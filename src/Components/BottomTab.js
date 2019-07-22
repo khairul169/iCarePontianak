@@ -15,7 +15,7 @@ const BottomTab = ({ navigation, icons }) => {
           key={index}
           title={item.routeName}
           active={index === navigation.state.index}
-          icon={icons[item.routeName]}
+          icon={icons[item.key]}
           onPress={() => navigateTo(item.key)}
         />
       ))}
