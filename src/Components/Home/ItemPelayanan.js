@@ -15,7 +15,7 @@ const ItemPelayanan = ({ title, image, borderLeft }) => {
 
 ItemPelayanan.propTypes = {
   title: PropTypes.string,
-  image: PropTypes.node,
+  image: PropTypes.any,
   borderLeft: PropTypes.bool
 };
 

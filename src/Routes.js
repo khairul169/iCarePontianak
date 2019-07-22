@@ -5,7 +5,6 @@ import {
   createStackNavigator,
   createMaterialTopTabNavigator
 } from "react-navigation";
-import { fromRight } from "react-navigation-transitions";
 import BottomTab from "./Components/BottomTab";
 
 // Routes
@@ -36,8 +35,7 @@ const mainStack = createStackNavigator(
     Main: mainNavigator
   },
   {
-    headerMode: "none",
-    transitionConfig: fromRight
+    headerMode: "none"
   }
 );
 
