@@ -1,12 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import AppContainer from "./src/Routes";
 
 const App = () => {
-  return (
-    <View>
-      <Text>Hello world!</Text>
-    </View>
-  );
+  return <AppContainer />;
 };
 
 export default App;
