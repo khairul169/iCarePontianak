@@ -1,11 +1,23 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  StatusBar,
+  Platform
+} from "react-native";
 import Icon from "../Icon";
+
+const lightStatusBar = Platform.OS !== "android" || Platform.Version > 22;
 
 const HomeHeader = () => {
   return (
     <View style={styles.headerContainer}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar
+        barStyle={lightStatusBar ? "dark-content" : "light-content"}
+        backgroundColor={lightStatusBar ? "#fff" : "#454545"}
+      />
 
       <View style={styles.header}>
         <Icon name="home-plus" size={24} color="#4f6780" />
