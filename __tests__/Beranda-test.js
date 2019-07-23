@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Header from "../src/Components/Home/Header";
-import ItemPelayanan from "../src/Components/Home/ItemPelayanan";
+import Header from "../src/Components/Beranda/Header";
+import ItemPelayanan from "../src/Components/Beranda/ItemPelayanan";
 
 describe("<Header />", () => {
   const defaultProps = {};

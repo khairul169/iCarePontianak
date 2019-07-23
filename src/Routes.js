@@ -6,11 +6,14 @@ import {
   createMaterialTopTabNavigator
 } from "react-navigation";
 import BottomTab from "./Components/BottomTab";
+import { fromRight } from "react-navigation-transitions";
 
 // Routes
 import Beranda from "./Screens/Beranda";
 import Notifikasi from "./Screens/Notifikasi";
 import Akun from "./Screens/Akun";
+
+import GawatDarurat from "./Screens/Beranda/GawatDarurat";
 
 const routeIcons = {
   Beranda: "home-plus",
@@ -32,10 +35,12 @@ const mainNavigator = createMaterialTopTabNavigator(
 
 const mainStack = createStackNavigator(
   {
-    Main: mainNavigator
+    Main: mainNavigator,
+    GawatDarurat
   },
   {
-    headerMode: "none"
+    headerMode: "none",
+    transitionConfig: () => fromRight(200)
   }
 );
 

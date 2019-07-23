@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Card } from "../Components";
-import Header from "../Components/Home/Header";
-import ItemPelayanan from "../Components/Home/ItemPelayanan";
+import Header from "../Components/Beranda/Header";
+import ItemPelayanan from "../Components/Beranda/ItemPelayanan";
 
 // Images
 import iconGadar from "../../assets/pelayanan/gadar.jpg";
@@ -14,7 +14,13 @@ import iconLansia from "../../assets/pelayanan/lansia.jpg";
 import iconSanitasi from "../../assets/pelayanan/sanitasi.jpg";
 import iconDietNutrisi from "../../assets/pelayanan/dietnutrisi.jpg";
 
-const MainItems = () => {
+const MainItems = ({ navigation }) => {
+  const navigateTo = (route, data) => {
+    navigation.navigate(route, {
+      data
+    });
+  };
+
   return (
     <View>
       <View style={styles.listPelayanan}>
@@ -24,6 +30,7 @@ const MainItems = () => {
             title="Gawat Darurat"
             card
             height={128}
+            onPress={() => navigateTo("GawatDarurat")}
           />
         </Card>
         <Card flex={1} marginLeft={16}>
@@ -53,12 +60,12 @@ const MainItems = () => {
   );
 };
 
-const Beranda = () => {
+const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header />
       <ScrollView style={styles.content}>
-        <MainItems />
+        <MainItems navigation={navigation} />
       </ScrollView>
     </View>
   );
