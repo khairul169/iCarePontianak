@@ -5,7 +5,6 @@ exports[`<Header /> render 1`] = `
   style={
     Object {
       "backgroundColor": "#fff",
-      "elevation": 3,
       "padding": 16,
     }
   }
@@ -74,13 +73,20 @@ exports[`<Header /> render 1`] = `
   </View>
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#eee",
-        "borderRadius": 5,
-        "flexDirection": "row",
-        "marginTop": 12,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 5,
+          "flexDirection": "row",
+        },
+        Object {
+          "backgroundColor": "#eee",
+          "marginBottom": undefined,
+          "marginHorizontal": undefined,
+          "marginTop": 12,
+        },
+        undefined,
+      ]
     }
   >
     <TextInput

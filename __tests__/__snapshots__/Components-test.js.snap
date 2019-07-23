@@ -8,17 +8,13 @@ exports[`<Card /> render 1`] = `
         "backgroundColor": "#fff",
       },
       Object {
-        "borderRadius": 5,
-        "elevation": 5,
+        "borderRadius": 3,
+        "elevation": 0,
         "flex": 1,
         "margin": 10,
-        "marginBottom": undefined,
-        "marginHorizontal": 2,
-        "marginLeft": undefined,
-        "marginRight": undefined,
-        "marginTop": undefined,
-        "marginVertical": 6,
+        "padding": 10,
       },
+      false,
       undefined,
     ]
   }
@@ -47,3 +43,62 @@ exports[`<Icon /> render 1`] = `
   
 </Text>
 `;
+
+exports[`<SearchBar /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 5,
+        "flexDirection": "row",
+      },
+      Object {
+        "backgroundColor": "#eee",
+        "marginBottom": undefined,
+        "marginHorizontal": undefined,
+        "marginTop": undefined,
+      },
+      undefined,
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    placeholder="Mau cari tindakan atau bantuan apa?"
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 4,
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+  <Text
+    allowFontScaling={false}
+    style={
+      Array [
+        Object {
+          "color": "#4f6780",
+          "fontSize": 18,
+        },
+        Object {
+          "marginHorizontal": 10,
+        },
+        Object {
+          "fontFamily": "Ionicons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+        Object {},
+      ]
+    }
+  >
+    
+  </Text>
+</View>
+`;
+
+exports[`<StatusBar /> render 1`] = `null`;

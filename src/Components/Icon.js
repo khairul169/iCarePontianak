@@ -34,7 +34,7 @@ Icon.propTypes = {
   style: PropTypes.object
 };
 
-Icon.defaultProp = {
+Icon.defaultProps = {
   type: "MaterialCommunityIcons",
   size: 24,
   color: "#333"

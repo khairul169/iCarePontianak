@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Card } from "../Components";
+import { StatusBar, Card } from "../Components";
 import Header from "../Components/Beranda/Header";
 import ItemPelayanan from "../Components/Beranda/ItemPelayanan";
 
@@ -21,6 +21,10 @@ const MainItems = ({ navigation }) => {
     });
   };
 
+  const cardMargin = {
+    marginLeft: 16
+  };
+
   return (
     <View>
       <View style={styles.listPelayanan}>
@@ -33,7 +37,7 @@ const MainItems = ({ navigation }) => {
             onPress={() => navigateTo("GawatDarurat")}
           />
         </Card>
-        <Card flex={1} marginLeft={16}>
+        <Card flex={1} style={cardMargin}>
           <ItemPelayanan
             image={iconMedVisit}
             title="Kunjungan Medis"
@@ -43,14 +47,14 @@ const MainItems = ({ navigation }) => {
         </Card>
       </View>
 
-      <Card marginX={16} style={styles.listPelayanan}>
-        <ItemPelayanan image={iconLabDarah} title="Lab Darah" noMargin />
+      <Card style={styles.listPelayanan}>
+        <ItemPelayanan image={iconLabDarah} title="Lab Darah" />
         <ItemPelayanan image={iconGigi} title="Kesehatan Gigi" />
         <ItemPelayanan image={iconBidan} title="Bidan Terampil" />
 
         <View style={styles.separatorPelayanan} />
 
-        <ItemPelayanan image={iconLansia} title="Lansia" noMargin />
+        <ItemPelayanan image={iconLansia} title="Lansia" />
         <ItemPelayanan image={iconSanitasi} title="Sanitasi" />
         <ItemPelayanan image={iconDietNutrisi} title="Diet Nutrisi" />
       </Card>
@@ -63,7 +67,9 @@ const MainItems = ({ navigation }) => {
 const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar />
       <Header />
+
       <ScrollView style={styles.content}>
         <MainItems navigation={navigation} />
       </ScrollView>
@@ -83,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "space-around",
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
     flexWrap: "wrap",
     marginTop: 16
   },

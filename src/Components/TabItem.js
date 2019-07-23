@@ -21,7 +21,7 @@ TabItem.propTypes = {
   onPress: PropTypes.func
 };
 
-TabItem.defaultProp = {
+TabItem.defaultProps = {
   active: false
 };
 

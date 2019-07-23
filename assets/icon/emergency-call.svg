@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="512pt"
+   viewBox="0 0 512 512.001"
+   width="512pt"
+   version="1.1"
+   id="svg18"
+   sodipodi:docname="emergency-call.svg"
+   inkscape:export-filename="D:\Projects\ReactNative\iCarePontianak\assets\icon\emergency-call.png"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata24">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs22" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview20"
+     showgrid="false"
+     inkscape:zoom="0.34570313"
+     inkscape:cx="306.62147"
+     inkscape:cy="442.57627"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg18" />
+  <path
+     d="m306.828125 292.179688.429687-72.746094h-94.359374v-219.433594h299.101562v219.433594h-113.324219zm0 0"
+     fill="#5bccfb"
+     id="path2" />
+  <path
+     d="m362 0v248.480469l36.675781-29.046875h113.324219v-219.433594zm0 0"
+     fill="#1eb2fa"
+     id="path4" />
+  <path
+     d="m400.046875 90.109375h-23.027344v-23.027344h-30.035156v23.027344h-23.03125v30.035156h23.03125v23.027344h30.035156v-23.027344h23.027344zm0 0"
+     fill="#e9465f"
+     id="path6" />
+  <path
+     d="m377.019531 90.109375v-23.027344h-15.019531v76.089844h15.019531v-23.027344h23.027344v-30.035156zm0 0"
+     fill="#e10e59"
+     id="path8" />
+  <path
+     d="m279.109375 512c-.085937 0-.164063 0-.246094 0-28.746093-.0625-55.675781-11.246094-75.832031-31.496094l-171.867188-172.621094c-20.160156-20.246093-31.226562-47.226562-31.164062-75.972656s11.25-55.675781 31.496094-75.835937l50.4375-50.214844 112.292968 112.785156-53.320312 53.085938c-.996094.992187-1 2.742187-.007812 3.742187l95.023437 95.4375c.625.628906 1.386719.734375 1.875.757813.511719 0 1.246094-.128907 1.867187-.746094l53.316407-53.085937 112.292969 112.785156-50.4375 50.21875c-20.1875 20.097656-47.074219 31.160156-75.726563 31.160156zm0 0"
+     fill="#2afb6e"
+     id="path10" />
+  <path
+     d="m292.980469 317.835938-53.316407 53.085937c-.621093.617187-1.355468.746094-1.867187.746094-.488281-.023438-1.25-.128907-1.875-.757813l-58.921875-59.179687v142.632812l26.027344 26.144531c20.160156 20.246094 47.089844 31.429688 75.835937 31.492188h.242188c28.652343 0 55.539062-11.0625 75.730469-31.160156l50.4375-50.21875zm0 0"
+     fill="#24dc51"
+     id="path12" />
+  <path
+     d="m194.226562 218.644531-112.292968-112.785156-36.597656 36.4375 112.539062 112.539063zm0 0"
+     fill="#24dc51"
+     id="path14" />
+  <path
+     d="m292.980469 317.835938-36.128907 35.972656 112.539063 112.539062 35.882813-35.726562zm0 0"
+     fill="#1bb639"
+     id="path16" />
+</svg>
