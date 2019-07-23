@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { Header } from "../../Components";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Header, BottomSheet } from "../../Components";
 import MapView from "react-native-maps";
 
 const CariAmbulan = ({ navigation }) => {
@@ -12,6 +12,10 @@ const CariAmbulan = ({ navigation }) => {
     latitudeDelta: 0.1,
     longitudeDelta: 0.05
   };
+
+  useEffect(() => {
+    this.bottomSheet && this.bottomSheet.show(0, 2.0);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -25,10 +29,21 @@ const CariAmbulan = ({ navigation }) => {
       <MapView
         style={[styles.mapView, { margin: mapMargin }]}
         initialRegion={initialRegion}
+        showsUserLocation={true}
         onMapReady={() => {
           setMapMargin(0);
         }}
       />
+
+      <View style={styles.bottomMargin} />
+      <BottomSheet
+        ref={ref => {
+          this.bottomSheet = ref;
+        }}
+        headerHeight={32}
+      >
+        <Text>Test</Text>
+      </BottomSheet>
     </View>
   );
 };
@@ -39,6 +54,9 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1
+  },
+  bottomMargin: {
+    marginTop: 32
   }
 });
 

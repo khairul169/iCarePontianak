@@ -1,7 +1,22 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { Card, Icon, SearchBar, StatusBar } from "../src/Components";
+import {
+  BottomSheet,
+  Card,
+  Icon,
+  SearchBar,
+  StatusBar
+} from "../src/Components";
+
+describe("<BottomSheet />", () => {
+  const defaultProps = {};
+  const wrapper = renderer.create(<BottomSheet {...defaultProps} />);
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
 
 describe("<Card />", () => {
   const defaultProps = {

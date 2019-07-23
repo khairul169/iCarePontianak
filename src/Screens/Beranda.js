@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { StatusBar, Card } from "../Components";
+import { Card } from "../Components";
 import Header from "../Components/Beranda/Header";
 import ItemPelayanan from "../Components/Beranda/ItemPelayanan";
 
