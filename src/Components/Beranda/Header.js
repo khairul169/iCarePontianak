@@ -1,11 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Icon, SearchBar } from "../index";
+import { Icon, SearchBar, StatusBar } from "../index";
+import { statusBarHeight } from "../StatusBar";
 
 const HomeHeader = () => {
+  const headerStyle = [
+    styles.header,
+    {
+      marginTop: statusBarHeight
+    }
+  ];
+
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.header}>
+      <StatusBar />
+
+      <View style={headerStyle}>
         <Icon name="home-plus" size={24} color="#4f6780" />
         <Text style={styles.headerTitle}>iCare Pontianak</Text>
         <Icon

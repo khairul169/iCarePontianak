@@ -9,12 +9,18 @@ exports[`<Header /> render 1`] = `
     }
   }
 >
+  <View />
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+        Object {
+          "marginTop": 20,
+        },
+      ]
     }
   >
     <Text

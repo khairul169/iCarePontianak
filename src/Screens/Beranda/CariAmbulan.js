@@ -15,12 +15,16 @@ const CariAmbulan = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Cari Ambulan" backButton navigation={navigation} />
+      <Header
+        title="Cari Ambulan"
+        transparent
+        backButton
+        navigation={navigation}
+      />
 
       <MapView
         style={[styles.mapView, { margin: mapMargin }]}
         initialRegion={initialRegion}
-        showsUserLocation={true}
         onMapReady={() => {
           setMapMargin(0);
         }}

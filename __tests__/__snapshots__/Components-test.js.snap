@@ -101,4 +101,4 @@ exports[`<SearchBar /> render 1`] = `
 </View>
 `;
 
-exports[`<StatusBar /> render 1`] = `null`;
+exports[`<StatusBar /> render 1`] = `<View />`;

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
+import StatusBar, { statusBarHeight } from "./StatusBar";
 import Icon from "./Icon";
 
 export const HeaderItem = ({ children, onPress }) => {
@@ -33,13 +34,28 @@ HeaderIcon.propTypes = {
   onPress: PropTypes.func
 };
 
-const Header = ({ title, navigation, left, right, backButton }) => {
+const Header = ({
+  title,
+  navigation,
+  left,
+  right,
+  backButton,
+  transparent
+}) => {
   const goBack = () => {
     navigation && navigation.goBack();
   };
 
+  const containerStyle = [
+    styles.header,
+    transparent && styles.headerTransparent,
+    { paddingTop: statusBarHeight + 16 }
+  ];
+
   return (
-    <View style={styles.header}>
+    <View style={containerStyle}>
+      <StatusBar />
+
       <View style={styles.headerItem}>
         {backButton && <HeaderIcon name="arrow-left" onPress={goBack} />}
         {left}
@@ -54,6 +70,7 @@ const Header = ({ title, navigation, left, right, backButton }) => {
 
 Header.propTypes = {
   title: PropTypes.string,
+  transparent: PropTypes.bool,
   left: PropTypes.element,
   right: PropTypes.element,
   backButton: PropTypes.bool,
@@ -61,7 +78,8 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  backButton: false
+  backButton: false,
+  transparent: false
 };
 
 const styles = StyleSheet.create({
@@ -72,6 +90,14 @@ const styles = StyleSheet.create({
     padding: 16,
     minHeight: 55,
     backgroundColor: "#fff"
+  },
+  headerTransparent: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    right: 0,
+    zIndex: 1
   },
   headerItem: {
     flex: 1,

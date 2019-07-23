@@ -67,7 +67,6 @@ const MainItems = ({ navigation }) => {
 const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <StatusBar />
       <Header />
 
       <ScrollView style={styles.content}>

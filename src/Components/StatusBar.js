@@ -1,25 +1,25 @@
 import React from "react";
-import { StatusBar as RNStatusBar, Platform } from "react-native";
-import PropTypes from "prop-types";
+import { View, StatusBar as RNStatusBar, Platform } from "react-native";
 
-const lightStatusBar = Platform.OS !== "android" || Platform.Version > 22;
+export const lightStatusBar =
+  Platform.OS !== "android" || Platform.Version > 22;
 
-const StatusBar = ({ translucent }) => {
+export const statusBarHeight = lightStatusBar
+  ? Platform.OS === "ios"
+    ? 20
+    : RNStatusBar.currentHeight
+  : 0;
+
+const StatusBar = () => {
   return (
-    <RNStatusBar
-      barStyle={lightStatusBar ? "dark-content" : "light-content"}
-      backgroundColor={lightStatusBar ? "#fff" : "#454545"}
-      translucent={translucent}
-    />
+    <View>
+      <RNStatusBar
+        barStyle={lightStatusBar ? "dark-content" : "light-content"}
+        backgroundColor={lightStatusBar ? "rgba(0, 0, 0, 0)" : "#424242"}
+        translucent={lightStatusBar}
+      />
+    </View>
   );
-};
-
-StatusBar.propTypes = {
-  translucent: PropTypes.bool
-};
-
-StatusBar.defaultProps = {
-  translucent: false
 };
 
 export default StatusBar;

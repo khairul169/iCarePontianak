@@ -34,7 +34,7 @@ const Card = ({
 };
 
 Card.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
   flex: PropTypes.number,
   radius: PropTypes.number,
   elevation: PropTypes.number,
