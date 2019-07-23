@@ -5,6 +5,7 @@ exports[`<Header /> render 1`] = `
   style={
     Object {
       "backgroundColor": "#fff",
+      "elevation": 3,
       "padding": 16,
     }
   }
@@ -123,16 +124,25 @@ exports[`<Header /> render 1`] = `
 
 exports[`<ItemPelayanan /> render 1`] = `
 <View
+  accessible={true}
+  clickable={false}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "minHeight": 52,
-        "minWidth": "30%",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "height": 80,
+      "minWidth": "25%",
+      "opacity": 1,
+      "padding": 12,
+    }
   }
 >
   <Image
@@ -148,8 +158,9 @@ exports[`<ItemPelayanan /> render 1`] = `
     style={
       Object {
         "color": "#525252",
-        "fontSize": 12,
+        "fontSize": 11,
         "marginTop": 8,
+        "textAlign": "center",
       }
     }
   >

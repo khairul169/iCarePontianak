@@ -1,34 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-const ItemPelayanan = ({ title, image, borderLeft }) => {
+const ItemPelayanan = ({ title, image, height, onPress }) => {
+  const containerStyle = [styles.container, { height }];
   return (
-    <View
-      style={[styles.pelayananItem, borderLeft && styles.pelayananitemBordered]}
-    >
+    <TouchableOpacity style={containerStyle} onPress={onPress}>
       <Image source={image} style={styles.pelayananImage} />
       <Text style={styles.pelayananTitle}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 ItemPelayanan.propTypes = {
   title: PropTypes.string,
   image: PropTypes.any,
-  borderLeft: PropTypes.bool
+  height: PropTypes.number,
+  onPress: PropTypes.func
+};
+
+ItemPelayanan.defaultProps = {
+  height: 80
 };
 
 const styles = StyleSheet.create({
-  pelayananItem: {
+  container: {
     flex: 1,
     alignItems: "center",
-    minHeight: 52,
-    minWidth: "30%"
-  },
-  pelayananitemBordered: {
-    borderLeftColor: "#eee",
-    borderLeftWidth: 1
+    minWidth: "25%",
+    padding: 12
   },
   pelayananImage: {
     flex: 1,
@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
   },
   pelayananTitle: {
     color: "#525252",
-    fontSize: 12,
-    marginTop: 8
+    fontSize: 11,
+    marginTop: 8,
+    textAlign: "center"
   }
 });
 

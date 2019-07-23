@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Card /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+      },
+      Object {
+        "borderRadius": 5,
+        "elevation": 5,
+        "flex": 1,
+        "margin": 10,
+        "marginBottom": undefined,
+        "marginHorizontal": 2,
+        "marginLeft": undefined,
+        "marginRight": undefined,
+        "marginTop": undefined,
+        "marginVertical": 6,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
+
 exports[`<Icon /> render 1`] = `
 <Text
   allowFontScaling={false}

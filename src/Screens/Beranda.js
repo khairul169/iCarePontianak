@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
+import { Card } from "../Components";
 import Header from "../Components/Home/Header";
 import ItemPelayanan from "../Components/Home/ItemPelayanan";
 
@@ -16,26 +17,38 @@ import iconDietNutrisi from "../../assets/pelayanan/dietnutrisi.jpg";
 const MainItems = () => {
   return (
     <View>
-      <View style={styles.mainPelayanan}>
-        <ItemPelayanan image={iconGadar} title="Gawat Darurat" />
-        <ItemPelayanan
-          image={iconMedVisit}
-          title="Kunjungan Medis"
-          borderLeft
-        />
+      <View style={styles.listPelayanan}>
+        <Card flex={1}>
+          <ItemPelayanan
+            image={iconGadar}
+            title="Gawat Darurat"
+            card
+            height={128}
+          />
+        </Card>
+        <Card flex={1} marginLeft={16}>
+          <ItemPelayanan
+            image={iconMedVisit}
+            title="Kunjungan Medis"
+            card
+            height={128}
+          />
+        </Card>
       </View>
 
-      <View style={styles.altPelayanan}>
-        <ItemPelayanan image={iconLabDarah} title="Lab Darah" />
+      <Card marginX={16} style={styles.listPelayanan}>
+        <ItemPelayanan image={iconLabDarah} title="Lab Darah" noMargin />
         <ItemPelayanan image={iconGigi} title="Kesehatan Gigi" />
         <ItemPelayanan image={iconBidan} title="Bidan Terampil" />
 
         <View style={styles.separatorPelayanan} />
 
-        <ItemPelayanan image={iconLansia} title="Lansia" />
+        <ItemPelayanan image={iconLansia} title="Lansia" noMargin />
         <ItemPelayanan image={iconSanitasi} title="Sanitasi" />
         <ItemPelayanan image={iconDietNutrisi} title="Diet Nutrisi" />
-      </View>
+      </Card>
+
+      <View style={styles.bottomMargin} />
     </View>
   );
 };
@@ -59,27 +72,19 @@ const styles = StyleSheet.create({
   content: {
     flex: 1
   },
-  mainPelayanan: {
+  listPelayanan: {
     flexDirection: "row",
     alignItems: "stretch",
-    justifyContent: "space-evenly",
-    height: 120,
-    padding: 16,
-    backgroundColor: "#fff",
+    justifyContent: "space-around",
+    paddingHorizontal: 16,
+    flexWrap: "wrap",
     marginTop: 16
   },
-  altPelayanan: {
-    flexDirection: "row",
-    alignItems: "stretch",
-    justifyContent: "space-evenly",
-    padding: 16,
-    backgroundColor: "#fff",
-    marginTop: 16,
-    flexWrap: "wrap"
-  },
   separatorPelayanan: {
-    marginTop: 20,
     width: "100%"
+  },
+  bottomMargin: {
+    marginBottom: 16
   }
 });
 

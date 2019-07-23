@@ -50,7 +50,8 @@ const HomeHeader = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     padding: 16,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    elevation: 3
   },
   header: {
     flexDirection: "row",
