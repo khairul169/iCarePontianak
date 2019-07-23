@@ -71,7 +71,7 @@ const GawatDarurat = ({ navigation }) => {
     <View style={styles.container}>
       <Header title="Gawat Darurat" backButton navigation={navigation} />
 
-      <ScrollView>
+      <ScrollView style={styles.content}>
         <Text style={styles.titleText}>Pusat Bantuan</Text>
 
         <Card style={styles.mainAction}>
@@ -82,6 +82,7 @@ const GawatDarurat = ({ navigation }) => {
             imageSize={48}
             flex={0.6}
             borderLeft
+            onPress={() => navigation.navigate("CariAmbulan")}
           />
         </Card>
 
@@ -109,6 +110,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f2f2f2"
+  },
+  content: {
+    flex: 1
   },
   mainAction: {
     flexDirection: "row",

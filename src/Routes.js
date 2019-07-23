@@ -14,6 +14,7 @@ import Notifikasi from "./Screens/Notifikasi";
 import Akun from "./Screens/Akun";
 
 import GawatDarurat from "./Screens/Beranda/GawatDarurat";
+import CariAmbulan from "./Screens/Beranda/CariAmbulan";
 
 const routeIcons = {
   Beranda: "home-plus",
@@ -36,7 +37,10 @@ const mainNavigator = createMaterialTopTabNavigator(
 const mainStack = createStackNavigator(
   {
     Main: mainNavigator,
-    GawatDarurat
+
+    // Beranda
+    GawatDarurat,
+    CariAmbulan
   },
   {
     headerMode: "none",
