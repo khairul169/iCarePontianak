@@ -9,7 +9,7 @@ import {
   FlatList,
   Dimensions
 } from "react-native";
-import { Header, Card, SearchBar } from "../../components";
+import { Header, Card, SearchBar, Title } from "../../components";
 
 // Action image
 import emergencyCall from "../../assets/icon/emergency-call.png";
@@ -72,21 +72,21 @@ const GawatDarurat = ({ navigation }) => {
       <Header title="Gawat Darurat" backButton navigation={navigation} />
 
       <ScrollView style={styles.content}>
-        <Text style={styles.titleText}>Pusat Bantuan</Text>
+        <Title>Pusat Bantuan</Title>
 
         <Card style={styles.mainAction}>
-          <ActionItem label="PANGGIL BANTUAN" image={emergencyCall} />
+          <ActionItem label="Panggil Bantuan" image={emergencyCall} />
           <ActionItem
-            label="CARI AMBULAN"
+            label="Cari Ambulan"
             image={ambulance}
             imageSize={48}
-            flex={0.6}
+            flex={0.35}
             borderLeft
             onPress={() => navigation.navigate("CariAmbulan")}
           />
         </Card>
 
-        <Text style={styles.titleText}>Pertolongan Pertama</Text>
+        <Title>Pertolongan Pertama</Title>
         <SearchBar
           backgroundColor="#fff"
           marginBottom={12}
@@ -109,7 +109,7 @@ const GawatDarurat = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#ECEFF1"
   },
   content: {
     flex: 1
@@ -119,13 +119,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 16,
     paddingVertical: 16
-  },
-  titleText: {
-    fontSize: 18,
-    color: "#525252",
-    marginTop: 24,
-    marginBottom: 16,
-    marginLeft: 16
   },
   actionItem: {
     flex: 1,

@@ -8,7 +8,10 @@ const SearchBar = ({
   marginHorizontal,
   marginTop,
   marginBottom,
-  style
+  style,
+  color,
+  placeholder,
+  placeholderColor
 }) => {
   const containerStyle = [
     styles.searchBox,
@@ -21,17 +24,25 @@ const SearchBar = ({
     style
   ];
 
+  const textInputStyle = [
+    styles.searchInput,
+    {
+      color
+    }
+  ];
+
   return (
     <View style={containerStyle}>
       <TextInput
-        style={styles.searchInput}
-        placeholder="Mau cari tindakan atau bantuan apa?"
+        style={textInputStyle}
+        placeholder={placeholder}
+        placeholderTextColor={placeholderColor}
       />
       <Icon
         type="Ionicons"
         name="md-search"
         size={18}
-        color="#4f6780"
+        color={color}
         style={styles.searchIcon}
       />
     </View>
@@ -43,11 +54,17 @@ SearchBar.propTypes = {
   marginHorizontal: PropTypes.number,
   marginTop: PropTypes.number,
   marginBottom: PropTypes.number,
-  style: PropTypes.object
+  style: PropTypes.object,
+  color: PropTypes.string,
+  placeholder: PropTypes.string,
+  placeholderColor: PropTypes.string
 };
 
 SearchBar.defaultProps = {
-  backgroundColor: "#eee"
+  backgroundColor: "#ECEFF1",
+  color: "#37474F",
+  placeholder: "Mau cari tindakan atau bantuan apa?",
+  placeholderColor: "#78909C"
 };
 
 const styles = StyleSheet.create({
@@ -59,7 +76,8 @@ const styles = StyleSheet.create({
   searchInput: {
     paddingHorizontal: 10,
     paddingVertical: 4,
-    flex: 1
+    flex: 1,
+    color: "#333"
   },
   searchIcon: {
     marginHorizontal: 10

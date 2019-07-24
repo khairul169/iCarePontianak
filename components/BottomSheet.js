@@ -22,7 +22,7 @@ class BottomSheet extends Component {
 
   constructor(props) {
     super(props);
-    this.snappingPoints = [];
+    this.updatePoints();
   }
 
   componentDidMount() {
@@ -47,15 +47,17 @@ class BottomSheet extends Component {
   }
 
   updatePoints = () => {
-    this.snappingPoints = [];
+    let points = [];
 
     // Add snapping points
     this.props.points.forEach(element => {
-      this.snappingPoints.push(element * window.height);
+      points.push(element * window.height);
     });
 
     // Add snapping to header
-    this.snappingPoints.push(this.props.headerHeight);
+    points.push(this.props.headerHeight);
+
+    this.snappingPoints = points;
   };
 
   defaultHeader = () => {
@@ -95,23 +97,23 @@ class BottomSheet extends Component {
       bottom: headerHeight
     };
 
-    return (
-      <View style={style}>
-        <SlidingUpPanel
-          ref={ref => {
-            this.panel = ref;
-          }}
-          showBackdrop={backdrop}
-          draggableRange={draggableRange}
-          snappingPoints={this.snappingPoints}
-        >
-          <View style={styles.panel}>
-            {this.renderHeader()}
+    const panelStyle = [styles.panel, style];
 
-            <View style={styles.container}>{children}</View>
-          </View>
-        </SlidingUpPanel>
-      </View>
+    return (
+      <SlidingUpPanel
+        ref={ref => {
+          this.panel = ref;
+        }}
+        showBackdrop={backdrop}
+        draggableRange={draggableRange}
+        snappingPoints={this.snappingPoints}
+      >
+        <View style={panelStyle}>
+          {this.renderHeader()}
+
+          <View style={styles.container}>{children}</View>
+        </View>
+      </SlidingUpPanel>
     );
   }
 }

@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Header, BottomSheet } from "../../components";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 
 const CariAmbulan = ({ navigation }) => {
-  const [mapMargin, setMapMargin] = useState(1);
-
   const initialRegion = {
     latitude: -0.0257813,
     longitude: 109.3323449,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.05
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.02
   };
 
+  const [mapRegion, setMapRegion] = useState(initialRegion);
+  const [userLocation, setUserLocation] = useState();
+
   useEffect(() => {
-    this.bottomSheet && this.bottomSheet.show(0, 2.0);
+    this.bottomSheet && this.bottomSheet.hide();
   }, []);
 
   return (
@@ -27,13 +28,29 @@ const CariAmbulan = ({ navigation }) => {
       />
 
       <MapView
-        style={[styles.mapView, { margin: mapMargin }]}
+        ref={ref => {
+          this.mapView = ref;
+        }}
+        style={styles.mapView}
         initialRegion={initialRegion}
         showsUserLocation={true}
-        onMapReady={() => {
-          setMapMargin(0);
+        showsMyLocationButton={false}
+        onRegionChangeComplete={region => {
+          setMapRegion(region);
         }}
-      />
+        onUserLocationChange={event => {
+          const { latitude, longitude } = event.nativeEvent.coordinate;
+          setUserLocation({ latitude, longitude });
+
+          this.mapView.animateToRegion({
+            ...mapRegion,
+            latitude,
+            longitude
+          });
+        }}
+      >
+        {userLocation && <Marker coordinate={userLocation} />}
+      </MapView>
 
       <View style={styles.bottomMargin} />
       <BottomSheet
@@ -41,6 +58,7 @@ const CariAmbulan = ({ navigation }) => {
           this.bottomSheet = ref;
         }}
         headerHeight={32}
+        style={styles.bottomPanel}
       >
         <Text>Test</Text>
       </BottomSheet>
@@ -57,6 +75,9 @@ const styles = StyleSheet.create({
   },
   bottomMargin: {
     marginTop: 32
+  },
+  bottomPanel: {
+    elevation: 10
   }
 });
 

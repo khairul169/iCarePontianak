@@ -21,10 +21,6 @@ const MainItems = ({ navigation }) => {
     });
   };
 
-  const cardMargin = {
-    marginLeft: 16
-  };
-
   return (
     <View>
       <View style={styles.listPelayanan}>
@@ -37,7 +33,7 @@ const MainItems = ({ navigation }) => {
             onPress={() => navigateTo("GawatDarurat")}
           />
         </Card>
-        <Card flex={1} style={cardMargin}>
+        <Card flex={1} style={styles.cardMargin}>
           <ItemPelayanan
             image={iconMedVisit}
             title="Kunjungan Medis"
@@ -79,7 +75,7 @@ const Beranda = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#ECEFF1"
   },
   content: {
     flex: 1
@@ -88,12 +84,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "space-around",
-    marginHorizontal: 16,
     flexWrap: "wrap",
+    marginHorizontal: 16,
     marginTop: 16
   },
   separatorPelayanan: {
     width: "100%"
+  },
+  cardMargin: {
+    marginLeft: 16
   },
   bottomMargin: {
     marginBottom: 16

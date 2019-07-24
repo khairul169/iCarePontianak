@@ -26,7 +26,7 @@ const HomeHeader = () => {
         />
       </View>
 
-      <SearchBar marginTop={12} />
+      <SearchBar marginTop={12} backgroundColor="#ECEFF1" />
     </View>
   );
 };

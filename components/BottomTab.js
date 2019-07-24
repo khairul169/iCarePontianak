@@ -30,9 +30,7 @@ BottomTab.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
-    borderTopColor: "#ddd",
-    borderTopWidth: 1
+    alignItems: "center"
   }
 });
 

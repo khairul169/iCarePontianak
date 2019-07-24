@@ -8,7 +8,6 @@ const Card = ({
   radius,
   elevation,
   border,
-  borderColor,
   style,
   padding,
   margin
@@ -22,11 +21,7 @@ const Card = ({
       padding,
       margin
     },
-    border && {
-      elevation: 0,
-      borderColor: borderColor || "#eee",
-      borderWidth: 1
-    },
+    border && styles.bordered,
     style
   ];
 
@@ -45,7 +40,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   flex: 0,
-  radius: 3,
+  radius: 2,
   elevation: 0,
   border: false
 };
@@ -55,7 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   bordered: {
-    borderColor: "#eee",
+    elevation: 0,
+    borderColor: "#CFD8DC",
     borderWidth: 1
   }
 });
