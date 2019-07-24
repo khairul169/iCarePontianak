@@ -9,11 +9,11 @@ import {
   FlatList,
   Dimensions
 } from "react-native";
-import { Header, Card, SearchBar } from "../../Components";
+import { Header, Card, SearchBar } from "../../components";
 
 // Action image
-import emergencyCall from "../../../assets/icon/emergency-call.png";
-import ambulance from "../../../assets/icon/ambulance.png";
+import emergencyCall from "../../assets/icon/emergency-call.png";
+import ambulance from "../../assets/icon/ambulance.png";
 
 const ActionItem = ({ flex, image, imageSize, label, borderLeft, onPress }) => {
   const containerStyle = [

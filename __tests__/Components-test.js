@@ -1,13 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import {
-  BottomSheet,
-  Card,
-  Icon,
-  SearchBar,
-  StatusBar
-} from "../src/Components";
+import { BottomSheet, Card, Icon, SearchBar, StatusBar } from "../components";
 
 describe("<BottomSheet />", () => {
   const defaultProps = {};

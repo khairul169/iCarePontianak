@@ -1,11 +1,15 @@
-import React from "react";
-import AppContainer from "./src/Routes";
+import React, { Component } from "react";
+import AppContainer from "./screens/Routes";
 
-const App = () => {
-  // Disable warnings
-  console.disableYellowBox = true;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    console.disableYellowBox = true;
+  }
 
-  return <AppContainer />;
-};
+  render() {
+    return <AppContainer />;
+  }
+}
 
 export default App;

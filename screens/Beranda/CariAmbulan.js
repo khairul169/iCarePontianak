@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Header, BottomSheet } from "../../Components";
+import { Header, BottomSheet } from "../../components";
 import MapView from "react-native-maps";
 
 const CariAmbulan = ({ navigation }) => {

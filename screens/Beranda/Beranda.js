@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Card } from "../Components";
-import Header from "../Components/Beranda/Header";
-import ItemPelayanan from "../Components/Beranda/ItemPelayanan";
+import { Card } from "../../components";
+import Header from "../../components/Beranda/Header";
+import ItemPelayanan from "../../components/Beranda/ItemPelayanan";
 
 // Images
 import iconGadar from "../../assets/pelayanan/gadar.jpg";

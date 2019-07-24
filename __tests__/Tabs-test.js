@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import BottomTab from "../src/Components/BottomTab";
-import TabItem from "../src/Components/TabItem";
+import BottomTab from "../components/BottomTab";
+import TabItem from "../components/TabItem";
 
 describe("<BottomTab />", () => {
   const defaultProps = {
