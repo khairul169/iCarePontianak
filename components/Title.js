@@ -8,6 +8,7 @@ const Title = ({
   fontSize,
   marginTop,
   marginBottom,
+  marginX,
   color
 }) => {
   const textStyle = [
@@ -16,6 +17,7 @@ const Title = ({
       fontSize,
       marginTop,
       marginBottom,
+      marginHorizontal: marginX,
       color
     },
     style
@@ -28,23 +30,22 @@ Title.propTypes = {
   fontSize: PropTypes.number,
   marginTop: PropTypes.number,
   marginBottom: PropTypes.number,
+  marginX: PropTypes.number,
   color: PropTypes.string
 };
 
 Title.defaultProps = {
-  fontSize: 18,
-  marginTop: 24,
+  fontSize: 16,
+  marginTop: 0,
   marginBottom: 16,
+  marginX: 0,
   color: "#37474F"
 };
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 18,
-    color: "#525252",
-    marginTop: 24,
-    marginBottom: 16,
-    marginLeft: 16
+    fontSize: 16,
+    color: "#525252"
   }
 });
 

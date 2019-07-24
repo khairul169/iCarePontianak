@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 // Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const Icon = props => {
   let Icons = MaterialCommunityIcons;
@@ -11,6 +12,9 @@ const Icon = props => {
   switch (props.type) {
     case "Ionicons":
       Icons = Ionicons;
+      break;
+    case "FontAwesome5":
+      Icons = FontAwesome5;
       break;
     default:
       break;
@@ -27,7 +31,7 @@ const Icon = props => {
 };
 
 Icon.propTypes = {
-  type: PropTypes.oneOf(["Ionicons", "MaterialCommunityIcons"]),
+  type: PropTypes.string,
   size: PropTypes.number,
   color: PropTypes.string,
   name: PropTypes.string.isRequired,

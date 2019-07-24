@@ -1,44 +1,53 @@
 import React from "react";
-import { Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-const ItemPelayanan = ({ title, image, height, onPress }) => {
-  const containerStyle = [styles.container, { height }];
+const ItemPelayanan = ({ title, image, onPress, border }) => {
   return (
-    <TouchableOpacity style={containerStyle} onPress={onPress}>
-      <Image source={image} style={styles.pelayananImage} />
-      <Text style={styles.pelayananTitle}>{title}</Text>
-    </TouchableOpacity>
+    <View style={[styles.container, border && styles.border]}>
+      <TouchableOpacity style={styles.item} onPress={onPress}>
+        <Image source={image} style={styles.pelayananImage} />
+        <Text style={styles.pelayananTitle}>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 ItemPelayanan.propTypes = {
   title: PropTypes.string,
   image: PropTypes.any,
-  height: PropTypes.number,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  border: PropTypes.bool
 };
 
 ItemPelayanan.defaultProps = {
-  height: 80
+  border: true
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexBasis: "30%"
+  },
+  border: {
+    borderBottomColor: "#CFD8DC",
+    borderRightColor: "#CFD8DC",
+    borderBottomWidth: 1,
+    borderRightWidth: 1
+  },
+  item: {
+    flex: 1,
     alignItems: "center",
-    minWidth: "25%",
-    padding: 12
+    padding: 16
   },
   pelayananImage: {
     flex: 1,
-    height: "100%",
     resizeMode: "contain"
   },
   pelayananTitle: {
     color: "#525252",
     fontSize: 11,
-    marginTop: 8,
+    marginTop: 12,
     textAlign: "center"
   }
 });

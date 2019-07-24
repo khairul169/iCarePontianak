@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
-import { Card } from "../../components";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import Header from "../../components/Beranda/Header";
 import ItemPelayanan from "../../components/Beranda/ItemPelayanan";
 
@@ -22,40 +21,44 @@ const MainItems = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <View style={styles.listPelayanan}>
-        <Card flex={1}>
+    <View style={styles.container}>
+      <View style={styles.separator} />
+
+      <View style={styles.mainContent}>
+        <Text style={styles.textPelayanan}>Layanan Kami</Text>
+
+        <View style={styles.row}>
           <ItemPelayanan
             image={iconGadar}
+            border={false}
             title="Gawat Darurat"
-            card
-            height={128}
             onPress={() => navigateTo("GawatDarurat")}
           />
-        </Card>
-        <Card flex={1} style={styles.cardMargin}>
+
           <ItemPelayanan
             image={iconMedVisit}
+            border={false}
             title="Kunjungan Medis"
-            card
-            height={128}
+            onPress={() => navigateTo("Pelayanan")}
           />
-        </Card>
+        </View>
       </View>
 
-      <Card style={styles.listPelayanan}>
-        <ItemPelayanan image={iconLabDarah} title="Lab Darah" />
-        <ItemPelayanan image={iconGigi} title="Kesehatan Gigi" />
-        <ItemPelayanan image={iconBidan} title="Bidan Terampil" />
+      <View style={styles.separator} />
 
-        <View style={styles.separatorPelayanan} />
+      <View style={styles.pelayanan}>
+        <View style={styles.row}>
+          <ItemPelayanan image={iconLabDarah} title="Lab Darah" />
+          <ItemPelayanan image={iconGigi} title="Kesehatan Gigi" />
+          <ItemPelayanan image={iconBidan} title="Bidan Terampil" />
+        </View>
 
-        <ItemPelayanan image={iconLansia} title="Lansia" />
-        <ItemPelayanan image={iconSanitasi} title="Sanitasi" />
-        <ItemPelayanan image={iconDietNutrisi} title="Diet Nutrisi" />
-      </Card>
-
-      <View style={styles.bottomMargin} />
+        <View style={styles.row}>
+          <ItemPelayanan image={iconLansia} title="Lansia" />
+          <ItemPelayanan image={iconSanitasi} title="Sanitasi" />
+          <ItemPelayanan image={iconDietNutrisi} title="Diet Nutrisi" />
+        </View>
+      </View>
     </View>
   );
 };
@@ -64,7 +67,6 @@ const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header />
-
       <ScrollView style={styles.content}>
         <MainItems navigation={navigation} />
       </ScrollView>
@@ -75,27 +77,36 @@ const Beranda = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF1"
+    backgroundColor: "#fff"
   },
   content: {
     flex: 1
   },
-  listPelayanan: {
-    flexDirection: "row",
-    alignItems: "stretch",
-    justifyContent: "space-around",
-    flexWrap: "wrap",
-    marginHorizontal: 16,
-    marginTop: 16
+  mainContent: {
+    height: 200,
+    backgroundColor: "#fff",
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center"
   },
-  separatorPelayanan: {
-    width: "100%"
-  },
-  cardMargin: {
-    marginLeft: 16
-  },
-  bottomMargin: {
+  textPelayanan: {
+    fontSize: 18,
+    color: "#37474F",
     marginBottom: 16
+  },
+  pelayanan: {
+    flex: 1,
+    backgroundColor: "#fff",
+    height: 180
+  },
+  row: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "stretch"
+  },
+  separator: {
+    backgroundColor: "#B0BEC5",
+    height: 8
   }
 });
 

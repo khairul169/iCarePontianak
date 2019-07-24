@@ -40,7 +40,8 @@ const mainStack = createStackNavigator(
 
     // Beranda
     GawatDarurat: Beranda.GawatDarurat,
-    CariAmbulan: Beranda.CariAmbulan
+    CariAmbulan: Beranda.CariAmbulan,
+    Pelayanan: Beranda.Pelayanan
   },
   {
     headerMode: "none",

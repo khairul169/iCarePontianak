@@ -56,12 +56,15 @@ const GawatDarurat = ({ navigation }) => {
     const itemWidth = width * 0.75;
     const itemStyle = [
       styles.faItem,
-      { width: itemWidth },
-      index === 0 && { marginLeft: 16 }
+      {
+        width: itemWidth,
+        marginLeft: index === 0 ? 0 : 8,
+        marginRight: index === firstAids.length - 1 ? 0 : 8
+      }
     ];
 
     return (
-      <Card style={itemStyle}>
+      <Card style={itemStyle} border>
         <Text>Test</Text>
       </Card>
     );
@@ -71,36 +74,36 @@ const GawatDarurat = ({ navigation }) => {
     <View style={styles.container}>
       <Header title="Gawat Darurat" backButton navigation={navigation} />
 
-      <ScrollView style={styles.content}>
-        <Title>Pusat Bantuan</Title>
+      <ScrollView style={styles.container}>
+        <View style={styles.content}>
+          <Title marginTop={0}>Pusat Bantuan</Title>
 
-        <Card style={styles.mainAction}>
-          <ActionItem label="Panggil Bantuan" image={emergencyCall} />
-          <ActionItem
-            label="Cari Ambulan"
-            image={ambulance}
-            imageSize={48}
-            flex={0.35}
-            borderLeft
-            onPress={() => navigation.navigate("CariAmbulan")}
+          <Card style={styles.mainAction} border>
+            <ActionItem label="Panggil Bantuan" image={emergencyCall} />
+            <ActionItem
+              label="Cari Ambulan"
+              image={ambulance}
+              imageSize={48}
+              flex={0.5}
+              borderLeft
+              onPress={() => navigation.navigate("CariAmbulan")}
+            />
+          </Card>
+        </View>
+
+        <View style={styles.content}>
+          <Title>Pertolongan Pertama</Title>
+          <SearchBar marginBottom={12} />
+
+          <FlatList
+            horizontal
+            scrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            data={firstAids}
+            keyExtractor={(item, index) => `firstaid-${index}`}
+            renderItem={renderFistAids}
           />
-        </Card>
-
-        <Title>Pertolongan Pertama</Title>
-        <SearchBar
-          backgroundColor="#fff"
-          marginBottom={12}
-          marginHorizontal={16}
-        />
-
-        <FlatList
-          horizontal
-          scrollEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          data={firstAids}
-          keyExtractor={(item, index) => `firstaid-${index}`}
-          renderItem={renderFistAids}
-        />
+        </View>
       </ScrollView>
     </View>
   );
@@ -109,30 +112,30 @@ const GawatDarurat = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF1"
+    backgroundColor: "#B0BEC5"
   },
   content: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#fff",
+    marginTop: 8,
+    padding: 16
   },
   mainAction: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 16,
     paddingVertical: 16
   },
   actionItem: {
     flex: 1,
     alignItems: "center",
     alignSelf: "stretch",
-    justifyContent: "center",
-    paddingHorizontal: 16
+    justifyContent: "center"
   },
   faItem: {
     height: 160,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 16,
-    marginBottom: 16
+    margin: 8
   }
 });
 
