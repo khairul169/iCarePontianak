@@ -86,7 +86,7 @@ exports[`<Header /> render 1`] = `
           "flexDirection": "row",
         },
         Object {
-          "backgroundColor": "#eee",
+          "backgroundColor": "#ECEFF1",
           "marginBottom": undefined,
           "marginHorizontal": undefined,
           "marginTop": 12,
@@ -98,13 +98,20 @@ exports[`<Header /> render 1`] = `
     <TextInput
       allowFontScaling={true}
       placeholder="Mau cari tindakan atau bantuan apa?"
+      placeholderTextColor="#78909C"
       rejectResponderTermination={true}
       style={
-        Object {
-          "flex": 1,
-          "paddingHorizontal": 10,
-          "paddingVertical": 4,
-        }
+        Array [
+          Object {
+            "color": "#333",
+            "flex": 1,
+            "paddingHorizontal": 10,
+            "paddingVertical": 4,
+          },
+          Object {
+            "color": "#37474F",
+          },
+        ]
       }
       underlineColorAndroid="transparent"
     />
@@ -113,7 +120,7 @@ exports[`<Header /> render 1`] = `
       style={
         Array [
           Object {
-            "color": "#4f6780",
+            "color": "#37474F",
             "fontSize": 18,
           },
           Object {

@@ -5,8 +5,6 @@ exports[`<BottomTab /> render 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "borderTopColor": "#ddd",
-      "borderTopWidth": 1,
       "flexDirection": "row",
     }
   }

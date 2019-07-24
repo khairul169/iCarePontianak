@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Header, BottomSheet } from "../../components";
-import MapView, { Marker } from "react-native-maps";
+import { Header, BottomSheet, MapLayout } from "../../components";
 
 const CariAmbulan = ({ navigation }) => {
-  const initialRegion = {
-    latitude: -0.0257813,
-    longitude: 109.3323449,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.02
-  };
-
-  const [mapRegion, setMapRegion] = useState(initialRegion);
-  const [userLocation, setUserLocation] = useState();
-
   useEffect(() => {
     this.bottomSheet && this.bottomSheet.hide();
   }, []);
@@ -27,30 +16,7 @@ const CariAmbulan = ({ navigation }) => {
         navigation={navigation}
       />
 
-      <MapView
-        ref={ref => {
-          this.mapView = ref;
-        }}
-        style={styles.mapView}
-        initialRegion={initialRegion}
-        showsUserLocation={true}
-        showsMyLocationButton={false}
-        onRegionChangeComplete={region => {
-          setMapRegion(region);
-        }}
-        onUserLocationChange={event => {
-          const { latitude, longitude } = event.nativeEvent.coordinate;
-          setUserLocation({ latitude, longitude });
-
-          this.mapView.animateToRegion({
-            ...mapRegion,
-            latitude,
-            longitude
-          });
-        }}
-      >
-        {userLocation && <Marker coordinate={userLocation} />}
-      </MapView>
+      <MapLayout style={styles.mapView} />
 
       <View style={styles.bottomMargin} />
       <BottomSheet

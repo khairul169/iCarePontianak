@@ -1,7 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { BottomSheet, Card, Icon, SearchBar, StatusBar } from "../components";
+import {
+  BottomSheet,
+  Card,
+  Icon,
+  SearchBar,
+  StatusBar,
+  Title
+} from "../components";
 
 describe("<BottomSheet />", () => {
   const defaultProps = {};
@@ -51,6 +58,17 @@ describe("<SearchBar />", () => {
 describe("<StatusBar />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<StatusBar {...defaultProps} />);
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
+describe("<Title />", () => {
+  const defaultProps = {
+    children: "Hello world!"
+  };
+  const wrapper = renderer.create(<Title {...defaultProps} />);
 
   test("render", () => {
     expect(wrapper).toMatchSnapshot();

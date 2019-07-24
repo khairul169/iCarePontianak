@@ -1,50 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BottomSheet /> render 1`] = `
-<View>
-  <View
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    pointerEvents="box-none"
-    style={
-      Object {
-        "alignSelf": "stretch",
-        "bottom": -1292,
-        "flex": 1,
-        "height": 1292,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": Array [
-          Object {
-            "translateY": -0,
-          },
-        ],
-      }
+<View
+  onMoveShouldSetResponder={[Function]}
+  onMoveShouldSetResponderCapture={[Function]}
+  onResponderEnd={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderReject={[Function]}
+  onResponderRelease={[Function]}
+  onResponderStart={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "bottom": -1292,
+      "flex": 1,
+      "height": 1292,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "transform": Array [
+        Object {
+          "translateY": -0,
+        },
+      ],
     }
-  >
-    <View
-      style={
+  }
+>
+  <View
+    style={
+      Array [
         Object {
           "backgroundColor": "white",
           "flex": 1,
           "position": "relative",
-        }
-      }
-    >
-      0
-      <View />
-    </View>
+        },
+        undefined,
+      ]
+    }
+  >
+    0
+    <View />
   </View>
 </View>
 `;
@@ -57,7 +58,7 @@ exports[`<Card /> render 1`] = `
         "backgroundColor": "#fff",
       },
       Object {
-        "borderRadius": 3,
+        "borderRadius": 2,
         "elevation": 0,
         "flex": 1,
         "margin": 10,
@@ -103,7 +104,7 @@ exports[`<SearchBar /> render 1`] = `
         "flexDirection": "row",
       },
       Object {
-        "backgroundColor": "#eee",
+        "backgroundColor": "#ECEFF1",
         "marginBottom": undefined,
         "marginHorizontal": undefined,
         "marginTop": undefined,
@@ -115,13 +116,20 @@ exports[`<SearchBar /> render 1`] = `
   <TextInput
     allowFontScaling={true}
     placeholder="Mau cari tindakan atau bantuan apa?"
+    placeholderTextColor="#78909C"
     rejectResponderTermination={true}
     style={
-      Object {
-        "flex": 1,
-        "paddingHorizontal": 10,
-        "paddingVertical": 4,
-      }
+      Array [
+        Object {
+          "color": "#333",
+          "flex": 1,
+          "paddingHorizontal": 10,
+          "paddingVertical": 4,
+        },
+        Object {
+          "color": "#37474F",
+        },
+      ]
     }
     underlineColorAndroid="transparent"
   />
@@ -130,7 +138,7 @@ exports[`<SearchBar /> render 1`] = `
     style={
       Array [
         Object {
-          "color": "#4f6780",
+          "color": "#37474F",
           "fontSize": 18,
         },
         Object {
@@ -151,3 +159,28 @@ exports[`<SearchBar /> render 1`] = `
 `;
 
 exports[`<StatusBar /> render 1`] = `<View />`;
+
+exports[`<Title /> render 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#525252",
+        "fontSize": 18,
+        "marginBottom": 16,
+        "marginLeft": 16,
+        "marginTop": 24,
+      },
+      Object {
+        "color": "#37474F",
+        "fontSize": 18,
+        "marginBottom": 16,
+        "marginTop": 24,
+      },
+      undefined,
+    ]
+  }
+>
+  Hello world!
+</Text>
+`;
