@@ -14,6 +14,21 @@ class DateTimePicker extends Component {
     mode: null
   };
 
+  _dateTimeUnix = (date, time) => {
+    // Convert to string
+    const dateString = moment(date).format("DD-MM-YYYY");
+    const timeString = moment(time).format("HH:mm:ss");
+
+    // Concatenated date and time
+    const dateTime = moment(
+      dateString + " " + timeString,
+      "DD-MM-YYYY HH:mm:ss"
+    );
+
+    // Returns time in unix miliseconds
+    return dateTime.valueOf();
+  };
+
   _dateChanged = (event, value) => {
     const { mode } = this.state;
     const { onValueChange } = this.props;
@@ -38,12 +53,11 @@ class DateTimePicker extends Component {
     });
 
     if (mode === "time") {
-      const dateTime =
-        moment(date).format("YYYY-MM-DD") +
-        " " +
-        moment(time).format("HH:mm:ss");
+      // Get unix time
+      const unixTime = this._dateTimeUnix(date, time);
 
-      onValueChange && onValueChange(dateTime);
+      // Value changed callback
+      onValueChange && onValueChange(unixTime);
     }
   };
 
