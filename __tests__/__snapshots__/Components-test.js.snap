@@ -50,6 +50,60 @@ exports[`<BottomSheet /> render 1`] = `
 </View>
 `;
 
+exports[`<Button /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "borderColor": "#ccc",
+        "borderRadius": 2,
+        "borderWidth": 1,
+      },
+      undefined,
+      false,
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    clickable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#626262",
+            "fontSize": 14,
+            "fontWeight": "bold",
+          },
+          undefined,
+        ]
+      }
+    >
+      THIS IS BUTTON
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`<Card /> render 1`] = `
 <View
   style={
@@ -413,6 +467,35 @@ exports[`<SearchBar /> render 1`] = `
 `;
 
 exports[`<StatusBar /> render 1`] = `<View />`;
+
+exports[`<TextEdit /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomColor": "#ccc",
+        "borderBottomWidth": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#333",
+        "flex": 1,
+        "fontSize": 14,
+        "padding": 0,
+        "paddingVertical": 8,
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;
 
 exports[`<Title /> render 1`] = `
 <Text

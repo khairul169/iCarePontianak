@@ -1,87 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import MapView from "react-native-maps";
-import { Header, Title } from "../Components";
-
-const TextEdit = ({ style, placeholder }) => {
-  const containerStyle = [
-    {
-      borderBottomColor: "#ccc",
-      borderBottomWidth: 1
-    },
-    style
-  ];
-
-  return (
-    <View style={containerStyle}>
-      <TextInput
-        placeholder={placeholder}
-        style={{
-          flex: 1,
-          padding: 0,
-          paddingVertical: 8,
-          fontSize: 14,
-          color: "#333"
-        }}
-      />
-    </View>
-  );
-};
-
-const Button = ({
-  title,
-  backgroundColor,
-  color,
-  marginTop,
-  height = 40,
-  border = true
-}) => {
-  return (
-    <View
-      style={[
-        {
-          backgroundColor: backgroundColor || "#fff"
-        },
-        marginTop && { marginTop },
-        border && {
-          borderColor: "#ccc",
-          borderWidth: 1,
-          borderRadius: 2
-        }
-      ]}
-    >
-      <TouchableOpacity
-        style={[
-          {
-            alignItems: "center",
-            justifyContent: "center",
-            height: 40
-          },
-          {
-            height
-          }
-        ]}
-      >
-        <Text
-          style={{
-            color: color || "#626262",
-            fontSize: 14,
-            fontWeight: "bold"
-          }}
-        >
-          {title.toUpperCase()}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+import { Button, Header, TextEdit, Title } from "../Components";
 
 const BuatLayanan = ({ navigation }) => {
   return (
@@ -104,22 +24,24 @@ const BuatLayanan = ({ navigation }) => {
 
         <View style={styles.content}>
           <Title>Lokasi</Title>
-          <MapView style={{ height: 200 }} scrollEnabled={false} />
+          <View style={styles.locationMap}>
+            <MapView style={styles.mapView} scrollEnabled={false} />
+          </View>
         </View>
 
         <View style={styles.content}>
           <Title>Waktu Kunjungan</Title>
           <Button title="Pilih Tanggal" />
-          <Button title="Pilih Jam" marginTop={8} />
+          <Button title="Pilih Jam" style={styles.topSpace} />
         </View>
 
         <Button
-          title="Buat Kunjungan"
+          title="Buat Layanan"
           height={55}
           backgroundColor="#4CAF50"
           color="#fff"
           border={false}
-          marginTop={8}
+          style={styles.topSpace}
         />
       </ScrollView>
     </View>
@@ -134,6 +56,17 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     backgroundColor: "#fff",
+    marginTop: 8
+  },
+  locationMap: {
+    borderRadius: 3,
+    height: 200,
+    overflow: "hidden"
+  },
+  mapView: {
+    flex: 1
+  },
+  topSpace: {
     marginTop: 8
   }
 });

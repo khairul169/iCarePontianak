@@ -12,6 +12,15 @@ describe("<BottomSheet />", () => {
   });
 });
 
+describe("<Button />", () => {
+  const defaultProps = { title: "This is button" };
+  const wrapper = renderer.create(<Component.Button {...defaultProps} />);
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
 describe("<Card />", () => {
   const defaultProps = {
     flex: 1,
@@ -78,6 +87,15 @@ describe("<SearchBar />", () => {
 describe("<StatusBar />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.StatusBar {...defaultProps} />);
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
+describe("<TextEdit />", () => {
+  const defaultProps = {};
+  const wrapper = renderer.create(<Component.TextEdit {...defaultProps} />);
 
   test("render", () => {
     expect(wrapper).toMatchSnapshot();
