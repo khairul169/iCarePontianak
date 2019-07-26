@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  ToastAndroid,
+  TouchableOpacity
+} from "react-native";
 import MapView from "react-native-maps";
 import {
   Button,
@@ -7,11 +13,9 @@ import {
   TextEdit,
   Title,
   PickerSelect,
-  DateTimePicker,
-  Icon
+  DateTimePicker
 } from "../Components";
-import moment from "moment";
-import "moment/locale/id";
+import { getTimeString } from "../Utils";
 
 const Layanan = [
   {
@@ -81,39 +85,66 @@ const Layanan = [
   }
 ];
 
-const InputItem = ({ children, icon, margin }) => {
-  const containerStyle = [
-    { flexDirection: "row" },
-    margin && { marginTop: 16 }
-  ];
-
-  const contentStyle = { flex: 1, marginHorizontal: 8 };
-
+const MapsLokasi = ({ onPress }) => {
   return (
-    <View style={containerStyle}>
-      <Icon name={icon} size={18} color="#626262" />
-      <View style={contentStyle}>{children}</View>
-    </View>
+    <TouchableOpacity style={styles.locationMap} onPress={onPress}>
+      <MapView
+        style={styles.mapView}
+        scrollEnabled={false}
+        zoomEnabled={false}
+        pitchEnabled={false}
+        rotateEnabled={false}
+      />
+    </TouchableOpacity>
   );
 };
 
 const BuatLayanan = ({ navigation }) => {
-  // States
-  const [tindakan, setTindakan] = useState();
-  const [waktu, setWaktu] = useState();
-
-  const getTimeString = time => {
-    moment.locale("id");
-    return moment(time).format("DD MMMM YYYY HH.mm");
-  };
-
   // Cek layanan
   const namaLayanan = navigation.getParam("layanan", null);
   const layanan = Layanan.find(item => item.name === namaLayanan);
 
   // Map item tindakan
-  let actionItems = layanan ? ["Lain-lain", ...layanan.actions] : null;
+  const defaultAction = "Lain-lain";
+  let actionItems = layanan ? [defaultAction, ...layanan.actions] : null;
   actionItems = actionItems.map(item => ({ label: item, value: item }));
+
+  // States
+  const [keluhan, setKeluhan] = useState("");
+  const [tindakan, setTindakan] = useState(defaultAction);
+  const [diagnosa, setDiagnosa] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [lokasi, setLokasi] = useState();
+  const [waktu, setWaktu] = useState();
+
+  const buatLayanan = () => {
+    if (keluhan.trim() === "" || alamat.trim() === "" || !waktu) {
+      ToastAndroid.show(
+        "Mohon periksa lagi input yang tersedia.",
+        ToastAndroid.LONG
+      );
+      return;
+    }
+
+    let dataLayanan = {
+      keluhan,
+      tindakan,
+      alamat,
+      lokasi,
+      waktu
+    };
+
+    if (namaLayanan === "medicalvisit")
+      dataLayanan = { ...dataLayanan, diagnosa };
+
+    navigation.navigate("KonfirmasiLayanan", {
+      layanan: {
+        name: layanan.name,
+        title: layanan.title,
+        data: dataLayanan
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -121,58 +152,63 @@ const BuatLayanan = ({ navigation }) => {
 
       <ScrollView style={styles.container}>
         <View style={styles.content}>
-          <InputItem icon="account-alert">
-            <Title marginBottom={0}>Keluhan Utama</Title>
-            <TextEdit placeholder="Keluhan yang dirasakan saat ini..." />
-          </InputItem>
+          <Title marginBottom={4}>Keluhan Utama</Title>
+          <TextEdit
+            placeholder="Keluhan yang dirasakan saat ini..."
+            value={keluhan}
+            onChangeText={value => setKeluhan(value)}
+          />
 
-          <InputItem icon="briefcase-edit" margin>
-            <Title>Jenis Tindakan</Title>
-            <PickerSelect
-              items={actionItems}
-              value={tindakan}
-              onValueChange={item => setTindakan(item)}
-            />
-          </InputItem>
+          <Title marginTop={16}>Jenis Tindakan</Title>
+          <PickerSelect
+            items={actionItems}
+            value={tindakan}
+            onValueChange={item => setTindakan(item)}
+          />
 
-          {layanan.name === "medicalvisit" && (
-            <InputItem icon="box-cutter" margin>
-              <Title marginBottom={0}>Diagnosa Medis (opsional)</Title>
-              <TextEdit />
-            </InputItem>
+          {namaLayanan === "medicalvisit" && (
+            <View>
+              <Title marginTop={16} marginBottom={4}>
+                Diagnosa Medis (opsional)
+              </Title>
+              <TextEdit
+                placeholder="..."
+                value={diagnosa}
+                onChangeText={value => setDiagnosa(value)}
+              />
+            </View>
           )}
         </View>
 
         <View style={styles.content}>
-          <InputItem icon="home-map-marker">
-            <Title marginBottom={0}>Lokasi</Title>
-            <TextEdit placeholder="Alamat lengkap..." />
-            <View style={styles.locationMap}>
-              <MapView style={styles.mapView} scrollEnabled={false} />
-            </View>
-          </InputItem>
+          <Title marginBottom={4}>Lokasi</Title>
+          <TextEdit
+            placeholder="Alamat lengkap..."
+            value={alamat}
+            onChangeText={value => setAlamat(value)}
+          />
+          <MapsLokasi onPress={() => setLokasi("test")} />
 
-          <InputItem icon="calendar-clock" margin>
-            <Title>Waktu Kunjungan</Title>
-            <DateTimePicker
-              ref={ref => {
-                this.dtPicker = ref;
-              }}
-              onValueChange={value => setWaktu(value)}
-            />
-            <Button
-              title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
-              onPress={() => this.dtPicker.show()}
-            />
-          </InputItem>
+          <Title marginTop={16}>Waktu Kunjungan</Title>
+          <DateTimePicker
+            ref={ref => {
+              this.dtPicker = ref;
+            }}
+            onValueChange={value => setWaktu(value)}
+          />
+          <Button
+            title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
+            onPress={() => this.dtPicker.show()}
+          />
         </View>
 
         <Button
           title="Buat Layanan"
           height={55}
-          backgroundColor="#8BC34A"
-          color="#fff"
           border={false}
+          onPress={buatLayanan}
+          style={styles.btnBuat}
+          color="#fff"
         />
       </ScrollView>
     </View>
@@ -185,7 +221,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#B0BEC5"
   },
   content: {
-    padding: 12,
+    padding: 16,
     paddingVertical: 24,
     backgroundColor: "#fff",
     marginTop: 8
@@ -198,7 +234,12 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1
+  },
+  btnBuat: {
+    marginTop: 8,
+    backgroundColor: "#7986CB"
   }
 });
 
 export default BuatLayanan;
+export { MapsLokasi };

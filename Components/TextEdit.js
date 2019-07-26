@@ -32,9 +32,8 @@ const styles = StyleSheet.create({
   inputText: {
     flex: 1,
     margin: 0,
-    marginTop: 2,
     padding: 0,
-    paddingVertical: 2,
+    paddingVertical: 4,
     fontSize: 14,
     color: "#333"
   }
