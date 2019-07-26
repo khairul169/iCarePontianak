@@ -34,6 +34,17 @@ describe("<Card />", () => {
   });
 });
 
+describe("<DateTimePicker />", () => {
+  const defaultProps = {};
+  const wrapper = renderer.create(
+    <Component.DateTimePicker {...defaultProps} />
+  );
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
 describe("<Header />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.Header {...defaultProps} />);

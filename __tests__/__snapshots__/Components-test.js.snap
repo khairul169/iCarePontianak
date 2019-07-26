@@ -125,6 +125,8 @@ exports[`<Card /> render 1`] = `
 />
 `;
 
+exports[`<DateTimePicker /> render 1`] = `null`;
+
 exports[`<Header /> render 1`] = `
 <View
   style={

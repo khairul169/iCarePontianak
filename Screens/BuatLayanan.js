@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import MapView from "react-native-maps";
-import { Button, Header, TextEdit, Title, PickerSelect } from "../Components";
+import {
+  Button,
+  Header,
+  TextEdit,
+  Title,
+  PickerSelect,
+  DateTimePicker
+} from "../Components";
 
 const Layanan = [
   {
@@ -72,12 +79,21 @@ const Layanan = [
 ];
 
 const BuatLayanan = ({ navigation }) => {
+  // States
   const [tindakan, setTindakan] = useState();
 
+  const dateTimeChanged = value => {
+    console.log(value);
+  };
+
+  // Cek layanan
   const namaLayanan = navigation.getParam("layanan", null);
   const layanan = Layanan.find(item => item.name === namaLayanan);
+
+  // Tambahkan pilihan default
   layanan.actions.splice(0, 0, "Lain-lain");
 
+  // Map item tindakan
   const actionItems = layanan
     ? layanan.actions.map((item, index) => ({ label: item, value: item }))
     : null;
@@ -115,8 +131,16 @@ const BuatLayanan = ({ navigation }) => {
 
         <View style={styles.content}>
           <Title>Waktu Kunjungan</Title>
-          <Button title="Pilih Tanggal" />
-          <Button title="Pilih Jam" style={styles.topSpace} />
+          <DateTimePicker
+            ref={ref => {
+              this.dtPicker = ref;
+            }}
+            onValueChange={dateTimeChanged}
+          />
+          <Button
+            title="Pilih Tanggal dan Jam"
+            onPress={() => this.dtPicker.show()}
+          />
         </View>
 
         <Button
