@@ -1,13 +1,15 @@
 {
-  "name": "iCarePontianak",
+  "name": "icarepontianak",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-native": "0.60.4",
@@ -30,6 +32,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
+    "jetifier": "^1.6.3",
     "metro-react-native-babel-preset": "^0.55.0",
     "react-test-renderer": "16.8.6"
   },
