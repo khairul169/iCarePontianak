@@ -1,17 +1,16 @@
 import React from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import Header from "../../components/Beranda/Header";
-import ItemPelayanan from "../../components/Beranda/ItemPelayanan";
+import { HomeHeader, ItemLayanan } from "../Components";
 
 // Images
-import iconGadar from "../../assets/pelayanan/gadar.jpg";
-import iconMedVisit from "../../assets/pelayanan/medical-visit.jpg";
-import iconLabDarah from "../../assets/pelayanan/labdarah.jpg";
-import iconGigi from "../../assets/pelayanan/gigi.jpg";
-import iconBidan from "../../assets/pelayanan/bidan.jpg";
-import iconLansia from "../../assets/pelayanan/lansia.jpg";
-import iconSanitasi from "../../assets/pelayanan/sanitasi.jpg";
-import iconDietNutrisi from "../../assets/pelayanan/dietnutrisi.jpg";
+import iconGadar from "../Assets/Layanan/gadar.jpg";
+import iconMedVisit from "../Assets/Layanan/medical-visit.jpg";
+import iconLabDarah from "../Assets/Layanan/labdarah.jpg";
+import iconGigi from "../Assets/Layanan/gigi.jpg";
+import iconBidan from "../Assets/Layanan/bidan.jpg";
+import iconLansia from "../Assets/Layanan/lansia.jpg";
+import iconSanitasi from "../Assets/Layanan/sanitasi.jpg";
+import iconDietNutrisi from "../Assets/Layanan/dietnutrisi.jpg";
 
 const MainItems = ({ navigation }) => {
   const navigateTo = (route, data) => {
@@ -28,18 +27,18 @@ const MainItems = ({ navigation }) => {
         <Text style={styles.textPelayanan}>Layanan Kami</Text>
 
         <View style={styles.row}>
-          <ItemPelayanan
+          <ItemLayanan
             image={iconGadar}
             border={false}
             title="Gawat Darurat"
-            onPress={() => navigateTo("GawatDarurat")}
+            onPress={() => navigateTo("Gadar")}
           />
 
-          <ItemPelayanan
+          <ItemLayanan
             image={iconMedVisit}
             border={false}
             title="Kunjungan Medis"
-            onPress={() => navigateTo("Pelayanan")}
+            onPress={() => navigateTo("BuatLayanan")}
           />
         </View>
       </View>
@@ -48,15 +47,15 @@ const MainItems = ({ navigation }) => {
 
       <View style={styles.pelayanan}>
         <View style={styles.row}>
-          <ItemPelayanan image={iconLabDarah} title="Lab Darah" />
-          <ItemPelayanan image={iconGigi} title="Kesehatan Gigi" />
-          <ItemPelayanan image={iconBidan} title="Bidan Terampil" />
+          <ItemLayanan image={iconLabDarah} title="Lab Darah" />
+          <ItemLayanan image={iconGigi} title="Kesehatan Gigi" />
+          <ItemLayanan image={iconBidan} title="Bidan Terampil" />
         </View>
 
         <View style={styles.row}>
-          <ItemPelayanan image={iconLansia} title="Lansia" />
-          <ItemPelayanan image={iconSanitasi} title="Sanitasi" />
-          <ItemPelayanan image={iconDietNutrisi} title="Diet Nutrisi" />
+          <ItemLayanan image={iconLansia} title="Lansia" />
+          <ItemLayanan image={iconSanitasi} title="Sanitasi" />
+          <ItemLayanan image={iconDietNutrisi} title="Diet Nutrisi" />
         </View>
       </View>
     </View>
@@ -66,7 +65,7 @@ const MainItems = ({ navigation }) => {
 const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header />
+      <HomeHeader />
       <ScrollView style={styles.content}>
         <MainItems navigation={navigation} />
       </ScrollView>

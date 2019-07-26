@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import MapView from "react-native-maps";
-import { Header, Title } from "../../components";
+import { Header, Title } from "../Components";
 
 const TextEdit = ({ style, placeholder }) => {
   const containerStyle = [
@@ -83,7 +83,7 @@ const Button = ({
   );
 };
 
-const Pelayanan = ({ navigation }) => {
+const BuatLayanan = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header title="Kunjungan Medis" backButton navigation={navigation} />
@@ -138,4 +138,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Pelayanan;
+export default BuatLayanan;

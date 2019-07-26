@@ -9,11 +9,11 @@ import {
   FlatList,
   Dimensions
 } from "react-native";
-import { Header, Card, SearchBar, Title } from "../../components";
+import { Header, Card, SearchBar, Title } from "../Components";
 
 // Action image
-import emergencyCall from "../../assets/icon/emergency-call.png";
-import ambulance from "../../assets/icon/ambulance.png";
+import emergencyCall from "../Assets/Icon/emergency-call.png";
+import ambulance from "../Assets/Icon/ambulance.png";
 
 const ActionItem = ({ flex, image, imageSize, label, borderLeft, onPress }) => {
   const containerStyle = [
@@ -47,7 +47,7 @@ const ActionItem = ({ flex, image, imageSize, label, borderLeft, onPress }) => {
   );
 };
 
-const GawatDarurat = ({ navigation }) => {
+const Gadar = ({ navigation }) => {
   const firstAids = [1, 2, 3];
 
   const renderFistAids = ({ item, index }) => {
@@ -139,4 +139,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default GawatDarurat;
+export default Gadar;

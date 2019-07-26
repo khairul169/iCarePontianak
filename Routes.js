@@ -5,13 +5,16 @@ import {
   createStackNavigator,
   createMaterialTopTabNavigator
 } from "react-navigation";
-import BottomTab from "../components/BottomTab";
+import BottomTab from "./Components/BottomTab";
 import { fromRight } from "react-navigation-transitions";
 
 // Routes
-import * as Beranda from "./Beranda";
-import * as Notifikasi from "./Notifikasi";
-import * as Akun from "./Akun";
+import Beranda from "./Screens/Beranda";
+import Notifikasi from "./Screens/Notifikasi";
+import Akun from "./Screens/Akun";
+import Gadar from "./Screens/Gadar";
+import CariAmbulan from "./Screens/CariAmbulan";
+import BuatLayanan from "./Screens/BuatLayanan";
 
 // Tabbar icons
 const routeIcons = {
@@ -23,9 +26,9 @@ const routeIcons = {
 // Beranda navigator
 const mainNavigator = createMaterialTopTabNavigator(
   {
-    Beranda: Beranda.Index,
-    Notifikasi: Notifikasi.Index,
-    Akun: Akun.Index
+    Beranda,
+    Notifikasi,
+    Akun
   },
   {
     tabBarPosition: "bottom",
@@ -39,9 +42,9 @@ const mainStack = createStackNavigator(
     Main: mainNavigator,
 
     // Beranda
-    GawatDarurat: Beranda.GawatDarurat,
-    CariAmbulan: Beranda.CariAmbulan,
-    Pelayanan: Beranda.Pelayanan
+    Gadar,
+    CariAmbulan,
+    BuatLayanan
   },
   {
     headerMode: "none",

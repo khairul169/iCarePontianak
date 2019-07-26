@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AppContainer from "./screens/Routes";
+import AppContainer from "./Routes";
 
 class App extends Component {
   constructor(props) {

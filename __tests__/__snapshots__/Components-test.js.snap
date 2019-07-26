@@ -71,6 +71,201 @@ exports[`<Card /> render 1`] = `
 />
 `;
 
+exports[`<Header /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fff",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 55,
+        "padding": 16,
+      },
+      false,
+      Object {
+        "paddingTop": 36,
+      },
+    ]
+  }
+>
+  <View />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "#424242",
+        "flex": 3,
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`<HomeHeader /> render 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "padding": 16,
+    }
+  }
+>
+  <View />
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+        Object {
+          "marginTop": 20,
+        },
+      ]
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": "#4f6780",
+            "fontSize": 24,
+          },
+          undefined,
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      若
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#333",
+          "flex": 1,
+          "fontSize": 16,
+          "fontWeight": "100",
+          "marginLeft": 16,
+        }
+      }
+    >
+      iCare Pontianak
+    </Text>
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": "#525252",
+            "fontSize": 20,
+          },
+          undefined,
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 5,
+          "flexDirection": "row",
+        },
+        Object {
+          "backgroundColor": "#ECEFF1",
+          "marginBottom": undefined,
+          "marginHorizontal": undefined,
+          "marginTop": 12,
+        },
+        undefined,
+      ]
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      placeholder="Mau cari tindakan atau bantuan apa?"
+      placeholderTextColor="#78909C"
+      rejectResponderTermination={true}
+      style={
+        Array [
+          Object {
+            "color": "#333",
+            "flex": 1,
+            "paddingHorizontal": 10,
+            "paddingVertical": 4,
+          },
+          Object {
+            "color": "#37474F",
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": "#37474F",
+            "fontSize": 18,
+          },
+          Object {
+            "marginHorizontal": 10,
+          },
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`<Icon /> render 1`] = `
 <Text
   allowFontScaling={false}
@@ -92,6 +287,65 @@ exports[`<Icon /> render 1`] = `
 >
   
 </Text>
+`;
+
+exports[`<ItemLayanan /> render 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+        "flexBasis": "30%",
+      },
+      Object {
+        "borderBottomColor": "#CFD8DC",
+        "borderBottomWidth": 1,
+        "borderRightColor": "#CFD8DC",
+        "borderRightWidth": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    clickable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "opacity": 1,
+        "padding": 16,
+      }
+    }
+  >
+    <Image
+      style={
+        Object {
+          "flex": 1,
+          "resizeMode": "contain",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#525252",
+          "fontSize": 11,
+          "marginTop": 12,
+          "textAlign": "center",
+        }
+      }
+    />
+  </View>
+</View>
 `;
 
 exports[`<SearchBar /> render 1`] = `
@@ -166,16 +420,14 @@ exports[`<Title /> render 1`] = `
     Array [
       Object {
         "color": "#525252",
-        "fontSize": 18,
-        "marginBottom": 16,
-        "marginLeft": 16,
-        "marginTop": 24,
+        "fontSize": 16,
       },
       Object {
         "color": "#37474F",
-        "fontSize": 18,
+        "fontSize": 16,
         "marginBottom": 16,
-        "marginTop": 24,
+        "marginHorizontal": 0,
+        "marginTop": 0,
       },
       undefined,
     ]

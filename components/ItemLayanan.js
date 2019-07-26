@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-const ItemPelayanan = ({ title, image, onPress, border }) => {
+const ItemLayanan = ({ title, image, onPress, border }) => {
   return (
     <View style={[styles.container, border && styles.border]}>
       <TouchableOpacity style={styles.item} onPress={onPress}>
@@ -13,14 +13,14 @@ const ItemPelayanan = ({ title, image, onPress, border }) => {
   );
 };
 
-ItemPelayanan.propTypes = {
+ItemLayanan.propTypes = {
   title: PropTypes.string,
   image: PropTypes.any,
   onPress: PropTypes.func,
   border: PropTypes.bool
 };
 
-ItemPelayanan.defaultProps = {
+ItemLayanan.defaultProps = {
   border: true
 };
 
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ItemPelayanan;
+export default ItemLayanan;

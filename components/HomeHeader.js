@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Icon, SearchBar, StatusBar } from "../index";
-import { statusBarHeight } from "../StatusBar";
+import Icon from "./Icon";
+import SearchBar from "./SearchBar";
+import StatusBar, { statusBarHeight } from "./StatusBar";
 
 const HomeHeader = () => {
   const headerStyle = [

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Header, BottomSheet, MapLayout } from "../../components";
+import { Header, BottomSheet, MapLayout } from "../Components";
 
 const CariAmbulan = ({ navigation }) => {
   useEffect(() => {

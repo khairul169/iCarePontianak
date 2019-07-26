@@ -61,7 +61,7 @@ const Header = ({
         {left}
       </View>
 
-      <Text style={styles.headerTitle}>{title.toUpperCase()}</Text>
+      <Text style={styles.headerTitle}>{title && title.toUpperCase()}</Text>
 
       <View style={styles.headerItem}>{right}</View>
     </View>
