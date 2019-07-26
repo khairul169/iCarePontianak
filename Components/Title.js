@@ -8,7 +8,6 @@ const Title = ({
   fontSize,
   marginTop,
   marginBottom,
-  marginX,
   color
 }) => {
   const textStyle = [
@@ -17,7 +16,6 @@ const Title = ({
       fontSize,
       marginTop,
       marginBottom,
-      marginHorizontal: marginX,
       color
     },
     style
@@ -30,7 +28,6 @@ Title.propTypes = {
   fontSize: PropTypes.number,
   marginTop: PropTypes.number,
   marginBottom: PropTypes.number,
-  marginX: PropTypes.number,
   color: PropTypes.string
 };
 

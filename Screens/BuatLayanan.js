@@ -7,8 +7,11 @@ import {
   TextEdit,
   Title,
   PickerSelect,
-  DateTimePicker
+  DateTimePicker,
+  Icon
 } from "../Components";
+import moment from "moment";
+import "moment/locale/id";
 
 const Layanan = [
   {
@@ -78,25 +81,39 @@ const Layanan = [
   }
 ];
 
+const InputItem = ({ children, icon, margin }) => {
+  const containerStyle = [
+    { flexDirection: "row" },
+    margin && { marginTop: 16 }
+  ];
+
+  const contentStyle = { flex: 1, marginHorizontal: 8 };
+
+  return (
+    <View style={containerStyle}>
+      <Icon name={icon} size={18} color="#626262" />
+      <View style={contentStyle}>{children}</View>
+    </View>
+  );
+};
+
 const BuatLayanan = ({ navigation }) => {
   // States
   const [tindakan, setTindakan] = useState();
+  const [waktu, setWaktu] = useState();
 
-  const dateTimeChanged = value => {
-    console.log(value);
+  const getTimeString = time => {
+    moment.locale("id");
+    return moment(time).format("DD MMMM YYYY HH.mm");
   };
 
   // Cek layanan
   const namaLayanan = navigation.getParam("layanan", null);
   const layanan = Layanan.find(item => item.name === namaLayanan);
 
-  // Tambahkan pilihan default
-  layanan.actions.splice(0, 0, "Lain-lain");
-
   // Map item tindakan
-  const actionItems = layanan
-    ? layanan.actions.map((item, index) => ({ label: item, value: item }))
-    : null;
+  let actionItems = layanan ? ["Lain-lain", ...layanan.actions] : null;
+  actionItems = actionItems.map(item => ({ label: item, value: item }));
 
   return (
     <View style={styles.container}>
@@ -104,52 +121,58 @@ const BuatLayanan = ({ navigation }) => {
 
       <ScrollView style={styles.container}>
         <View style={styles.content}>
-          <Title marginBottom={0}>Keluhan Utama</Title>
-          <TextEdit />
+          <InputItem icon="account-alert">
+            <Title marginBottom={0}>Keluhan Utama</Title>
+            <TextEdit placeholder="Keluhan yang dirasakan saat ini..." />
+          </InputItem>
 
-          <Title marginTop={16}>Jenis Tindakan</Title>
-          <PickerSelect
-            items={actionItems}
-            value={tindakan}
-            onValueChange={item => setTindakan(item)}
-          />
+          <InputItem icon="briefcase-edit" margin>
+            <Title>Jenis Tindakan</Title>
+            <PickerSelect
+              items={actionItems}
+              value={tindakan}
+              onValueChange={item => setTindakan(item)}
+            />
+          </InputItem>
 
           {layanan.name === "medicalvisit" && (
-            <Title marginTop={16} marginBottom={0}>
-              Diagnosa Medis (opsional)
-            </Title>
+            <InputItem icon="box-cutter" margin>
+              <Title marginBottom={0}>Diagnosa Medis (opsional)</Title>
+              <TextEdit />
+            </InputItem>
           )}
-          <TextEdit />
         </View>
 
         <View style={styles.content}>
-          <Title>Lokasi</Title>
-          <View style={styles.locationMap}>
-            <MapView style={styles.mapView} scrollEnabled={false} />
-          </View>
-        </View>
+          <InputItem icon="home-map-marker">
+            <Title marginBottom={0}>Lokasi</Title>
+            <TextEdit placeholder="Alamat lengkap..." />
+            <View style={styles.locationMap}>
+              <MapView style={styles.mapView} scrollEnabled={false} />
+            </View>
+          </InputItem>
 
-        <View style={styles.content}>
-          <Title>Waktu Kunjungan</Title>
-          <DateTimePicker
-            ref={ref => {
-              this.dtPicker = ref;
-            }}
-            onValueChange={dateTimeChanged}
-          />
-          <Button
-            title="Pilih Tanggal dan Jam"
-            onPress={() => this.dtPicker.show()}
-          />
+          <InputItem icon="calendar-clock" margin>
+            <Title>Waktu Kunjungan</Title>
+            <DateTimePicker
+              ref={ref => {
+                this.dtPicker = ref;
+              }}
+              onValueChange={value => setWaktu(value)}
+            />
+            <Button
+              title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
+              onPress={() => this.dtPicker.show()}
+            />
+          </InputItem>
         </View>
 
         <Button
           title="Buat Layanan"
           height={55}
-          backgroundColor="#4CAF50"
+          backgroundColor="#8BC34A"
           color="#fff"
           border={false}
-          style={styles.topSpace}
         />
       </ScrollView>
     </View>
@@ -162,20 +185,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#B0BEC5"
   },
   content: {
-    padding: 16,
+    padding: 12,
+    paddingVertical: 24,
     backgroundColor: "#fff",
     marginTop: 8
   },
   locationMap: {
     borderRadius: 3,
     height: 200,
-    overflow: "hidden"
+    overflow: "hidden",
+    marginTop: 16
   },
   mapView: {
     flex: 1
-  },
-  topSpace: {
-    marginTop: 8
   }
 });
 
