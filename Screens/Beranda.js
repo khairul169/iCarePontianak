@@ -5,7 +5,7 @@ import { HomeHeader, ItemLayanan } from "../Components";
 // Images
 import iconGadar from "../Assets/Layanan/gadar.jpg";
 import iconMedVisit from "../Assets/Layanan/medical-visit.jpg";
-import iconLabDarah from "../Assets/Layanan/labdarah.jpg";
+import iconLabMedik from "../Assets/Layanan/labdarah.jpg";
 import iconGigi from "../Assets/Layanan/gigi.jpg";
 import iconBidan from "../Assets/Layanan/bidan.jpg";
 import iconLansia from "../Assets/Layanan/lansia.jpg";
@@ -14,9 +14,11 @@ import iconDietNutrisi from "../Assets/Layanan/dietnutrisi.jpg";
 
 const MainItems = ({ navigation }) => {
   const navigateTo = (route, data) => {
-    navigation.navigate(route, {
-      data
-    });
+    navigation.navigate(route, data);
+  };
+
+  const buatLayanan = name => {
+    navigateTo("BuatLayanan", { layanan: name });
   };
 
   return (
@@ -38,7 +40,7 @@ const MainItems = ({ navigation }) => {
             image={iconMedVisit}
             border={false}
             title="Kunjungan Medis"
-            onPress={() => navigateTo("BuatLayanan")}
+            onPress={() => buatLayanan("medicalvisit")}
           />
         </View>
       </View>
@@ -47,15 +49,39 @@ const MainItems = ({ navigation }) => {
 
       <View style={styles.pelayanan}>
         <View style={styles.row}>
-          <ItemLayanan image={iconLabDarah} title="Lab Darah" />
-          <ItemLayanan image={iconGigi} title="Kesehatan Gigi" />
-          <ItemLayanan image={iconBidan} title="Bidan Terampil" />
+          <ItemLayanan
+            image={iconLabMedik}
+            title="Lab Medik"
+            onPress={() => buatLayanan("labmedik")}
+          />
+          <ItemLayanan
+            image={iconGigi}
+            title="Kesehatan Gigi"
+            onPress={() => buatLayanan("gigi")}
+          />
+          <ItemLayanan
+            image={iconBidan}
+            title="Bidan Terampil"
+            onPress={() => buatLayanan("bidan")}
+          />
         </View>
 
         <View style={styles.row}>
-          <ItemLayanan image={iconLansia} title="Lansia" />
-          <ItemLayanan image={iconSanitasi} title="Sanitasi" />
-          <ItemLayanan image={iconDietNutrisi} title="Diet Nutrisi" />
+          <ItemLayanan
+            image={iconLansia}
+            title="Lansia"
+            onPress={() => buatLayanan("lansia")}
+          />
+          <ItemLayanan
+            image={iconSanitasi}
+            title="Sanitasi"
+            onPress={() => buatLayanan("sanitasi")}
+          />
+          <ItemLayanan
+            image={iconDietNutrisi}
+            title="Diet Nutrisi"
+            onPress={() => buatLayanan("dietnutrisi")}
+          />
         </View>
       </View>
     </View>

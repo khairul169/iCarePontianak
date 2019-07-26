@@ -2,7 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-const Button = ({ title, backgroundColor, color, height, border, style }) => {
+const Button = ({
+  title,
+  backgroundColor,
+  color,
+  height,
+  border,
+  style,
+  onPress
+}) => {
   const containerStyle = [
     styles.container,
     backgroundColor && { backgroundColor },
@@ -14,7 +22,10 @@ const Button = ({ title, backgroundColor, color, height, border, style }) => {
 
   return (
     <View style={containerStyle}>
-      <TouchableOpacity style={[styles.button, height && { height }]}>
+      <TouchableOpacity
+        style={[styles.button, height && { height }]}
+        onPress={onPress}
+      >
         <Text style={[styles.buttonTitle, color && { color }]}>
           {title && title.toUpperCase()}
         </Text>
@@ -29,7 +40,8 @@ Button.propTypes = {
   color: PropTypes.string,
   height: PropTypes.number,
   border: PropTypes.bool,
-  style: PropTypes.any
+  style: PropTypes.any,
+  onPress: PropTypes.func
 };
 
 Button.defaultProps = {

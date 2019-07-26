@@ -1,12 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import MapView from "react-native-maps";
-import { Button, Header, TextEdit, Title } from "../Components";
+import { Button, Header, TextEdit, Title, PickerSelect } from "../Components";
+
+const Layanan = [
+  {
+    name: "medicalvisit",
+    title: "Kunjungan Medis",
+    actions: [
+      "Injeksi",
+      "Intravena Infus",
+      "Perawatan Luka",
+      "Pemenuhan Nutrisi",
+      "Cek Gula Darah, Asam Urat, dan Kolesterol"
+    ]
+  },
+  {
+    name: "labmedik",
+    title: "Cek Lab Medik",
+    actions: [
+      "Tes Darah Lengkap",
+      "Uji Protein C - Reaktif",
+      "Laju Endap Darah",
+      "Tes Elektrolit",
+      "Tes Koagulasi",
+      "Cek Urin",
+      "Cek Sampel Dahak",
+      "Tes ELISA",
+      "Analisa Gas Darah",
+      "Penilaian Risiko Penyakit Jantung"
+    ]
+  },
+  {
+    name: "gigi",
+    title: "Kesehatan Gigi",
+    actions: ["Pemeriksaan Gigi dan Gusi", "Perawatan Oral Hygiene"]
+  },
+  {
+    name: "bidan",
+    title: "Bidan Terampil",
+    actions: [
+      "Pemeriksaan Kehamilan",
+      "Konsultasi",
+      "Senam Cantik",
+      "Senam Yoga Hamil & Nifas",
+      "Baby Spa",
+      "Pijat Bayi"
+    ]
+  },
+  {
+    name: "lansia",
+    title: "Pendampingan Lansia",
+    actions: ["Pendampingan Lansia", "Konsultasi"]
+  },
+  {
+    name: "sanitasi",
+    title: "Sanitasi",
+    actions: ["Instalasi Jamban", "Fogging", "Pemberantasan Hama"]
+  },
+  {
+    name: "dietnutrisi",
+    title: "Diet dan Nutrisi",
+    actions: [
+      "Konsultasi Gizi Nutrisi Diet Biasa",
+      "Konsultasi Diet Penyakit Jantung",
+      "Konsultasi Diet Diabetes",
+      "Konsultasi Diet Asam Urat dan Kolesterol",
+      "Konsultasi Diet Pasca Operasi"
+    ]
+  }
+];
 
 const BuatLayanan = ({ navigation }) => {
+  const [tindakan, setTindakan] = useState();
+
+  const namaLayanan = navigation.getParam("layanan", null);
+  const layanan = Layanan.find(item => item.name === namaLayanan);
+  layanan.actions.splice(0, 0, "Lain-lain");
+
+  const actionItems = layanan
+    ? layanan.actions.map((item, index) => ({ label: item, value: item }))
+    : null;
+
   return (
     <View style={styles.container}>
-      <Header title="Kunjungan Medis" backButton navigation={navigation} />
+      <Header title={layanan.title} backButton navigation={navigation} />
 
       <ScrollView style={styles.container}>
         <View style={styles.content}>
@@ -14,11 +92,17 @@ const BuatLayanan = ({ navigation }) => {
           <TextEdit />
 
           <Title marginTop={16}>Jenis Tindakan</Title>
-          <Button title="Pilih Tindakan" />
+          <PickerSelect
+            items={actionItems}
+            value={tindakan}
+            onValueChange={item => setTindakan(item)}
+          />
 
-          <Title marginTop={16} marginBottom={0}>
-            Diagnosa Medis (opsional)
-          </Title>
+          {layanan.name === "medicalvisit" && (
+            <Title marginTop={16} marginBottom={0}>
+              Diagnosa Medis (opsional)
+            </Title>
+          )}
           <TextEdit />
         </View>
 

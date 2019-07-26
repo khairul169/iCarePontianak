@@ -75,6 +75,15 @@ describe("<ItemLayanan />", () => {
   });
 });
 
+describe("<PickerSelect />", () => {
+  const defaultProps = {};
+  const wrapper = renderer.create(<Component.PickerSelect {...defaultProps} />);
+
+  test("render", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
 describe("<SearchBar />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.SearchBar {...defaultProps} />);

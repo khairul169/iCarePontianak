@@ -402,6 +402,43 @@ exports[`<ItemLayanan /> render 1`] = `
 </View>
 `;
 
+exports[`<PickerSelect /> render 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#ddd",
+      "borderRadius": 3,
+      "borderWidth": 1,
+      "paddingLeft": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 40,
+      }
+    }
+  >
+    <RCTPicker
+      items={Array []}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      selectedIndex={0}
+      style={
+        Array [
+          Object {
+            "height": 216,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
 exports[`<SearchBar /> render 1`] = `
 <View
   style={

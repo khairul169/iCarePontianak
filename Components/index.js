@@ -6,6 +6,7 @@ import HomeHeader from "./HomeHeader";
 import Icon from "./Icon";
 import ItemLayanan from "./ItemLayanan";
 import MapLayout from "./MapLayout";
+import PickerSelect from "./PickerSelect";
 import SearchBar from "./SearchBar";
 import StatusBar from "./StatusBar";
 import TextEdit from "./TextEdit";
@@ -20,6 +21,7 @@ export {
   Icon,
   ItemLayanan,
   MapLayout,
+  PickerSelect,
   SearchBar,
   StatusBar,
   TextEdit,
