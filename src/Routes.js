@@ -9,6 +9,8 @@ import BottomTab from "./Components/BottomTab";
 import { fromRight } from "react-navigation-transitions";
 
 // Routes
+import Splash from "./Screens/Splash";
+import Login from "./Screens/Login";
 import Beranda from "./Screens/Beranda";
 import Notifikasi from "./Screens/Notifikasi";
 import Akun from "./Screens/Akun";
@@ -55,8 +57,15 @@ const mainStack = createStackNavigator(
 );
 
 // Switch navigator
-const switchNavigator = createSwitchNavigator({
-  Main: mainStack
-});
+const switchNavigator = createSwitchNavigator(
+  {
+    Splash,
+    Login,
+    Main: mainStack
+  },
+  {
+    initialRouteName: "Splash"
+  }
+);
 
 export default createAppContainer(switchNavigator);

@@ -3,14 +3,14 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader, ItemLayanan } from "../Components";
 
 // Images
-import iconGadar from "../Assets/Layanan/gadar.jpg";
-import iconMedVisit from "../Assets/Layanan/medical-visit.jpg";
-import iconLabMedik from "../Assets/Layanan/labdarah.jpg";
-import iconGigi from "../Assets/Layanan/gigi.jpg";
-import iconBidan from "../Assets/Layanan/bidan.jpg";
-import iconLansia from "../Assets/Layanan/lansia.jpg";
-import iconSanitasi from "../Assets/Layanan/sanitasi.jpg";
-import iconDietNutrisi from "../Assets/Layanan/dietnutrisi.jpg";
+import iconGadar from "../../assets/layanan/gadar.jpg";
+import iconMedVisit from "../../assets/layanan/medical-visit.jpg";
+import iconLabMedik from "../../assets/layanan/labdarah.jpg";
+import iconGigi from "../../assets/layanan/gigi.jpg";
+import iconBidan from "../../assets/layanan/bidan.jpg";
+import iconLansia from "../../assets/layanan/lansia.jpg";
+import iconSanitasi from "../../assets/layanan/sanitasi.jpg";
+import iconDietNutrisi from "../../assets/layanan/dietnutrisi.jpg";
 
 const MainItems = ({ navigation }) => {
   const navigateTo = (route, data) => {

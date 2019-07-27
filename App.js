@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import AppContainer from "./Routes";
+import { Provider } from "react-redux";
+import AppContainer from "./src/Routes";
+import store from "./src/Store";
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +10,11 @@ class App extends Component {
   }
 
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
 

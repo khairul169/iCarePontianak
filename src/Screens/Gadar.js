@@ -12,8 +12,8 @@ import {
 import { Header, Card, SearchBar, Title } from "../Components";
 
 // Action image
-import emergencyCall from "../Assets/Icon/emergency-call.png";
-import ambulance from "../Assets/Icon/ambulance.png";
+import emergencyCall from "../../assets/icon/emergency-call.png";
+import ambulance from "../../assets/icon/ambulance.png";
 
 const ActionItem = ({ flex, image, imageSize, label, borderLeft, onPress }) => {
   const containerStyle = [
