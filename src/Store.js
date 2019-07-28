@@ -3,9 +3,11 @@ import thunk from "redux-thunk";
 
 // Reducers
 import { auth } from "./Reducers/Auth.reducer";
+import { akun } from "./Reducers/Akun.reducer";
 
 const reducers = combineReducers({
-  auth
+  auth,
+  akun
 });
 
 export default createStore(reducers, applyMiddleware(thunk));

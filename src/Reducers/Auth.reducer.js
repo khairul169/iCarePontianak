@@ -1,11 +1,11 @@
-const authInitialState = {
+const initialState = {
   isLoading: false,
   success: false,
   message: null,
   token: null
 };
 
-export const auth = (state = authInitialState, action) => {
+export const auth = (state = initialState, action) => {
   switch (action.type) {
     // setLoading
     case "AUTH_SET_LOADING":

@@ -1,10 +1,10 @@
 import React from "react";
 import {
   createAppContainer,
-  createSwitchNavigator,
   createStackNavigator,
   createMaterialTopTabNavigator
 } from "react-navigation";
+import createAnimatedSwitchNavigator from "react-navigation-animated-switch";
 import BottomTab from "./Components/BottomTab";
 import { fromRight } from "react-navigation-transitions";
 
@@ -57,7 +57,7 @@ const mainStack = createStackNavigator(
 );
 
 // Switch navigator
-const switchNavigator = createSwitchNavigator(
+const switchNavigator = createAnimatedSwitchNavigator(
   {
     Splash,
     Login,

@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { fetchUser } from "../Actions/Akun.action";
 import { logout } from "../Actions/Auth.action";
 
 import { View, Text, StyleSheet, Button } from "react-native";
 import { Header } from "../Components";
 
 const Akun = props => {
-  const { token, navigation } = props;
+  const { token, user, navigation, fetchUserData } = props;
+
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
 
   const onLogout = () => {
     props.logout();
@@ -21,6 +26,8 @@ const Akun = props => {
       <Header title="Akun" />
 
       <View style={styles.content}>
+        <Text>Username: {user && user.username}</Text>
+        <Text>Name: {user && user.name}</Text>
         <Button title="Logout" onPress={onLogout} />
       </View>
     </View>
@@ -36,11 +43,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ auth }) => ({
-  token: auth.token
+const mapStateToProps = ({ auth, akun }) => ({
+  token: auth.token,
+  user: akun.userData
 });
 
 const mapDispatchToProps = {
+  fetchUserData: fetchUser,
   logout
 };
 
