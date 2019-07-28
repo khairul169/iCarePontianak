@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const DEBUG = true;
-const API_URL = "http://192.168.43.48/icare/public/";
+const LOCAL = true;
+const API_URL = LOCAL
+  ? "http://192.168.56.1/icare/public/"
+  : "http://192.168.43.48/icare/public/";
 
 const auth = token => {
   return {

@@ -18,6 +18,8 @@ const setResponse = ({ success, message }) => {
   };
 };
 
+const setError = message => setResponse({ success: false, message });
+
 const setToken = token => {
   return {
     type: "AUTH_SET_TOKEN",
@@ -33,15 +35,18 @@ export const fetchLogin = (username, password) => {
     // fetch data
     const response = await API.post("auth/login", { username, password });
 
-    // set response
-    dispatch(setResponse(response));
+    try {
+      const { success, result } = response;
+      dispatch(setResponse(response));
 
-    if (response && response.success) {
-      const token = response.result.token;
-
-      // save token
-      await Storage.storeToken(token);
-      dispatch(setToken(token));
+      // set token
+      if (success) {
+        dispatch(setToken(result.token));
+        Storage.storeToken(result.token);
+      }
+    } catch (error) {
+      // exception catched
+      dispatch(setError("Network error!"));
     }
   };
 };
@@ -58,15 +63,18 @@ export const fetchRegister = (username, password, fullname) => {
       fullname
     });
 
-    // set response
-    dispatch(setResponse(response));
+    try {
+      const { success, result } = response;
+      dispatch(setResponse(response));
 
-    if (response && response.success) {
-      const token = response.result.token;
-
-      // save token
-      await Storage.storeToken(token);
-      dispatch(setToken(token));
+      // set token
+      if (success) {
+        dispatch(setToken(result.token));
+        Storage.storeToken(result.token);
+      }
+    } catch (error) {
+      // exception catched
+      dispatch(setError("Network error!"));
     }
   };
 };
@@ -76,19 +84,24 @@ export const validateToken = () => {
     // set loading
     dispatch(setLoading(true));
 
-    // get token from storage
+    // get token
     const token = await Storage.getToken();
 
-    // fetch data
+    // validate token
     const response = await API.get("auth/validate", token);
 
-    // data loaded
-    dispatch(setLoading(false));
+    try {
+      const { success, result } = response;
+      dispatch(setLoading(false));
 
-    // success
-    if (response && response.success) {
-      await Storage.storeToken(token);
-      dispatch(setToken(token));
+      // set token
+      if (success) {
+        Storage.storeToken(result.token);
+        dispatch(setToken(result.token));
+      }
+    } catch (error) {
+      // exception catched
+      console.log(error.message);
     }
   };
 };
@@ -97,7 +110,6 @@ export const logout = () => {
   return async dispatch => {
     // clear token from storage
     await Storage.clearToken();
-
     // clear token state
     dispatch(setToken(null));
   };
