@@ -6,42 +6,38 @@ class MapLayout extends Component {
   static propTypes = {
     style: PropTypes.any,
     coordinate: PropTypes.object,
-    latlngDelta: PropTypes.object,
     markers: PropTypes.array,
-    lockPosition: PropTypes.bool
+    onRegionChanged: PropTypes.func
   };
 
   static defaultProps = {
-    coordinate: {
-      latitude: -0.0257813,
-      longitude: 109.3323449
-    },
-    latlngDelta: {
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.02
-    },
-    markers: [],
-    lockPosition: false
+    markers: []
   };
 
   state = {
     region: null,
     userLocation: null,
-    initUserLoc: true
+    animateToUser: true
+  };
+
+  initialRegion = {
+    latitude: -0.0257813,
+    longitude: 109.3323449,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.02
   };
 
   _regionChanged = region => {
+    this.props.onRegionChanged && this.props.onRegionChanged(region);
     this.setState({ region });
   };
 
   _userLocation = coordinate => {
-    const { lockPosition } = this.props;
-
-    if (lockPosition || this.state.initUserLoc) {
+    if (this.state.animateToUser && !this.props.coordinate) {
       this.moveToLocation(coordinate);
     }
 
-    this.setState({ userLocation: coordinate, initUserLoc: lockPosition });
+    this.setState({ userLocation: coordinate, animateToUser: false });
   };
 
   _renderMarkers = () => {
@@ -51,7 +47,7 @@ class MapLayout extends Component {
   };
 
   moveToLocation = location => {
-    const currentRegion = this.state.region || this.props.latlngDelta;
+    const currentRegion = this.state.region || this.initialRegion;
 
     this.mapView.animateToRegion({
       ...currentRegion,
@@ -64,12 +60,14 @@ class MapLayout extends Component {
   };
 
   render() {
-    const { style, coordinate, latlngDelta, lockPosition } = this.props;
+    const { style, coordinate } = this.props;
 
-    const initialRegion = {
-      ...coordinate,
-      ...latlngDelta
-    };
+    const initialRegion = coordinate
+      ? {
+          ...this.initialRegion,
+          ...coordinate
+        }
+      : this.initialRegion;
 
     return (
       <MapView
@@ -80,7 +78,6 @@ class MapLayout extends Component {
         initialRegion={initialRegion}
         showsUserLocation={true}
         showsMyLocationButton={false}
-        scrollEnabled={!lockPosition}
         onRegionChangeComplete={this._regionChanged}
         onUserLocationChange={event =>
           this._userLocation(event.nativeEvent.coordinate)

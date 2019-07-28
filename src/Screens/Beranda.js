@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
+import { Service } from "../Consts";
 
 // Images
 import iconGadar from "../../assets/layanan/gadar.jpg";
@@ -18,8 +19,8 @@ const MainItems = ({ navigation }) => {
     navigation.navigate(route, data);
   };
 
-  const buatLayanan = name => {
-    navigateTo("BuatLayanan", { layanan: name });
+  const buatLayanan = type => {
+    navigateTo("BuatLayanan", { layanan: type });
   };
 
   return (
@@ -41,7 +42,7 @@ const MainItems = ({ navigation }) => {
             image={iconMedVisit}
             border={false}
             title="Kunjungan Medis"
-            onPress={() => buatLayanan("medicalvisit")}
+            onPress={() => buatLayanan(Service.MEDICALVISIT)}
           />
         </View>
       </View>
@@ -53,17 +54,17 @@ const MainItems = ({ navigation }) => {
           <ItemLayanan
             image={iconLabMedik}
             title="Lab Medik"
-            onPress={() => buatLayanan("labmedik")}
+            onPress={() => buatLayanan(Service.LABMEDIK)}
           />
           <ItemLayanan
             image={iconGigi}
             title="Kesehatan Gigi"
-            onPress={() => buatLayanan("gigi")}
+            onPress={() => buatLayanan(Service.GIGI)}
           />
           <ItemLayanan
             image={iconBidan}
             title="Bidan Terampil"
-            onPress={() => buatLayanan("bidan")}
+            onPress={() => buatLayanan(Service.BIDAN)}
           />
         </View>
 
@@ -71,17 +72,17 @@ const MainItems = ({ navigation }) => {
           <ItemLayanan
             image={iconLansia}
             title="Lansia"
-            onPress={() => buatLayanan("lansia")}
+            onPress={() => buatLayanan(Service.LANSIA)}
           />
           <ItemLayanan
             image={iconSanitasi}
             title="Sanitasi"
-            onPress={() => buatLayanan("sanitasi")}
+            onPress={() => buatLayanan(Service.SANITASI)}
           />
           <ItemLayanan
             image={iconDietNutrisi}
             title="Diet Nutrisi"
-            onPress={() => buatLayanan("dietnutrisi")}
+            onPress={() => buatLayanan(Service.NUTRISI)}
           />
         </View>
       </View>

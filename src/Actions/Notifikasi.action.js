@@ -2,31 +2,31 @@ import API from "../API";
 
 const setLoading = bool => {
   return {
-    type: "AKUN_SET_LOADING",
+    type: "NOTIFIKASI_SET_LOADING",
     payload: bool
   };
 };
 
-const setUserData = userData => {
+const setItems = items => {
   return {
-    type: "AKUN_SET_USERDATA",
-    payload: userData
+    type: "NOTIFIKASI_SET_ITEMS",
+    payload: items
   };
 };
 
-export const fetchUser = () => {
+export const fetchItems = () => {
   return (dispatch, getState) => {
     // set loading
     dispatch(setLoading(true));
 
     // fetch data
-    API.get("user/", getState().auth.token)
+    API.get("service/", getState().auth.token)
       .then(response => {
         dispatch(setLoading(false));
         return response;
       })
       .then(({ success, result }) => {
-        success && dispatch(setUserData(result));
+        success && dispatch(setItems(result));
       });
   };
 };

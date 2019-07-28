@@ -1,0 +1,15 @@
+// Service type
+1: emergency
+2: visit
+3: labdarah
+4: gigi
+5: bidan
+6: lansia
+7: sanitasi
+8: diet
+
+// User role
+0: disabled
+1: client
+2: ners
+

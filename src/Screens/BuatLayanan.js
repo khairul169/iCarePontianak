@@ -9,11 +9,12 @@ import {
   DateTimePicker,
   MiniMap
 } from "../Components";
+import { Service } from "../Consts";
 import { getTimeString } from "../Utils";
 
 const Layanan = [
   {
-    name: "medicalvisit",
+    type: Service.MEDICALVISIT,
     title: "Kunjungan Medis",
     actions: [
       "Injeksi",
@@ -24,7 +25,7 @@ const Layanan = [
     ]
   },
   {
-    name: "labmedik",
+    type: Service.LABMEDIK,
     title: "Cek Lab Medik",
     actions: [
       "Tes Darah Lengkap",
@@ -40,12 +41,12 @@ const Layanan = [
     ]
   },
   {
-    name: "gigi",
+    type: Service.GIGI,
     title: "Kesehatan Gigi",
     actions: ["Pemeriksaan Gigi dan Gusi", "Perawatan Oral Hygiene"]
   },
   {
-    name: "bidan",
+    type: Service.BIDAN,
     title: "Bidan Terampil",
     actions: [
       "Pemeriksaan Kehamilan",
@@ -57,17 +58,17 @@ const Layanan = [
     ]
   },
   {
-    name: "lansia",
+    type: Service.LANSIA,
     title: "Pendampingan Lansia",
     actions: ["Pendampingan Lansia", "Konsultasi"]
   },
   {
-    name: "sanitasi",
+    type: Service.SANITASI,
     title: "Sanitasi",
     actions: ["Instalasi Jamban", "Fogging", "Pemberantasan Hama"]
   },
   {
-    name: "dietnutrisi",
+    type: Service.NUTRISI,
     title: "Diet dan Nutrisi",
     actions: [
       "Konsultasi Gizi Nutrisi Diet Biasa",
@@ -81,8 +82,8 @@ const Layanan = [
 
 const BuatLayanan = ({ navigation }) => {
   // Cek layanan
-  const namaLayanan = navigation.getParam("layanan", null);
-  const layanan = Layanan.find(item => item.name === namaLayanan);
+  const typeLayanan = navigation.getParam("layanan", null);
+  const layanan = Layanan.find(item => item.type === typeLayanan);
 
   // Map item tindakan
   const defaultAction = "Lain-lain";
@@ -98,7 +99,7 @@ const BuatLayanan = ({ navigation }) => {
   const [waktu, setWaktu] = useState();
 
   const buatLayanan = () => {
-    if (keluhan.trim() === "" || alamat.trim() === "" || !waktu) {
+    if (keluhan.trim() === "" || alamat.trim() === "" || !waktu || !lokasi) {
       ToastAndroid.show(
         "Mohon periksa lagi input yang tersedia.",
         ToastAndroid.LONG
@@ -111,15 +112,13 @@ const BuatLayanan = ({ navigation }) => {
       tindakan,
       alamat,
       lokasi,
-      waktu
+      waktu,
+      diagnosa
     };
-
-    if (namaLayanan === "medicalvisit")
-      dataLayanan = { ...dataLayanan, diagnosa };
 
     navigation.navigate("KonfirmasiLayanan", {
       layanan: {
-        name: layanan.name,
+        type: layanan.type,
         title: layanan.title,
         data: dataLayanan
       }
@@ -146,7 +145,7 @@ const BuatLayanan = ({ navigation }) => {
             onValueChange={item => setTindakan(item)}
           />
 
-          {namaLayanan === "medicalvisit" && (
+          {layanan.type === Service.MEDICALVISIT && (
             <View>
               <Title marginTop={16} marginBottom={4}>
                 Diagnosa Medis (opsional)
@@ -169,8 +168,14 @@ const BuatLayanan = ({ navigation }) => {
           />
           <MiniMap
             borderRadius={3}
-            onPress={() => setLokasi("test")}
+            onPress={() =>
+              navigation.navigate("PilihLokasi", {
+                location: lokasi,
+                callback: setLokasi
+              })
+            }
             style={styles.map}
+            coordinate={lokasi}
           />
 
           <Title marginTop={16}>Waktu Kunjungan</Title>

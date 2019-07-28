@@ -1,42 +1,45 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { ItemDetail as Item } from "../../Components";
+import { getTimeString, getServiceName } from "../../Utils";
 
-const ItemDetail = () => {
+const ItemDetail = ({ type, data }) => {
   const items = [
     {
       icon: "mother-nurse",
       title: "Jenis Layanan",
-      text: "Test"
+      text: getServiceName(type)
     },
     {
       icon: "account-alert",
       title: "Keluhan Utama",
-      text: "Test"
+      text: data.keluhan
     },
     {
       icon: "briefcase-edit",
       title: "Jenis Tindakan",
-      text: "Test"
+      text: data.tindakan
     },
     {
       icon: "box-cutter",
       title: "Diagnosa Medis",
-      text: "Test"
+      text: data.diagnosa
     },
     {
       icon: "calendar-clock",
       title: "Waktu Kunjungan",
-      text: "Test"
+      text: getTimeString(data.waktu)
     },
     {
       icon: "home-map-marker",
       title: "Lokasi Klien",
-      text: "Test"
+      text: data.alamat
     }
   ];
 
   const renderItem = ({ item, index }) => {
+    if (!item.text) return;
+
     return (
       <Item
         icon={item.icon}
