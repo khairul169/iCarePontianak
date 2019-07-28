@@ -22,7 +22,7 @@ const ItemHeader = ({
     }
   ];
 
-  const layananTextStyle = { marginLeft: 16, fontSize: 18, color: "#444" };
+  const layananTextStyle = { marginLeft: 16, fontSize: 16, color: "#444" };
   const layananIdStyle = {
     marginLeft: 8,
     fontSize: 16,
@@ -37,12 +37,12 @@ const ItemHeader = ({
   return (
     <TouchableNativeFeedback onPress={onPress}>
       <View style={headerStyle}>
-        <Icon name="note-outline" size={20} color="#525252" />
+        <Icon name="note-outline" size={18} color="#525252" />
         {title && <Text style={layananTextStyle}>{title}</Text>}
         {subtitle && <Text style={layananIdStyle}>{subtitle}</Text>}
         <Icon
           name={collapsed ? "chevron-up" : "chevron-down"}
-          size={24}
+          size={20}
           color="#525252"
           style={iconStyle}
         />

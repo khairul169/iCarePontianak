@@ -28,13 +28,29 @@ const Layanan = () => {
 
       <View style={styles.content}>
         {showDetail && <ItemDetail />}
+
+        <View style={styles.actionContainer}>
+          <Button
+            title="Hubungi"
+            style={[styles.actionButton, styles.btnContact]}
+            small
+            icon="phone"
+          />
+          <Button
+            title="Batalkan"
+            style={styles.actionButton}
+            small
+            icon="cancel"
+          />
+        </View>
+
         <Button
           title="Layanan Selesai"
           style={styles.btnSelesai}
           border={false}
           color="#fff"
+          icon="checkbox-marked-circle"
         />
-        <Button title="Batalkan Layanan" small />
       </View>
     </View>
   );
@@ -49,8 +65,17 @@ const styles = StyleSheet.create({
     padding: 16
   },
   btnSelesai: {
-    marginBottom: 8,
     backgroundColor: "#8BC34A"
+  },
+  actionContainer: {
+    flexDirection: "row",
+    marginBottom: 16
+  },
+  actionButton: {
+    flex: 1
+  },
+  btnContact: {
+    marginRight: 16
   }
 });
 

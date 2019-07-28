@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
 import PropTypes from "prop-types";
+import Icon from "./Icon";
 
-const Button = ({ title, color, border, style, onPress, small }) => {
+const Button = ({ title, color, border, style, onPress, small, icon }) => {
   const containerStyle = [
     styles.container,
     small && {
@@ -21,9 +22,16 @@ const Button = ({ title, color, border, style, onPress, small }) => {
     color && { color }
   ];
 
+  const iconStyle = {
+    color,
+    fontSize: small ? 20 : 24,
+    marginRight: 16
+  };
+
   return (
     <TouchableNativeFeedback onPress={onPress}>
       <View style={containerStyle}>
+        {icon && <Icon name={icon} style={iconStyle} />}
         <Text style={titleStyle}>{title.toUpperCase()}</Text>
       </View>
     </TouchableNativeFeedback>
@@ -36,7 +44,8 @@ Button.propTypes = {
   border: PropTypes.bool,
   style: PropTypes.any,
   onPress: PropTypes.func,
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  icon: PropTypes.string
 };
 
 Button.defaultProps = {
@@ -49,7 +58,8 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignItems: "center",
     justifyContent: "center",
-    height: 48
+    height: 48,
+    flexDirection: "row"
   },
   buttonTitle: {
     color: "#626262",

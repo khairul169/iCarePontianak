@@ -183,11 +183,13 @@ const BuatLayanan = ({ navigation }) => {
           <Button
             title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
             onPress={() => this.dtPicker.show()}
+            small
+            icon="clock-outline"
           />
         </View>
 
         <Button
-          title="Buat Layanan"
+          title="Lanjutkan"
           height={55}
           border={false}
           onPress={buatLayanan}

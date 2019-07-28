@@ -66,7 +66,7 @@ const KonfirmasiLayanan = ({ navigation }) => {
           </View>
 
           <Button
-            title="Konfirmasi Layanan"
+            title="Buat Layanan"
             height={55}
             style={styles.btnKonfirmasi}
             color="#fff"
