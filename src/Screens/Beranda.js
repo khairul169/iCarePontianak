@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { HomeHeader, ItemLayanan } from "../Components";
+import { HomeHeader } from "../Components";
+import ItemLayanan from "./Beranda/ItemLayanan";
 
 // Images
 import iconGadar from "../../assets/layanan/gadar.jpg";

@@ -34,6 +34,7 @@ const mainNavigator = createMaterialTopTabNavigator(
     Akun
   },
   {
+    initialRouteName: "Beranda",
     tabBarPosition: "bottom",
     tabBarComponent: props => <BottomTab {...props} icons={routeIcons} />
   }

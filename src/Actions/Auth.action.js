@@ -42,7 +42,7 @@ export const fetchLogin = (username, password) => {
       // set token
       if (success) {
         dispatch(setToken(result.token));
-        Storage.storeToken(result.token);
+        await Storage.storeToken(result.token);
       }
     } catch (error) {
       // exception catched
@@ -70,7 +70,7 @@ export const fetchRegister = (username, password, fullname) => {
       // set token
       if (success) {
         dispatch(setToken(result.token));
-        Storage.storeToken(result.token);
+        await Storage.storeToken(result.token);
       }
     } catch (error) {
       // exception catched
@@ -92,13 +92,15 @@ export const validateToken = () => {
 
     try {
       const { success, result } = response;
-      dispatch(setLoading(false));
 
       // set token
       if (success) {
-        Storage.storeToken(result.token);
         dispatch(setToken(result.token));
+        await Storage.storeToken(result.token);
       }
+
+      // finalize
+      dispatch(setLoading(false));
     } catch (error) {
       // exception catched
       console.log(error.message);

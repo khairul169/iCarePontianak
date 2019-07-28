@@ -1,5 +1,5 @@
 const initialState = {
-  isLoading: false,
+  loading: true,
   success: false,
   message: null,
   token: null
@@ -11,14 +11,14 @@ export const auth = (state = initialState, action) => {
     case "AUTH_SET_LOADING":
       return {
         ...state,
-        isLoading: action.payload
+        loading: action.payload
       };
 
     // setResponse
     case "AUTH_SET_RESPONSE":
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         success: action.payload.success,
         message: action.payload.message
       };

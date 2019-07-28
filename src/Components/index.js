@@ -5,8 +5,9 @@ import DateTimePicker from "./DateTimePicker";
 import Header from "./Header";
 import HomeHeader from "./HomeHeader";
 import Icon from "./Icon";
-import ItemLayanan from "./ItemLayanan";
+import ItemDetail from "./ItemDetail";
 import MapLayout from "./MapLayout";
+import MiniMap from "./MiniMap";
 import PickerSelect from "./PickerSelect";
 import SearchBar from "./SearchBar";
 import StatusBar from "./StatusBar";
@@ -21,8 +22,9 @@ export {
   Header,
   HomeHeader,
   Icon,
-  ItemLayanan,
+  ItemDetail,
   MapLayout,
+  MiniMap,
   PickerSelect,
   SearchBar,
   StatusBar,

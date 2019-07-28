@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  ToastAndroid,
-  TouchableOpacity
-} from "react-native";
-import MapView from "react-native-maps";
+import { View, StyleSheet, ScrollView, ToastAndroid } from "react-native";
 import {
   Button,
   Header,
   TextEdit,
   Title,
   PickerSelect,
-  DateTimePicker
+  DateTimePicker,
+  MiniMap
 } from "../Components";
 import { getTimeString } from "../Utils";
 
@@ -84,20 +78,6 @@ const Layanan = [
     ]
   }
 ];
-
-const MapsLokasi = ({ onPress }) => {
-  return (
-    <TouchableOpacity style={styles.locationMap} onPress={onPress}>
-      <MapView
-        style={styles.mapView}
-        scrollEnabled={false}
-        zoomEnabled={false}
-        pitchEnabled={false}
-        rotateEnabled={false}
-      />
-    </TouchableOpacity>
-  );
-};
 
 const BuatLayanan = ({ navigation }) => {
   // Cek layanan
@@ -187,7 +167,11 @@ const BuatLayanan = ({ navigation }) => {
             value={alamat}
             onChangeText={value => setAlamat(value)}
           />
-          <MapsLokasi onPress={() => setLokasi("test")} />
+          <MiniMap
+            borderRadius={3}
+            onPress={() => setLokasi("test")}
+            style={styles.map}
+          />
 
           <Title marginTop={16}>Waktu Kunjungan</Title>
           <DateTimePicker
@@ -226,20 +210,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginTop: 8
   },
-  locationMap: {
-    borderRadius: 3,
-    height: 200,
-    overflow: "hidden",
+  map: {
     marginTop: 16
   },
-  mapView: {
-    flex: 1
-  },
   btnBuat: {
-    marginTop: 8,
-    backgroundColor: "#7986CB"
+    backgroundColor: "#03A9F4"
   }
 });
 
 export default BuatLayanan;
-export { MapsLokasi };

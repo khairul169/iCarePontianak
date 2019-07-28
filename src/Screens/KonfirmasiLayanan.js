@@ -1,99 +1,80 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Header, Icon, Title, Button } from "../Components";
-import { MapsLokasi } from "./BuatLayanan";
+import { View, StyleSheet, ScrollView } from "react-native";
+import { Header, Button, ItemDetail, MiniMap } from "../Components";
 import { getTimeString } from "../Utils";
-
-const InputItem = ({ children, icon, margin = true, border }) => {
-  const containerStyle = [
-    {
-      flexDirection: "row"
-    },
-    margin && { marginTop: 16 }
-  ];
-
-  const contentStyle = [
-    {
-      flex: 1,
-      marginHorizontal: 12
-    },
-    border && {
-      borderBottomWidth: 1,
-      borderBottomColor: "#ddd",
-      paddingBottom: 16
-    }
-  ];
-
-  return (
-    <View style={containerStyle}>
-      <Icon name={icon} size={18} color="#626262" />
-      <View style={contentStyle}>{children}</View>
-    </View>
-  );
-};
 
 const KonfirmasiLayanan = ({ navigation }) => {
   const { name, title, data } = navigation.getParam("layanan");
 
   const buatLayanan = () => {};
 
-  const renderItems = () => (
-    <View>
-      <View style={styles.content}>
-        <InputItem icon="mother-nurse" margin={false}>
-          <Title>Jenis Layanan</Title>
-          <Text>{title}</Text>
-        </InputItem>
-      </View>
-
-      <View style={styles.content}>
-        <InputItem icon="account-alert" margin={false} border>
-          <Title>Keluhan Utama</Title>
-          <Text>{data.keluhan}</Text>
-        </InputItem>
-
-        <InputItem icon="briefcase-edit" border>
-          <Title>Jenis Tindakan</Title>
-          <Text>{data.tindakan}</Text>
-        </InputItem>
-
-        {name === "medicalvisit" && (
-          <InputItem icon="box-cutter">
-            <Title>Diagnosa Medis</Title>
-            <Text>{data.diagnosa || "-"}</Text>
-          </InputItem>
-        )}
-      </View>
-
-      <View style={styles.content}>
-        <InputItem icon="home-map-marker" margin={false}>
-          <Title>Lokasi Klien</Title>
-          <Text>{data.alamat}</Text>
-          <MapsLokasi />
-        </InputItem>
-
-        <InputItem icon="calendar-clock">
-          <Title>Waktu Kunjungan</Title>
-          <Text>{getTimeString(data.waktu)}</Text>
-        </InputItem>
-      </View>
-
-      <Button
-        title="Konfirmasi Layanan"
-        height={55}
-        style={styles.btnKonfirmasi}
-        color="#fff"
-        border={false}
-        onPress={buatLayanan}
-      />
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <Header title="Konfirmasi Layanan" backButton navigation={navigation} />
 
-      <ScrollView style={styles.container}>{renderItems()}</ScrollView>
+      <ScrollView style={styles.container}>
+        <View>
+          <View style={styles.content}>
+            <ItemDetail
+              icon="mother-nurse"
+              margin={false}
+              title="Jenis Layanan"
+              text={title}
+            />
+          </View>
+
+          <View style={styles.content}>
+            <ItemDetail
+              icon="account-alert"
+              margin={false}
+              title="Keluhan Utama"
+              text={data.keluhan}
+              border
+            />
+
+            <ItemDetail
+              icon="briefcase-edit"
+              title="Jenis Tindakan"
+              text={data.tindakan}
+              border={name === "medicalvisit"}
+            />
+
+            {name === "medicalvisit" && (
+              <ItemDetail
+                icon="box-cutter"
+                title="Diagnosa Medis"
+                text={data.diagnosa || "-"}
+              />
+            )}
+          </View>
+
+          <View style={styles.content}>
+            <ItemDetail
+              icon="home-map-marker"
+              title="Lokasi Klien"
+              text={data.alamat}
+              margin={false}
+            >
+              <MiniMap borderRadius={3} style={styles.map} />
+            </ItemDetail>
+
+            <ItemDetail
+              icon="calendar-clock"
+              title="Waktu Kunjungan"
+              text={getTimeString(data.waktu)}
+            />
+          </View>
+
+          <Button
+            title="Konfirmasi Layanan"
+            height={55}
+            style={styles.btnKonfirmasi}
+            color="#fff"
+            border={false}
+            onPress={buatLayanan}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -108,8 +89,10 @@ const styles = StyleSheet.create({
     marginTop: 8,
     backgroundColor: "#fff"
   },
+  map: {
+    marginTop: 16
+  },
   btnKonfirmasi: {
-    marginTop: 8,
     backgroundColor: "#8BC34A"
   }
 });

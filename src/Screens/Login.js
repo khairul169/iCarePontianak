@@ -2,59 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchLogin, fetchRegister } from "../Actions/Auth.action";
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ToastAndroid
-} from "react-native";
-import { Icon } from "../Components";
+import { View, StyleSheet, Image, ToastAndroid } from "react-native";
+import InputText from "./Login/InputText";
+import Button from "./Login/Button";
 import appIcon from "../../assets/icon/app-icon.png";
-
-const InputText = ({ icon = "home", placeholder, value, onChangeText }) => {
-  return (
-    <View style={styles.input}>
-      <Icon style={styles.inputIcon} name={icon} size={20} color="#78909C" />
-      <TextInput
-        style={styles.inputText}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={onChangeText}
-      />
-    </View>
-  );
-};
-
-const Button = ({
-  title,
-  backgroundColor = "#fff",
-  border = true,
-  dark,
-  marginTop = 8,
-  onPress
-}) => {
-  const containerStyle = [
-    styles.buttonContainer,
-    border && {
-      borderColor: "#CFD8DC",
-      borderWidth: 1
-    },
-    { backgroundColor, marginTop }
-  ];
-
-  const titleStyle = [styles.buttonTitle, { color: dark ? "#fff" : "#546E7A" }];
-
-  return (
-    <View style={containerStyle}>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={titleStyle}>{title}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 const Login = props => {
   const [register, setRegister] = useState(false);
@@ -68,7 +19,7 @@ const Login = props => {
   const { auth, navigation } = props;
 
   useEffect(() => {
-    if (auth.isLoading) return;
+    if (auth.loading) return;
 
     // error message
     if (!auth.success && auth.message) {
@@ -119,6 +70,7 @@ const Login = props => {
             placeholder="Nama Lengkap"
             value={fullname}
             onChangeText={setFullname}
+            capitalize
           />
         )}
         <InputText
@@ -132,6 +84,7 @@ const Login = props => {
           placeholder="Kata Sandi"
           value={password}
           onChangeText={setPassword}
+          password
         />
         {register && (
           <InputText
@@ -139,18 +92,22 @@ const Login = props => {
             placeholder="Konfirmasi Kata Sandi"
             value={confirmPass}
             onChangeText={setConfirmPass}
+            password
           />
         )}
 
         <Button
           title={register ? "DAFTAR" : "MASUK"}
-          backgroundColor={register ? "#4CAF50" : "#03A9F4"}
+          backgroundColor={register ? "#8BC34A" : "#03A9F4"}
           marginTop={32}
           dark
-          border={false}
           onPress={onSubmit}
         />
-        <Button title={register ? "Masuk" : "Daftar"} onPress={onToggle} />
+        <Button
+          title={register ? "Masuk" : "Daftar"}
+          onPress={onToggle}
+          border
+        />
       </View>
     </View>
   );
@@ -173,40 +130,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: 16
-  },
-  input: {
-    flexDirection: "row",
-    marginTop: 8,
-    alignItems: "stretch"
-  },
-  inputIcon: {
-    width: 24,
-    alignSelf: "center",
-    marginTop: 2
-  },
-  inputText: {
-    flex: 1,
-    borderColor: "#CFD8DC",
-    borderBottomWidth: 1,
-    padding: 0,
-    paddingVertical: 6,
-    marginLeft: 8
-  },
-  buttonContainer: {
-    marginTop: 16,
-    height: 40,
-    borderRadius: 20
-  },
-  button: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  buttonTitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#fff",
-    textAlign: "center"
   }
 });
 

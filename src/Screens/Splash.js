@@ -8,17 +8,15 @@ import appIcon from "../../assets/icon/app-icon.png";
 const Splash = props => {
   const { isLoading, token, navigation } = props;
 
+  // validate auth token
   useEffect(() => {
-    // validate auth token
     props.validateToken();
   }, [props]);
 
+  // switch screen
   useEffect(() => {
-    if (isLoading) return;
-
-    // switch screen
-    navigation.navigate(token ? "Main" : "Login");
-  }, [isLoading, navigation, token]);
+    !isLoading && navigation.navigate(token ? "Main" : "Login");
+  }, [token, navigation, isLoading]);
 
   return (
     <View style={styles.container}>
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ auth }) => ({
-  isLoading: auth.isLoading,
+  isLoading: auth.loading,
   token: auth.token
 });
 
