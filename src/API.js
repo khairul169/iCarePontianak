@@ -38,6 +38,18 @@ class API {
         DEBUG && console.log(error);
       });
   }
+
+  static async patch(url, body, token) {
+    return axios
+      .patch(API_URL + url, body, auth(token))
+      .then(result => {
+        DEBUG && console.log(result.data);
+        return result.data;
+      })
+      .catch(error => {
+        DEBUG && console.log(error);
+      });
+  }
 }
 
 export default API;

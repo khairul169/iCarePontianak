@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setServiceStatus } from "../../Actions/Layanan.action";
+
 import { View, StyleSheet, Linking, ToastAndroid } from "react-native";
 import { Button, MiniMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
@@ -6,7 +9,8 @@ import UserInfo from "./UserInfo";
 import ItemDetail from "./ItemDetail";
 import { getRoleName } from "../../Utils";
 
-const Layanan = ({ item, collapsed, onPress }) => {
+const Layanan = props => {
+  const { item, collapsed, onPress } = props;
   const { id, user, type, data } = item;
   const userType = user ? parseInt(user.type, 10) : null;
 
@@ -23,6 +27,14 @@ const Layanan = ({ item, collapsed, onPress }) => {
       );
   };
 
+  const layananBatal = () => {
+    item && props.setServiceStatus(item.id, "cancel");
+  };
+
+  const layananSelesai = () => {
+    item && props.setServiceStatus(item.id, "success");
+  };
+
   const renderActions = () => {
     if (!user) {
       return (
@@ -31,6 +43,7 @@ const Layanan = ({ item, collapsed, onPress }) => {
           style={styles.actionButton}
           small
           icon="cancel"
+          onPress={layananBatal}
         />
       );
     }
@@ -50,6 +63,7 @@ const Layanan = ({ item, collapsed, onPress }) => {
             style={styles.actionButton}
             small
             icon="cancel"
+            onPress={layananBatal}
           />
         </View>
 
@@ -60,6 +74,7 @@ const Layanan = ({ item, collapsed, onPress }) => {
             border={false}
             color="#fff"
             icon="checkbox-marked-circle"
+            onPress={layananSelesai}
           />
         )}
       </View>
@@ -122,4 +137,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Layanan;
+const mapDispatchToProps = {
+  setServiceStatus
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Layanan);
