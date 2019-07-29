@@ -23,7 +23,7 @@ class API {
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error);
+        DEBUG && console.log(error.message);
       });
   }
 
@@ -35,7 +35,7 @@ class API {
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error);
+        DEBUG && console.log(error.message);
       });
   }
 
@@ -47,7 +47,7 @@ class API {
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error);
+        DEBUG && console.log(error.message);
       });
   }
 }

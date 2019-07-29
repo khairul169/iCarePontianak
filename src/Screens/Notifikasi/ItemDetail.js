@@ -12,6 +12,11 @@ const ItemDetail = ({ type, data }) => {
     },
     {
       icon: "account-alert",
+      title: "Jenis Kejadian",
+      text: data.kejadian
+    },
+    {
+      icon: "account-alert",
       title: "Keluhan Utama",
       text: data.keluhan
     },
@@ -28,7 +33,7 @@ const ItemDetail = ({ type, data }) => {
     {
       icon: "calendar-clock",
       title: "Waktu Kunjungan",
-      text: getTimeString(data.waktu)
+      text: data.waktu ? getTimeString(data.waktu) : null
     },
     {
       icon: "home-map-marker",

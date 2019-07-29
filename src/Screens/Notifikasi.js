@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchItems } from "../Actions/Notifikasi.action";
 
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { Header } from "../Components";
 import Layanan from "./Notifikasi/Layanan";
 
@@ -16,23 +16,29 @@ const Notifikasi = props => {
     fetchData();
   }, [fetchData]);
 
+  const renderItem = ({ item, index }) => {
+    return (
+      <Layanan
+        item={item}
+        collapsed={collapsedItem === index}
+        onPress={() => {
+          setCollapsedItem(collapsedItem !== index ? index : null);
+        }}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Header title="Notifikasi" />
 
-      <ScrollView style={styles.container}>
-        {items &&
-          items.map((item, index) => (
-            <Layanan
-              key={index}
-              item={item}
-              collapsed={collapsedItem === index}
-              onPress={() =>
-                setCollapsedItem(collapsedItem !== index ? index : null)
-              }
-            />
-          ))}
-      </ScrollView>
+      <FlatList
+        style={styles.container}
+        data={items}
+        keyExtractor={(item, index) => item.id}
+        renderItem={renderItem}
+        extraData={collapsedItem}
+      />
     </View>
   );
 };

@@ -79,7 +79,11 @@ const Gadar = ({ navigation }) => {
           <Title marginTop={0}>Pusat Bantuan</Title>
 
           <Card style={styles.mainAction} border>
-            <ActionItem label="Panggil Bantuan" image={emergencyCall} />
+            <ActionItem
+              label="Panggil Bantuan"
+              image={emergencyCall}
+              onPress={() => navigation.navigate("PanggilBantuan")}
+            />
             <ActionItem
               label="Cari Ambulan"
               image={ambulance}

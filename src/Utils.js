@@ -10,7 +10,7 @@ export const getTimeString = time => {
 export const getServiceName = id => {
   switch (parseInt(id, 10)) {
     case Service.EMERGENCY:
-      return "Gadar";
+      return "Gawat Darurat";
     case Service.MEDICALVISIT:
       return "Kunjungan Medis";
     case Service.LABMEDIK:

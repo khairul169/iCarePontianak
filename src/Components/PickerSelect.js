@@ -2,17 +2,18 @@ import React from "react";
 import { View, StyleSheet, Picker } from "react-native";
 import PropTypes from "prop-types";
 
-const PickerSelect = ({ items, value, onValueChange }) => {
+const PickerSelect = ({ style, height, items, value, onValueChange }) => {
+  const pickerStyle = [styles.picker, height && { height }];
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Picker
         selectedValue={value}
         onValueChange={onValueChange}
-        style={styles.picker}
+        style={pickerStyle}
       >
         {items &&
           items.map((item, index) => (
-            <Picker.Item key={index} label={item.label} value={item.value} />
+            <Picker.Item key={index} label={item} value={item} />
           ))}
       </Picker>
     </View>
@@ -20,6 +21,8 @@ const PickerSelect = ({ items, value, onValueChange }) => {
 };
 
 Picker.propTypes = {
+  style: PropTypes.any,
+  height: PropTypes.number,
   items: PropTypes.array,
   value: PropTypes.any,
   onValueChange: PropTypes.func
@@ -30,7 +33,8 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
     borderWidth: 1,
     borderRadius: 3,
-    paddingLeft: 8
+    paddingLeft: 8,
+    backgroundColor: "#fff"
   },
   picker: {
     height: 40

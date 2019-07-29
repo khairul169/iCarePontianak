@@ -8,10 +8,13 @@ import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
 import ItemDetail from "./ItemDetail";
 import { getRoleName } from "../../Utils";
+import { Service } from "../../Consts";
 
 const Layanan = props => {
   const { item, collapsed, onPress } = props;
-  const { id, user, type, data } = item;
+  const { id, user, data } = item;
+  const itemType = parseInt(item.type, 10);
+  const isEmergency = itemType === Service.EMERGENCY;
   const userType = user ? parseInt(user.type, 10) : null;
 
   const contactUser = () => {
@@ -28,11 +31,11 @@ const Layanan = props => {
   };
 
   const layananBatal = () => {
-    item && props.setServiceStatus(item.id, "cancel");
+    props.setServiceStatus(id, "cancel");
   };
 
   const layananSelesai = () => {
-    item && props.setServiceStatus(item.id, "success");
+    props.setServiceStatus(id, "success");
   };
 
   const renderActions = () => {
@@ -59,15 +62,15 @@ const Layanan = props => {
             onPress={contactUser}
           />
           <Button
-            title="Batalkan"
+            title={isEmergency ? "Selesai" : "Batalkan"}
             style={styles.actionButton}
             small
-            icon="cancel"
+            icon={isEmergency ? "check" : "cancel"}
             onPress={layananBatal}
           />
         </View>
 
-        {userType !== 1 && (
+        {!isEmergency && userType !== 1 && (
           <Button
             title="Layanan Selesai"
             style={styles.btnSelesai}
@@ -82,18 +85,28 @@ const Layanan = props => {
   };
   return (
     <View style={styles.card}>
-      <ItemHeader
-        title={user ? "Layanan" : "Mencari Petugas..."}
-        subtitle={user ? `#${id}` : null}
-        collapsed={collapsed}
-        onPress={onPress}
-        border
-      />
+      {!isEmergency ? (
+        <ItemHeader
+          title={user ? "Layanan" : "Mencari Petugas..."}
+          subtitle={user ? `#${id}` : null}
+          collapsed={collapsed}
+          onPress={onPress}
+          border
+        />
+      ) : (
+        <ItemHeader
+          title={"GAWAT DARURAT"}
+          collapsed={collapsed}
+          onPress={onPress}
+          border
+          emergency
+        />
+      )}
       {user && (
         <UserInfo
           title={user.name}
           registered={user.registered}
-          subtitle={getRoleName(user.role)}
+          subtitle={getRoleName(user.type)}
           reputation={user.reputation}
           online
         />
@@ -101,7 +114,7 @@ const Layanan = props => {
       <MiniMap coordinate={data.lokasi} />
 
       <View style={styles.content}>
-        {collapsed && <ItemDetail type={type} data={data} />}
+        {collapsed && <ItemDetail type={itemType} data={data} />}
         {renderActions()}
       </View>
     </View>

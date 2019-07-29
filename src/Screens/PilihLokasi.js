@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Header, MapLayout, Button } from "../Components";
+import pinImage from "../../assets/pins/pin.png";
 
 const PilihLokasi = ({ navigation }) => {
   // state
@@ -39,10 +40,7 @@ const PilihLokasi = ({ navigation }) => {
         />
 
         <View style={styles.pinContainer}>
-          <Image
-            source={require("../../assets/pins/pin.png")}
-            style={styles.pin}
-          />
+          <Image source={pinImage} style={styles.pin} />
         </View>
 
         <Button

@@ -85,10 +85,11 @@ const BuatLayanan = ({ navigation }) => {
   const typeLayanan = navigation.getParam("layanan", null);
   const layanan = Layanan.find(item => item.type === typeLayanan);
 
-  // Map item tindakan
+  // Item tindakan
   const defaultAction = "Lain-lain";
-  let actionItems = layanan ? [defaultAction, ...layanan.actions] : null;
-  actionItems = actionItems.map(item => ({ label: item, value: item }));
+  const actionItems = layanan
+    ? [defaultAction, ...layanan.actions]
+    : defaultAction;
 
   // States
   const [keluhan, setKeluhan] = useState("");

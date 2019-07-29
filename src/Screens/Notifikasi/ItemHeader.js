@@ -7,7 +7,8 @@ const ItemHeader = ({
   subtitle,
   border,
   onPress,
-  collapsed = false
+  collapsed = false,
+  emergency
 }) => {
   const headerStyle = [
     styles.content,
@@ -19,17 +20,33 @@ const ItemHeader = ({
       borderColor: "#ddd",
       borderBottomWidth: 1,
       paddingBottom: 12
+    },
+    emergency && {
+      backgroundColor: "#f44336",
+      borderBottomWidth: 0
     }
   ];
 
-  const layananTextStyle = { marginLeft: 16, fontSize: 16, color: "#444" };
+  const color = emergency ? "#fff" : "#444";
+  const layananTextStyle = [
+    {
+      marginLeft: 16,
+      fontSize: 16,
+      color
+    },
+    emergency && {
+      marginLeft: 0,
+      flex: 1,
+      textAlign: "center"
+    }
+  ];
   const layananIdStyle = {
     marginLeft: 8,
-    fontSize: 16,
-    color: "#727272"
+    color: "#686868",
+    fontSize: 14
   };
   const iconStyle = {
-    flex: 1,
+    flex: emergency ? 0 : 1,
     alignSelf: "flex-end",
     textAlign: "right"
   };
@@ -37,13 +54,13 @@ const ItemHeader = ({
   return (
     <TouchableNativeFeedback onPress={onPress}>
       <View style={headerStyle}>
-        <Icon name="note-outline" size={18} color="#525252" />
+        <Icon name="note-outline" size={18} color={color} />
         {title && <Text style={layananTextStyle}>{title}</Text>}
         {subtitle && <Text style={layananIdStyle}>{subtitle}</Text>}
         <Icon
           name={collapsed ? "chevron-up" : "chevron-down"}
           size={20}
-          color="#525252"
+          color={color}
           style={iconStyle}
         />
       </View>

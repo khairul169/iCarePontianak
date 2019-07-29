@@ -98,13 +98,13 @@ export const validateToken = () => {
         dispatch(setToken(result.token));
         await Storage.storeToken(result.token);
       }
-
-      // finalize
-      dispatch(setLoading(false));
     } catch (error) {
       // exception catched
       console.log(error.message);
     }
+
+    // finalize
+    dispatch(setLoading(false));
   };
 };
 

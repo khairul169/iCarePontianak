@@ -19,6 +19,7 @@ import CariAmbulan from "./Screens/CariAmbulan";
 import BuatLayanan from "./Screens/BuatLayanan";
 import KonfirmasiLayanan from "./Screens/KonfirmasiLayanan";
 import PilihLokasi from "./Screens/PilihLokasi";
+import PanggilBantuan from "./Screens/PanggilBantuan";
 
 // Tabbar icons
 const routeIcons = {
@@ -51,7 +52,8 @@ const mainStack = createStackNavigator(
     CariAmbulan,
     BuatLayanan,
     KonfirmasiLayanan,
-    PilihLokasi
+    PilihLokasi,
+    PanggilBantuan
   },
   {
     headerMode: "none",
