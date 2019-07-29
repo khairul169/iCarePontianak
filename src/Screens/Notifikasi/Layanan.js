@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking, ToastAndroid } from "react-native";
 import { Button, MiniMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
@@ -7,8 +7,24 @@ import ItemDetail from "./ItemDetail";
 import { getRoleName } from "../../Utils";
 
 const Layanan = ({ item, collapsed, onPress }) => {
+  const { id, user, type, data } = item;
+  const userType = user ? parseInt(user.type, 10) : null;
+
+  const contactUser = () => {
+    if (!user) return;
+
+    // contact user
+    let phoneNumber = user.phone;
+    if (phoneNumber) Linking.openURL(`tel:${phoneNumber}`);
+    else
+      ToastAndroid.show(
+        "Pengguna belum memasukkan nomor telepon.",
+        ToastAndroid.LONG
+      );
+  };
+
   const renderActions = () => {
-    if (!item.user) {
+    if (!user) {
       return (
         <Button
           title="Batalkan"
@@ -27,6 +43,7 @@ const Layanan = ({ item, collapsed, onPress }) => {
             style={[styles.actionButton, styles.btnContact]}
             small
             icon="phone"
+            onPress={contactUser}
           />
           <Button
             title="Batalkan"
@@ -36,7 +53,7 @@ const Layanan = ({ item, collapsed, onPress }) => {
           />
         </View>
 
-        {item.user.role > 1 && (
+        {userType !== 1 && (
           <Button
             title="Layanan Selesai"
             style={styles.btnSelesai}
@@ -51,25 +68,25 @@ const Layanan = ({ item, collapsed, onPress }) => {
   return (
     <View style={styles.card}>
       <ItemHeader
-        title={item.user ? "Layanan" : "Mencari Petugas..."}
-        subtitle={item.user ? `#${item.id}` : null}
+        title={user ? "Layanan" : "Mencari Petugas..."}
+        subtitle={user ? `#${id}` : null}
         collapsed={collapsed}
         onPress={onPress}
         border
       />
-      {item.user && (
+      {user && (
         <UserInfo
-          title={item.user.name}
-          registered={item.user.registered}
-          subtitle={getRoleName(item.user.role)}
-          reputation={item.user.reputation}
+          title={user.name}
+          registered={user.registered}
+          subtitle={getRoleName(user.role)}
+          reputation={user.reputation}
           online
         />
       )}
-      <MiniMap coordinate={item.data.lokasi} />
+      <MiniMap coordinate={data.lokasi} />
 
       <View style={styles.content}>
-        {collapsed && <ItemDetail type={item.type} data={item.data} />}
+        {collapsed && <ItemDetail type={type} data={data} />}
         {renderActions()}
       </View>
     </View>

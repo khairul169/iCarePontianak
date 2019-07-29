@@ -31,7 +31,7 @@ export const getServiceName = id => {
 };
 
 export const getRoleName = role => {
-  const roles = ["", "Klien", "Perawat"];
+  const roles = ["", "Klien", "Ners"];
 
   return roles[role] || null;
 };
