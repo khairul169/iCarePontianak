@@ -24,6 +24,7 @@ const Notifikasi = props => {
         onPress={() => {
           setCollapsedItem(collapsedItem !== index ? index : null);
         }}
+        navigation={props.navigation}
       />
     );
   };

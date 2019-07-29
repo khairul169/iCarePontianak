@@ -30,8 +30,8 @@ export const getServiceName = id => {
   }
 };
 
-export const getRoleName = role => {
-  const roles = [
+export const getUserType = type => {
+  const userTypes = [
     "",
     "Klien",
     "Ners",
@@ -43,5 +43,5 @@ export const getRoleName = role => {
     "Nutrisionis"
   ];
 
-  return roles[role] || null;
+  return userTypes[type] || null;
 };
