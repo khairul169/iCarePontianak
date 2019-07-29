@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setServiceStatus } from "../../Actions/Layanan.action";
-
 import { View, StyleSheet, Linking, ToastAndroid } from "react-native";
+
 import Collapsible from "react-native-collapsible";
-import { Button, MiniMap } from "../../Components";
+import { Button, StaticMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
 import ItemDetail from "./ItemDetail";
@@ -135,7 +135,7 @@ const Layanan = props => {
         />
       )}
 
-      <MiniMap
+      <StaticMap
         coordinate={data.lokasi}
         onPress={() =>
           navigation.navigate("LihatLokasi", { location: data.lokasi })
