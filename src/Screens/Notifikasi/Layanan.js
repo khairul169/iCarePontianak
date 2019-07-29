@@ -15,7 +15,7 @@ const Layanan = props => {
   const { id, user, data } = item;
   const itemType = parseInt(item.type, 10);
   const isEmergency = itemType === Service.EMERGENCY;
-  const userType = user ? parseInt(user.type, 10) : null;
+  const isSelf = item.self;
 
   const contactUser = () => {
     if (!user) return;
@@ -51,26 +51,49 @@ const Layanan = props => {
       );
     }
 
+    if (isEmergency) {
+      return (
+        <View style={styles.actionContainer}>
+          <Button
+            title="Hubungi"
+            style={styles.actionButton}
+            small
+            icon="phone"
+            onPress={contactUser}
+          />
+          {isSelf && (
+            <Button
+              title={"Selesai"}
+              style={[styles.actionButton, styles.btnMarginLeft]}
+              small
+              icon={"check"}
+              onPress={layananBatal}
+            />
+          )}
+        </View>
+      );
+    }
+
     return (
       <View>
         <View style={styles.actionContainer}>
           <Button
             title="Hubungi"
-            style={[styles.actionButton, styles.btnContact]}
+            style={[styles.actionButton, styles.btnMarginRight]}
             small
             icon="phone"
             onPress={contactUser}
           />
           <Button
-            title={isEmergency ? "Selesai" : "Batalkan"}
+            title={"Batalkan"}
             style={styles.actionButton}
             small
-            icon={isEmergency ? "check" : "cancel"}
+            icon={"cancel"}
             onPress={layananBatal}
           />
         </View>
 
-        {!isEmergency && userType !== 1 && (
+        {isSelf && (
           <Button
             title="Layanan Selesai"
             style={styles.btnSelesai}
@@ -139,7 +162,10 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1
   },
-  btnContact: {
+  btnMarginLeft: {
+    marginLeft: 16
+  },
+  btnMarginRight: {
     marginRight: 16
   },
   waitingText: {

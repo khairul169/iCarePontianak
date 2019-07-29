@@ -31,7 +31,17 @@ export const getServiceName = id => {
 };
 
 export const getRoleName = role => {
-  const roles = ["", "Klien", "Ners"];
+  const roles = [
+    "",
+    "Klien",
+    "Ners",
+    "Analis Kesehatan",
+    "Perawat Gigi",
+    "Bidan",
+    "Perawat Lansia",
+    "Kesehatan Lingkungan",
+    "Nutrisionis"
+  ];
 
   return roles[role] || null;
 };
