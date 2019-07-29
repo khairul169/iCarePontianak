@@ -4,12 +4,11 @@ import { Button, MiniMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
 import ItemDetail from "./ItemDetail";
+import { getRoleName } from "../../Utils";
 
 const Layanan = ({ item, collapsed, onPress }) => {
-  const userData = true;
-
   const renderActions = () => {
-    if (!userData) {
+    if (!item.user) {
       return (
         <Button
           title="Batalkan"
@@ -37,31 +36,33 @@ const Layanan = ({ item, collapsed, onPress }) => {
           />
         </View>
 
-        <Button
-          title="Layanan Selesai"
-          style={styles.btnSelesai}
-          border={false}
-          color="#fff"
-          icon="checkbox-marked-circle"
-        />
+        {item.user.role > 1 && (
+          <Button
+            title="Layanan Selesai"
+            style={styles.btnSelesai}
+            border={false}
+            color="#fff"
+            icon="checkbox-marked-circle"
+          />
+        )}
       </View>
     );
   };
   return (
     <View style={styles.card}>
       <ItemHeader
-        title={userData ? "Layanan" : "Mencari Petugas..."}
-        subtitle={userData ? `#${item.id}` : null}
+        title={item.user ? "Layanan" : "Mencari Petugas..."}
+        subtitle={item.user ? `#${item.id}` : null}
         collapsed={collapsed}
         onPress={onPress}
         border
       />
-      {userData && (
+      {item.user && (
         <UserInfo
-          title="Khairul Hidayat"
-          registered="28 Juli 2019"
-          subtitle="Perawat"
-          reputation
+          title={item.user.name}
+          registered={item.user.registered}
+          subtitle={getRoleName(item.user.role)}
+          reputation={item.user.reputation}
           online
         />
       )}
@@ -84,11 +85,11 @@ const styles = StyleSheet.create({
     padding: 16
   },
   btnSelesai: {
-    backgroundColor: "#8BC34A"
+    backgroundColor: "#8BC34A",
+    marginTop: 16
   },
   actionContainer: {
-    flexDirection: "row",
-    marginBottom: 16
+    flexDirection: "row"
   },
   actionButton: {
     flex: 1

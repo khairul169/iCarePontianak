@@ -29,3 +29,9 @@ export const getServiceName = id => {
       return "undefined";
   }
 };
+
+export const getRoleName = role => {
+  const roles = ["", "Klien", "Perawat"];
+
+  return roles[role] || null;
+};
