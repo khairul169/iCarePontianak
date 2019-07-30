@@ -5,11 +5,13 @@ import thunk from "redux-thunk";
 import { auth } from "./Reducers/Auth.reducer";
 import { layanan } from "./Reducers/Layanan.reducer";
 import { akun } from "./Reducers/Akun.reducer";
+import { notifikasi } from "./Reducers/Notifikasi.reducer";
 
 const reducers = combineReducers({
   auth,
   layanan,
-  akun
+  akun,
+  notifikasi
 });
 
 export default createStore(reducers, applyMiddleware(thunk));
