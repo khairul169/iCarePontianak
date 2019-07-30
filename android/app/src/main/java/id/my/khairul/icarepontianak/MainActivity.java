@@ -1,4 +1,4 @@
-package com.icarepontianak;
+package id.my.khairul.icarepontianak;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,4 +1,4 @@
-package com.icarepontianak;
+package id.my.khairul.icarepontianak;
 
 import android.app.Application;
 import android.util.Log;
