@@ -11,7 +11,7 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
   const [loading, setLoading] = useState(false);
 
   // params
-  const { type, title, data } = navigation.getParam("layanan");
+  const { type, title, data, location } = navigation.getParam("layanan");
 
   const navigateLayanan = () => {
     // navigate to main route
@@ -30,7 +30,8 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
     setLoading(true);
 
     // create service
-    API.post("service/", { type, data }, token).then(({ success }) => {
+    const body = { type, data, location };
+    API.post("service/", body, token).then(({ success }) => {
       setLoading(false);
       if (success) navigateLayanan();
     });
@@ -85,7 +86,7 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
             <MiniMap
               borderRadius={3}
               style={styles.map}
-              coordinate={data.lokasi}
+              coordinate={location}
             />
           </ItemDetail>
 

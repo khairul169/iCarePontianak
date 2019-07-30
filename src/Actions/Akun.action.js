@@ -42,6 +42,9 @@ export const setUserLocation = (latitude, longitude) => {
         }
       },
       getState().auth.token
-    ).then(response => console.log(response));
+    ).then(() => {
+      // refresh data
+      dispatch(fetchUser());
+    });
   };
 };

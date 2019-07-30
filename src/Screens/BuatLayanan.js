@@ -112,7 +112,6 @@ const BuatLayanan = ({ navigation }) => {
       keluhan,
       tindakan,
       alamat,
-      lokasi,
       waktu,
       diagnosa
     };
@@ -121,7 +120,8 @@ const BuatLayanan = ({ navigation }) => {
       layanan: {
         type: layanan.type,
         title: layanan.title,
-        data: dataLayanan
+        data: dataLayanan,
+        location: lokasi
       }
     });
   };

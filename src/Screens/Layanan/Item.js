@@ -14,6 +14,11 @@ import { Service } from "../../Consts";
 const ItemLayanan = props => {
   const { item, collapsed, onPress, navigation } = props;
   const { id, user, data } = item;
+  const location = {
+    latitude: parseFloat(item.lat),
+    longitude: parseFloat(item.lng)
+  };
+
   const itemType = parseInt(item.type, 10);
   const isEmergency = itemType === Service.EMERGENCY;
   const isSelf = item.self;
@@ -136,10 +141,8 @@ const ItemLayanan = props => {
       )}
 
       <StaticMap
-        coordinate={data.lokasi}
-        onPress={() =>
-          navigation.navigate("LihatLokasi", { location: data.lokasi })
-        }
+        coordinate={location}
+        onPress={() => navigation.navigate("LihatLokasi", { location })}
       />
 
       <View style={styles.content}>
