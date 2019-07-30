@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 1000 1000"
+   enable-background="new 0 0 1000 1000"
+   xml:space="preserve"
+   id="svg14"
+   sodipodi:docname="user.svg"
+   inkscape:export-filename="D:\Projects\ReactNative\iCarePontianak\assets\icon\user.png"
+   inkscape:export-xdpi="24.576"
+   inkscape:export-ydpi="24.576"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><defs
+   id="defs18" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1366"
+   inkscape:window-height="705"
+   id="namedview16"
+   showgrid="false"
+   inkscape:zoom="0.236"
+   inkscape:cx="-188.55932"
+   inkscape:cy="500"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg14" />
+<metadata
+   id="metadata2"> Svg Vector Icons : http://www.onlinewebfonts.com/icon <rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata>
+<rect
+   style="fill:#333333;fill-opacity:1;stroke:none;stroke-opacity:1"
+   id="rect830"
+   width="1508.4746"
+   height="1411.017"
+   x="-194.91525"
+   y="-233.05084" /><rect
+   style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1"
+   id="rect832"
+   width="1000"
+   height="1000"
+   x="0"
+   y="2.9604646e-05" /><g
+   id="g12"
+   style="fill:#85a7ca;fill-opacity:1;stroke:none;stroke-width:1.05332065;stroke-opacity:1"
+   transform="matrix(0.94937857,0,0,0.94937857,25.263254,105.81923)"><path
+     d="M 500.1,596.1 C 421.8,596.1 348.2,565.6 292.9,510.3 237.5,454.9 207,381.4 207,303.1 207,224.8 237.5,151.2 292.8,95.9 348.2,40.5 421.8,10 500.1,10 c 78.3,0 151.9,30.5 207.2,85.8 55.4,55.4 85.8,128.9 85.8,207.2 0,78.3 -30.5,151.9 -85.8,207.2 -55.4,55.5 -129,85.9 -207.2,85.9 z m 0,-520.8 C 374.5,75.3 272.4,177.5 272.4,303 272.4,428.6 374.6,530.7 500.1,530.7 625.7,530.7 727.8,428.5 727.8,303 727.8,177.5 625.6,75.3 500.1,75.3 Z"
+     id="path4"
+     style="fill:#85a7ca;fill-opacity:1;stroke:none;stroke-width:1.05332065;stroke-opacity:1"
+     inkscape:connector-curvature="0" /><path
+     d="m 891.4,957.1 c 0,18.2 14.7,32.9 32.9,32.9 18.2,0 32.9,-14.7 32.9,-32.9 0,-18.2 -14.7,-32.9 -32.9,-32.9 -18.1,-0.1 -32.9,14.7 -32.9,32.9 z"
+     id="path6"
+     style="fill:#85a7ca;fill-opacity:1;stroke:none;stroke-width:1.05332065;stroke-opacity:1"
+     inkscape:connector-curvature="0" /><path
+     d="m 42.6,956.9 c 0,18.3 14.8,33.1 33.1,33.1 18.3,0 33.1,-14.8 33.1,-33.1 0,-18.3 -14.8,-33.1 -33.1,-33.1 -18.3,0.1 -33.1,14.9 -33.1,33.1 z"
+     id="path8"
+     style="fill:#85a7ca;fill-opacity:1;stroke:none;stroke-width:1.05332065;stroke-opacity:1"
+     inkscape:connector-curvature="0" /><path
+     d="m 500.1,597.2 c 205,0 374.7,158.3 391.3,359.1 h 66.1 C 954,905.9 942.3,856.9 922.6,810.3 899.5,755.7 866.4,706.7 824.4,664.6 782.3,622.5 733.3,589.4 678.7,566.3 c -56.6,-23.9 -116.6,-36 -178.5,-36 -61.9,0 -121.9,12.1 -178.5,36 -54.6,23.1 -103.6,56.2 -145.7,98.3 -42.1,42.1 -75.2,91.1 -98.3,145.7 -19.7,46.6 -31.4,95.6 -34.9,146 h 66.1 C 125.3,755.5 295.1,597.2 500.1,597.2 Z"
+     id="path10"
+     style="fill:#85a7ca;fill-opacity:1;stroke:none;stroke-width:1.05332065;stroke-opacity:1"
+     inkscape:connector-curvature="0" /></g>
+</svg>

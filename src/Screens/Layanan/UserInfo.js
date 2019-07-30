@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { Icon } from "../../Components";
+import userIcon from "../../../assets/icon/user.png";
 
 const UserInfoItem = ({ children, title, value }) => {
   const containerStyle = { flexDirection: "row", marginTop: 4 };
@@ -45,7 +46,9 @@ const UserInfo = ({ title, subtitle, online, registered, reputation }) => {
 
   return (
     <View style={containerStyle}>
-      <View style={styles.profilePict} />
+      <View style={styles.profilePict}>
+        <Image source={userIcon} style={styles.profileImage} />
+      </View>
 
       <View style={infoContainer}>
         <View style={nameContainer}>
@@ -83,7 +86,13 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: "#ddd"
+    backgroundColor: "#ddd",
+    overflow: "hidden"
+  },
+  profileImage: {
+    width: 64,
+    height: 64,
+    resizeMode: "cover"
   },
   onlineIndicator: {
     width: 10,

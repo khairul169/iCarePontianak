@@ -8,9 +8,12 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Image
 } from "react-native";
 import { Header, Card, Icon } from "../Components";
+import { getUserType } from "../Utils";
+import userIcon from "../../assets/icon/user.png";
 
 const Button = ({ onPress, title, icon }) => {
   const titleStyle = {
@@ -61,9 +64,11 @@ const Akun = props => {
 
       <ScrollView style={styles.container}>
         <View style={styles.profile}>
-          <View style={styles.profilePict} />
-          <Text style={styles.title}>Khairul Hidayat</Text>
-          <Text style={styles.subtitle}>Ners</Text>
+          <View style={styles.profilePict}>
+            <Image source={userIcon} style={styles.profileImage} />
+          </View>
+          <Text style={styles.title}>{user && user.name}</Text>
+          <Text style={styles.subtitle}>{user && getUserType(user.type)}</Text>
         </View>
         <Card style={styles.content}>
           <Button
@@ -107,8 +112,16 @@ const styles = StyleSheet.create({
     width: 128,
     height: 128,
     borderRadius: 64,
-    backgroundColor: "#ddd",
-    alignSelf: "center"
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    overflow: "hidden",
+    borderColor: "#eee",
+    borderWidth: 1
+  },
+  profileImage: {
+    width: 128,
+    height: 128,
+    resizeMode: "cover"
   },
   title: {
     fontSize: 16,
