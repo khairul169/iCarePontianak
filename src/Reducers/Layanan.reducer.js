@@ -3,14 +3,14 @@ const initialState = {
   items: null
 };
 
-export const notifikasi = (state = initialState, action) => {
+export const layanan = (state = initialState, action) => {
   switch (action.type) {
-    case "NOTIFIKASI_SET_LOADING":
+    case "LAYANAN_SET_LOADING":
       return {
         ...state,
         loading: action.payload
       };
-    case "NOTIFIKASI_SET_ITEMS":
+    case "LAYANAN_SET_ITEMS":
       return {
         ...state,
         loading: false,

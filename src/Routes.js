@@ -13,6 +13,7 @@ import Splash from "./Screens/Splash";
 import Login from "./Screens/Login";
 import Beranda from "./Screens/Beranda";
 import Notifikasi from "./Screens/Notifikasi";
+import Layanan from "./Screens/Layanan";
 import Akun from "./Screens/Akun";
 import Gadar from "./Screens/Gadar";
 import CariAmbulan from "./Screens/CariAmbulan";
@@ -25,7 +26,8 @@ import LihatLokasi from "./Screens/LihatLokasi";
 // Tabbar icons
 const routeIcons = {
   Beranda: "home-plus",
-  Notifikasi: "radio",
+  Notifikasi: "bell-circle",
+  Layanan: "radio",
   Akun: "account-circle"
 };
 
@@ -34,6 +36,7 @@ const mainNavigator = createMaterialTopTabNavigator(
   {
     Beranda,
     Notifikasi,
+    Layanan,
     Akun
   },
   {

@@ -29,11 +29,11 @@ const PanggilBantuan = ({ navigation, token }) => {
     });
   };
 
-  const navigateToNotification = () => {
+  const navigateLayanan = () => {
     // navigate to main route
     const action = NavigationActions.navigate({
       routeName: "Main",
-      action: NavigationActions.navigate({ routeName: "Notifikasi" })
+      action: NavigationActions.navigate({ routeName: "Layanan" })
     });
     // reset stack
     navigation.reset([action], 0);
@@ -53,7 +53,7 @@ const PanggilBantuan = ({ navigation, token }) => {
     // create service
     API.post("service/", body, token).then(({ success }) => {
       setLoading(false);
-      if (success) navigateToNotification();
+      if (success) navigateLayanan();
     });
   };
 

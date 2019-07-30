@@ -11,7 +11,7 @@ import ItemDetail from "./ItemDetail";
 import { getUserType } from "../../Utils";
 import { Service } from "../../Consts";
 
-const Layanan = props => {
+const ItemLayanan = props => {
   const { item, collapsed, onPress, navigation } = props;
   const { id, user, data } = item;
   const itemType = parseInt(item.type, 10);
@@ -192,4 +192,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps
-)(Layanan);
+)(ItemLayanan);
