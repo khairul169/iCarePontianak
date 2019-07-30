@@ -1,8 +1,8 @@
 import axios from "axios";
+import { APP_API } from "react-native-dotenv";
 
-const DEBUG = true;
-const API_URL = "http://192.168.43.48/icare/public/";
-//const API_URL = "http://192.168.56.1/icare/public/";
+const RELEASE = true;
+const API_URL = RELEASE ? APP_API : "http://192.168.43.48/icare/public/";
 
 const auth = token => {
   return {
@@ -19,11 +19,11 @@ class API {
     return axios
       .get(API_URL + url, auth(token))
       .then(result => {
-        DEBUG && console.log(result.data);
+        console.log(result.data);
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error.message);
+        console.log(error.message);
       });
   }
 
@@ -31,11 +31,11 @@ class API {
     return axios
       .post(API_URL + url, body, auth(token))
       .then(result => {
-        DEBUG && console.log(result.data);
+        console.log(result.data);
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error.message);
+        console.log(error.message);
       });
   }
 
@@ -43,11 +43,11 @@ class API {
     return axios
       .patch(API_URL + url, body, auth(token))
       .then(result => {
-        DEBUG && console.log(result.data);
+        console.log(result.data);
         return result.data;
       })
       .catch(error => {
-        DEBUG && console.log(error.message);
+        console.log(error.message);
       });
   }
 }

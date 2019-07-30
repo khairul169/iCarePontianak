@@ -28,7 +28,7 @@ const TextEdit = ({
           value={value}
           keyboardType={numeric ? "numeric" : "default"}
           secureTextEntry={password}
-          autoCapitalize={capitalize ? "words" : "none"}
+          autoCapitalize={capitalize ? "words" : "sentences"}
         />
       </View>
     </View>

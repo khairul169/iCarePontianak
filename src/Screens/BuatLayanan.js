@@ -136,6 +136,7 @@ const BuatLayanan = ({ navigation }) => {
           <TextEdit
             placeholder="Keluhan yang dirasakan saat ini..."
             value={keluhan}
+            capitalize
             onChangeText={value => setKeluhan(value)}
           />
 
@@ -154,6 +155,7 @@ const BuatLayanan = ({ navigation }) => {
               <TextEdit
                 placeholder="..."
                 value={diagnosa}
+                capitalize
                 onChangeText={value => setDiagnosa(value)}
               />
             </View>
@@ -165,6 +167,7 @@ const BuatLayanan = ({ navigation }) => {
           <TextEdit
             placeholder="Alamat lengkap..."
             value={alamat}
+            capitalize
             onChangeText={value => setAlamat(value)}
           />
           <MiniMap
