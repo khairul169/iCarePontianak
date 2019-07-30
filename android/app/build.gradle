@@ -150,10 +150,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('release.keystore')
-            storePassword 'khairul'
-            keyAlias 'release'
-            keyPassword 'khairul'
+            storeFile file('icarepontianak.jks')
+            storePassword 'd2cceae5561d443fb7c25022ebf80866'
+            keyAlias 'QGtoYWlydWwxNjkvaWNhcmVwb250aWFuYWs='
+            keyPassword '1370043d433247b29d8f28b589833953'
         }
     }
     buildTypes {
