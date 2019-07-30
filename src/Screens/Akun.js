@@ -14,7 +14,8 @@ import {
   ScrollView,
   TouchableNativeFeedback,
   TouchableOpacity,
-  Image
+  Image,
+  RefreshControl
 } from "react-native";
 import ImagePicker from "react-native-image-crop-picker";
 import { Header, Card, Icon } from "../Components";
@@ -38,13 +39,17 @@ const Button = ({ onPress, title, icon }) => {
 };
 
 const Akun = props => {
-  const { token, user, navigation } = props;
-  const loadUser = props.fetchUser;
+  const { loading, token, user, navigation } = props;
+  const fetchData = props.fetchUser;
 
   // on start
   useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+    fetchData();
+  }, [fetchData]);
+
+  const onRefresh = () => {
+    fetchData();
+  };
 
   // on token changed
   useEffect(() => {
@@ -84,7 +89,12 @@ const Akun = props => {
     <View style={styles.container}>
       <Header title="Akun" />
 
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl onRefresh={onRefresh} refreshing={loading} />
+        }
+      >
         <View style={styles.profile}>
           <TouchableOpacity style={styles.profilePict} onPress={ubahFotoProfil}>
             <Image
@@ -172,6 +182,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ auth, akun }) => ({
+  loading: akun.loading,
   token: auth.token,
   user: akun.userData
 });

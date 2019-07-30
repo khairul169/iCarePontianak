@@ -4,16 +4,19 @@ import { fetchItems } from "../Actions/Notifikasi.action";
 
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { Header } from "../Components";
-import { getTimeString } from "../Utils";
 
 const Notifikasi = props => {
-  const { items } = props.notifikasi;
+  const { loading, items } = props.notifikasi;
   const fetchData = props.fetchItems;
 
   // load items
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const onRefresh = () => {
+    fetchData();
+  };
 
   const emptyNotification = () => {
     return <Text style={styles.emptyText}>Tidak ada notifikasi.</Text>;
@@ -39,6 +42,8 @@ const Notifikasi = props => {
         keyExtractor={(item, index) => `notif-${index}`}
         renderItem={renderItem}
         ListEmptyComponent={emptyNotification}
+        onRefresh={onRefresh}
+        refreshing={loading}
       />
     </View>
   );

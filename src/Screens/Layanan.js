@@ -9,12 +9,16 @@ import ItemLayanan from "./Layanan/Item";
 const Layanan = props => {
   const [collapsedItem, setCollapsedItem] = useState();
 
-  const { items } = props.layanan;
+  const { loading, items } = props.layanan;
   const fetchData = props.fetchItems;
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const onRefresh = () => {
+    fetchData();
+  };
 
   const renderItem = ({ item, index }) => {
     return (
@@ -39,6 +43,8 @@ const Layanan = props => {
         keyExtractor={(item, index) => item.id}
         renderItem={renderItem}
         extraData={collapsedItem}
+        onRefresh={onRefresh}
+        refreshing={loading}
       />
     </View>
   );
