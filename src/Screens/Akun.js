@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUser, setUserLocation } from "../Actions/Akun.action";
+import {
+  fetchUser,
+  setProfileImage,
+  setUserLocation
+} from "../Actions/Akun.action";
 import { logout } from "../Actions/Auth.action";
 
 import {
@@ -9,8 +13,10 @@ import {
   StyleSheet,
   ScrollView,
   TouchableNativeFeedback,
+  TouchableOpacity,
   Image
 } from "react-native";
+import ImagePicker from "react-native-image-crop-picker";
 import { Header, Card, Icon } from "../Components";
 import { getUserType } from "../Utils";
 import userIcon from "../../assets/icon/user.png";
@@ -45,6 +51,22 @@ const Akun = props => {
     !token && navigation.navigate("Login");
   }, [navigation, token]);
 
+  const ubahFotoProfil = () => {
+    ImagePicker.openPicker({
+      width: 512,
+      height: 512,
+      includeBase64: true,
+      cropping: true,
+      mediaType: "photo"
+    })
+      .then(image => {
+        props.setProfileImage(image.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  };
+
   const pengaturanLokasi = () => {
     const coordinate = {
       latitude: parseFloat(user.lat),
@@ -64,9 +86,13 @@ const Akun = props => {
 
       <ScrollView style={styles.container}>
         <View style={styles.profile}>
-          <View style={styles.profilePict}>
-            <Image source={userIcon} style={styles.profileImage} />
-          </View>
+          <TouchableOpacity style={styles.profilePict} onPress={ubahFotoProfil}>
+            <Image
+              source={user && user.image ? { uri: user.image } : userIcon}
+              style={styles.profileImage}
+            />
+          </TouchableOpacity>
+
           <Text style={styles.title}>{user && user.name}</Text>
           <Text style={styles.subtitle}>{user && getUserType(user.type)}</Text>
         </View>
@@ -76,12 +102,14 @@ const Akun = props => {
             style={styles.button}
             title="Pengaturan Akun"
           />
-          <Button
-            icon="map-marker"
-            style={styles.button}
-            title="Pengaturan Lokasi"
-            onPress={pengaturanLokasi}
-          />
+          {user && user.type >= 2 && (
+            <Button
+              icon="map-marker"
+              style={styles.button}
+              title="Pengaturan Lokasi"
+              onPress={pengaturanLokasi}
+            />
+          )}
           <Button
             icon="logout"
             style={styles.button}
@@ -115,8 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignSelf: "center",
     overflow: "hidden",
-    borderColor: "#eee",
-    borderWidth: 1
+    elevation: 3
   },
   profileImage: {
     width: 128,
@@ -151,8 +178,9 @@ const mapStateToProps = ({ auth, akun }) => ({
 
 const mapDispatchToProps = {
   fetchUser,
-  logout,
-  setUserLocation
+  setProfileImage,
+  setUserLocation,
+  logout
 };
 
 export default connect(

@@ -135,6 +135,7 @@ const ItemLayanan = props => {
           title={user.name}
           registered={user.registered}
           subtitle={getUserType(user.type)}
+          image={user.image}
           reputation={user.reputation}
           online
         />

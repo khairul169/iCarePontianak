@@ -31,6 +31,15 @@ export const fetchUser = () => {
   };
 };
 
+export const setProfileImage = value => {
+  return (dispatch, getState) => {
+    API.patch("user/profileimg", { value }, getState().auth.token).then(() => {
+      // refresh data
+      dispatch(fetchUser());
+    });
+  };
+};
+
 export const setUserLocation = (latitude, longitude) => {
   return (dispatch, getState) => {
     API.patch(

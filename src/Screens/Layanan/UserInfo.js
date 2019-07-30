@@ -19,7 +19,14 @@ const UserInfoItem = ({ children, title, value }) => {
   );
 };
 
-const UserInfo = ({ title, subtitle, online, registered, reputation }) => {
+const UserInfo = ({
+  title,
+  subtitle,
+  image,
+  online,
+  registered,
+  reputation
+}) => {
   const containerStyle = [styles.content, { flexDirection: "row" }];
   const infoContainer = { flex: 1, marginLeft: 16 };
   const nameContainer = {
@@ -47,7 +54,10 @@ const UserInfo = ({ title, subtitle, online, registered, reputation }) => {
   return (
     <View style={containerStyle}>
       <View style={styles.profilePict}>
-        <Image source={userIcon} style={styles.profileImage} />
+        <Image
+          source={image ? { uri: image } : userIcon}
+          style={styles.profileImage}
+        />
       </View>
 
       <View style={infoContainer}>
