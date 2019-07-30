@@ -68,20 +68,21 @@ const ItemLayanan = props => {
     if (isEmergency) {
       return (
         <View style={styles.actionContainer}>
-          <Button
-            title="Hubungi"
-            style={styles.actionButton}
-            small
-            icon="phone"
-            onPress={contactUser}
-          />
-          {isSelf && (
+          {isSelf ? (
             <Button
               title={"Selesai"}
-              style={[styles.actionButton, styles.btnMarginLeft]}
+              style={styles.actionButton}
               small
               icon={"check"}
               onPress={layananBatal}
+            />
+          ) : (
+            <Button
+              title="Hubungi"
+              style={styles.actionButton}
+              small
+              icon="phone"
+              onPress={contactUser}
             />
           )}
         </View>

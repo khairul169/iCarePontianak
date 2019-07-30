@@ -106,7 +106,7 @@ const Akun = props => {
             <Button
               icon="map-marker"
               style={styles.button}
-              title="Pengaturan Lokasi"
+              title="Atur Lokasi Saya"
               onPress={pengaturanLokasi}
             />
           )}

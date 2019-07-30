@@ -47,7 +47,8 @@ const PanggilBantuan = ({ navigation, token }) => {
 
     const body = {
       type: Service.EMERGENCY,
-      data: { kejadian, lokasi }
+      data: { kejadian },
+      location: lokasi
     };
 
     // create service

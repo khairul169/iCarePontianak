@@ -13,8 +13,7 @@ const StaticMap = ({ coordinate, width, onPress }) => {
 
   const containerStyle = {
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#444"
+    justifyContent: "center"
   };
   const windowSize = Dimensions.get("window");
   const imageWidth = width || windowSize.width;
