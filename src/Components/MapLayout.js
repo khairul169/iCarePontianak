@@ -3,7 +3,6 @@ import MapView, { Marker, Polyline } from "react-native-maps";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { OPENROUTE_APIKEY } from "react-native-dotenv";
-import { requestLocationPermission } from "../Permissions";
 
 class MapLayout extends Component {
   static propTypes = {
@@ -35,11 +34,6 @@ class MapLayout extends Component {
     latitudeDelta: 0.015,
     longitudeDelta: 0.02
   };
-
-  async componentDidMount() {
-    // ask for location permission
-    await requestLocationPermission();
-  }
 
   _regionChanged = region => {
     this.props.onRegionChanged && this.props.onRegionChanged(region);

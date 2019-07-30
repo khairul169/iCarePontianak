@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
 import { Service } from "../Consts";
+import { requestLocationPermission } from "../Permissions";
 
 // Images
 import iconGadar from "../../assets/layanan/gadar.jpg";
@@ -15,6 +16,11 @@ import iconSanitasi from "../../assets/layanan/sanitasi.jpg";
 import iconDietNutrisi from "../../assets/layanan/dietnutrisi.jpg";
 
 const MainItems = ({ navigation }) => {
+  // ask permissions
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
   const navigateTo = (route, data) => {
     navigation.navigate(route, data);
   };
