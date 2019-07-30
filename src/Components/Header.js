@@ -20,10 +20,16 @@ HeaderItem.propTypes = {
   onPress: PropTypes.func
 };
 
-export const HeaderIcon = ({ type, name, onPress }) => {
+export const HeaderIcon = ({ type, name, onPress, right }) => {
   return (
     <HeaderItem onPress={onPress}>
-      <Icon type={type} name={name} size={24} color="#333" />
+      <Icon
+        type={type}
+        name={name}
+        size={24}
+        color="#333"
+        style={right && styles.right}
+      />
     </HeaderItem>
   );
 };
@@ -31,7 +37,8 @@ export const HeaderIcon = ({ type, name, onPress }) => {
 HeaderIcon.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  right: PropTypes.bool
 };
 
 const Header = ({
@@ -63,7 +70,7 @@ const Header = ({
 
       <Text style={styles.headerTitle}>{title && title.toUpperCase()}</Text>
 
-      <View style={styles.headerItem}>{right}</View>
+      <View style={[styles.headerItem, styles.right]}>{right}</View>
     </View>
   );
 };
@@ -115,6 +122,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#424242",
     textAlign: "center"
+  },
+  right: {
+    alignSelf: "flex-end"
   }
 });
 

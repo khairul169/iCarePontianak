@@ -31,9 +31,27 @@ export const fetchUser = () => {
   };
 };
 
+export const setMultiData = data => {
+  return (dispatch, getState) => {
+    API.patch("user/", { data }, getState().auth.token).then(() => {
+      // refresh data
+      dispatch(fetchUser());
+    });
+  };
+};
+
 export const setProfileImage = value => {
   return (dispatch, getState) => {
     API.patch("user/profileimg", { value }, getState().auth.token).then(() => {
+      // refresh data
+      dispatch(fetchUser());
+    });
+  };
+};
+
+export const setActive = value => {
+  return (dispatch, getState) => {
+    API.patch("user/active", { value }, getState().auth.token).then(() => {
       // refresh data
       dispatch(fetchUser());
     });

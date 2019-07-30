@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   fetchUser,
+  setMultiData,
   setProfileImage,
+  setActive,
   setUserLocation
 } from "../Actions/Akun.action";
 import { logout } from "../Actions/Auth.action";
@@ -15,7 +17,8 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
+  Switch
 } from "react-native";
 import ImagePicker from "react-native-image-crop-picker";
 import { Header, Card, Icon } from "../Components";
@@ -32,7 +35,11 @@ const Button = ({ onPress, title, icon }) => {
     <TouchableNativeFeedback onPress={onPress}>
       <View style={styles.button}>
         <Text style={titleStyle}>{title}</Text>
-        <Icon name={icon} color="#686868" size={20} />
+        {typeof icon === "string" ? (
+          <Icon name={icon} color="#686868" size={20} />
+        ) : (
+          icon
+        )}
       </View>
     </TouchableNativeFeedback>
   );
@@ -41,6 +48,10 @@ const Button = ({ onPress, title, icon }) => {
 const Akun = props => {
   const { loading, token, user, navigation } = props;
   const fetchData = props.fetchUser;
+
+  if (user) {
+    user.active = parseInt(user.active, 10);
+  }
 
   // on start
   useEffect(() => {
@@ -70,6 +81,10 @@ const Akun = props => {
       .catch(error => {
         console.log(error.message);
       });
+  };
+
+  const menerimaLayanan = () => {
+    props.setActive(user.active ? 0 : 1);
   };
 
   const pengaturanLokasi = () => {
@@ -111,14 +126,33 @@ const Akun = props => {
             icon="account-circle"
             style={styles.button}
             title="Pengaturan Akun"
+            onPress={() =>
+              navigation.navigate("PengaturanAkun", {
+                user,
+                callback: data => props.setMultiData(data)
+              })
+            }
           />
           {user && user.type >= 2 && (
-            <Button
-              icon="map-marker"
-              style={styles.button}
-              title="Atur Lokasi Saya"
-              onPress={pengaturanLokasi}
-            />
+            <View>
+              <Button
+                icon={
+                  <Switch
+                    value={user.active === 1}
+                    onValueChange={menerimaLayanan}
+                  />
+                }
+                style={styles.button}
+                title="Menerima Layanan"
+                onPress={menerimaLayanan}
+              />
+              <Button
+                icon="map-marker"
+                style={styles.button}
+                title="Atur Lokasi Saya"
+                onPress={pengaturanLokasi}
+              />
+            </View>
           )}
           <Button
             icon="logout"
@@ -189,7 +223,9 @@ const mapStateToProps = ({ auth, akun }) => ({
 
 const mapDispatchToProps = {
   fetchUser,
+  setMultiData,
   setProfileImage,
+  setActive,
   setUserLocation,
   logout
 };
