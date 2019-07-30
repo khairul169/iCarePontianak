@@ -9,8 +9,12 @@ class MapLayout extends Component {
     style: PropTypes.any,
     coordinate: PropTypes.object,
     markers: PropTypes.array,
+    onMapReady: PropTypes.func,
     onRegionChanged: PropTypes.func,
-    navPath: PropTypes.bool
+    onUserLocation: PropTypes.func,
+    onPress: PropTypes.func,
+    navPath: PropTypes.bool,
+    mapPadding: PropTypes.object
   };
 
   static defaultProps = {
@@ -37,8 +41,16 @@ class MapLayout extends Component {
   };
 
   _userLocation = coordinate => {
-    if (this.state.animateToUser && !this.props.coordinate)
+    if (this.state.animateToUser && !this.props.coordinate) {
       this.moveToLocation(coordinate);
+    }
+
+    if (this.props.onUserLocation) {
+      this.props.onUserLocation({
+        latitude: coordinate.latitude,
+        longitude: coordinate.longitude
+      });
+    }
 
     // update state
     this.setState({ userLocation: coordinate, animateToUser: false });
@@ -48,8 +60,20 @@ class MapLayout extends Component {
   };
 
   _renderMarkers = () => {
-    return this.props.markers.map((item, index) => (
-      <Marker key={index} coordinate={item} />
+    const markers = [...this.props.markers];
+
+    if (this.props.pin) {
+      markers.push({ coordinate: this.props.coordinate });
+    }
+
+    return markers.map((item, index) => (
+      <Marker
+        key={index}
+        coordinate={item.coordinate}
+        title={item.title}
+        image={item.image}
+        onPress={item.onPress}
+      />
     ));
   };
 
@@ -131,10 +155,13 @@ class MapLayout extends Component {
         initialRegion={initialRegion}
         showsUserLocation={true}
         showsMyLocationButton={false}
+        onMapReady={this.props.onMapReady}
         onRegionChangeComplete={this._regionChanged}
         onUserLocationChange={event =>
           this._userLocation(event.nativeEvent.coordinate)
         }
+        onPress={this.props.onPress}
+        mapPadding={this.props.mapPadding}
       >
         {this._renderMarkers()}
         {this._renderNavigation()}

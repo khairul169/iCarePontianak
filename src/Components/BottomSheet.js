@@ -11,13 +11,15 @@ class BottomSheet extends Component {
     backdrop: PropTypes.bool,
     points: PropTypes.array,
     header: PropTypes.element,
-    headerHeight: PropTypes.number
+    headerHeight: PropTypes.number,
+    snapping: PropTypes.bool
   };
 
   static defaultProps = {
     backdrop: false,
     points: [0.4],
-    headerHeight: 0
+    headerHeight: 0,
+    snapping: true
   };
 
   constructor(props) {
@@ -33,13 +35,9 @@ class BottomSheet extends Component {
     this.updatePoints();
   }
 
-  show(index, velocity) {
-    const value =
-      index !== undefined && this.snappingPoints[index] !== null
-        ? this.snappingPoints[index]
-        : 0;
-
-    this.panel && this.panel.show({ toValue: value, velocity: -velocity });
+  show(index) {
+    const value = this.snappingPoints[index] ? this.snappingPoints[index] : 0;
+    this.panel && this.panel.show(value);
   }
 
   hide() {
@@ -68,16 +66,17 @@ class BottomSheet extends Component {
     );
   };
 
-  renderHeader = () => {
+  renderHeader = dragHandlers => {
     const { header, headerHeight } = this.props;
 
     const headerStyle = {
-      height: headerHeight
+      height: headerHeight,
+      backgroundColor: "#fff"
     };
 
     return (
       headerHeight && (
-        <View style={headerStyle}>
+        <View style={headerStyle} {...dragHandlers}>
           {header
             ? typeof header === "function"
               ? header()
@@ -90,14 +89,15 @@ class BottomSheet extends Component {
 
   render() {
     const { style, backdrop, headerHeight, children } = this.props;
+    const panelStyle = [styles.panel, style];
 
-    // Draggable range
     const draggableRange = {
       top: this.snappingPoints.length ? this.snappingPoints[0] : window.height,
       bottom: headerHeight
     };
-
-    const panelStyle = [styles.panel, style];
+    const snappingPoints = this.props.snapping
+      ? this.snappingPoints
+      : undefined;
 
     return (
       <SlidingUpPanel
@@ -106,13 +106,16 @@ class BottomSheet extends Component {
         }}
         showBackdrop={backdrop}
         draggableRange={draggableRange}
-        snappingPoints={this.snappingPoints}
+        snappingPoints={snappingPoints}
+        height={draggableRange.top}
       >
-        <View style={panelStyle}>
-          {this.renderHeader()}
+        {dragHandlers => (
+          <View style={panelStyle}>
+            {this.renderHeader(dragHandlers)}
 
-          <View style={styles.container}>{children}</View>
-        </View>
+            <View style={styles.container}>{children}</View>
+          </View>
+        )}
       </SlidingUpPanel>
     );
   }
@@ -122,7 +125,13 @@ const styles = StyleSheet.create({
   panel: {
     flex: 1,
     backgroundColor: "white",
-    position: "relative"
+    position: "relative",
+    marginHorizontal: 8,
+    borderRadius: 3,
+    overflow: "hidden"
+  },
+  container: {
+    flex: 1
   },
   defaultHeader: {
     flex: 1,

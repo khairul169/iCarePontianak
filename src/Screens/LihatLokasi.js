@@ -15,12 +15,7 @@ const LihatLokasi = ({ navigation }) => {
       />
 
       <View style={styles.container}>
-        <MapLayout
-          style={styles.container}
-          coordinate={location}
-          markers={[location]}
-          navPath
-        />
+        <MapLayout style={styles.container} coordinate={location} pin navPath />
       </View>
     </View>
   );
