@@ -1,45 +1,133 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../Actions/Akun.action";
+import { fetchUser, setUserLocation } from "../Actions/Akun.action";
 import { logout } from "../Actions/Auth.action";
 
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Header } from "../Components";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableNativeFeedback
+} from "react-native";
+import { Header, Card, Icon } from "../Components";
+
+const Button = ({ onPress, title, icon }) => {
+  const titleStyle = {
+    flex: 1,
+    fontSize: 14,
+    color: "#424242"
+  };
+  return (
+    <TouchableNativeFeedback onPress={onPress}>
+      <View style={styles.button}>
+        <Text style={titleStyle}>{title}</Text>
+        <Icon name={icon} color="#686868" size={20} />
+      </View>
+    </TouchableNativeFeedback>
+  );
+};
 
 const Akun = props => {
-  const { token, user, navigation, fetchUserData } = props;
+  const { token, user, navigation } = props;
+  const loadUser = props.fetchUser;
 
+  // on start
   useEffect(() => {
-    fetchUserData();
-  }, [fetchUserData]);
+    loadUser();
+  }, [loadUser]);
 
-  const onLogout = () => {
-    props.logout();
-  };
-
+  // on token changed
   useEffect(() => {
     !token && navigation.navigate("Login");
   }, [navigation, token]);
+
+  const pengaturanLokasi = () => {
+    const coordinate = {
+      latitude: parseFloat(user.lat),
+      longitude: parseFloat(user.lng)
+    };
+    navigation.navigate("PilihLokasi", {
+      location: coordinate.latitude ? coordinate : null,
+      callback: ({ latitude, longitude }) => {
+        props.setUserLocation(latitude, longitude);
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
       <Header title="Akun" />
 
-      <View style={styles.content}>
-        <Text>Username: {user && user.username}</Text>
-        <Text>Name: {user && user.name}</Text>
-        <Button title="Logout" onPress={onLogout} />
-      </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.profile}>
+          <View style={styles.profilePict} />
+          <Text style={styles.title}>Khairul Hidayat</Text>
+          <Text style={styles.subtitle}>Ners</Text>
+        </View>
+        <Card style={styles.content}>
+          <Button
+            icon="account-circle"
+            style={styles.button}
+            title="Pengaturan Akun"
+          />
+          <Button
+            icon="map-marker"
+            style={styles.button}
+            title="Pengaturan Lokasi"
+            onPress={pengaturanLokasi}
+          />
+          <Button
+            icon="logout"
+            style={styles.button}
+            title="Keluar"
+            onPress={props.logout}
+            small
+          />
+        </Card>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#fff"
   },
   content: {
-    padding: 16
+    padding: 8,
+    marginTop: 16
+  },
+  profile: {
+    padding: 16,
+    alignItems: "center"
+  },
+  profilePict: {
+    width: 128,
+    height: 128,
+    borderRadius: 64,
+    backgroundColor: "#ddd",
+    alignSelf: "center"
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    marginTop: 16
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "#525252",
+    marginTop: 4
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 12,
+    borderWidth: 0,
+    borderTopWidth: 1,
+    borderColor: "#eee"
   }
 });
 
@@ -49,8 +137,9 @@ const mapStateToProps = ({ auth, akun }) => ({
 });
 
 const mapDispatchToProps = {
-  fetchUserData: fetchUser,
-  logout
+  fetchUser,
+  logout,
+  setUserLocation
 };
 
 export default connect(

@@ -30,3 +30,18 @@ export const fetchUser = () => {
       });
   };
 };
+
+export const setUserLocation = (latitude, longitude) => {
+  return (dispatch, getState) => {
+    API.patch(
+      "user/location",
+      {
+        value: {
+          latitude,
+          longitude
+        }
+      },
+      getState().auth.token
+    ).then(response => console.log(response));
+  };
+};
