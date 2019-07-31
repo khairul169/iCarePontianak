@@ -27,6 +27,13 @@ const setToken = token => {
   };
 };
 
+export const setDeviceId = id => {
+  return {
+    type: "AUTH_DEVICE_ID",
+    payload: id
+  };
+};
+
 export const fetchLogin = (username, password) => {
   return async dispatch => {
     // set loading
@@ -41,8 +48,9 @@ export const fetchLogin = (username, password) => {
 
       // set token
       if (success) {
-        dispatch(setToken(result.token));
         await Storage.storeToken(result.token);
+        dispatch(setToken(result.token));
+        dispatch(updateUserData());
       }
     } catch (error) {
       // exception catched
@@ -69,8 +77,9 @@ export const fetchRegister = (username, password, fullname) => {
 
       // set token
       if (success) {
-        dispatch(setToken(result.token));
         await Storage.storeToken(result.token);
+        dispatch(setToken(result.token));
+        dispatch(updateUserData());
       }
     } catch (error) {
       // exception catched
@@ -95,8 +104,9 @@ export const validateToken = () => {
 
       // set token
       if (success) {
-        dispatch(setToken(result.token));
         await Storage.storeToken(result.token);
+        dispatch(setToken(result.token));
+        dispatch(updateUserData());
       }
     } catch (error) {
       // exception catched
@@ -114,5 +124,15 @@ export const logout = () => {
     await Storage.clearToken();
     // clear token state
     dispatch(setToken(null));
+  };
+};
+
+const updateUserData = () => {
+  return async (dispatch, getState) => {
+    let auth = getState().auth;
+
+    // update device id
+    if (auth.deviceId)
+      await API.patch("user/deviceid", { value: auth.deviceId }, auth.token);
   };
 };

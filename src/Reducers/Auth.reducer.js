@@ -2,7 +2,8 @@ const initialState = {
   loading: true,
   success: false,
   message: null,
-  token: null
+  token: null,
+  deviceId: null
 };
 
 export const auth = (state = initialState, action) => {
@@ -28,6 +29,13 @@ export const auth = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload
+      };
+
+    // OneSignal device id
+    case "AUTH_DEVICE_ID":
+      return {
+        ...state,
+        deviceId: action.payload
       };
 
     default:

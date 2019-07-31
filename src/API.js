@@ -1,7 +1,7 @@
 import axios from "axios";
 import { APP_API } from "react-native-dotenv";
 
-const RELEASE = true;
+const RELEASE = false;
 const API_URL = RELEASE ? APP_API : "http://192.168.43.48/icare/public/";
 
 const auth = token => {

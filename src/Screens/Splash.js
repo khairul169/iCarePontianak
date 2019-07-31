@@ -7,11 +7,12 @@ import appIcon from "../../assets/icon/app-icon.png";
 
 const Splash = props => {
   const { isLoading, token, navigation } = props;
+  const checkSession = props.validateToken;
 
   // validate auth token
   useEffect(() => {
-    props.validateToken();
-  }, [props]);
+    checkSession();
+  }, [checkSession]);
 
   // switch screen
   useEffect(() => {

@@ -5319,6 +5319,13 @@ react-native-maps@^0.25.0:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.25.0.tgz#81bc51eb50e33811a9e1c345cc48869413ead67d"
   integrity sha512-PFJuW1pt+HnnnN0m0OGk29RSvICFVkK/DScX6cUk0SuCSN2DAHx0y6y57lZyYXcYqU4J4usNpfxgp/ccjASDiw==
 
+react-native-onesignal@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.3.1.tgz#2c0ca054896d0c6ff2d0f8ac26747eb9907d41b0"
+  integrity sha512-gEYv4vihaE67fxQiW9ibUt+jW4fjxsPgwqNaLopeKU6jp+YpQSzAur5wySx/QrqFjCrWK9WwQljq64bxpDscXA==
+  dependencies:
+    invariant "^2.2.2"
+
 react-native-reanimated@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.1.0.tgz#ba6864055ec3a206cdd5209a293fe653ce276206"
