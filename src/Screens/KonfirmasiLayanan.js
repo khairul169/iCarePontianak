@@ -95,16 +95,14 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
             title="Waktu Kunjungan"
             text={getTimeString(data.waktu)}
           />
-        </View>
 
-        <Button
-          title="Buat Layanan"
-          height={55}
-          style={styles.btnKonfirmasi}
-          color="#fff"
-          border={false}
-          onPress={buatLayanan}
-        />
+          <Button
+            title="Buat Layanan"
+            style={styles.btnKonfirmasi}
+            color="#fff"
+            onPress={buatLayanan}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -113,18 +111,20 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#B0BEC5"
+    backgroundColor: "#fff"
   },
   content: {
     padding: 16,
-    marginTop: 8,
-    backgroundColor: "#fff"
+    borderColor: "#eee",
+    borderTopWidth: 1
   },
   map: {
     marginTop: 16
   },
   btnKonfirmasi: {
-    backgroundColor: "#8BC34A"
+    backgroundColor: "#8BC34A",
+    marginTop: 16,
+    borderWidth: 0
   }
 });
 

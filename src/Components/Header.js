@@ -4,10 +4,13 @@ import PropTypes from "prop-types";
 import StatusBar, { statusBarHeight } from "./StatusBar";
 import Icon from "./Icon";
 
-export const HeaderItem = ({ children, onPress }) => {
+export const HeaderItem = ({ style, children, onPress }) => {
   if (onPress) {
     return (
-      <TouchableOpacity style={styles.headerItemContainer} onPress={onPress}>
+      <TouchableOpacity
+        style={[styles.headerItemContainer, style]}
+        onPress={onPress}
+      >
         {children}
       </TouchableOpacity>
     );
@@ -22,14 +25,8 @@ HeaderItem.propTypes = {
 
 export const HeaderIcon = ({ type, name, onPress, right }) => {
   return (
-    <HeaderItem onPress={onPress}>
-      <Icon
-        type={type}
-        name={name}
-        size={24}
-        color="#333"
-        style={right && styles.right}
-      />
+    <HeaderItem style={right && styles.headerItemRight} onPress={onPress}>
+      <Icon type={type} name={name} size={22} color="#333" />
     </HeaderItem>
   );
 };
@@ -56,7 +53,7 @@ const Header = ({
   const containerStyle = [
     styles.header,
     transparent && styles.headerTransparent,
-    { paddingTop: statusBarHeight + 16 }
+    { paddingTop: statusBarHeight }
   ];
 
   return (
@@ -94,8 +91,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16,
-    minHeight: 55,
+    paddingHorizontal: 16,
+    height: 80,
     backgroundColor: "#fff"
   },
   headerTransparent: {
@@ -114,7 +111,12 @@ const styles = StyleSheet.create({
   },
   headerItemContainer: {
     flex: 1,
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    alignItems: "flex-start",
+    justifyContent: "center"
+  },
+  headerItemRight: {
+    alignItems: "flex-end"
   },
   headerTitle: {
     flex: 3,
@@ -122,9 +124,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#424242",
     textAlign: "center"
-  },
-  right: {
-    alignSelf: "flex-end"
   }
 });
 

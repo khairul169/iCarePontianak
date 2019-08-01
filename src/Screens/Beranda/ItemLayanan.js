@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-const ItemLayanan = ({ title, image, onPress, border }) => {
+const ItemLayanan = ({ title, image, onPress, first }) => {
   return (
-    <View style={[styles.container, border && styles.border]}>
+    <View style={[styles.container, first && styles.first]}>
       <TouchableOpacity style={styles.item} onPress={onPress}>
         <Image source={image} style={styles.pelayananImage} />
         <Text style={styles.pelayananTitle}>{title}</Text>
@@ -16,24 +16,20 @@ const ItemLayanan = ({ title, image, onPress, border }) => {
 ItemLayanan.propTypes = {
   title: PropTypes.string,
   image: PropTypes.any,
-  onPress: PropTypes.func,
-  border: PropTypes.bool
-};
-
-ItemLayanan.defaultProps = {
-  border: true
+  onPress: PropTypes.func
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexBasis: "30%"
+    backgroundColor: "#fff",
+    marginRight: 8,
+    marginBottom: 8,
+    elevation: 2,
+    borderRadius: 3
   },
-  border: {
-    borderBottomColor: "#CFD8DC",
-    borderRightColor: "#CFD8DC",
-    borderBottomWidth: 1,
-    borderRightWidth: 1
+  first: {
+    marginLeft: 8
   },
   item: {
     flex: 1,

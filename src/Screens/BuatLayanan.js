@@ -131,8 +131,8 @@ const BuatLayanan = ({ navigation }) => {
       <Header title={layanan.title} backButton navigation={navigation} />
 
       <ScrollView style={styles.container}>
-        <View style={styles.content}>
-          <Title marginBottom={4}>Keluhan Utama</Title>
+        <View style={[styles.content, styles.first]}>
+          <Title style={styles.title}>Keluhan Utama</Title>
           <TextEdit
             placeholder="Keluhan yang dirasakan saat ini..."
             value={keluhan}
@@ -140,7 +140,9 @@ const BuatLayanan = ({ navigation }) => {
             onChangeText={value => setKeluhan(value)}
           />
 
-          <Title marginTop={16}>Jenis Tindakan</Title>
+          <Title marginTop={16} style={styles.title}>
+            Jenis Tindakan
+          </Title>
           <PickerSelect
             items={actionItems}
             value={tindakan}
@@ -149,7 +151,7 @@ const BuatLayanan = ({ navigation }) => {
 
           {layanan.type === Service.MEDICALVISIT && (
             <View>
-              <Title marginTop={16} marginBottom={4}>
+              <Title marginTop={16} style={styles.title}>
                 Diagnosa Medis (opsional)
               </Title>
               <TextEdit
@@ -163,7 +165,7 @@ const BuatLayanan = ({ navigation }) => {
         </View>
 
         <View style={styles.content}>
-          <Title marginBottom={4}>Lokasi</Title>
+          <Title style={styles.title}>Lokasi</Title>
           <TextEdit
             placeholder="Alamat lengkap..."
             value={alamat}
@@ -182,7 +184,9 @@ const BuatLayanan = ({ navigation }) => {
             coordinate={lokasi}
           />
 
-          <Title marginTop={16}>Waktu Kunjungan</Title>
+          <Title marginTop={16} style={styles.title}>
+            Waktu Kunjungan
+          </Title>
           <DateTimePicker
             ref={ref => {
               this.dtPicker = ref;
@@ -195,16 +199,14 @@ const BuatLayanan = ({ navigation }) => {
             small
             icon="clock-outline"
           />
-        </View>
 
-        <Button
-          title="Lanjutkan"
-          height={55}
-          border={false}
-          onPress={buatLayanan}
-          style={styles.btnBuat}
-          color="#fff"
-        />
+          <Button
+            title="Lanjutkan"
+            onPress={buatLayanan}
+            style={styles.btnBuat}
+            color="#fff"
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -213,19 +215,31 @@ const BuatLayanan = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#B0BEC5"
+    backgroundColor: "#ECEFF1"
   },
   content: {
     padding: 16,
-    paddingVertical: 24,
     backgroundColor: "#fff",
+    borderRadius: 3,
+    margin: 8,
+    marginTop: 0,
+    elevation: 2
+  },
+  first: {
     marginTop: 8
   },
   map: {
     marginTop: 16
   },
   btnBuat: {
-    backgroundColor: "#03A9F4"
+    backgroundColor: "#03A9F4",
+    borderWidth: 0,
+    marginTop: 16
+  },
+  title: {
+    fontSize: 14,
+    color: "#626262",
+    marginBottom: 8
   }
 });
 

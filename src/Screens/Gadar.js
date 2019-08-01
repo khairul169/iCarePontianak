@@ -1,114 +1,42 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  Dimensions
-} from "react-native";
-import { Header, Card, SearchBar, Title } from "../Components";
+import { View, Text, Image, StyleSheet } from "react-native";
+import { Header, Button } from "../Components";
 
 // Action image
-import emergencyCall from "../../assets/icon/emergency-call.png";
-import ambulance from "../../assets/icon/ambulance.png";
-
-const ActionItem = ({ flex, image, imageSize, label, borderLeft, onPress }) => {
-  const containerStyle = [
-    styles.actionItem,
-    flex && {
-      flex
-    },
-    borderLeft && {
-      borderLeftColor: "#eee",
-      borderLeftWidth: 1
-    }
-  ];
-
-  const imageStyle = {
-    height: imageSize ? imageSize : 80,
-    resizeMode: "contain"
-  };
-
-  const textStyle = {
-    textAlign: "center",
-    fontSize: 14,
-    marginTop: 16,
-    color: "#626262"
-  };
-
-  return (
-    <TouchableOpacity style={containerStyle} onPress={onPress}>
-      <Image source={image} style={imageStyle} />
-      <Text style={textStyle}>{label}</Text>
-    </TouchableOpacity>
-  );
-};
+import gadarIllust from "../../assets/gadar-illust.png";
 
 const Gadar = ({ navigation }) => {
-  const firstAids = [1, 2, 3];
-
-  const renderFistAids = ({ item, index }) => {
-    // Width of first aid items
-    const { width } = Dimensions.get("window");
-    const itemWidth = width * 0.75;
-    const itemStyle = [
-      styles.faItem,
-      {
-        width: itemWidth,
-        marginLeft: index === 0 ? 0 : 8,
-        marginRight: index === firstAids.length - 1 ? 0 : 8
-      }
-    ];
-
-    return (
-      <Card style={itemStyle} border>
-        <Text>Test</Text>
-      </Card>
-    );
-  };
-
   return (
     <View style={styles.container}>
-      <Header title="Gawat Darurat" backButton navigation={navigation} />
+      <Header backButton navigation={navigation} />
 
-      <ScrollView style={styles.container}>
-        <View style={styles.content}>
-          <Title marginTop={0}>Pusat Bantuan</Title>
+      <View style={styles.content}>
+        <Image source={gadarIllust} style={styles.illust} />
+        <Text style={styles.title}>Gawat Darurat</Text>
+        <Text style={styles.subtitle}>
+          Kondisi yang mengancam nyawa. Segera panggil bantuan dan lakukan
+          penanganan pertama sampai bantuan datang.
+        </Text>
+      </View>
 
-          <Card style={styles.mainAction} border>
-            <ActionItem
-              label="Panggil Bantuan"
-              image={emergencyCall}
-              onPress={() => navigation.navigate("PanggilBantuan")}
-            />
-            <ActionItem
-              label="Cari Ambulan"
-              image={ambulance}
-              imageSize={48}
-              flex={0.5}
-              borderLeft
-              onPress={() => navigation.navigate("CariAmbulan")}
-            />
-          </Card>
-        </View>
+      <View style={styles.actions}>
+        <Button
+          style={styles.btnBantuan}
+          color="#fff"
+          title="Panggil Bantuan"
+          onPress={() => navigation.navigate("PanggilBantuan")}
+        />
 
-        <View style={styles.content}>
-          <Title>Pertolongan Pertama</Title>
-          <SearchBar marginBottom={12} />
-
-          <FlatList
-            horizontal
-            scrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            data={firstAids}
-            keyExtractor={(item, index) => `firstaid-${index}`}
-            renderItem={renderFistAids}
+        <View style={styles.col}>
+          <Button style={styles.btnAid} small title="Penanganan Pertama" />
+          <Button
+            style={styles.btnAmbulan}
+            small
+            title="Cari Ambulan"
+            onPress={() => navigation.navigate("CariAmbulan")}
           />
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -116,30 +44,50 @@ const Gadar = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#B0BEC5"
+    backgroundColor: "#ECEFF1"
   },
   content: {
     flex: 1,
-    backgroundColor: "#fff",
-    marginTop: 8,
-    padding: 16
-  },
-  mainAction: {
-    flexDirection: "row",
+    padding: 16,
+    paddingHorizontal: "10%",
     alignItems: "center",
-    paddingVertical: 16
-  },
-  actionItem: {
-    flex: 1,
-    alignItems: "center",
-    alignSelf: "stretch",
     justifyContent: "center"
   },
-  faItem: {
-    height: 160,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 8
+  illust: {
+    width: "100%",
+    height: "40%",
+    resizeMode: "contain"
+  },
+  title: {
+    fontSize: 18,
+    marginTop: 18,
+    marginBottom: 8,
+    color: "#424242"
+  },
+  subtitle: {
+    fontSize: 12,
+    color: "#676767",
+    textAlign: "center",
+    lineHeight: 20
+  },
+  actions: {
+    backgroundColor: "#fff",
+    padding: 16
+  },
+  col: {
+    flexDirection: "row"
+  },
+  btnBantuan: {
+    backgroundColor: "#ef5350",
+    marginBottom: 16,
+    borderWidth: 0
+  },
+  btnAid: {
+    flex: 1,
+    marginRight: 16
+  },
+  btnAmbulan: {
+    flex: 1
   }
 });
 

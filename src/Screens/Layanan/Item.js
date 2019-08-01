@@ -12,7 +12,7 @@ import { getUserType } from "../../Utils";
 import { Service } from "../../Consts";
 
 const ItemLayanan = props => {
-  const { item, collapsed, onPress, navigation } = props;
+  const { item, collapsed, onPress, style, navigation } = props;
   const { id, user, data } = item;
   const location = {
     latitude: parseFloat(item.lat),
@@ -123,7 +123,7 @@ const ItemLayanan = props => {
   };
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, style]}>
       <ItemHeader
         title={getHeaderTitle()}
         subtitle={!isEmergency && user ? `#${id}` : null}
@@ -143,6 +143,7 @@ const ItemLayanan = props => {
       )}
 
       <StaticMap
+        style={styles.map}
         coordinate={location}
         onPress={() => navigation.navigate("LihatLokasi", { location })}
       />
@@ -160,8 +161,11 @@ const ItemLayanan = props => {
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 8,
-    backgroundColor: "#fff"
+    marginBottom: 8,
+    marginHorizontal: 8,
+    backgroundColor: "#fff",
+    borderRadius: 3,
+    elevation: 2
   },
   content: {
     padding: 16
@@ -187,6 +191,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#626262",
     marginVertical: 16
+  },
+  map: {
+    flex: 1,
+    width: undefined,
+    marginHorizontal: 16,
+    overflow: "hidden",
+    borderRadius: 3
   }
 });
 

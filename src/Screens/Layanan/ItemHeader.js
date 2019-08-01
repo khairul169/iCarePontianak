@@ -23,11 +23,11 @@ const ItemHeader = ({ title, subtitle, onPress, collapsed }) => {
 const styles = StyleSheet.create({
   header: {
     padding: 16,
+    paddingVertical: 12,
     flexDirection: "row",
     alignItems: "center",
     borderColor: "#ddd",
-    borderBottomWidth: 1,
-    paddingBottom: 12
+    borderBottomWidth: 1
   },
   title: {
     marginLeft: 16,

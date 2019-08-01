@@ -1,12 +1,33 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Keyboard } from "react-native";
 import PropTypes from "prop-types";
 import TabItem from "./TabItem";
 
 const BottomTab = ({ navigation, icons }) => {
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => setKeyboardVisible(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setKeyboardVisible(false)
+    );
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
   const navigateTo = route => {
     navigation.navigate(route);
   };
+
+  if (keyboardVisible) {
+    return <View />;
+  }
 
   return (
     <View style={styles.container}>

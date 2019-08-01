@@ -143,7 +143,7 @@ const CariAmbulan = props => {
         style={styles.container}
         onUserLocation={setUserLocation}
         onMapReady={() => {
-          this.bottomSheet.show(1);
+          setTimeout(() => this.bottomSheet.show(), 500);
         }}
         onPress={releaseItem}
         markers={markers}

@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Icon from "./Icon";
-import Title from "./Title";
 import PropTypes from "prop-types";
 
 const ItemDetail = ({ children, title, icon, text, margin, border }) => {
@@ -17,23 +16,27 @@ const ItemDetail = ({ children, title, icon, text, margin, border }) => {
     },
     border && {
       borderBottomWidth: 1,
-      borderBottomColor: "#ddd",
-      paddingBottom: 8
+      borderBottomColor: "#eee",
+      paddingBottom: 16
     }
   ];
 
+  const titleStyle = {
+    fontSize: 12,
+    color: "#686868",
+    marginBottom: 8
+  };
+
   const textStyle = {
     fontSize: 16,
-    color: "#222"
+    color: "#333"
   };
 
   return (
     <View style={containerStyle}>
       <Icon name={icon} size={18} color="#626262" />
       <View style={contentStyle}>
-        <Title fontSize={14} marginBottom={8}>
-          {title}
-        </Title>
+        <Text style={titleStyle}>{title}</Text>
         {text && <Text style={textStyle}>{text}</Text>}
         {children}
       </View>

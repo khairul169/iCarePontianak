@@ -60,12 +60,7 @@ const PanggilBantuan = ({ navigation, token }) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        title="Panggil Bantuan"
-        transparent
-        backButton
-        navigation={navigation}
-      />
+      <Header transparent backButton navigation={navigation} />
 
       <View style={styles.container}>
         <MapLayout style={styles.mapView} onRegionChanged={onRegionChanged} />

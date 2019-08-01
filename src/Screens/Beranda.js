@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
+
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { HomeHeader } from "../Components";
+import { HomeHeader, Title } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
 import { Service } from "../Consts";
 import { requestLocationPermission } from "../Permissions";
@@ -15,7 +17,7 @@ import iconLansia from "../../assets/layanan/lansia.jpg";
 import iconSanitasi from "../../assets/layanan/sanitasi.jpg";
 import iconDietNutrisi from "../../assets/layanan/dietnutrisi.jpg";
 
-const MainItems = ({ navigation }) => {
+const Beranda = ({ navigation, user }) => {
   // ask permissions
   useEffect(() => {
     requestLocationPermission();
@@ -29,79 +31,77 @@ const MainItems = ({ navigation }) => {
     navigateTo("BuatLayanan", { layanan: type });
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.separator} />
+  console.log(user);
 
-      <View style={styles.mainContent}>
-        <Text style={styles.textPelayanan}>Layanan Kami</Text>
-
-        <View style={styles.row}>
-          <ItemLayanan
-            image={iconGadar}
-            border={false}
-            title="Gawat Darurat"
-            onPress={() => navigateTo("Gadar")}
-          />
-
-          <ItemLayanan
-            image={iconMedVisit}
-            border={false}
-            title="Kunjungan Medis"
-            onPress={() => buatLayanan(Service.MEDICALVISIT)}
-          />
-        </View>
-      </View>
-
-      <View style={styles.separator} />
-
-      <View style={styles.pelayanan}>
-        <View style={styles.row}>
-          <ItemLayanan
-            image={iconLabMedik}
-            title="Lab Medik"
-            onPress={() => buatLayanan(Service.LABMEDIK)}
-          />
-          <ItemLayanan
-            image={iconGigi}
-            title="Kesehatan Gigi"
-            onPress={() => buatLayanan(Service.GIGI)}
-          />
-          <ItemLayanan
-            image={iconBidan}
-            title="Bidan Terampil"
-            onPress={() => buatLayanan(Service.BIDAN)}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <ItemLayanan
-            image={iconLansia}
-            title="Lansia"
-            onPress={() => buatLayanan(Service.LANSIA)}
-          />
-          <ItemLayanan
-            image={iconSanitasi}
-            title="Sanitasi"
-            onPress={() => buatLayanan(Service.SANITASI)}
-          />
-          <ItemLayanan
-            image={iconDietNutrisi}
-            title="Diet Nutrisi"
-            onPress={() => buatLayanan(Service.NUTRISI)}
-          />
-        </View>
-      </View>
-    </View>
-  );
-};
-
-const Beranda = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <HomeHeader />
       <ScrollView style={styles.content}>
-        <MainItems navigation={navigation} />
+        <Title style={styles.title}>
+          Selamat Datang{user && `, ${user.name.split(" ")[0]}`}!
+        </Title>
+        <Text style={styles.subtitle}>Ada yang bisa dibantu?</Text>
+
+        <View style={styles.layananUtama}>
+          <View style={styles.row}>
+            <ItemLayanan
+              first
+              image={iconGadar}
+              border={false}
+              title="Gawat Darurat"
+              onPress={() => navigateTo("Gadar")}
+            />
+
+            <ItemLayanan
+              image={iconMedVisit}
+              border={false}
+              title="Kunjungan Medis"
+              onPress={() => buatLayanan(Service.MEDICALVISIT)}
+            />
+          </View>
+        </View>
+
+        <Title style={styles.title}>Layanan Kami</Title>
+
+        <View style={styles.layanan}>
+          <View style={styles.row}>
+            <ItemLayanan
+              first
+              image={iconLabMedik}
+              title="Lab Medik"
+              onPress={() => buatLayanan(Service.LABMEDIK)}
+            />
+            <ItemLayanan
+              image={iconGigi}
+              title="Kesehatan Gigi"
+              onPress={() => buatLayanan(Service.GIGI)}
+            />
+            <ItemLayanan
+              image={iconBidan}
+              title="Bidan Terampil"
+              onPress={() => buatLayanan(Service.BIDAN)}
+            />
+          </View>
+
+          <View style={styles.row}>
+            <ItemLayanan
+              first
+              image={iconLansia}
+              title="Lansia"
+              onPress={() => buatLayanan(Service.LANSIA)}
+            />
+            <ItemLayanan
+              image={iconSanitasi}
+              title="Sanitasi"
+              onPress={() => buatLayanan(Service.SANITASI)}
+            />
+            <ItemLayanan
+              image={iconDietNutrisi}
+              title="Diet Nutrisi"
+              onPress={() => buatLayanan(Service.NUTRISI)}
+            />
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
@@ -110,37 +110,44 @@ const Beranda = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#ECEFF1"
   },
   content: {
     flex: 1
   },
-  mainContent: {
-    height: 200,
-    backgroundColor: "#fff",
-    padding: 16,
+  layananUtama: {
+    height: 140,
+    padding: 8,
     alignItems: "center",
     justifyContent: "center"
   },
-  textPelayanan: {
+  title: {
     fontSize: 18,
     color: "#37474F",
-    marginBottom: 16
+    marginLeft: 16,
+    marginTop: 16,
+    marginBottom: 4
   },
-  pelayanan: {
+  subtitle: {
+    fontSize: 12,
+    color: "#626262",
+    marginBottom: 8,
+    marginLeft: 16
+  },
+  layanan: {
     flex: 1,
-    backgroundColor: "#fff",
-    height: 180
+    height: 200,
+    padding: 8
   },
   row: {
     flex: 1,
     flexDirection: "row",
     alignItems: "stretch"
-  },
-  separator: {
-    backgroundColor: "#B0BEC5",
-    height: 8
   }
 });
 
-export default Beranda;
+const mapStateToProps = ({ akun }) => ({
+  user: akun.userData
+});
+
+export default connect(mapStateToProps)(Beranda);

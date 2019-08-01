@@ -12,19 +12,22 @@ const Layanan = props => {
   const { loading, items } = props.layanan;
   const fetchData = props.fetchItems;
 
+  const onRefresh = () => {
+    props.fetchItems();
+  };
+
+  // fetch data on load
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  const onRefresh = () => {
-    fetchData();
-  };
-
   const renderItem = ({ item, index }) => {
+    const itemStyle = { marginTop: !index ? 8 : 0 };
     return (
       <ItemLayanan
         item={item}
         collapsed={collapsedItem === index}
+        style={itemStyle}
         onPress={() => {
           setCollapsedItem(collapsedItem !== index ? index : null);
         }}
@@ -53,7 +56,7 @@ const Layanan = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#B0BEC5"
+    backgroundColor: "#ECEFF1"
   }
 });
 

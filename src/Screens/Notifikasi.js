@@ -23,9 +23,9 @@ const Notifikasi = props => {
   };
 
   const renderItem = ({ item, index }) => {
-    const containerStyle = [styles.item, !index && { borderTopWidth: 1 }];
+    const itemStyle = [styles.item, !index && { paddingTop: 0 }];
     return (
-      <View style={containerStyle}>
+      <View style={itemStyle}>
         <Text style={styles.itemDate}>{item.time}</Text>
         <Text style={styles.itemContent}>{item.content}</Text>
       </View>
