@@ -26,7 +26,7 @@ const ItemDetail = ({ type, data }) => {
       text: data.tindakan
     },
     {
-      icon: "box-cutter",
+      icon: "clipboard-pulse",
       title: "Diagnosa Medis",
       text: data.diagnosa
     },

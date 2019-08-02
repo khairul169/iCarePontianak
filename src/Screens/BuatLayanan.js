@@ -99,7 +99,14 @@ const BuatLayanan = ({ navigation }) => {
   const [lokasi, setLokasi] = useState();
   const [waktu, setWaktu] = useState();
 
-  const buatLayanan = () => {
+  const onPilihLokasi = () => {
+    navigation.navigate("PilihLokasi", {
+      location: lokasi,
+      callback: setLokasi
+    });
+  };
+
+  const onBuatLayanan = () => {
     if (keluhan.trim() === "" || alamat.trim() === "" || !waktu || !lokasi) {
       ToastAndroid.show(
         "Mohon periksa lagi input yang tersedia.",
@@ -174,14 +181,15 @@ const BuatLayanan = ({ navigation }) => {
           />
           <MiniMap
             borderRadius={3}
-            onPress={() =>
-              navigation.navigate("PilihLokasi", {
-                location: lokasi,
-                callback: setLokasi
-              })
-            }
+            onPress={onPilihLokasi}
             style={styles.map}
             coordinate={lokasi}
+          />
+          <Button
+            title={"Tentukan Lokasi"}
+            onPress={onPilihLokasi}
+            small
+            style={styles.btnPilihLokasi}
           />
 
           <Title marginTop={16} style={styles.title}>
@@ -197,12 +205,11 @@ const BuatLayanan = ({ navigation }) => {
             title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
             onPress={() => this.dtPicker.show()}
             small
-            icon="clock-outline"
           />
 
           <Button
             title="Lanjutkan"
-            onPress={buatLayanan}
+            onPress={onBuatLayanan}
             style={styles.btnBuat}
             color="#fff"
           />
@@ -240,6 +247,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#626262",
     marginBottom: 8
+  },
+  btnPilihLokasi: {
+    marginTop: 16
   }
 });
 

@@ -7,7 +7,7 @@ const TabItem = ({ icon, active, title, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       {icon && (
-        <Icon name={icon} size={20} color={active ? "#383838" : "#ccc"} />
+        <Icon name={icon} size={20} color={active ? "#546E7A" : "#CFD8DC"} />
       )}
       <Text style={styles.tabTitle}>{title}</Text>
     </TouchableOpacity>

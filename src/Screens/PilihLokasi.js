@@ -25,12 +25,7 @@ const PilihLokasi = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        title="Tentukan Lokasi"
-        transparent
-        backButton
-        navigation={navigation}
-      />
+      <Header transparent backButton navigation={navigation} />
 
       <View style={styles.container}>
         <MapLayout

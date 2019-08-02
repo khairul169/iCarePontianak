@@ -69,7 +69,7 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
 
           {data.diagnosa ? (
             <ItemDetail
-              icon="box-cutter"
+              icon="clipboard-pulse"
               title="Diagnosa Medis"
               text={data.diagnosa}
             />
