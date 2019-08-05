@@ -110,13 +110,13 @@ const Beranda = ({ navigation, user }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF1"
+    backgroundColor: "#fff"
   },
   content: {
     flex: 1
   },
   layananUtama: {
-    height: 140,
+    height: 180,
     padding: 8,
     alignItems: "center",
     justifyContent: "center"
@@ -126,17 +126,17 @@ const styles = StyleSheet.create({
     color: "#37474F",
     marginLeft: 16,
     marginTop: 16,
-    marginBottom: 4
+    marginBottom: 6
   },
   subtitle: {
     fontSize: 12,
     color: "#626262",
-    marginBottom: 8,
+    marginBottom: 12,
     marginLeft: 16
   },
   layanan: {
     flex: 1,
-    height: 200,
+    height: 240,
     padding: 8
   },
   row: {

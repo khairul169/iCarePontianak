@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginRight: 8,
     marginBottom: 8,
-    elevation: 2,
-    borderRadius: 3
+    elevation: 5,
+    borderRadius: 8
   },
   first: {
     marginLeft: 8
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     alignItems: "center",
-    padding: 16
+    padding: 16,
+    paddingHorizontal: 4
   },
   pelayananImage: {
     flex: 1,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
   pelayananTitle: {
     color: "#525252",
-    fontSize: 11,
+    fontSize: 12,
     marginTop: 12,
     textAlign: "center"
   }

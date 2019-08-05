@@ -55,14 +55,14 @@ Button.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    borderRadius: 2,
+    borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
     height: 48,
     flexDirection: "row"
   },
   buttonTitle: {
-    color: "#626262",
+    color: "#484848",
     fontSize: 14,
     fontWeight: "bold"
   }

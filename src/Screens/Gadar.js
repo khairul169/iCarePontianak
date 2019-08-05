@@ -44,7 +44,7 @@ const Gadar = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF1"
+    backgroundColor: "#fff"
   },
   content: {
     flex: 1,

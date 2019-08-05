@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     backgroundColor: "#fff",
     borderRadius: 3,
-    elevation: 2
+    elevation: 3
   },
   content: {
     padding: 16

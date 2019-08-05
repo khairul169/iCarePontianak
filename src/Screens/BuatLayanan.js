@@ -147,7 +147,7 @@ const BuatLayanan = ({ navigation }) => {
             onChangeText={value => setKeluhan(value)}
           />
 
-          <Title marginTop={16} style={styles.title}>
+          <Title marginTop={32} style={styles.title}>
             Jenis Tindakan
           </Title>
           <PickerSelect
@@ -158,7 +158,7 @@ const BuatLayanan = ({ navigation }) => {
 
           {layanan.type === Service.MEDICALVISIT && (
             <View>
-              <Title marginTop={16} style={styles.title}>
+              <Title marginTop={32} style={styles.title}>
                 Diagnosa Medis (opsional)
               </Title>
               <TextEdit
@@ -192,7 +192,7 @@ const BuatLayanan = ({ navigation }) => {
             style={styles.btnPilihLokasi}
           />
 
-          <Title marginTop={16} style={styles.title}>
+          <Title marginTop={32} style={styles.title}>
             Waktu Kunjungan
           </Title>
           <DateTimePicker
@@ -222,7 +222,7 @@ const BuatLayanan = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF1"
+    backgroundColor: "#fff"
   },
   content: {
     padding: 16,
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     margin: 8,
     marginTop: 0,
-    elevation: 2
+    elevation: 3
   },
   first: {
     marginTop: 8
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   btnBuat: {
     backgroundColor: "#03A9F4",
     borderWidth: 0,
-    marginTop: 16
+    marginTop: 32
   },
   title: {
     fontSize: 14,

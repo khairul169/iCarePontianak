@@ -3,46 +3,18 @@ import { View, StyleSheet, TextInput } from "react-native";
 import Icon from "./Icon";
 import PropTypes from "prop-types";
 
-const SearchBar = ({
-  backgroundColor,
-  marginHorizontal,
-  marginTop,
-  marginBottom,
-  style,
-  color,
-  placeholder,
-  placeholderColor
-}) => {
-  const containerStyle = [
-    styles.searchBox,
-    {
-      backgroundColor,
-      marginHorizontal,
-      marginTop,
-      marginBottom
-    },
-    style
-  ];
-
-  const textInputStyle = [
-    styles.searchInput,
-    {
-      color
-    }
-  ];
-
+const SearchBar = ({ style, placeholder }) => {
   return (
-    <View style={containerStyle}>
+    <View style={[styles.searchBox, style]}>
       <TextInput
-        style={textInputStyle}
+        style={[styles.searchInput]}
         placeholder={placeholder}
-        placeholderTextColor={placeholderColor}
+        placeholderTextColor="#78909C"
       />
       <Icon
         type="Ionicons"
         name="md-search"
         size={18}
-        color={color}
         style={styles.searchIcon}
       />
     </View>
@@ -50,28 +22,19 @@ const SearchBar = ({
 };
 
 SearchBar.propTypes = {
-  backgroundColor: PropTypes.string,
-  marginHorizontal: PropTypes.number,
-  marginTop: PropTypes.number,
-  marginBottom: PropTypes.number,
   style: PropTypes.object,
-  color: PropTypes.string,
-  placeholder: PropTypes.string,
-  placeholderColor: PropTypes.string
+  placeholder: PropTypes.string
 };
 
 SearchBar.defaultProps = {
-  backgroundColor: "#ECEFF1",
-  color: "#37474F",
-  placeholder: "Mau cari tindakan atau bantuan apa?",
-  placeholderColor: "#78909C"
+  placeholder: "Mau cari tindakan atau bantuan apa?"
 };
 
 const styles = StyleSheet.create({
   searchBox: {
-    borderRadius: 5,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#fff"
   },
   searchInput: {
     paddingHorizontal: 10,

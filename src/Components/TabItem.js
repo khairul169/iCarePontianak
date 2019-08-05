@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import Icon from "./Icon";
 
 const TabItem = ({ icon, active, title, onPress }) => {
+  const tintColorStyle = { color: active ? "#43A047" : "#676767" };
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      {icon && (
-        <Icon name={icon} size={20} color={active ? "#546E7A" : "#CFD8DC"} />
-      )}
-      <Text style={styles.tabTitle}>{title}</Text>
+      {icon && <Icon name={icon} size={20} style={tintColorStyle} />}
+      <Text style={[styles.tabTitle, tintColorStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingVertical: 6
+    paddingVertical: 8
   },
   tabTitle: {
-    color: "#626262",
-    fontSize: 11,
-    marginTop: 1
+    color: "#333",
+    fontSize: 12,
+    marginTop: 2
   }
 });
 

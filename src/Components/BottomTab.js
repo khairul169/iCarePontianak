@@ -52,8 +52,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    borderTopColor: "#CFD8DC",
-    borderTopWidth: 1
+    //borderTopColor: "#CFD8DC",
+    //borderTopWidth: 1,
+    elevation: 10,
+    zIndex: 10,
+    backgroundColor: "#fff"
   }
 });
 

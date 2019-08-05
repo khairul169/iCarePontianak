@@ -27,7 +27,7 @@ const HomeHeader = () => {
         />
       </View>
 
-      <SearchBar marginTop={12} backgroundColor="#ECEFF1" />
+      <SearchBar marginTop={12} style={styles.searchBar} />
     </View>
   );
 };
@@ -52,6 +52,13 @@ const styles = StyleSheet.create({
     fontWeight: "100",
     marginLeft: 16,
     flex: 1
+  },
+  searchBar: {
+    backgroundColor: "#fff",
+    marginTop: 12,
+    borderRadius: 5,
+    borderColor: "#ddd",
+    borderWidth: 1
   }
 });
 

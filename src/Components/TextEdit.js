@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     flex: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: "#ddd",
     borderBottomWidth: 1,
     margin: 0,
     padding: 0,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 12,
-    color: "#686868",
+    color: "#484848",
     marginLeft: 35
   }
 });
