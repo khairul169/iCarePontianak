@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { fetchItems as fetchLayanan } from "../Actions/Layanan.action";
 
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader, Title } from "../Components";
@@ -17,7 +18,9 @@ import iconLansia from "../../assets/layanan/lansia.jpg";
 import iconSanitasi from "../../assets/layanan/sanitasi.jpg";
 import iconDietNutrisi from "../../assets/layanan/dietnutrisi.jpg";
 
-const Beranda = ({ navigation, user }) => {
+const Beranda = props => {
+  const { navigation, user, pushNotification } = props;
+
   // ask permissions
   useEffect(() => {
     requestLocationPermission();
@@ -30,6 +33,16 @@ const Beranda = ({ navigation, user }) => {
   const buatLayanan = type => {
     navigateTo("BuatLayanan", { layanan: type });
   };
+
+  // on push notification opened
+  useEffect(() => {
+    const onPushNotification = () => {
+      props.fetchLayanan();
+      navigation.navigate("Layanan");
+    };
+
+    if (pushNotification) onPushNotification();
+  }, [navigation, props, pushNotification]);
 
   return (
     <View style={styles.container}>
@@ -144,8 +157,16 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ akun }) => ({
+const mapStateToProps = ({ beranda, akun }) => ({
+  pushNotification: beranda.pushNotification,
   user: akun.userData
 });
 
-export default connect(mapStateToProps)(Beranda);
+const mapDispatchToProps = {
+  fetchLayanan
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Beranda);

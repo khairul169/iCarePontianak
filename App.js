@@ -5,6 +5,7 @@ import store from "./src/Store";
 import { ONESIGNAL_ID } from "react-native-dotenv";
 import OneSignal from "react-native-onesignal";
 import { setDeviceId } from "./src/Actions/Auth.action";
+import { onPushNotification } from "./src/Actions/Beranda.action";
 
 class App extends Component {
   constructor(props) {
@@ -30,8 +31,8 @@ class App extends Component {
   }
 
   onOpened = openResult => {
-    // TODO
-    return;
+    const data = openResult.notification.payload.additionalData;
+    this.store.dispatch(onPushNotification(data));
   };
 
   onIds = device => {
