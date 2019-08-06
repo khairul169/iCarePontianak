@@ -31,8 +31,6 @@ const Beranda = ({ navigation, user }) => {
     navigateTo("BuatLayanan", { layanan: type });
   };
 
-  console.log(user);
-
   return (
     <View style={styles.container}>
       <HomeHeader />
