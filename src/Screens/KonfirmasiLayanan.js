@@ -42,19 +42,19 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
       <Header title="Konfirmasi Layanan" backButton navigation={navigation} />
 
       <ScrollView style={styles.container}>
+        <MiniMap borderRadius={3} style={styles.map} coordinate={location} />
+
         <View style={styles.content}>
           <ItemDetail
             icon="mother-nurse"
             margin={false}
             title="Jenis Layanan"
             text={title}
+            border
           />
-        </View>
 
-        <View style={styles.content}>
           <ItemDetail
             icon="account-alert"
-            margin={false}
             title="Keluhan Utama"
             text={data.keluhan}
             border
@@ -64,7 +64,7 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
             icon="briefcase-edit"
             title="Jenis Tindakan"
             text={data.tindakan}
-            border={data.diagnosa ? true : false}
+            border
           />
 
           {data.diagnosa ? (
@@ -72,30 +72,25 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
               icon="clipboard-pulse"
               title="Diagnosa Medis"
               text={data.diagnosa}
+              border
             />
           ) : null}
-        </View>
 
-        <View style={styles.content}>
           <ItemDetail
             icon="home-map-marker"
             title="Lokasi Klien"
             text={data.alamat}
-            margin={false}
-          >
-            <MiniMap
-              borderRadius={3}
-              style={styles.map}
-              coordinate={location}
-            />
-          </ItemDetail>
+            border
+          />
 
           <ItemDetail
             icon="calendar-clock"
             title="Waktu Kunjungan"
             text={getTimeString(data.waktu)}
           />
+        </View>
 
+        <View style={styles.content}>
           <Button
             title="Buat Layanan"
             style={styles.btnKonfirmasi}
@@ -118,12 +113,8 @@ const styles = StyleSheet.create({
     borderColor: "#eee",
     borderTopWidth: 1
   },
-  map: {
-    marginTop: 16
-  },
   btnKonfirmasi: {
     backgroundColor: "#8BC34A",
-    marginTop: 16,
     borderWidth: 0
   }
 });
