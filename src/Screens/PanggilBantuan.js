@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import { View, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import API from "../API";
 import { navigateToMainStack } from "../Routes";
-
-import { View, StyleSheet, Image } from "react-native";
 import { Header, MapLayout, Button, PickerSelect } from "../Components";
 import { Service } from "../Consts";
-import pinImage from "../../assets/pins/pin.png";
+import { pinImage } from "../Assets";
 
 const PanggilBantuan = ({ navigation, token }) => {
   const jenisBantuan = [

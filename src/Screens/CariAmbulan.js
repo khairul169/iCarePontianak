@@ -14,7 +14,7 @@ import {
   Dimensions
 } from "react-native";
 import { Header, BottomSheet, MapLayout, Button } from "../Components";
-import markerImage from "../../assets/pins/ambulance.png";
+import { pinAmbulance } from "../Assets";
 
 const haversine = require("haversine");
 const window = Dimensions.get("window");
@@ -54,7 +54,7 @@ const CariAmbulan = props => {
   const markers = items.map((item, index) => {
     return {
       title: item.name,
-      image: markerImage,
+      image: pinAmbulance,
       coordinate: item.coordinate,
       onPress: () => selectItem(index)
     };

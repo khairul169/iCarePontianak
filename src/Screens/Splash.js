@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { validateToken } from "../Actions/Auth.action";
 
 import { View, StyleSheet, Image } from "react-native";
-import appIcon from "../../assets/icon/app-icon.png";
+import appIcon from "../Assets/icon/app-icon.png";
 
 const Splash = props => {
   const { isLoading, token, navigation } = props;

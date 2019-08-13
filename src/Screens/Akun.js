@@ -23,7 +23,7 @@ import {
 import ImagePicker from "react-native-image-crop-picker";
 import { Header, Icon } from "../Components";
 import { getUserType } from "../Utils";
-import userIcon from "../../assets/icon/user.png";
+import { iconUser } from "../Assets";
 
 const Button = ({ onPress, title, icon }) => {
   const titleStyle = {
@@ -38,8 +38,8 @@ const Button = ({ onPress, title, icon }) => {
         {typeof icon === "string" ? (
           <Icon name={icon} color="#686868" size={20} />
         ) : (
-            icon
-          )}
+          icon
+        )}
       </View>
     </TouchableNativeFeedback>
   );
@@ -113,7 +113,7 @@ const Akun = props => {
         <View style={styles.profile}>
           <TouchableOpacity style={styles.profilePict} onPress={ubahFotoProfil}>
             <Image
-              source={user && user.image ? { uri: user.image } : userIcon}
+              source={user && user.image ? { uri: user.image } : iconUser}
               style={styles.profileImage}
             />
           </TouchableOpacity>

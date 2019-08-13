@@ -5,7 +5,7 @@ import { fetchLogin, fetchRegister } from "../Actions/Auth.action";
 import { View, StyleSheet, Image, ToastAndroid } from "react-native";
 import InputText from "./Login/InputText";
 import Button from "./Login/Button";
-import appIcon from "../../assets/icon/app-icon.png";
+import appIcon from "../Assets/icon/app-icon.png";
 
 const Login = props => {
   const [register, setRegister] = useState(false);

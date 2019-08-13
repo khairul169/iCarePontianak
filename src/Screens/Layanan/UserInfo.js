@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Icon } from "../../Components";
-import userIcon from "../../../assets/icon/user.png";
+import { iconUser } from "../../Assets";
 
 const UserInfoItem = ({ children, title, value }) => {
   const containerStyle = { flexDirection: "row", marginTop: 4 };
@@ -55,7 +55,7 @@ const UserInfo = ({
     <View style={containerStyle}>
       <View style={styles.profilePict}>
         <Image
-          source={image ? { uri: image } : userIcon}
+          source={image ? { uri: image } : iconUser}
           style={styles.profileImage}
         />
       </View>

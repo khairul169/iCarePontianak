@@ -7,16 +7,16 @@ import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
 import { Service } from "../Consts";
 import { requestLocationPermission } from "../Permissions";
-
-// Images
-import iconGadar from "../../assets/layanan/gadar.jpg";
-import iconMedVisit from "../../assets/layanan/medical-visit.jpg";
-import iconLabMedik from "../../assets/layanan/labdarah.jpg";
-import iconGigi from "../../assets/layanan/gigi.jpg";
-import iconBidan from "../../assets/layanan/bidan.jpg";
-import iconLansia from "../../assets/layanan/lansia.jpg";
-import iconSanitasi from "../../assets/layanan/sanitasi.jpg";
-import iconDietNutrisi from "../../assets/layanan/dietnutrisi.jpg";
+import {
+  iconGadar,
+  iconMedVisit,
+  iconLabMedik,
+  iconGigi,
+  iconBidan,
+  iconLansia,
+  iconSanitasi,
+  iconDietNutrisi
+} from "../Assets";
 
 const Beranda = props => {
   const { navigation, user, pushNotification } = props;

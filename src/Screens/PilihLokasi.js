@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Header, MapLayout, Button } from "../Components";
-import pinImage from "../../assets/pins/pin.png";
+import { pinImage } from "../Assets";
 
 const PilihLokasi = ({ navigation }) => {
   // state
