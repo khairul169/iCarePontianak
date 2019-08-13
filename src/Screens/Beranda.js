@@ -6,7 +6,7 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
 import { Service } from "../Consts";
-import { requestLocationPermission } from "../Permissions";
+import { requestLocationPermission } from "../Utils";
 import {
   iconGadar,
   iconMedVisit,
