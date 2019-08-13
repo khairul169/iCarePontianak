@@ -1,6 +1,5 @@
 import BottomSheet from "./BottomSheet";
 import Button from "./Button";
-import Card from "./Card";
 import DateTimePicker from "./DateTimePicker";
 import Header from "./Header";
 import HomeHeader from "./HomeHeader";
@@ -13,12 +12,10 @@ import SearchBar from "./SearchBar";
 import StaticMap from "./StaticMap";
 import StatusBar from "./StatusBar";
 import TextEdit from "./TextEdit";
-import Title from "./Title";
 
 export {
   BottomSheet,
   Button,
-  Card,
   DateTimePicker,
   Header,
   HomeHeader,
@@ -30,6 +27,5 @@ export {
   SearchBar,
   StaticMap,
   StatusBar,
-  TextEdit,
-  Title
+  TextEdit
 };

@@ -15,9 +15,11 @@ const AppStatusBar = () => {
   const backgroundColor = lightStatusBar ? "rgba(0, 0, 0, 0)" : "#424242";
 
   // set statusbar
-  StatusBar.setTranslucent(lightStatusBar);
-  StatusBar.setBarStyle(barStyle);
-  StatusBar.setBackgroundColor(backgroundColor);
+  if (Platform.OS === "android") {
+    StatusBar.setTranslucent(lightStatusBar);
+    StatusBar.setBarStyle(barStyle);
+    StatusBar.setBackgroundColor(backgroundColor);
+  }
 
   return (
     <View>

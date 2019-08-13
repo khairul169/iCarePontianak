@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, ToastAndroid } from "react-native";
+import { View, StyleSheet, ScrollView, ToastAndroid, Text } from "react-native";
 import {
   Button,
   Header,
   TextEdit,
-  Title,
   PickerSelect,
   DateTimePicker,
   MiniMap
@@ -138,8 +137,8 @@ const BuatLayanan = ({ navigation }) => {
       <Header title={layanan.title} backButton navigation={navigation} />
 
       <ScrollView style={styles.container}>
-        <View style={[styles.content, styles.first]}>
-          <Title style={styles.title}>Keluhan Utama</Title>
+        <View style={styles.content}>
+          <Text style={[styles.title, styles.noMarginTop]}>Keluhan Utama</Text>
           <TextEdit
             placeholder="Keluhan yang dirasakan saat ini..."
             value={keluhan}
@@ -147,9 +146,7 @@ const BuatLayanan = ({ navigation }) => {
             onChangeText={value => setKeluhan(value)}
           />
 
-          <Title marginTop={32} style={styles.title}>
-            Jenis Tindakan
-          </Title>
+          <Text style={styles.title}>Jenis Tindakan</Text>
           <PickerSelect
             items={actionItems}
             value={tindakan}
@@ -158,9 +155,7 @@ const BuatLayanan = ({ navigation }) => {
 
           {layanan.type === Service.MEDICALVISIT && (
             <View>
-              <Title marginTop={32} style={styles.title}>
-                Diagnosa Medis (opsional)
-              </Title>
+              <Text style={styles.title}>Diagnosa Medis (opsional)</Text>
               <TextEdit
                 placeholder="..."
                 value={diagnosa}
@@ -169,10 +164,8 @@ const BuatLayanan = ({ navigation }) => {
               />
             </View>
           )}
-        </View>
 
-        <View style={styles.content}>
-          <Title style={styles.title}>Lokasi</Title>
+          <Text style={styles.title}>Lokasi</Text>
           <TextEdit
             placeholder="Alamat lengkap..."
             value={alamat}
@@ -192,9 +185,7 @@ const BuatLayanan = ({ navigation }) => {
             style={styles.btnPilihLokasi}
           />
 
-          <Title marginTop={32} style={styles.title}>
-            Waktu Kunjungan
-          </Title>
+          <Text style={styles.title}>Waktu Kunjungan</Text>
           <DateTimePicker
             ref={ref => {
               this.dtPicker = ref;
@@ -225,15 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   content: {
-    padding: 16,
-    backgroundColor: "#fff",
-    borderRadius: 3,
-    margin: 8,
-    marginTop: 0,
-    elevation: 3
-  },
-  first: {
-    marginTop: 8
+    padding: 16
   },
   map: {
     marginTop: 16
@@ -246,7 +229,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     color: "#626262",
-    marginBottom: 8
+    marginBottom: 6,
+    marginTop: 16
+  },
+  noMarginTop: {
+    marginTop: 0
   },
   btnPilihLokasi: {
     marginTop: 16

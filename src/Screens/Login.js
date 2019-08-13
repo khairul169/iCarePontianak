@@ -28,7 +28,7 @@ const Login = props => {
 
     // navigate to main screen
     if (auth.token) {
-      navigation.navigate("Main");
+      navigation.navigate("MainStack");
     }
   }, [auth, navigation]);
 

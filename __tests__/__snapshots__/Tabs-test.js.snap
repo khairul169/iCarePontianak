@@ -5,9 +5,10 @@ exports[`<BottomTab /> render 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "borderTopColor": "#CFD8DC",
-      "borderTopWidth": 1,
+      "backgroundColor": "#fff",
+      "elevation": 10,
       "flexDirection": "row",
+      "zIndex": 10,
     }
   }
 >
@@ -27,7 +28,7 @@ exports[`<BottomTab /> render 1`] = `
         "alignItems": "center",
         "flex": 1,
         "opacity": 1,
-        "paddingVertical": 6,
+        "paddingVertical": 8,
       }
     }
   >
@@ -36,10 +37,12 @@ exports[`<BottomTab /> render 1`] = `
       style={
         Array [
           Object {
-            "color": "#383838",
+            "color": "#333",
             "fontSize": 20,
           },
-          undefined,
+          Object {
+            "color": "#43A047",
+          },
           Object {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
@@ -53,11 +56,16 @@ exports[`<BottomTab /> render 1`] = `
     </Text>
     <Text
       style={
-        Object {
-          "color": "#626262",
-          "fontSize": 11,
-          "marginTop": 1,
-        }
+        Array [
+          Object {
+            "color": "#333",
+            "fontSize": 12,
+            "marginTop": 2,
+          },
+          Object {
+            "color": "#43A047",
+          },
+        ]
       }
     >
       Home
@@ -79,7 +87,7 @@ exports[`<BottomTab /> render 1`] = `
         "alignItems": "center",
         "flex": 1,
         "opacity": 1,
-        "paddingVertical": 6,
+        "paddingVertical": 8,
       }
     }
   >
@@ -88,10 +96,12 @@ exports[`<BottomTab /> render 1`] = `
       style={
         Array [
           Object {
-            "color": "#ccc",
+            "color": "#333",
             "fontSize": 20,
           },
-          undefined,
+          Object {
+            "color": "#676767",
+          },
           Object {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
@@ -105,11 +115,16 @@ exports[`<BottomTab /> render 1`] = `
     </Text>
     <Text
       style={
-        Object {
-          "color": "#626262",
-          "fontSize": 11,
-          "marginTop": 1,
-        }
+        Array [
+          Object {
+            "color": "#333",
+            "fontSize": 12,
+            "marginTop": 2,
+          },
+          Object {
+            "color": "#676767",
+          },
+        ]
       }
     >
       Account
@@ -135,7 +150,7 @@ exports[`<TabItem /> render 1`] = `
       "alignItems": "center",
       "flex": 1,
       "opacity": 1,
-      "paddingVertical": 6,
+      "paddingVertical": 8,
     }
   }
 >
@@ -144,10 +159,12 @@ exports[`<TabItem /> render 1`] = `
     style={
       Array [
         Object {
-          "color": "#ccc",
+          "color": "#333",
           "fontSize": 20,
         },
-        undefined,
+        Object {
+          "color": "#676767",
+        },
         Object {
           "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
@@ -161,11 +178,16 @@ exports[`<TabItem /> render 1`] = `
   </Text>
   <Text
     style={
-      Object {
-        "color": "#626262",
-        "fontSize": 11,
-        "marginTop": 1,
-      }
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 12,
+          "marginTop": 2,
+        },
+        Object {
+          "color": "#676767",
+        },
+      ]
     }
   >
     TabItem

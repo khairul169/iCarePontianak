@@ -21,7 +21,7 @@ import {
   Switch
 } from "react-native";
 import ImagePicker from "react-native-image-crop-picker";
-import { Header, Card, Icon } from "../Components";
+import { Header, Icon } from "../Components";
 import { getUserType } from "../Utils";
 import userIcon from "../../assets/icon/user.png";
 
@@ -38,8 +38,8 @@ const Button = ({ onPress, title, icon }) => {
         {typeof icon === "string" ? (
           <Icon name={icon} color="#686868" size={20} />
         ) : (
-          icon
-        )}
+            icon
+          )}
       </View>
     </TouchableNativeFeedback>
   );
@@ -121,7 +121,7 @@ const Akun = props => {
           <Text style={styles.title}>{user && user.name}</Text>
           <Text style={styles.subtitle}>{user && getUserType(user.type)}</Text>
         </View>
-        <Card style={styles.content}>
+        <View style={styles.content}>
           <Button
             icon="account-circle"
             style={styles.button}
@@ -161,7 +161,7 @@ const Akun = props => {
             onPress={props.logout}
             small
           />
-        </Card>
+        </View>
       </ScrollView>
     </View>
   );

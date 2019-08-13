@@ -16,7 +16,7 @@ const Splash = props => {
 
   // switch screen
   useEffect(() => {
-    !isLoading && navigation.navigate(token ? "Main" : "Login");
+    !isLoading && navigation.navigate(token ? "MainStack" : "Login");
   }, [token, navigation, isLoading]);
 
   return (

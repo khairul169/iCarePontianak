@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { setServiceStatus } from "../../Actions/Layanan.action";
 import { View, StyleSheet, Linking, ToastAndroid } from "react-native";
 
-import Collapsible from "react-native-collapsible";
 import { Button, StaticMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
@@ -149,9 +148,7 @@ const ItemLayanan = props => {
       />
 
       <View style={styles.content}>
-        <Collapsible collapsed={!collapsed}>
-          <ItemDetail type={itemType} data={data} />
-        </Collapsible>
+        {collapsed && <ItemDetail type={itemType} data={data} />}
 
         {renderActions()}
       </View>

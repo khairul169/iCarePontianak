@@ -1,10 +1,11 @@
 import React from "react";
 import {
   createAppContainer,
+  createSwitchNavigator,
   createStackNavigator,
-  createMaterialTopTabNavigator
+  createMaterialTopTabNavigator,
+  NavigationActions
 } from "react-navigation";
-import createAnimatedSwitchNavigator from "react-navigation-animated-switch";
 import BottomTab from "./Components/BottomTab";
 import { fromRight } from "react-navigation-transitions";
 
@@ -32,27 +33,23 @@ const routeIcons = {
   Akun: "account-circle"
 };
 
-// Beranda navigator
-const mainNavigator = createMaterialTopTabNavigator(
-  {
-    Beranda,
-    Notifikasi,
-    Layanan,
-    Akun
-  },
-  {
-    initialRouteName: "Beranda",
-    tabBarPosition: "bottom",
-    tabBarComponent: props => <BottomTab {...props} icons={routeIcons} />
-  }
-);
+const tabRoutes = {
+  Beranda,
+  Notifikasi,
+  Layanan,
+  Akun
+};
+
+// BottomTab navigator
+const TabNavigator = createMaterialTopTabNavigator(tabRoutes, {
+  tabBarPosition: "bottom",
+  tabBarComponent: props => <BottomTab {...props} icons={routeIcons} />
+});
 
 // Main stacks
-const mainStack = createStackNavigator(
+const MainStack = createStackNavigator(
   {
-    Main: mainNavigator,
-
-    // Beranda
+    TabNavigator,
     Gadar,
     CariAmbulan,
     BuatLayanan,
@@ -68,16 +65,19 @@ const mainStack = createStackNavigator(
   }
 );
 
-// Switch navigator
-const switchNavigator = createAnimatedSwitchNavigator(
-  {
-    Splash,
-    Login,
-    Main: mainStack
-  },
-  {
-    initialRouteName: "Splash"
-  }
-);
+// Root navigator
+const rootNavigator = createSwitchNavigator({
+  Splash,
+  Login,
+  MainStack
+});
 
-export default createAppContainer(switchNavigator);
+export const navigateToMainStack = route => {
+  const action = NavigationActions.navigate({
+    routeName: "TabNavigator",
+    action: NavigationActions.navigate({ routeName: route })
+  });
+  return [action];
+};
+
+export default createAppContainer(rootNavigator);

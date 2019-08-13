@@ -21,19 +21,6 @@ describe("<Button />", () => {
   });
 });
 
-describe("<Card />", () => {
-  const defaultProps = {
-    flex: 1,
-    margin: 10,
-    padding: 10
-  };
-  const wrapper = renderer.create(<Component.Card {...defaultProps} />);
-
-  test("render", () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
 describe("<DateTimePicker />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(
@@ -77,15 +64,6 @@ describe("<Icon />", () => {
   });
 });
 
-describe("<ItemLayanan />", () => {
-  const defaultProps = {};
-  const wrapper = renderer.create(<Component.ItemLayanan {...defaultProps} />);
-
-  test("render", () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
 describe("<PickerSelect />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.PickerSelect {...defaultProps} />);
@@ -116,17 +94,6 @@ describe("<StatusBar />", () => {
 describe("<TextEdit />", () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.TextEdit {...defaultProps} />);
-
-  test("render", () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
-describe("<Title />", () => {
-  const defaultProps = {
-    children: "Hello world!"
-  };
-  const wrapper = renderer.create(<Component.Title {...defaultProps} />);
 
   test("render", () => {
     expect(wrapper).toMatchSnapshot();

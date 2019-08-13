@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import API from "../API";
 import { getTimeString } from "../Utils";
-import { NavigationActions } from "react-navigation";
+import { navigateToMainStack } from "../Routes";
 
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Header, Button, ItemDetail, MiniMap } from "../Components";
@@ -13,14 +13,9 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
   // params
   const { type, title, data, location } = navigation.getParam("layanan");
 
+  // navigate to layanan screen
   const navigateLayanan = () => {
-    // navigate to main route
-    const action = NavigationActions.navigate({
-      routeName: "Main",
-      action: NavigationActions.navigate({ routeName: "Layanan" })
-    });
-    // reset stack
-    navigation.reset([action], 0);
+    navigation.reset(navigateToMainStack("Layanan"), 0);
   };
 
   const buatLayanan = () => {

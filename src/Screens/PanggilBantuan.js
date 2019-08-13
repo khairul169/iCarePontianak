@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import API from "../API";
-import { NavigationActions } from "react-navigation";
+import { navigateToMainStack } from "../Routes";
 
 import { View, StyleSheet, Image } from "react-native";
 import { Header, MapLayout, Button, PickerSelect } from "../Components";
@@ -29,14 +29,9 @@ const PanggilBantuan = ({ navigation, token }) => {
     });
   };
 
+  // navigate to layanan screen
   const navigateLayanan = () => {
-    // navigate to main route
-    const action = NavigationActions.navigate({
-      routeName: "Main",
-      action: NavigationActions.navigate({ routeName: "Layanan" })
-    });
-    // reset stack
-    navigation.reset([action], 0);
+    navigation.reset(navigateToMainStack("Layanan"), 0);
   };
 
   const submit = () => {

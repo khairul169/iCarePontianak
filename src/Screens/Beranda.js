@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchItems as fetchLayanan } from "../Actions/Layanan.action";
 
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { HomeHeader, Title } from "../Components";
+import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
 import { Service } from "../Consts";
 import { requestLocationPermission } from "../Permissions";
@@ -48,9 +48,9 @@ const Beranda = props => {
     <View style={styles.container}>
       <HomeHeader />
       <ScrollView style={styles.content}>
-        <Title style={styles.title}>
+        <Text style={styles.title}>
           Selamat Datang{user && `, ${user.name.split(" ")[0]}`}!
-        </Title>
+        </Text>
         <Text style={styles.subtitle}>Ada yang bisa dibantu?</Text>
 
         <View style={styles.layananUtama}>
@@ -72,7 +72,7 @@ const Beranda = props => {
           </View>
         </View>
 
-        <Title style={styles.title}>Layanan Kami</Title>
+        <Text style={styles.title}>Layanan Kami</Text>
 
         <View style={styles.layanan}>
           <View style={styles.row}>
