@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import API from "../API";
-import { getTimeString } from "../Utils";
-import { navigateToMainStack } from "../Routes";
+import API from "../Public/API";
+import { getTimeString } from "../Public/Utils";
+import { navigateToMainStack } from "../Screens";
 
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Header, Button, ItemDetail, MiniMap } from "../Components";

@@ -1,4 +1,4 @@
-import API from "../API";
+import API from "../Public/API";
 
 const setLoading = bool => {
   return {

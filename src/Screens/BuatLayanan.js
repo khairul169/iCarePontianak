@@ -8,8 +8,8 @@ import {
   DateTimePicker,
   MiniMap
 } from "../Components";
-import { Service } from "../Consts";
-import { getTimeString } from "../Utils";
+import { Service } from "../Public/Consts";
+import { getTimeString } from "../Public/Utils";
 
 const Layanan = [
   {

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import AppContainer from "./src/Routes";
-import store from "./src/Store";
-import { ONESIGNAL_ID } from "react-native-dotenv";
-import OneSignal from "react-native-onesignal";
+import AppContainer from "./src/Screens";
+import store from "./src/Public/Store";
 import { setDeviceId } from "./src/Actions/Auth.action";
 import { onPushNotification } from "./src/Actions/Beranda.action";
+
+// OneSignal
+import { ONESIGNAL_ID } from "react-native-dotenv";
+import OneSignal from "react-native-onesignal";
 
 class App extends Component {
   constructor(props) {

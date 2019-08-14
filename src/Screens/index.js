@@ -6,24 +6,24 @@ import {
   createMaterialTopTabNavigator,
   NavigationActions
 } from "react-navigation";
-import BottomTab from "./Components/BottomTab";
 import { fromRight } from "react-navigation-transitions";
+import BottomTab from "../Components/BottomTab";
 
 // Routes
-import Splash from "./Screens/Splash";
-import Login from "./Screens/Login";
-import Beranda from "./Screens/Beranda";
-import Notifikasi from "./Screens/Notifikasi";
-import Layanan from "./Screens/Layanan";
-import Akun from "./Screens/Akun";
-import Gadar from "./Screens/Gadar";
-import CariAmbulan from "./Screens/CariAmbulan";
-import BuatLayanan from "./Screens/BuatLayanan";
-import KonfirmasiLayanan from "./Screens/KonfirmasiLayanan";
-import PilihLokasi from "./Screens/PilihLokasi";
-import PanggilBantuan from "./Screens/PanggilBantuan";
-import LihatLokasi from "./Screens/LihatLokasi";
-import PengaturanAkun from "./Screens/PengaturanAkun";
+import Splash from "./Splash";
+import Login from "./Login";
+import Beranda from "./Beranda";
+import Notifikasi from "./Notifikasi";
+import Layanan from "./Layanan";
+import Akun from "./Akun";
+import Gadar from "./Gadar";
+import CariAmbulan from "./CariAmbulan";
+import BuatLayanan from "./BuatLayanan";
+import KonfirmasiLayanan from "./KonfirmasiLayanan";
+import PilihLokasi from "./PilihLokasi";
+import PanggilBantuan from "./PanggilBantuan";
+import LihatLokasi from "./LihatLokasi";
+import PengaturanAkun from "./PengaturanAkun";
 
 // Tabbar icons
 const routeIcons = {

@@ -5,8 +5,8 @@ import { fetchItems as fetchLayanan } from "../Actions/Layanan.action";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { HomeHeader } from "../Components";
 import ItemLayanan from "./Beranda/ItemLayanan";
-import { Service } from "../Consts";
-import { requestLocationPermission } from "../Utils";
+import { Service } from "../Public/Consts";
+import { requestLocationPermission } from "../Public/Utils";
 import {
   iconGadar,
   iconMedVisit,

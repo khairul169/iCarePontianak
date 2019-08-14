@@ -1,7 +1,9 @@
+import { PermissionsAndroid } from "react-native";
+import { Service } from "./Consts";
+
+// momentjs
 import moment from "moment";
 import "moment/locale/id";
-import { Service } from "./Consts";
-import { PermissionsAndroid } from "react-native";
 
 export const getTimeString = time => {
   moment.locale("id");

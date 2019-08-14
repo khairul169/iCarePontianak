@@ -7,8 +7,8 @@ import { Button, StaticMap } from "../../Components";
 import ItemHeader from "./ItemHeader";
 import UserInfo from "./UserInfo";
 import ItemDetail from "./ItemDetail";
-import { getUserType } from "../../Utils";
-import { Service } from "../../Consts";
+import { getUserType } from "../../Public/Utils";
+import { Service } from "../../Public/Consts";
 
 const ItemLayanan = props => {
   const { item, collapsed, onPress, style, navigation } = props;

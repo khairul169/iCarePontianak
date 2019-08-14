@@ -1,5 +1,5 @@
-import API from "../API";
-import * as Storage from "../Storage";
+import API from "../Public/API";
+import * as Storage from "../Public/Storage";
 
 const setLoading = (payload = true) => {
   return {

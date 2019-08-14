@@ -22,7 +22,7 @@ import {
 } from "react-native";
 import ImagePicker from "react-native-image-crop-picker";
 import { Header, Icon } from "../Components";
-import { getUserType } from "../Utils";
+import { getUserType } from "../Public/Utils";
 import { iconUser } from "../Assets";
 
 const Button = ({ onPress, title, icon }) => {

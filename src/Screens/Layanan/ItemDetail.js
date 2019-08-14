@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { ItemDetail as Item } from "../../Components";
-import { getTimeString, getServiceName } from "../../Utils";
+import { getTimeString, getServiceName } from "../../Public/Utils";
 
 const ItemDetail = ({ type, data }) => {
   const items = [
