@@ -1,4 +1,4 @@
-import API from "../Public/API";
+import { AmbulanceAPI } from "../Public/API";
 
 const setItems = items => {
   return {
@@ -7,10 +7,8 @@ const setItems = items => {
   };
 };
 
-export const fetchItems = () => {
-  return async (dispatch, getState) => {
-    // fetch data
-    const response = await API.get("ambulance/", getState().auth.token);
-    response.success && dispatch(setItems(response.result));
-  };
+export const fetchItems = () => async dispatch => {
+  // fetch data
+  const response = await AmbulanceAPI.getAll();
+  response.success && dispatch(setItems(response.result));
 };

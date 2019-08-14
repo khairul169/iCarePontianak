@@ -1,4 +1,4 @@
-import API from "../Public/API";
+import { UserAPI } from "../Public/API";
 
 const setLoading = bool => {
   return {
@@ -14,64 +14,33 @@ const setUserData = userData => {
   };
 };
 
-export const fetchUser = () => {
-  return (dispatch, getState) => {
-    // set loading
-    dispatch(setLoading(true));
+export const fetchUser = () => async dispatch => {
+  dispatch(setLoading(true));
 
-    // fetch data
-    API.get("user/", getState().auth.token)
-      .then(response => {
-        dispatch(setLoading(false));
-        return response;
-      })
-      .then(({ success, result }) => {
-        success && dispatch(setUserData(result));
-      });
-  };
+  try {
+    const { success, result } = await UserAPI.getUser();
+    success && dispatch(setUserData(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const setMultiData = data => {
-  return (dispatch, getState) => {
-    API.patch("user/", { data }, getState().auth.token).then(() => {
-      // refresh data
-      dispatch(fetchUser());
-    });
-  };
+export const setMultiData = data => async dispatch => {
+  await UserAPI.setData(data);
+  dispatch(fetchUser());
 };
 
-export const setProfileImage = value => {
-  return (dispatch, getState) => {
-    API.patch("user/profileimg", { value }, getState().auth.token).then(() => {
-      // refresh data
-      dispatch(fetchUser());
-    });
-  };
+export const setProfileImage = data => async dispatch => {
+  await UserAPI.setProfileImage(data);
+  dispatch(fetchUser());
 };
 
-export const setActive = value => {
-  return (dispatch, getState) => {
-    API.patch("user/active", { value }, getState().auth.token).then(() => {
-      // refresh data
-      dispatch(fetchUser());
-    });
-  };
+export const setActive = value => async dispatch => {
+  await UserAPI.setActive(value);
+  dispatch(fetchUser());
 };
 
-export const setUserLocation = (latitude, longitude) => {
-  return (dispatch, getState) => {
-    API.patch(
-      "user/location",
-      {
-        value: {
-          latitude,
-          longitude
-        }
-      },
-      getState().auth.token
-    ).then(() => {
-      // refresh data
-      dispatch(fetchUser());
-    });
-  };
+export const setUserLocation = (latitude, longitude) => async dispatch => {
+  await UserAPI.setUserLocation(latitude, longitude);
+  dispatch(fetchUser());
 };

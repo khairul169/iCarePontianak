@@ -1,4 +1,4 @@
-import API from "../Public/API";
+import { AuthAPI, UserAPI } from "../Public/API";
 import * as Storage from "../Public/Storage";
 
 const setLoading = (payload = true) => {
@@ -34,105 +34,67 @@ export const setDeviceId = id => {
   };
 };
 
-export const fetchLogin = (username, password) => {
-  return async dispatch => {
-    // set loading
-    dispatch(setLoading(true));
+const updateUserData = () => (dispatch, getState) => {
+  const auth = getState().auth;
+  UserAPI.setDeviceId(auth.deviceId);
+};
 
-    // fetch data
-    const response = await API.post("auth/login", { username, password });
-
-    try {
-      const { success, result } = response;
-      dispatch(setResponse(response));
-
-      // set token
-      if (success) {
-        await Storage.storeToken(result.token);
-        dispatch(setToken(result.token));
-        dispatch(updateUserData());
-      }
-    } catch (error) {
-      // exception catched
-      dispatch(setError("Network error!"));
+const updateToken = async (dispatch, response) => {
+  try {
+    const { success, result } = response;
+    if (success) {
+      await Storage.storeToken(result.token);
+      dispatch(setToken(result.token));
+      dispatch(updateUserData());
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const fetchRegister = (username, password, fullname) => {
-  return async dispatch => {
-    // set loading
-    dispatch(setLoading(true));
+export const fetchLogin = (username, password) => async dispatch => {
+  dispatch(setLoading(true));
 
-    // fetch data
-    const response = await API.post("auth/register", {
-      username,
-      password,
-      fullname
-    });
-
-    try {
-      const { success, result } = response;
-      dispatch(setResponse(response));
-
-      // set token
-      if (success) {
-        await Storage.storeToken(result.token);
-        dispatch(setToken(result.token));
-        dispatch(updateUserData());
-      }
-    } catch (error) {
-      // exception catched
-      dispatch(setError("Network error!"));
-    }
-  };
+  try {
+    const response = await AuthAPI.login(username, password);
+    dispatch(setResponse(response));
+    updateToken(dispatch, response);
+  } catch (error) {
+    console.log(error);
+    dispatch(setError("Network error!"));
+  }
 };
 
-export const validateToken = () => {
-  return async dispatch => {
-    // set loading
-    dispatch(setLoading(true));
+export const fetchRegister = (
+  username,
+  password,
+  fullname
+) => async dispatch => {
+  dispatch(setLoading(true));
 
-    // get token
-    const token = await Storage.getToken();
-
-    // validate token
-    const response = await API.get("auth/validate", token);
-
-    try {
-      const { success, result } = response;
-
-      // set token
-      if (success) {
-        await Storage.storeToken(result.token);
-        dispatch(setToken(result.token));
-        dispatch(updateUserData());
-      }
-    } catch (error) {
-      // exception catched
-      console.log(error.message);
-    }
-
-    // finalize
-    dispatch(setLoading(false));
-  };
+  try {
+    const response = await AuthAPI.register(username, password, fullname);
+    dispatch(setResponse(response));
+    updateToken(dispatch, response);
+  } catch (error) {
+    console.log(error);
+    dispatch(setError("Network error!"));
+  }
 };
 
-export const logout = () => {
-  return async dispatch => {
-    // clear token from storage
-    await Storage.clearToken();
-    // clear token state
-    dispatch(setToken(null));
-  };
+export const validateToken = () => dispatch => {
+  dispatch(setLoading(true));
+
+  Storage.getToken()
+    .then(token => AuthAPI.validate(token))
+    .then(response => updateToken(dispatch, response))
+    .catch(error => console.log(error))
+    .finally(() => dispatch(setLoading(false)));
 };
 
-const updateUserData = () => {
-  return async (dispatch, getState) => {
-    let auth = getState().auth;
-
-    // update device id
-    if (auth.deviceId)
-      await API.patch("user/deviceid", { value: auth.deviceId }, auth.token);
-  };
+export const logout = () => async dispatch => {
+  // clear token from storage
+  await Storage.clearToken();
+  // clear token state
+  dispatch(setToken(null));
 };

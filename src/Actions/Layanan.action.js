@@ -1,6 +1,6 @@
-import API from "../Public/API";
+import { ServiceAPI } from "../Public/API";
 
-const setLoading = bool => {
+const setLoading = (bool = true) => {
   return {
     type: "LAYANAN_SET_LOADING",
     payload: bool
@@ -14,27 +14,14 @@ const setItems = items => {
   };
 };
 
-export const fetchItems = () => {
-  return (dispatch, getState) => {
-    // set loading
-    dispatch(setLoading(true));
-
-    // fetch data
-    API.get("service/", getState().auth.token)
-      .then(response => {
-        dispatch(setLoading(false));
-        return response;
-      })
-      .then(({ success, result }) => {
-        success && dispatch(setItems(result));
-      });
-  };
+export const fetchItems = () => async dispatch => {
+  dispatch(setLoading());
+  const { success, result } = await ServiceAPI.getAll();
+  success && dispatch(setItems(result));
 };
 
-export const setServiceStatus = (id, status) => {
-  return (dispatch, getState) => {
-    API.patch(`service/${id}/status`, { status }, getState().auth.token).then(
-      response => response.success && dispatch(fetchItems())
-    );
-  };
+export const setServiceStatus = (id, status) => async dispatch => {
+  dispatch(setLoading());
+  const { success } = await ServiceAPI.setStatus(id, status);
+  success && dispatch(fetchItems());
 };

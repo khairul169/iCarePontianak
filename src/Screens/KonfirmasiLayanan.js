@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import API from "../Public/API";
-import { getTimeString } from "../Public/Utils";
-import { navigateToMainStack } from "../Screens";
+import { ServiceAPI } from "../Public/API";
+import { getTimeString, navigateToMainStack } from "../Public/Utils";
 
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Header, Button, ItemDetail, MiniMap } from "../Components";
 
-const KonfirmasiLayanan = ({ navigation, token }) => {
+const KonfirmasiLayanan = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   // params
@@ -15,21 +13,17 @@ const KonfirmasiLayanan = ({ navigation, token }) => {
 
   // navigate to layanan screen
   const navigateLayanan = () => {
-    navigation.reset(navigateToMainStack("Layanan"), 0);
+    navigateToMainStack(navigation, "Layanan");
   };
 
-  const buatLayanan = () => {
+  const buatLayanan = async () => {
     if (loading) return;
 
-    // set state
-    setLoading(true);
-
     // create service
-    const body = { type, data, location };
-    API.post("service/", body, token).then(({ success }) => {
-      setLoading(false);
-      if (success) navigateLayanan();
-    });
+    setLoading(true);
+    const { success } = await ServiceAPI.create(type, data, location);
+    setLoading(false);
+    success && navigateLayanan();
   };
 
   return (
@@ -114,8 +108,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ auth }) => ({
-  token: auth.token
-});
-
-export default connect(mapStateToProps)(KonfirmasiLayanan);
+export default KonfirmasiLayanan;

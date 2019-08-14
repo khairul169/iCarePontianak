@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
-import { connect } from "react-redux";
-import { navigateToMainStack } from "../Screens";
 import { Header, MapLayout, Button, PickerSelect } from "../Components";
-import API from "../Public/API";
+import { ServiceAPI } from "../Public/API";
 import { Service } from "../Public/Consts";
+import { navigateToMainStack } from "../Public/Utils";
 import { pinImage } from "../Assets";
 
-const PanggilBantuan = ({ navigation, token }) => {
+const PanggilBantuan = ({ navigation }) => {
   const jenisBantuan = [
     "Kecelakaan Lalu Lintas",
     "Kebakaran",
@@ -30,26 +29,21 @@ const PanggilBantuan = ({ navigation, token }) => {
 
   // navigate to layanan screen
   const navigateLayanan = () => {
-    navigation.reset(navigateToMainStack("Layanan"), 0);
+    navigateToMainStack(navigation, "Layanan");
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (loading) return;
 
-    // set state
+    // create emergency service
     setLoading(true);
-
-    const body = {
-      type: Service.EMERGENCY,
-      data: { kejadian },
-      location: lokasi
-    };
-
-    // create service
-    API.post("service/", body, token).then(({ success }) => {
-      setLoading(false);
-      if (success) navigateLayanan();
-    });
+    const { success } = await ServiceAPI.create(
+      Service.EMERGENCY,
+      { kejadian },
+      lokasi
+    );
+    setLoading(false);
+    success && navigateLayanan();
   };
 
   return (
@@ -124,8 +118,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ auth }) => ({
-  token: auth.token
-});
-
-export default connect(mapStateToProps)(PanggilBantuan);
+export default PanggilBantuan;

@@ -1,6 +1,6 @@
-import API from "../Public/API";
+import { NotificationAPI } from "../Public/API";
 
-const setLoading = bool => {
+const setLoading = (bool = true) => {
   return {
     type: "NOTIF_SET_LOADING",
     payload: bool
@@ -14,19 +14,12 @@ const setItems = items => {
   };
 };
 
-export const fetchItems = () => {
-  return (dispatch, getState) => {
-    // set loading
-    dispatch(setLoading(true));
+export const fetchItems = () => async dispatch => {
+  // fetch data
+  dispatch(setLoading());
+  const response = await NotificationAPI.getAll();
+  dispatch(setLoading(false));
 
-    // fetch data
-    API.get("notification/", getState().auth.token)
-      .then(response => {
-        dispatch(setLoading(false));
-        return response;
-      })
-      .then(({ success, result }) => {
-        success && dispatch(setItems(result));
-      });
-  };
+  // items loaded
+  response.success && dispatch(setItems(response.result));
 };

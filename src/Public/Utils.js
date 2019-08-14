@@ -1,4 +1,5 @@
 import { PermissionsAndroid } from "react-native";
+import { NavigationActions } from "react-navigation";
 import { Service } from "./Consts";
 
 // momentjs
@@ -66,4 +67,12 @@ export const requestLocationPermission = async () => {
   } catch (err) {
     console.warn(err);
   }
+};
+
+export const navigateToMainStack = (navigation, route) => {
+  const action = NavigationActions.navigate({
+    routeName: "TabNavigator",
+    action: NavigationActions.navigate({ routeName: route })
+  });
+  navigation.reset([action], 0);
 };
