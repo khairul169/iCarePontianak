@@ -1,58 +1,72 @@
-language: android
-jdk: oraclejdk8
-dist: trusty
-sudo: required
-
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   yarn: true
+  cocoapods: true
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
     - node_modules
 
-android:
-  components:
-    - tools
-    - platform-tools
-    - build-tools-28.0.3
-    - android-28
-
 matrix:
   include:
-    - name: "ESLint & Unit Test"
+    - name: "Linting and Testing"
+      os: linux
+      dist: trusty
+      sudo: required
+      jdk: oraclejdk8
+      language: node_js
+      node_js:
+        - "10"
       env: LINT_UNIT_TEST=yes
-      os: linux
     
-    - name: "Build Android Debug"
-      env: ANDROID_BUILD=yes GRADLE_ARGS=assembleDebug
+    - name: "Android Build"
       os: linux
-    
-    - name: "Build Android Release"
-      env: ANDROID_BUILD=yes GRADLE_ARGS=bundleRelease
-      os: linux
+      dist: trusty
+      sudo: required
+      jdk: oraclejdk8
+      language: android
+      android:
+        components:
+          - tools
+          - platform-tools
+          - build-tools-28.0.3
+          - android-28
+      env: ANDROID_BUILD=yes
+
+    - name: "iOS Build"
+      env: IOS_BUILD=yes
+      os: osx
+      language: objective-c
+      osx_image: xcode10.3
+      podfile: ios/Podfile
 
 before_install:
   - nvm install 10
-  - npm install -g yarn
-  - cp .env.default .env
+  - npm install -g yarn react-native-cli
 
 install:
   - yarn install
+  - if [ "$IOS_BUILD" = "yes" ]; then
+      cd ios && pod repo update && pod install && cd ..;
+    fi
 
 before_script:
-  - chmod +x ./android/gradlew
+  - cp .env.default .env
+  - if [ "$ANDROID_BUILD" = "yes" ]; then
+      chmod +x ./android/gradlew;
+    fi
 
 script:
   - if [ "$LINT_UNIT_TEST" = "yes" ]; then
-      yarn lint;
-      yarn test;
+      yarn lint && yarn test;
     fi
-  
   - if [ "$ANDROID_BUILD" = "yes" ]; then
-      cd android && ./gradlew clean $GRADLE_ARGS;
+      cd android && ./gradlew clean assembleRelease;
+    fi
+  - if [ "$IOS_BUILD" = "yes" ]; then
+      react-native run-ios;
     fi
