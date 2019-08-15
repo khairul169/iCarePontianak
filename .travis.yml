@@ -37,12 +37,12 @@ matrix:
           - android-28
       env: ANDROID_BUILD=yes
 
-    - name: "iOS Build"
-      env: IOS_BUILD=yes
-      os: osx
-      language: objective-c
-      osx_image: xcode10.3
-      podfile: ios/Podfile
+#    - name: "iOS Build"
+#      env: IOS_BUILD=yes
+#      os: osx
+#      language: objective-c
+#      osx_image: xcode10.3
+#      podfile: ios/Podfile
 
 before_install:
   - nvm install 10
