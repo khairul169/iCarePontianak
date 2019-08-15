@@ -161,33 +161,12 @@ exports[`<HomeHeader /> render 1`] = `
     }
   >
     <Text
-      allowFontScaling={false}
-      style={
-        Array [
-          Object {
-            "color": "#4f6780",
-            "fontSize": 24,
-          },
-          undefined,
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
-        ]
-      }
-    >
-      若
-    </Text>
-    <Text
       style={
         Object {
-          "color": "#333",
+          "color": "#37474F",
           "flex": 1,
           "fontSize": 16,
-          "fontWeight": "100",
-          "marginLeft": 16,
+          "marginTop": 16,
         }
       }
     >

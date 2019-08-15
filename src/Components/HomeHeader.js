@@ -4,7 +4,7 @@ import Icon from './Icon';
 import SearchBar from './SearchBar';
 import StatusBar, {statusBarHeight} from './StatusBar';
 
-const HomeHeader = () => {
+const HomeHeader = ({name}) => {
   const headerStyle = [
     styles.header,
     {
@@ -17,8 +17,9 @@ const HomeHeader = () => {
       <StatusBar />
 
       <View style={headerStyle}>
-        <Icon name="home-plus" size={24} color="#4f6780" />
-        <Text style={styles.headerTitle}>iCare Pontianak</Text>
+        <Text style={styles.headerTitle}>
+          {name ? `Halo, ${name}!` : 'iCare Pontianak'}
+        </Text>
         <Icon
           type="Ionicons"
           name="ios-notifications-outline"
@@ -47,11 +48,10 @@ const styles = StyleSheet.create({
     tintColor: '#4f6780',
   },
   headerTitle: {
-    color: '#333',
+    color: '#37474F',
     fontSize: 16,
-    fontWeight: '100',
-    marginLeft: 16,
     flex: 1,
+    marginTop: 16,
   },
   searchBar: {
     backgroundColor: '#fff',

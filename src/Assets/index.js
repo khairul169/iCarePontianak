@@ -1,6 +1,8 @@
 import iconUser from './icon/user.png';
 import pinImage from './pins/pin.png';
 import pinAmbulance from './pins/ambulance.png';
+import gadarBg from './gadar-bg.jpg';
+import gadarIcon from './gadar-icon.png';
 
 import iconGadar from './layanan/gadar.jpg';
 import iconMedVisit from './layanan/medical-visit.jpg';
@@ -15,6 +17,8 @@ export {
   iconUser,
   pinImage,
   pinAmbulance,
+  gadarBg,
+  gadarIcon,
   // layanan
   iconGadar,
   iconMedVisit,

@@ -4,11 +4,14 @@ import {fetchItems as fetchLayanan} from '../Actions/Layanan.action';
 
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import {HomeHeader} from '../Components';
-import ItemLayanan from './Beranda/ItemLayanan';
 import {Service} from '../Public/Consts';
 import {requestLocationPermission} from '../Public/Utils';
+import LayananGadar from './Beranda/LayananGadar';
+import KategoriLayanan from './Beranda/KategoriLayanan';
+
 import {
-  iconGadar,
+  gadarBg,
+  gadarIcon,
   iconMedVisit,
   iconLabMedik,
   iconGigi,
@@ -20,6 +23,7 @@ import {
 
 const Beranda = props => {
   const {navigation, user, pushNotification} = props;
+  const loadLayanan = props.fetchLayanan();
 
   // ask permissions
   useEffect(() => {
@@ -36,83 +40,65 @@ const Beranda = props => {
 
   // on push notification opened
   useEffect(() => {
-    const onPushNotification = () => {
-      props.fetchLayanan();
+    if (pushNotification) {
+      loadLayanan();
       navigation.navigate('Layanan');
-    };
+    }
+  }, [loadLayanan, navigation, pushNotification]);
 
-    if (pushNotification) onPushNotification();
-  }, [navigation, props, pushNotification]);
+  const kategoriLayanan = [
+    {
+      id: Service.MEDICALVISIT,
+      name: 'Kunjungan Medis',
+      icon: iconMedVisit,
+    },
+    {
+      id: Service.LABMEDIK,
+      name: 'Laboratorium Medik',
+      icon: iconLabMedik,
+    },
+    {
+      id: Service.GIGI,
+      name: 'Kesehatan Gigi',
+      icon: iconGigi,
+    },
+    {
+      id: Service.BIDAN,
+      name: 'Bidan Terampil',
+      icon: iconBidan,
+    },
+    {
+      id: Service.LANSIA,
+      name: 'Lansia',
+      icon: iconLansia,
+    },
+    {
+      id: Service.SANITASI,
+      name: 'Sanitasi',
+      icon: iconSanitasi,
+    },
+    {
+      id: Service.NUTRISI,
+      name: 'Diet dan Nutrisi',
+      icon: iconDietNutrisi,
+    },
+  ];
 
   return (
     <View style={styles.container}>
-      <HomeHeader />
-      <ScrollView style={styles.content}>
-        <Text style={styles.title}>
-          Selamat Datang{user && `, ${user.name.split(' ')[0]}`}!
-        </Text>
-        <Text style={styles.subtitle}>Ada yang bisa dibantu?</Text>
-
-        <View style={styles.layananUtama}>
-          <View style={styles.row}>
-            <ItemLayanan
-              first
-              image={iconGadar}
-              border={false}
-              title="Gawat Darurat"
-              onPress={() => navigateTo('Gadar')}
-            />
-
-            <ItemLayanan
-              image={iconMedVisit}
-              border={false}
-              title="Kunjungan Medis"
-              onPress={() => buatLayanan(Service.MEDICALVISIT)}
-            />
-          </View>
-        </View>
-
+      <HomeHeader name={user && user.name.split(' ')[0]} />
+      <ScrollView style={styles.container}>
         <Text style={styles.title}>Layanan Kami</Text>
-
-        <View style={styles.layanan}>
-          <View style={styles.row}>
-            <ItemLayanan
-              first
-              image={iconLabMedik}
-              title="Lab Medik"
-              onPress={() => buatLayanan(Service.LABMEDIK)}
-            />
-            <ItemLayanan
-              image={iconGigi}
-              title="Kesehatan Gigi"
-              onPress={() => buatLayanan(Service.GIGI)}
-            />
-            <ItemLayanan
-              image={iconBidan}
-              title="Bidan Terampil"
-              onPress={() => buatLayanan(Service.BIDAN)}
-            />
-          </View>
-
-          <View style={styles.row}>
-            <ItemLayanan
-              first
-              image={iconLansia}
-              title="Lansia"
-              onPress={() => buatLayanan(Service.LANSIA)}
-            />
-            <ItemLayanan
-              image={iconSanitasi}
-              title="Sanitasi"
-              onPress={() => buatLayanan(Service.SANITASI)}
-            />
-            <ItemLayanan
-              image={iconDietNutrisi}
-              title="Diet Nutrisi"
-              onPress={() => buatLayanan(Service.NUTRISI)}
-            />
-          </View>
-        </View>
+        <Text style={styles.subtitle}>
+          Pilih jenis layanan yang anda inginkan
+        </Text>
+        <LayananGadar
+          icon={gadarIcon}
+          background={gadarBg}
+          onPress={() => navigateTo('Gadar')}
+        />
+        <Text style={styles.subtitle}>Layanan lainnya</Text>
+        <KategoriLayanan data={kategoriLayanan} onPress={buatLayanan} />
       </ScrollView>
     </View>
   );
@@ -123,20 +109,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  content: {
-    flex: 1,
-  },
-  layananUtama: {
-    height: 180,
-    padding: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 18,
     color: '#37474F',
     marginLeft: 16,
-    marginTop: 16,
     marginBottom: 6,
   },
   subtitle: {
@@ -144,16 +120,6 @@ const styles = StyleSheet.create({
     color: '#626262',
     marginBottom: 12,
     marginLeft: 16,
-  },
-  layanan: {
-    flex: 1,
-    height: 240,
-    padding: 8,
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'stretch',
   },
 });
 
