@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, TouchableHighlight } from "react-native";
-import MapView from "react-native-maps";
-import PropTypes from "prop-types";
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, TouchableHighlight} from 'react-native';
+import MapView from 'react-native-maps';
+import PropTypes from 'prop-types';
 
-const MiniMap = ({ style, height, borderRadius, onPress, coordinate, pin }) => {
+const MiniMap = ({style, height, borderRadius, onPress, coordinate, pin}) => {
   const [mapReady, setMapReady] = useState(false);
 
   const initialRegion = {
     latitude: coordinate.latitude || -0.0257813,
     longitude: coordinate.longitude || 109.3323449,
     latitudeDelta: 0.015,
-    longitudeDelta: 0.02
+    longitudeDelta: 0.02,
   };
 
   // on coordinate changed
@@ -18,7 +18,7 @@ const MiniMap = ({ style, height, borderRadius, onPress, coordinate, pin }) => {
     if (!coordinate) return;
     this.mapView.animateToRegion({
       ...initialRegion,
-      ...coordinate
+      ...coordinate,
     });
   }, [coordinate, initialRegion]);
 
@@ -30,7 +30,7 @@ const MiniMap = ({ style, height, borderRadius, onPress, coordinate, pin }) => {
     }
   };
 
-  const mapStyle = [styles.container, { height, borderRadius }, style];
+  const mapStyle = [styles.container, {height, borderRadius}, style];
 
   return (
     <TouchableHighlight onPress={onPress} underlayColor={null}>
@@ -45,8 +45,7 @@ const MiniMap = ({ style, height, borderRadius, onPress, coordinate, pin }) => {
           zoomEnabled={false}
           pitchEnabled={false}
           rotateEnabled={false}
-          onMapReady={() => setMapReady(true)}
-        >
+          onMapReady={() => setMapReady(true)}>
           {renderMarker()}
         </MapView>
       </View>
@@ -60,25 +59,25 @@ MiniMap.propTypes = {
   borderRadius: PropTypes.number,
   onPress: PropTypes.func,
   coordinate: PropTypes.object,
-  pin: PropTypes.bool
+  pin: PropTypes.bool,
 };
 
 MiniMap.defaultProps = {
   height: 200,
   coordinate: {
     latitude: -0.0257813,
-    longitude: 109.3323449
+    longitude: 109.3323449,
   },
-  pin: true
+  pin: true,
 };
 
 const styles = StyleSheet.create({
   container: {
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   mapView: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default MiniMap;

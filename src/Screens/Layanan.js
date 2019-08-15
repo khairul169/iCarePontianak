@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { fetchItems } from "../Actions/Layanan.action";
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {fetchItems} from '../Actions/Layanan.action';
 
-import { View, StyleSheet, FlatList } from "react-native";
-import { Header } from "../Components";
-import ItemLayanan from "./Layanan/Item";
+import {View, StyleSheet, FlatList} from 'react-native';
+import {Header} from '../Components';
+import ItemLayanan from './Layanan/Item';
 
 const Layanan = props => {
   const [collapsedItem, setCollapsedItem] = useState();
 
-  const { loading, items } = props.layanan;
+  const {loading, items} = props.layanan;
   const fetchData = props.fetchItems;
 
   const onRefresh = () => {
@@ -21,8 +21,8 @@ const Layanan = props => {
     fetchData();
   }, [fetchData]);
 
-  const renderItem = ({ item, index }) => {
-    const itemStyle = { marginTop: !index ? 8 : 0 };
+  const renderItem = ({item, index}) => {
+    const itemStyle = {marginTop: !index ? 8 : 0};
     return (
       <ItemLayanan
         item={item}
@@ -56,19 +56,19 @@ const Layanan = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: '#fff',
+  },
 });
 
-const mapStateToProps = ({ layanan }) => ({
-  layanan
+const mapStateToProps = ({layanan}) => ({
+  layanan,
 });
 
 const mapDispatchToProps = {
-  fetchItems
+  fetchItems,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Layanan);

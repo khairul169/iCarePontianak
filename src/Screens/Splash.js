@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { validateToken } from "../Actions/Auth.action";
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {validateToken} from '../Actions/Auth.action';
 
-import { View, StyleSheet, Image } from "react-native";
-import appIcon from "../Assets/icon/app-icon.png";
+import {View, StyleSheet, Image} from 'react-native';
+import appIcon from '../Assets/icon/app-icon.png';
 
 const Splash = props => {
-  const { isLoading, token, navigation } = props;
+  const {isLoading, token, navigation} = props;
   const checkSession = props.validateToken;
 
   // validate auth token
@@ -16,7 +16,7 @@ const Splash = props => {
 
   // switch screen
   useEffect(() => {
-    !isLoading && navigation.navigate(token ? "MainStack" : "Login");
+    !isLoading && navigation.navigate(token ? 'MainStack' : 'Login');
   }, [token, navigation, isLoading]);
 
   return (
@@ -29,26 +29,26 @@ const Splash = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   splashImage: {
     width: 48,
     height: 48,
-    tintColor: "#90A4AE"
-  }
+    tintColor: '#90A4AE',
+  },
 });
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({auth}) => ({
   isLoading: auth.loading,
-  token: auth.token
+  token: auth.token,
 });
 
 const mapDispatchToProps = {
-  validateToken
+  validateToken,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Splash);

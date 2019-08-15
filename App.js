@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { Provider } from "react-redux";
-import AppContainer from "./src/Screens";
-import { setDeviceId } from "./src/Actions/Auth.action";
-import { onPushNotification } from "./src/Actions/Beranda.action";
-import store from "./src/Public/Store";
+import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import AppContainer from './src/Screens';
+import {setDeviceId} from './src/Actions/Auth.action';
+import {onPushNotification} from './src/Actions/Beranda.action';
+import store from './src/Public/Store';
 
 // OneSignal
-import { ONESIGNAL_ID } from "react-native-dotenv";
-import OneSignal from "react-native-onesignal";
+import {ONESIGNAL_ID} from 'react-native-dotenv';
+import OneSignal from 'react-native-onesignal';
 
 class App extends Component {
   constructor(props) {
@@ -23,13 +23,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    OneSignal.addEventListener("opened", this.onOpened);
-    OneSignal.addEventListener("ids", this.onIds);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
   }
 
   componentWillUnmount() {
-    OneSignal.removeEventListener("opened", this.onOpened);
-    OneSignal.removeEventListener("ids", this.onIds);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
   }
 
   onOpened = openResult => {

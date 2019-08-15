@@ -1,16 +1,15 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import PropTypes from "prop-types";
-import StatusBar, { statusBarHeight } from "./StatusBar";
-import Icon from "./Icon";
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import PropTypes from 'prop-types';
+import StatusBar, {statusBarHeight} from './StatusBar';
+import Icon from './Icon';
 
-export const HeaderItem = ({ style, children, onPress }) => {
+export const HeaderItem = ({style, children, onPress}) => {
   if (onPress) {
     return (
       <TouchableOpacity
         style={[styles.headerItemContainer, style]}
-        onPress={onPress}
-      >
+        onPress={onPress}>
         {children}
       </TouchableOpacity>
     );
@@ -20,10 +19,10 @@ export const HeaderItem = ({ style, children, onPress }) => {
 };
 
 HeaderItem.propTypes = {
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
-export const HeaderIcon = ({ type, name, onPress, right }) => {
+export const HeaderIcon = ({type, name, onPress, right}) => {
   return (
     <HeaderItem style={right && styles.headerItemRight} onPress={onPress}>
       <Icon type={type} name={name} size={22} color="#333" />
@@ -35,17 +34,10 @@ HeaderIcon.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   onPress: PropTypes.func,
-  right: PropTypes.bool
+  right: PropTypes.bool,
 };
 
-const Header = ({
-  title,
-  navigation,
-  left,
-  right,
-  backButton,
-  transparent
-}) => {
+const Header = ({title, navigation, left, right, backButton, transparent}) => {
   const goBack = () => {
     navigation && navigation.goBack();
   };
@@ -53,7 +45,7 @@ const Header = ({
   const containerStyle = [
     styles.header,
     transparent && styles.headerTransparent,
-    { paddingTop: statusBarHeight }
+    {paddingTop: statusBarHeight},
   ];
 
   return (
@@ -78,53 +70,53 @@ Header.propTypes = {
   left: PropTypes.element,
   right: PropTypes.element,
   backButton: PropTypes.bool,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 };
 
 Header.defaultProps = {
   backButton: false,
-  transparent: false
+  transparent: false,
 };
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 16,
     height: 80,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   headerTransparent: {
-    backgroundColor: "rgba(0, 0, 0, 0)",
-    position: "absolute",
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    position: 'absolute',
     left: 0,
     top: 0,
     right: 0,
-    zIndex: 1
+    zIndex: 1,
   },
   headerItem: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerItemContainer: {
     flex: 1,
-    alignSelf: "stretch",
-    alignItems: "flex-start",
-    justifyContent: "center"
+    alignSelf: 'stretch',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   headerItemRight: {
-    alignItems: "flex-end"
+    alignItems: 'flex-end',
   },
   headerTitle: {
     flex: 3,
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#424242",
-    textAlign: "center"
-  }
+    fontWeight: 'bold',
+    color: '#424242',
+    textAlign: 'center',
+  },
 });
 
 export default Header;

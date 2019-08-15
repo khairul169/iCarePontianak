@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { ServiceAPI } from "../Public/API";
-import { getTimeString, navigateToMainStack } from "../Public/Utils";
+import React, {useState} from 'react';
+import {ServiceAPI} from '../Public/API';
+import {getTimeString, navigateToMainStack} from '../Public/Utils';
 
-import { View, StyleSheet, ScrollView } from "react-native";
-import { Header, Button, ItemDetail, MiniMap } from "../Components";
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {Header, Button, ItemDetail, MiniMap} from '../Components';
 
-const KonfirmasiLayanan = ({ navigation }) => {
+const KonfirmasiLayanan = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   // params
-  const { type, title, data, location } = navigation.getParam("layanan");
+  const {type, title, data, location} = navigation.getParam('layanan');
 
   // navigate to layanan screen
   const navigateLayanan = () => {
-    navigateToMainStack(navigation, "Layanan");
+    navigateToMainStack(navigation, 'Layanan');
   };
 
   const buatLayanan = async () => {
@@ -21,7 +21,7 @@ const KonfirmasiLayanan = ({ navigation }) => {
 
     // create service
     setLoading(true);
-    const { success } = await ServiceAPI.create(type, data, location);
+    const {success} = await ServiceAPI.create(type, data, location);
     setLoading(false);
     success && navigateLayanan();
   };
@@ -95,17 +95,17 @@ const KonfirmasiLayanan = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   content: {
     padding: 16,
-    borderColor: "#eee",
-    borderTopWidth: 1
+    borderColor: '#eee',
+    borderTopWidth: 1,
   },
   btnKonfirmasi: {
-    backgroundColor: "#8BC34A",
-    borderWidth: 0
-  }
+    backgroundColor: '#8BC34A',
+    borderWidth: 0,
+  },
 });
 
 export default KonfirmasiLayanan;

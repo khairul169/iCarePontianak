@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Image } from "react-native";
-import { Header, MapLayout, Button } from "../Components";
-import { pinImage } from "../Assets";
+import React, {useState} from 'react';
+import {View, StyleSheet, Image} from 'react-native';
+import {Header, MapLayout, Button} from '../Components';
+import {pinImage} from '../Assets';
 
-const PilihLokasi = ({ navigation }) => {
+const PilihLokasi = ({navigation}) => {
   // state
   const [location, setLocation] = useState();
 
-  const onRegionChanged = ({ latitude, longitude }) => {
+  const onRegionChanged = ({latitude, longitude}) => {
     setLocation({
       latitude,
-      longitude
+      longitude,
     });
   };
 
@@ -31,7 +31,7 @@ const PilihLokasi = ({ navigation }) => {
         <MapLayout
           style={styles.mapView}
           onRegionChanged={onRegionChanged}
-          coordinate={navigation.getParam("location")}
+          coordinate={navigation.getParam('location')}
         />
 
         <View style={styles.pinContainer}>
@@ -53,34 +53,34 @@ const PilihLokasi = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   mapView: {
-    flex: 1
+    flex: 1,
   },
   selectButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 16,
     paddingHorizontal: 32,
-    alignSelf: "center",
-    backgroundColor: "#03A9F4",
-    elevation: 3
+    alignSelf: 'center',
+    backgroundColor: '#03A9F4',
+    elevation: 3,
   },
   pinContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
   pin: {
     width: 48,
     height: 48,
     marginTop: -48,
-    resizeMode: "contain"
-  }
+    resizeMode: 'contain',
+  },
 });
 
 export default PilihLokasi;

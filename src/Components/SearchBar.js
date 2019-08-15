@@ -1,9 +1,9 @@
-import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
-import Icon from "./Icon";
-import PropTypes from "prop-types";
+import React from 'react';
+import {View, StyleSheet, TextInput} from 'react-native';
+import Icon from './Icon';
+import PropTypes from 'prop-types';
 
-const SearchBar = ({ style, placeholder }) => {
+const SearchBar = ({style, placeholder}) => {
   return (
     <View style={[styles.searchBox, style]}>
       <TextInput
@@ -23,28 +23,28 @@ const SearchBar = ({ style, placeholder }) => {
 
 SearchBar.propTypes = {
   style: PropTypes.object,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 
 SearchBar.defaultProps = {
-  placeholder: "Mau cari tindakan atau bantuan apa?"
+  placeholder: 'Mau cari tindakan atau bantuan apa?',
 };
 
 const styles = StyleSheet.create({
   searchBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff"
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   searchInput: {
     paddingHorizontal: 16,
     paddingVertical: 4,
     flex: 1,
-    color: "#333"
+    color: '#333',
   },
   searchIcon: {
-    marginHorizontal: 16
-  }
+    marginHorizontal: 16,
+  },
 });
 
 export default SearchBar;

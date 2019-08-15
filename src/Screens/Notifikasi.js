@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchItems } from "../Actions/Notifikasi.action";
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchItems} from '../Actions/Notifikasi.action';
 
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Header } from "../Components";
+import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {Header} from '../Components';
 
 const Notifikasi = props => {
-  const { loading, items } = props.notifikasi;
+  const {loading, items} = props.notifikasi;
   const fetchData = props.fetchItems;
 
   // load items
@@ -22,8 +22,8 @@ const Notifikasi = props => {
     return <Text style={styles.emptyText}>Tidak ada notifikasi.</Text>;
   };
 
-  const renderItem = ({ item, index }) => {
-    const itemStyle = [styles.item, !index && { paddingTop: 0 }];
+  const renderItem = ({item, index}) => {
+    const itemStyle = [styles.item, !index && {paddingTop: 0}];
     return (
       <View style={itemStyle}>
         <Text style={styles.itemDate}>{item.time}</Text>
@@ -51,43 +51,43 @@ const Notifikasi = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   emptyText: {
     fontSize: 16,
-    color: "#424242",
-    alignSelf: "center"
+    color: '#424242',
+    alignSelf: 'center',
   },
   item: {
-    backgroundColor: "#fff",
-    borderColor: "#eee",
+    backgroundColor: '#fff',
+    borderColor: '#eee',
     borderBottomWidth: 1,
-    paddingVertical: 16
+    paddingVertical: 16,
   },
   itemDate: {
     fontSize: 12,
-    color: "#626262",
-    marginBottom: 4
+    color: '#626262',
+    marginBottom: 4,
   },
   itemContent: {
     fontSize: 14,
-    color: "#333",
-    lineHeight: 18
-  }
+    color: '#333',
+    lineHeight: 18,
+  },
 });
 
-const mapStateToProps = ({ notifikasi }) => ({
-  notifikasi
+const mapStateToProps = ({notifikasi}) => ({
+  notifikasi,
 });
 
 const mapDispatchToProps = {
-  fetchItems
+  fetchItems,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Notifikasi);

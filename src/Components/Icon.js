@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Icons
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Icon = props => {
   let Icons = MaterialCommunityIcons;
 
   switch (props.type) {
-    case "Ionicons":
+    case 'Ionicons':
       Icons = Ionicons;
       break;
-    case "FontAwesome5":
+    case 'FontAwesome5':
       Icons = FontAwesome5;
       break;
     default:
@@ -35,13 +35,13 @@ Icon.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
   name: PropTypes.string.isRequired,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 Icon.defaultProps = {
-  type: "MaterialCommunityIcons",
+  type: 'MaterialCommunityIcons',
   size: 24,
-  color: "#333"
+  color: '#333',
 };
 
 export default Icon;

@@ -1,9 +1,9 @@
-import { AmbulanceAPI } from "../Public/API";
+import {AmbulanceAPI} from '../Public/API';
 
 const setItems = items => {
   return {
-    type: "AMBULAN_STATE",
-    payload: items
+    type: 'AMBULAN_STATE',
+    payload: items,
   };
 };
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
-import { Icon } from "../../Components";
-import PropTypes from "prop-types";
+import React from 'react';
+import {View, TextInput, StyleSheet} from 'react-native';
+import {Icon} from '../../Components';
+import PropTypes from 'prop-types';
 
 const InputText = ({
   icon,
@@ -9,7 +9,7 @@ const InputText = ({
   value,
   onChangeText,
   capitalize,
-  password
+  password,
 }) => {
   return (
     <View style={styles.input}>
@@ -21,7 +21,7 @@ const InputText = ({
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
-        autoCapitalize={capitalize ? "words" : "none"}
+        autoCapitalize={capitalize ? 'words' : 'none'}
         autoCompleteType="off"
         secureTextEntry={password}
       />
@@ -35,28 +35,28 @@ InputText.propTypes = {
   value: PropTypes.string,
   onChangeText: PropTypes.func,
   capitalize: PropTypes.bool,
-  password: PropTypes.bool
+  password: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
   input: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 8,
-    alignItems: "stretch"
+    alignItems: 'stretch',
   },
   inputIcon: {
     width: 24,
-    alignSelf: "center",
-    marginTop: 2
+    alignSelf: 'center',
+    marginTop: 2,
   },
   inputText: {
     flex: 1,
-    borderColor: "#CFD8DC",
+    borderColor: '#CFD8DC',
     borderBottomWidth: 1,
     padding: 0,
     paddingVertical: 6,
-    marginLeft: 8
-  }
+    marginLeft: 8,
+  },
 });
 
 export default InputText;

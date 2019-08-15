@@ -1,21 +1,21 @@
-import React from "react";
-import { connect } from "react-redux";
-import { setServiceStatus } from "../../Actions/Layanan.action";
-import { View, StyleSheet, Linking, ToastAndroid } from "react-native";
+import React from 'react';
+import {connect} from 'react-redux';
+import {setServiceStatus} from '../../Actions/Layanan.action';
+import {View, StyleSheet, Linking, ToastAndroid} from 'react-native';
 
-import { Button, StaticMap } from "../../Components";
-import ItemHeader from "./ItemHeader";
-import UserInfo from "./UserInfo";
-import ItemDetail from "./ItemDetail";
-import { getUserType } from "../../Public/Utils";
-import { Service } from "../../Public/Consts";
+import {Button, StaticMap} from '../../Components';
+import ItemHeader from './ItemHeader';
+import UserInfo from './UserInfo';
+import ItemDetail from './ItemDetail';
+import {getUserType} from '../../Public/Utils';
+import {Service} from '../../Public/Consts';
 
 const ItemLayanan = props => {
-  const { item, collapsed, onPress, style, navigation } = props;
-  const { id, user, data } = item;
+  const {item, collapsed, onPress, style, navigation} = props;
+  const {id, user, data} = item;
   const location = {
     latitude: parseFloat(item.lat),
-    longitude: parseFloat(item.lng)
+    longitude: parseFloat(item.lng),
   };
 
   const itemType = parseInt(item.type, 10);
@@ -30,25 +30,25 @@ const ItemLayanan = props => {
     if (phoneNumber) Linking.openURL(`tel:${phoneNumber}`);
     else
       ToastAndroid.show(
-        "Pengguna belum memasukkan nomor telepon.",
-        ToastAndroid.LONG
+        'Pengguna belum memasukkan nomor telepon.',
+        ToastAndroid.LONG,
       );
   };
 
   const layananBatal = () => {
-    props.setServiceStatus(id, "cancel");
+    props.setServiceStatus(id, 'cancel');
   };
 
   const layananSelesai = () => {
-    props.setServiceStatus(id, "success");
+    props.setServiceStatus(id, 'success');
   };
 
   const getHeaderTitle = () => {
     return isEmergency
-      ? "Gawat Darurat"
+      ? 'Gawat Darurat'
       : user
-      ? "Layanan"
-      : "Mencari Petugas...";
+      ? 'Layanan'
+      : 'Mencari Petugas...';
   };
 
   const renderActions = () => {
@@ -69,10 +69,10 @@ const ItemLayanan = props => {
         <View style={styles.actionContainer}>
           {isSelf ? (
             <Button
-              title={"Selesai"}
+              title={'Selesai'}
               style={styles.actionButton}
               small
-              icon={"check"}
+              icon={'check'}
               onPress={layananBatal}
             />
           ) : (
@@ -99,10 +99,10 @@ const ItemLayanan = props => {
             onPress={contactUser}
           />
           <Button
-            title={"Batalkan"}
+            title={'Batalkan'}
             style={styles.actionButton}
             small
-            icon={"cancel"}
+            icon={'cancel'}
             onPress={layananBatal}
           />
         </View>
@@ -144,7 +144,7 @@ const ItemLayanan = props => {
       <StaticMap
         style={styles.map}
         coordinate={location}
-        onPress={() => navigation.navigate("LihatLokasi", { location })}
+        onPress={() => navigation.navigate('LihatLokasi', {location})}
       />
 
       <View style={styles.content}>
@@ -160,49 +160,49 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 8,
     marginHorizontal: 8,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 3,
-    elevation: 3
+    elevation: 3,
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   btnSelesai: {
-    backgroundColor: "#8BC34A",
-    marginTop: 16
+    backgroundColor: '#8BC34A',
+    marginTop: 16,
   },
   actionContainer: {
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   actionButton: {
-    flex: 1
+    flex: 1,
   },
   btnMarginLeft: {
-    marginLeft: 16
+    marginLeft: 16,
   },
   btnMarginRight: {
-    marginRight: 16
+    marginRight: 16,
   },
   waitingText: {
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: 16,
-    color: "#626262",
-    marginVertical: 16
+    color: '#626262',
+    marginVertical: 16,
   },
   map: {
     flex: 1,
     width: undefined,
     marginHorizontal: 16,
-    overflow: "hidden",
-    borderRadius: 3
-  }
+    overflow: 'hidden',
+    borderRadius: 3,
+  },
 });
 
 const mapDispatchToProps = {
-  setServiceStatus
+  setServiceStatus,
 };
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ItemLayanan);

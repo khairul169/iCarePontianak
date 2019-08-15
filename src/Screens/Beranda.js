@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchItems as fetchLayanan } from "../Actions/Layanan.action";
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchItems as fetchLayanan} from '../Actions/Layanan.action';
 
-import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { HomeHeader } from "../Components";
-import ItemLayanan from "./Beranda/ItemLayanan";
-import { Service } from "../Public/Consts";
-import { requestLocationPermission } from "../Public/Utils";
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {HomeHeader} from '../Components';
+import ItemLayanan from './Beranda/ItemLayanan';
+import {Service} from '../Public/Consts';
+import {requestLocationPermission} from '../Public/Utils';
 import {
   iconGadar,
   iconMedVisit,
@@ -15,11 +15,11 @@ import {
   iconBidan,
   iconLansia,
   iconSanitasi,
-  iconDietNutrisi
-} from "../Assets";
+  iconDietNutrisi,
+} from '../Assets';
 
 const Beranda = props => {
-  const { navigation, user, pushNotification } = props;
+  const {navigation, user, pushNotification} = props;
 
   // ask permissions
   useEffect(() => {
@@ -31,14 +31,14 @@ const Beranda = props => {
   };
 
   const buatLayanan = type => {
-    navigateTo("BuatLayanan", { layanan: type });
+    navigateTo('BuatLayanan', {layanan: type});
   };
 
   // on push notification opened
   useEffect(() => {
     const onPushNotification = () => {
       props.fetchLayanan();
-      navigation.navigate("Layanan");
+      navigation.navigate('Layanan');
     };
 
     if (pushNotification) onPushNotification();
@@ -49,7 +49,7 @@ const Beranda = props => {
       <HomeHeader />
       <ScrollView style={styles.content}>
         <Text style={styles.title}>
-          Selamat Datang{user && `, ${user.name.split(" ")[0]}`}!
+          Selamat Datang{user && `, ${user.name.split(' ')[0]}`}!
         </Text>
         <Text style={styles.subtitle}>Ada yang bisa dibantu?</Text>
 
@@ -60,7 +60,7 @@ const Beranda = props => {
               image={iconGadar}
               border={false}
               title="Gawat Darurat"
-              onPress={() => navigateTo("Gadar")}
+              onPress={() => navigateTo('Gadar')}
             />
 
             <ItemLayanan
@@ -121,52 +121,52 @@ const Beranda = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   content: {
-    flex: 1
+    flex: 1,
   },
   layananUtama: {
     height: 180,
     padding: 8,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 18,
-    color: "#37474F",
+    color: '#37474F',
     marginLeft: 16,
     marginTop: 16,
-    marginBottom: 6
+    marginBottom: 6,
   },
   subtitle: {
     fontSize: 12,
-    color: "#626262",
+    color: '#626262',
     marginBottom: 12,
-    marginLeft: 16
+    marginLeft: 16,
   },
   layanan: {
     flex: 1,
     height: 240,
-    padding: 8
+    padding: 8,
   },
   row: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "stretch"
-  }
+    flexDirection: 'row',
+    alignItems: 'stretch',
+  },
 });
 
-const mapStateToProps = ({ beranda, akun }) => ({
+const mapStateToProps = ({beranda, akun}) => ({
   pushNotification: beranda.pushNotification,
-  user: akun.userData
+  user: akun.userData,
 });
 
 const mapDispatchToProps = {
-  fetchLayanan
+  fetchLayanan,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Beranda);

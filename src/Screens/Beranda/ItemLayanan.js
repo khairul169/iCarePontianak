@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import PropTypes from "prop-types";
+import React from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import PropTypes from 'prop-types';
 
-const ItemLayanan = ({ title, image, onPress, first }) => {
+const ItemLayanan = ({title, image, onPress, first}) => {
   return (
     <View style={[styles.container, first && styles.first]}>
       <TouchableOpacity style={styles.item} onPress={onPress}>
@@ -16,37 +16,37 @@ const ItemLayanan = ({ title, image, onPress, first }) => {
 ItemLayanan.propTypes = {
   title: PropTypes.string,
   image: PropTypes.any,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     marginRight: 8,
     marginBottom: 8,
     elevation: 5,
-    borderRadius: 8
+    borderRadius: 8,
   },
   first: {
-    marginLeft: 8
+    marginLeft: 8,
   },
   item: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 16,
-    paddingHorizontal: 4
+    paddingHorizontal: 4,
   },
   pelayananImage: {
     flex: 1,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   pelayananTitle: {
-    color: "#525252",
+    color: '#525252',
     fontSize: 12,
     marginTop: 12,
-    textAlign: "center"
-  }
+    textAlign: 'center',
+  },
 });
 
 export default ItemLayanan;

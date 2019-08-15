@@ -1,16 +1,16 @@
-import { UserAPI } from "../Public/API";
+import {UserAPI} from '../Public/API';
 
 const setLoading = bool => {
   return {
-    type: "AKUN_SET_LOADING",
-    payload: bool
+    type: 'AKUN_SET_LOADING',
+    payload: bool,
   };
 };
 
 const setUserData = userData => {
   return {
-    type: "AKUN_SET_USERDATA",
-    payload: userData
+    type: 'AKUN_SET_USERDATA',
+    payload: userData,
   };
 };
 
@@ -18,7 +18,7 @@ export const fetchUser = () => async dispatch => {
   dispatch(setLoading(true));
 
   try {
-    const { success, result } = await UserAPI.getUser();
+    const {success, result} = await UserAPI.getUser();
     success && dispatch(setUserData(result));
   } catch (error) {
     console.log(error);

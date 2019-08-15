@@ -1,15 +1,15 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Icon from "./Icon";
-import SearchBar from "./SearchBar";
-import StatusBar, { statusBarHeight } from "./StatusBar";
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import Icon from './Icon';
+import SearchBar from './SearchBar';
+import StatusBar, {statusBarHeight} from './StatusBar';
 
 const HomeHeader = () => {
   const headerStyle = [
     styles.header,
     {
-      marginTop: statusBarHeight
-    }
+      marginTop: statusBarHeight,
+    },
   ];
 
   return (
@@ -35,31 +35,31 @@ const HomeHeader = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     padding: 16,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   headerAppIcon: {
     width: 28,
     height: 28,
-    tintColor: "#4f6780"
+    tintColor: '#4f6780',
   },
   headerTitle: {
-    color: "#333",
+    color: '#333',
     fontSize: 16,
-    fontWeight: "100",
+    fontWeight: '100',
     marginLeft: 16,
-    flex: 1
+    flex: 1,
   },
   searchBar: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     marginTop: 12,
     borderRadius: 5,
-    borderColor: "#ddd",
-    borderWidth: 1
-  }
+    borderColor: '#ddd',
+    borderWidth: 1,
+  },
 });
 
 export default HomeHeader;

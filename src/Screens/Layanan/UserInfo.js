@@ -1,13 +1,13 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { Icon } from "../../Components";
-import { iconUser } from "../../Assets";
+import React from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {Icon} from '../../Components';
+import {iconUser} from '../../Assets';
 
-const UserInfoItem = ({ children, title, value }) => {
-  const containerStyle = { flexDirection: "row", marginTop: 4 };
-  const titleStyle = { flex: 1, fontSize: 12, color: "#444" };
-  const valueStyle = { flex: 3, flexDirection: "row" };
-  const valueTextStyle = { fontSize: 12, color: "#585858" };
+const UserInfoItem = ({children, title, value}) => {
+  const containerStyle = {flexDirection: 'row', marginTop: 4};
+  const titleStyle = {flex: 1, fontSize: 12, color: '#444'};
+  const valueStyle = {flex: 3, flexDirection: 'row'};
+  const valueTextStyle = {fontSize: 12, color: '#585858'};
 
   return (
     <View style={containerStyle}>
@@ -19,43 +19,36 @@ const UserInfoItem = ({ children, title, value }) => {
   );
 };
 
-const UserInfo = ({
-  title,
-  subtitle,
-  image,
-  online,
-  registered,
-  reputation
-}) => {
-  const containerStyle = [styles.content, { flexDirection: "row" }];
-  const infoContainer = { flex: 1, marginLeft: 16 };
+const UserInfo = ({title, subtitle, image, online, registered, reputation}) => {
+  const containerStyle = [styles.content, {flexDirection: 'row'}];
+  const infoContainer = {flex: 1, marginLeft: 16};
   const nameContainer = {
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   };
-  const titleStyle = { fontSize: 16, color: "#333" };
-  const subtitleSpacing = { flex: 1, alignItems: "flex-end" };
+  const titleStyle = {fontSize: 16, color: '#333'};
+  const subtitleSpacing = {flex: 1, alignItems: 'flex-end'};
   const subtitleStyle = {
     fontSize: 12,
-    color: "#525252",
-    borderColor: "#ddd",
+    color: '#525252',
+    borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 3,
     padding: 10,
-    paddingVertical: 4
+    paddingVertical: 4,
   };
   const onlineIndicator = [
     styles.onlineIndicator,
-    { backgroundColor: online ? "#7CB342" : "#ddd" }
+    {backgroundColor: online ? '#7CB342' : '#ddd'},
   ];
-  const reputationColor = "#66BB6A";
-  const reputationTextStyle = { fontSize: 12, color: "#585858", marginLeft: 8 };
+  const reputationColor = '#66BB6A';
+  const reputationTextStyle = {fontSize: 12, color: '#585858', marginLeft: 8};
 
   return (
     <View style={containerStyle}>
       <View style={styles.profilePict}>
         <Image
-          source={image ? { uri: image } : iconUser}
+          source={image ? {uri: image} : iconUser}
           style={styles.profileImage}
         />
       </View>
@@ -90,27 +83,27 @@ const UserInfo = ({
 
 const styles = StyleSheet.create({
   content: {
-    padding: 16
+    padding: 16,
   },
   profilePict: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: "#ddd",
-    overflow: "hidden"
+    backgroundColor: '#ddd',
+    overflow: 'hidden',
   },
   profileImage: {
     width: 64,
     height: 64,
-    resizeMode: "cover"
+    resizeMode: 'cover',
   },
   onlineIndicator: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#7CB342",
-    marginLeft: 8
-  }
+    backgroundColor: '#7CB342',
+    marginLeft: 8,
+  },
 });
 
 export default UserInfo;

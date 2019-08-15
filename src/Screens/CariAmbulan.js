@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { fetchItems } from "../Actions/Ambulan.action";
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {fetchItems} from '../Actions/Ambulan.action';
 
 import {
   View,
@@ -11,16 +11,16 @@ import {
   ScrollView,
   Linking,
   BackHandler,
-  Dimensions
-} from "react-native";
-import { Header, BottomSheet, MapLayout, Button } from "../Components";
-import { pinAmbulance } from "../Assets";
+  Dimensions,
+} from 'react-native';
+import {Header, BottomSheet, MapLayout, Button} from '../Components';
+import {pinAmbulance} from '../Assets';
 
-const haversine = require("haversine");
-const window = Dimensions.get("window");
+const haversine = require('haversine');
+const window = Dimensions.get('window');
 
 const CariAmbulan = props => {
-  const { navigation } = props;
+  const {navigation} = props;
   const fetchData = props.fetchItems;
 
   // states
@@ -35,7 +35,7 @@ const CariAmbulan = props => {
   const mapdistance = item => {
     item.coordinate = {
       latitude: parseFloat(item.lat),
-      longitude: parseFloat(item.lng)
+      longitude: parseFloat(item.lng),
     };
     item.distance = userLocation ? haversine(userLocation, item.coordinate) : 0;
     return item;
@@ -56,7 +56,7 @@ const CariAmbulan = props => {
       title: item.name,
       image: pinAmbulance,
       coordinate: item.coordinate,
-      onPress: () => selectItem(index)
+      onPress: () => selectItem(index),
     };
   });
 
@@ -67,21 +67,21 @@ const CariAmbulan = props => {
   // handle back button
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
+      'hardwareBackPress',
       () => {
         if (selectedItem) {
           releaseItem();
           return true;
         }
         return false;
-      }
+      },
     );
     return () => {
       backHandler.remove();
     };
   }, [selectedItem]);
 
-  const renderAmbulanceList = ({ item, index }) => {
+  const renderAmbulanceList = ({item, index}) => {
     return (
       <TouchableOpacity style={styles.item} onPress={() => selectItem(index)}>
         <View style={styles.itemHeader}>
@@ -147,7 +147,7 @@ const CariAmbulan = props => {
         }}
         onPress={releaseItem}
         markers={markers}
-        mapPadding={{ bottom: window.height * 0.3 }}
+        mapPadding={{bottom: window.height * 0.3}}
       />
 
       <BottomSheet
@@ -156,8 +156,7 @@ const CariAmbulan = props => {
         }}
         headerHeight={32}
         style={styles.bottomPanel}
-        points={[0.4, 0.15]}
-      >
+        points={[0.4, 0.15]}>
         {renderBottom()}
       </BottomSheet>
     </View>
@@ -166,67 +165,67 @@ const CariAmbulan = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   bottomPanel: {
-    elevation: 10
+    elevation: 10,
   },
   item: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderColor: "#eee",
+    borderColor: '#eee',
     padding: 12,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   itemHeader: {
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   itemName: {
     fontSize: 14,
-    fontWeight: "bold",
-    color: "#424242",
-    flex: 1
+    fontWeight: 'bold',
+    color: '#424242',
+    flex: 1,
   },
   ambulanceName: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#424242"
+    fontWeight: 'bold',
+    color: '#424242',
   },
   distance: {
     fontSize: 12,
-    color: "#484848"
+    color: '#484848',
   },
   address: {
     fontSize: 12,
-    color: "#686868",
-    marginTop: 4
+    color: '#686868',
+    marginTop: 4,
   },
   desc: {
     fontSize: 12,
-    color: "#525252",
+    color: '#525252',
     marginTop: 8,
     paddingTop: 12,
-    borderColor: "#eee",
-    borderTopWidth: 1
+    borderColor: '#eee',
+    borderTopWidth: 1,
   },
   hubungi: {
-    marginTop: 16
-  }
+    marginTop: 16,
+  },
 });
 
-const mapStateToProps = ({ ambulan }) => ({
-  ambulan
+const mapStateToProps = ({ambulan}) => ({
+  ambulan,
 });
 
 const mapDispatchToProps = {
-  fetchItems
+  fetchItems,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CariAmbulan);

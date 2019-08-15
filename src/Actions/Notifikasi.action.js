@@ -1,16 +1,16 @@
-import { NotificationAPI } from "../Public/API";
+import {NotificationAPI} from '../Public/API';
 
 const setLoading = (bool = true) => {
   return {
-    type: "NOTIF_SET_LOADING",
-    payload: bool
+    type: 'NOTIF_SET_LOADING',
+    payload: bool,
   };
 };
 
 const setItems = items => {
   return {
-    type: "NOTIF_SET_ITEMS",
-    payload: items
+    type: 'NOTIF_SET_ITEMS',
+    payload: items,
   };
 };
 

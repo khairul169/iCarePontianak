@@ -1,48 +1,48 @@
-import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import { ItemDetail as Item } from "../../Components";
-import { getTimeString, getServiceName } from "../../Public/Utils";
+import React from 'react';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {ItemDetail as Item} from '../../Components';
+import {getTimeString, getServiceName} from '../../Public/Utils';
 
-const ItemDetail = ({ type, data }) => {
+const ItemDetail = ({type, data}) => {
   const items = [
     {
-      icon: "mother-nurse",
-      title: "Jenis Layanan",
-      text: getServiceName(type)
+      icon: 'mother-nurse',
+      title: 'Jenis Layanan',
+      text: getServiceName(type),
     },
     {
-      icon: "account-alert",
-      title: "Jenis Kejadian",
-      text: data.kejadian
+      icon: 'account-alert',
+      title: 'Jenis Kejadian',
+      text: data.kejadian,
     },
     {
-      icon: "account-alert",
-      title: "Keluhan Utama",
-      text: data.keluhan
+      icon: 'account-alert',
+      title: 'Keluhan Utama',
+      text: data.keluhan,
     },
     {
-      icon: "briefcase-edit",
-      title: "Jenis Tindakan",
-      text: data.tindakan
+      icon: 'briefcase-edit',
+      title: 'Jenis Tindakan',
+      text: data.tindakan,
     },
     {
-      icon: "clipboard-pulse",
-      title: "Diagnosa Medis",
-      text: data.diagnosa
+      icon: 'clipboard-pulse',
+      title: 'Diagnosa Medis',
+      text: data.diagnosa,
     },
     {
-      icon: "calendar-clock",
-      title: "Waktu Kunjungan",
-      text: data.waktu ? getTimeString(data.waktu) : null
+      icon: 'calendar-clock',
+      title: 'Waktu Kunjungan',
+      text: data.waktu ? getTimeString(data.waktu) : null,
     },
     {
-      icon: "home-map-marker",
-      title: "Lokasi Klien",
-      text: data.alamat
-    }
+      icon: 'home-map-marker',
+      title: 'Lokasi Klien',
+      text: data.alamat,
+    },
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     if (!item.text) return;
 
     return (
@@ -69,8 +69,8 @@ const ItemDetail = ({ type, data }) => {
 
 const styles = StyleSheet.create({
   detailLayanan: {
-    marginBottom: 16
-  }
+    marginBottom: 16,
+  },
 });
 
 export default ItemDetail;

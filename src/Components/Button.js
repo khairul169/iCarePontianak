@@ -1,31 +1,31 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
-import PropTypes from "prop-types";
-import Icon from "./Icon";
+import React from 'react';
+import {View, Text, StyleSheet, TouchableNativeFeedback} from 'react-native';
+import PropTypes from 'prop-types';
+import Icon from './Icon';
 
-const Button = ({ title, color, border, style, onPress, small, icon }) => {
+const Button = ({title, color, border, style, onPress, small, icon}) => {
   const containerStyle = [
     styles.container,
     small && {
-      height: 40
+      height: 40,
     },
     border && {
-      borderColor: "#ccc",
-      borderWidth: 1
+      borderColor: '#ccc',
+      borderWidth: 1,
     },
-    style
+    style,
   ];
 
   const titleStyle = [
     styles.buttonTitle,
-    small && { fontSize: 12 },
-    color && { color }
+    small && {fontSize: 12},
+    color && {color},
   ];
 
   const iconStyle = {
     color,
     fontSize: small ? 20 : 24,
-    marginRight: 16
+    marginRight: 16,
   };
 
   return (
@@ -45,27 +45,27 @@ Button.propTypes = {
   style: PropTypes.any,
   onPress: PropTypes.func,
   small: PropTypes.bool,
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };
 
 Button.defaultProps = {
-  border: true
+  border: true,
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 48,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   buttonTitle: {
-    color: "#484848",
+    color: '#484848',
     fontSize: 14,
-    fontWeight: "bold"
-  }
+    fontWeight: 'bold',
+  },
 });
 
 export default Button;

@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, ToastAndroid } from "react-native";
-import { Header, TextEdit } from "../Components";
-import { HeaderIcon } from "../Components/Header";
+import React, {useState} from 'react';
+import {View, StyleSheet, ScrollView, ToastAndroid} from 'react-native';
+import {Header, TextEdit} from '../Components';
+import {HeaderIcon} from '../Components/Header';
 
 const PengaturanAkun = props => {
-  const user = props.navigation.getParam("user");
-  const callback = props.navigation.getParam("callback");
+  const user = props.navigation.getParam('user');
+  const callback = props.navigation.getParam('callback');
 
   const [name, setName] = useState(user.name);
-  const [password, setpassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
+  const [password, setpassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
   const [phone, setPhone] = useState(user.phone);
 
   const save = () => {
-    if (password !== "" && password !== rePassword) {
-      ToastAndroid.show("Kata Sandi tidak sama!", ToastAndroid.LONG);
+    if (password !== '' && password !== rePassword) {
+      ToastAndroid.show('Kata Sandi tidak sama!', ToastAndroid.LONG);
       return;
     }
-    if (password !== "" && password.length < 6) {
-      ToastAndroid.show("Kata Sandi minimal 6 huruf.", ToastAndroid.LONG);
+    if (password !== '' && password.length < 6) {
+      ToastAndroid.show('Kata Sandi minimal 6 huruf.', ToastAndroid.LONG);
       return;
     }
     const data = {
-      name: name !== user.name && name !== "" && name,
-      password: password !== "" && password,
-      phone: phone !== user.phone && phone !== "" && phone
+      name: name !== user.name && name !== '' && name,
+      password: password !== '' && password,
+      phone: phone !== user.phone && phone !== '' && phone,
     };
     callback && callback(data);
     props.navigation.goBack();
@@ -85,18 +85,18 @@ const PengaturanAkun = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   content: {
     flex: 1,
-    padding: 16
+    padding: 16,
   },
   input: {
-    marginTop: 12
+    marginTop: 12,
   },
   inputText: {
-    paddingTop: 0
-  }
+    paddingTop: 0,
+  },
 });
 
 export default PengaturanAkun;

@@ -1,11 +1,11 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { Header, Button } from "../Components";
+import React from 'react';
+import {View, Text, Image, StyleSheet} from 'react-native';
+import {Header, Button} from '../Components';
 
 // Action image
-import gadarIllust from "../Assets/gadar-illust.png";
+import gadarIllust from '../Assets/gadar-illust.png';
 
-const Gadar = ({ navigation }) => {
+const Gadar = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header backButton navigation={navigation} />
@@ -24,7 +24,7 @@ const Gadar = ({ navigation }) => {
           style={styles.btnBantuan}
           color="#fff"
           title="Panggil Bantuan"
-          onPress={() => navigation.navigate("PanggilBantuan")}
+          onPress={() => navigation.navigate('PanggilBantuan')}
         />
 
         <View style={styles.col}>
@@ -33,7 +33,7 @@ const Gadar = ({ navigation }) => {
             style={styles.btnAmbulan}
             small
             title="Cari Ambulan"
-            onPress={() => navigation.navigate("CariAmbulan")}
+            onPress={() => navigation.navigate('CariAmbulan')}
           />
         </View>
       </View>
@@ -44,51 +44,51 @@ const Gadar = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   content: {
     flex: 1,
     padding: 16,
-    paddingHorizontal: "10%",
-    alignItems: "center",
-    justifyContent: "center"
+    paddingHorizontal: '10%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   illust: {
-    width: "100%",
-    height: "40%",
-    resizeMode: "contain"
+    width: '100%',
+    height: '40%',
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 18,
     marginTop: 18,
     marginBottom: 8,
-    color: "#424242"
+    color: '#424242',
   },
   subtitle: {
     fontSize: 12,
-    color: "#676767",
-    textAlign: "center",
-    lineHeight: 20
+    color: '#676767',
+    textAlign: 'center',
+    lineHeight: 20,
   },
   actions: {
-    backgroundColor: "#fff",
-    padding: 16
+    backgroundColor: '#fff',
+    padding: 16,
   },
   col: {
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   btnBantuan: {
-    backgroundColor: "#ef5350",
+    backgroundColor: '#ef5350',
     marginBottom: 16,
-    borderWidth: 0
+    borderWidth: 0,
   },
   btnAid: {
     flex: 1,
-    marginRight: 16
+    marginRight: 16,
   },
   btnAmbulan: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default Gadar;

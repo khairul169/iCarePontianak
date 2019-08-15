@@ -1,9 +1,9 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Header, MapLayout } from "../Components";
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Header, MapLayout} from '../Components';
 
-const LihatLokasi = ({ navigation }) => {
-  const location = navigation.getParam("location");
+const LihatLokasi = ({navigation}) => {
+  const location = navigation.getParam('location');
 
   return (
     <View style={styles.container}>
@@ -23,8 +23,8 @@ const LihatLokasi = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default LihatLokasi;

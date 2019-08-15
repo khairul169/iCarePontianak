@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import MapView, { Marker, Polyline } from "react-native-maps";
-import PropTypes from "prop-types";
-import axios from "axios";
-import { OPENROUTE_APIKEY } from "react-native-dotenv";
+import React, {Component} from 'react';
+import MapView, {Marker, Polyline} from 'react-native-maps';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import {OPENROUTE_APIKEY} from 'react-native-dotenv';
 
 class MapLayout extends Component {
   static propTypes = {
@@ -14,30 +14,30 @@ class MapLayout extends Component {
     onUserLocation: PropTypes.func,
     onPress: PropTypes.func,
     navPath: PropTypes.bool,
-    mapPadding: PropTypes.object
+    mapPadding: PropTypes.object,
   };
 
   static defaultProps = {
-    markers: []
+    markers: [],
   };
 
   state = {
     region: null,
     userLocation: null,
     animateToUser: true,
-    navPoints: null
+    navPoints: null,
   };
 
   initialRegion = {
     latitude: -0.0257813,
     longitude: 109.3323449,
     latitudeDelta: 0.015,
-    longitudeDelta: 0.02
+    longitudeDelta: 0.02,
   };
 
   _regionChanged = region => {
     this.props.onRegionChanged && this.props.onRegionChanged(region);
-    this.setState({ region });
+    this.setState({region});
   };
 
   _userLocation = coordinate => {
@@ -48,12 +48,12 @@ class MapLayout extends Component {
     if (this.props.onUserLocation) {
       this.props.onUserLocation({
         latitude: coordinate.latitude,
-        longitude: coordinate.longitude
+        longitude: coordinate.longitude,
       });
     }
 
     // update state
-    this.setState({ userLocation: coordinate, animateToUser: false });
+    this.setState({userLocation: coordinate, animateToUser: false});
 
     // update navigation path
     if (this.props.navPath) this._updateNavigation(coordinate);
@@ -63,7 +63,7 @@ class MapLayout extends Component {
     const markers = [...this.props.markers];
 
     if (this.props.pin) {
-      markers.push({ coordinate: this.props.coordinate });
+      markers.push({coordinate: this.props.coordinate});
     }
 
     return markers.map((item, index) => (
@@ -80,14 +80,14 @@ class MapLayout extends Component {
   _updateNavigation = userCoordinate => {
     if (this.state.navPoints || !this.props.coordinate) return;
 
-    const { coordinate } = this.props;
+    const {coordinate} = this.props;
 
     const apiKey = OPENROUTE_APIKEY;
     const c0 = `${userCoordinate.longitude},${userCoordinate.latitude}`;
     const c1 = `${coordinate.longitude},${coordinate.latitude}`;
 
     // direction api
-    const apiUrl = "https://api.openrouteservice.org/v2/directions/";
+    const apiUrl = 'https://api.openrouteservice.org/v2/directions/';
 
     // fetch navigation path
     axios
@@ -97,7 +97,7 @@ class MapLayout extends Component {
         const points = response.data.features[0].geometry.coordinates;
 
         // set navigation points
-        this.setState({ navPoints: points });
+        this.setState({navPoints: points});
       })
       .catch(error => {
         console.log(error.message);
@@ -110,7 +110,7 @@ class MapLayout extends Component {
     const points = this.state.navPoints.map(item => {
       return {
         latitude: item[1],
-        longitude: item[0]
+        longitude: item[0],
       };
     });
 
@@ -128,7 +128,7 @@ class MapLayout extends Component {
 
     this.mapView.animateToRegion({
       ...currentRegion,
-      ...location
+      ...location,
     });
   };
 
@@ -137,12 +137,12 @@ class MapLayout extends Component {
   };
 
   render() {
-    const { style, coordinate } = this.props;
+    const {style, coordinate} = this.props;
 
     const initialRegion = coordinate
       ? {
           ...this.initialRegion,
-          ...coordinate
+          ...coordinate,
         }
       : this.initialRegion;
 
@@ -161,8 +161,7 @@ class MapLayout extends Component {
           this._userLocation(event.nativeEvent.coordinate)
         }
         onPress={this.props.onPress}
-        mapPadding={this.props.mapPadding}
-      >
+        mapPadding={this.props.mapPadding}>
         {this._renderMarkers()}
         {this._renderNavigation()}
       </MapView>

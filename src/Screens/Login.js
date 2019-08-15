@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchLogin, fetchRegister } from "../Actions/Auth.action";
+import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchLogin, fetchRegister} from '../Actions/Auth.action';
 
-import { View, StyleSheet, Image, ToastAndroid } from "react-native";
-import InputText from "./Login/InputText";
-import Button from "./Login/Button";
-import appIcon from "../Assets/icon/app-icon.png";
+import {View, StyleSheet, Image, ToastAndroid} from 'react-native';
+import InputText from './Login/InputText';
+import Button from './Login/Button';
+import appIcon from '../Assets/icon/app-icon.png';
 
 const Login = props => {
   const [register, setRegister] = useState(false);
 
   // input
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
 
-  const { auth, navigation } = props;
+  const {auth, navigation} = props;
 
   useEffect(() => {
     if (auth.loading) return;
@@ -28,7 +28,7 @@ const Login = props => {
 
     // navigate to main screen
     if (auth.token) {
-      navigation.navigate("MainStack");
+      navigation.navigate('MainStack');
     }
   }, [auth, navigation]);
 
@@ -41,8 +41,8 @@ const Login = props => {
     // Password confirmation
     if (confirmPass !== password)
       return ToastAndroid.show(
-        "Konfirmasi kata sandi tidak sama!",
-        ToastAndroid.SHORT
+        'Konfirmasi kata sandi tidak sama!',
+        ToastAndroid.SHORT,
       );
 
     // register
@@ -97,14 +97,14 @@ const Login = props => {
         )}
 
         <Button
-          title={register ? "DAFTAR" : "MASUK"}
-          backgroundColor={register ? "#8BC34A" : "#03A9F4"}
+          title={register ? 'DAFTAR' : 'MASUK'}
+          backgroundColor={register ? '#8BC34A' : '#03A9F4'}
           marginTop={32}
           dark
           onPress={onSubmit}
         />
         <Button
-          title={register ? "Masuk" : "Daftar"}
+          title={register ? 'Masuk' : 'Daftar'}
           onPress={onToggle}
           border
         />
@@ -116,33 +116,33 @@ const Login = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16
+    padding: 16,
   },
   iconContainer: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   icon: {
-    tintColor: "#455A64",
+    tintColor: '#455A64',
     width: 64,
     height: 64,
-    alignSelf: "center"
+    alignSelf: 'center',
   },
   inputContainer: {
-    padding: 16
-  }
+    padding: 16,
+  },
 });
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = ({auth}) => ({
+  auth,
 });
 
 const mapDispatchToProps = {
   fetchLogin,
-  fetchRegister
+  fetchRegister,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);

@@ -1,50 +1,50 @@
-import { PermissionsAndroid } from "react-native";
-import { NavigationActions } from "react-navigation";
-import { Service } from "./Consts";
+import {PermissionsAndroid} from 'react-native';
+import {NavigationActions} from 'react-navigation';
+import {Service} from './Consts';
 
 // momentjs
-import moment from "moment";
-import "moment/locale/id";
+import moment from 'moment';
+import 'moment/locale/id';
 
 export const getTimeString = time => {
-  moment.locale("id");
-  return moment(time).format("DD MMMM YYYY HH.mm");
+  moment.locale('id');
+  return moment(time).format('DD MMMM YYYY HH.mm');
 };
 
 export const getServiceName = id => {
   switch (parseInt(id, 10)) {
     case Service.EMERGENCY:
-      return "Gawat Darurat";
+      return 'Gawat Darurat';
     case Service.MEDICALVISIT:
-      return "Kunjungan Medis";
+      return 'Kunjungan Medis';
     case Service.LABMEDIK:
-      return "Lab Medik";
+      return 'Lab Medik';
     case Service.GIGI:
-      return "Kesehatan Gigi";
+      return 'Kesehatan Gigi';
     case Service.BIDAN:
-      return "Bidan Terampil";
+      return 'Bidan Terampil';
     case Service.LANSIA:
-      return "Lansia";
+      return 'Lansia';
     case Service.SANITASI:
-      return "Sanitasi";
+      return 'Sanitasi';
     case Service.NUTRISI:
-      return "Diet Nutrisi";
+      return 'Diet Nutrisi';
     default:
-      return "undefined";
+      return 'undefined';
   }
 };
 
 export const getUserType = type => {
   const userTypes = [
-    "",
-    "Klien",
-    "Ners",
-    "Analis Kesehatan",
-    "Perawat Gigi",
-    "Bidan",
-    "Perawat Lansia",
-    "Kesehatan Lingkungan",
-    "Nutrisionis"
+    '',
+    'Klien',
+    'Ners',
+    'Analis Kesehatan',
+    'Perawat Gigi',
+    'Bidan',
+    'Perawat Lansia',
+    'Kesehatan Lingkungan',
+    'Nutrisionis',
   ];
 
   return userTypes[type] || null;
@@ -55,9 +55,9 @@ export const requestLocationPermission = async () => {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
-        title: "iCare Pontianak",
-        message: "iCare Pontianak membutuhkan izin lokasi anda"
-      }
+        title: 'iCare Pontianak',
+        message: 'iCare Pontianak membutuhkan izin lokasi anda',
+      },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       //console.log("You can use the location");
@@ -71,8 +71,8 @@ export const requestLocationPermission = async () => {
 
 export const navigateToMainStack = (navigation, route) => {
   const action = NavigationActions.navigate({
-    routeName: "TabNavigator",
-    action: NavigationActions.navigate({ routeName: route })
+    routeName: 'TabNavigator',
+    action: NavigationActions.navigate({routeName: route}),
   });
   navigation.reset([action], 0);
 };

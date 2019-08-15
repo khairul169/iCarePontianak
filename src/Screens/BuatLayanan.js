@@ -1,115 +1,115 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, ToastAndroid, Text } from "react-native";
+import React, {useState} from 'react';
+import {View, StyleSheet, ScrollView, ToastAndroid, Text} from 'react-native';
 import {
   Button,
   Header,
   TextEdit,
   PickerSelect,
   DateTimePicker,
-  MiniMap
-} from "../Components";
-import { Service } from "../Public/Consts";
-import { getTimeString } from "../Public/Utils";
+  MiniMap,
+} from '../Components';
+import {Service} from '../Public/Consts';
+import {getTimeString} from '../Public/Utils';
 
 const Layanan = [
   {
     type: Service.MEDICALVISIT,
-    title: "Kunjungan Medis",
+    title: 'Kunjungan Medis',
     actions: [
-      "Injeksi",
-      "Intravena Infus",
-      "Perawatan Luka",
-      "Pemenuhan Nutrisi",
-      "Cek Gula Darah, Asam Urat, dan Kolesterol"
-    ]
+      'Injeksi',
+      'Intravena Infus',
+      'Perawatan Luka',
+      'Pemenuhan Nutrisi',
+      'Cek Gula Darah, Asam Urat, dan Kolesterol',
+    ],
   },
   {
     type: Service.LABMEDIK,
-    title: "Cek Lab Medik",
+    title: 'Cek Lab Medik',
     actions: [
-      "Tes Darah Lengkap",
-      "Uji Protein C - Reaktif",
-      "Laju Endap Darah",
-      "Tes Elektrolit",
-      "Tes Koagulasi",
-      "Cek Urin",
-      "Cek Sampel Dahak",
-      "Tes ELISA",
-      "Analisa Gas Darah",
-      "Penilaian Risiko Penyakit Jantung"
-    ]
+      'Tes Darah Lengkap',
+      'Uji Protein C - Reaktif',
+      'Laju Endap Darah',
+      'Tes Elektrolit',
+      'Tes Koagulasi',
+      'Cek Urin',
+      'Cek Sampel Dahak',
+      'Tes ELISA',
+      'Analisa Gas Darah',
+      'Penilaian Risiko Penyakit Jantung',
+    ],
   },
   {
     type: Service.GIGI,
-    title: "Kesehatan Gigi",
-    actions: ["Pemeriksaan Gigi dan Gusi", "Perawatan Oral Hygiene"]
+    title: 'Kesehatan Gigi',
+    actions: ['Pemeriksaan Gigi dan Gusi', 'Perawatan Oral Hygiene'],
   },
   {
     type: Service.BIDAN,
-    title: "Bidan Terampil",
+    title: 'Bidan Terampil',
     actions: [
-      "Pemeriksaan Kehamilan",
-      "Konsultasi",
-      "Senam Cantik",
-      "Senam Yoga Hamil & Nifas",
-      "Baby Spa",
-      "Pijat Bayi"
-    ]
+      'Pemeriksaan Kehamilan',
+      'Konsultasi',
+      'Senam Cantik',
+      'Senam Yoga Hamil & Nifas',
+      'Baby Spa',
+      'Pijat Bayi',
+    ],
   },
   {
     type: Service.LANSIA,
-    title: "Pendampingan Lansia",
-    actions: ["Pendampingan Lansia", "Konsultasi"]
+    title: 'Pendampingan Lansia',
+    actions: ['Pendampingan Lansia', 'Konsultasi'],
   },
   {
     type: Service.SANITASI,
-    title: "Sanitasi",
-    actions: ["Instalasi Jamban", "Fogging", "Pemberantasan Hama"]
+    title: 'Sanitasi',
+    actions: ['Instalasi Jamban', 'Fogging', 'Pemberantasan Hama'],
   },
   {
     type: Service.NUTRISI,
-    title: "Diet dan Nutrisi",
+    title: 'Diet dan Nutrisi',
     actions: [
-      "Konsultasi Gizi Nutrisi Diet Biasa",
-      "Konsultasi Diet Penyakit Jantung",
-      "Konsultasi Diet Diabetes",
-      "Konsultasi Diet Asam Urat dan Kolesterol",
-      "Konsultasi Diet Pasca Operasi"
-    ]
-  }
+      'Konsultasi Gizi Nutrisi Diet Biasa',
+      'Konsultasi Diet Penyakit Jantung',
+      'Konsultasi Diet Diabetes',
+      'Konsultasi Diet Asam Urat dan Kolesterol',
+      'Konsultasi Diet Pasca Operasi',
+    ],
+  },
 ];
 
-const BuatLayanan = ({ navigation }) => {
+const BuatLayanan = ({navigation}) => {
   // Cek layanan
-  const typeLayanan = navigation.getParam("layanan", null);
+  const typeLayanan = navigation.getParam('layanan', null);
   const layanan = Layanan.find(item => item.type === typeLayanan);
 
   // Item tindakan
-  const defaultAction = "Lain-lain";
+  const defaultAction = 'Lain-lain';
   const actionItems = layanan
     ? [defaultAction, ...layanan.actions]
     : defaultAction;
 
   // States
-  const [keluhan, setKeluhan] = useState("");
+  const [keluhan, setKeluhan] = useState('');
   const [tindakan, setTindakan] = useState(defaultAction);
-  const [diagnosa, setDiagnosa] = useState("");
-  const [alamat, setAlamat] = useState("");
+  const [diagnosa, setDiagnosa] = useState('');
+  const [alamat, setAlamat] = useState('');
   const [lokasi, setLokasi] = useState();
   const [waktu, setWaktu] = useState();
 
   const onPilihLokasi = () => {
-    navigation.navigate("PilihLokasi", {
+    navigation.navigate('PilihLokasi', {
       location: lokasi,
-      callback: setLokasi
+      callback: setLokasi,
     });
   };
 
   const onBuatLayanan = () => {
-    if (keluhan.trim() === "" || alamat.trim() === "" || !waktu || !lokasi) {
+    if (keluhan.trim() === '' || alamat.trim() === '' || !waktu || !lokasi) {
       ToastAndroid.show(
-        "Mohon periksa lagi input yang tersedia.",
-        ToastAndroid.LONG
+        'Mohon periksa lagi input yang tersedia.',
+        ToastAndroid.LONG,
       );
       return;
     }
@@ -119,16 +119,16 @@ const BuatLayanan = ({ navigation }) => {
       tindakan,
       alamat,
       waktu,
-      diagnosa
+      diagnosa,
     };
 
-    navigation.navigate("KonfirmasiLayanan", {
+    navigation.navigate('KonfirmasiLayanan', {
       layanan: {
         type: layanan.type,
         title: layanan.title,
         data: dataLayanan,
-        location: lokasi
-      }
+        location: lokasi,
+      },
     });
   };
 
@@ -179,7 +179,7 @@ const BuatLayanan = ({ navigation }) => {
             coordinate={lokasi}
           />
           <Button
-            title={"Tentukan Lokasi"}
+            title={'Tentukan Lokasi'}
             onPress={onPilihLokasi}
             small
             style={styles.btnPilihLokasi}
@@ -193,7 +193,7 @@ const BuatLayanan = ({ navigation }) => {
             onValueChange={value => setWaktu(value)}
           />
           <Button
-            title={waktu ? getTimeString(waktu) : "Pilih Tanggal dan Jam"}
+            title={waktu ? getTimeString(waktu) : 'Pilih Tanggal dan Jam'}
             onPress={() => this.dtPicker.show()}
             small
           />
@@ -213,31 +213,31 @@ const BuatLayanan = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   map: {
-    marginTop: 16
+    marginTop: 16,
   },
   btnBuat: {
-    backgroundColor: "#03A9F4",
+    backgroundColor: '#03A9F4',
     borderWidth: 0,
-    marginTop: 32
+    marginTop: 32,
   },
   title: {
     fontSize: 14,
-    color: "#626262",
+    color: '#626262',
     marginBottom: 6,
-    marginTop: 16
+    marginTop: 16,
   },
   noMarginTop: {
-    marginTop: 0
+    marginTop: 0,
   },
   btnPilihLokasi: {
-    marginTop: 16
-  }
+    marginTop: 16,
+  },
 });
 
 export default BuatLayanan;

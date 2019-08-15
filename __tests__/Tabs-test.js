@@ -1,46 +1,46 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
 
-import BottomTab from "../src/Components/BottomTab";
-import TabItem from "../src/Components/TabItem";
+import BottomTab from '../src/Components/BottomTab';
+import TabItem from '../src/Components/TabItem';
 
-describe("<BottomTab />", () => {
+describe('<BottomTab />', () => {
   const defaultProps = {
     navigation: {
       state: {
         routes: [
           {
-            key: "Home",
-            routeName: "Home"
+            key: 'Home',
+            routeName: 'Home',
           },
           {
-            key: "Account",
-            routeName: "Account"
-          }
+            key: 'Account',
+            routeName: 'Account',
+          },
         ],
-        index: 0
-      }
+        index: 0,
+      },
     },
     icons: {
-      Home: "home",
-      Account: "account"
-    }
+      Home: 'home',
+      Account: 'account',
+    },
   };
   const wrapper = renderer.create(<BottomTab {...defaultProps} />);
 
-  test("render", () => {
+  test('render', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
 
-describe("<TabItem />", () => {
+describe('<TabItem />', () => {
   const defaultProps = {
-    title: "TabItem",
-    icon: "home"
+    title: 'TabItem',
+    icon: 'home',
   };
   const wrapper = renderer.create(<TabItem {...defaultProps} />);
 
-  test("render", () => {
+  test('render', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });

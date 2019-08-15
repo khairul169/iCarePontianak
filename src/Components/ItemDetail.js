@@ -1,35 +1,35 @@
-import React from "react";
-import { View, Text } from "react-native";
-import Icon from "./Icon";
-import PropTypes from "prop-types";
+import React from 'react';
+import {View, Text} from 'react-native';
+import Icon from './Icon';
+import PropTypes from 'prop-types';
 
-const ItemDetail = ({ children, title, icon, text, margin, border }) => {
+const ItemDetail = ({children, title, icon, text, margin, border}) => {
   const containerStyle = {
-    flexDirection: "row",
-    marginTop: margin ? 16 : 0
+    flexDirection: 'row',
+    marginTop: margin ? 16 : 0,
   };
 
   const contentStyle = [
     {
       flex: 1,
-      marginHorizontal: 12
+      marginHorizontal: 12,
     },
     border && {
       borderBottomWidth: 1,
-      borderBottomColor: "#eee",
-      paddingBottom: 16
-    }
+      borderBottomColor: '#eee',
+      paddingBottom: 16,
+    },
   ];
 
   const titleStyle = {
     fontSize: 12,
-    color: "#686868",
-    marginBottom: 8
+    color: '#686868',
+    marginBottom: 8,
   };
 
   const textStyle = {
     fontSize: 16,
-    color: "#333"
+    color: '#333',
   };
 
   return (
@@ -49,11 +49,11 @@ ItemDetail.propTypes = {
   icon: PropTypes.string,
   text: PropTypes.string,
   margin: PropTypes.bool,
-  border: PropTypes.bool
+  border: PropTypes.bool,
 };
 
 ItemDetail.defaultProps = {
-  margin: true
+  margin: true,
 };
 
 export default ItemDetail;

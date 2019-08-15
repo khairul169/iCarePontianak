@@ -1,36 +1,36 @@
-import { AuthAPI, UserAPI } from "../Public/API";
-import * as Storage from "../Public/Storage";
+import {AuthAPI, UserAPI} from '../Public/API';
+import * as Storage from '../Public/Storage';
 
 const setLoading = (payload = true) => {
   return {
-    type: "AUTH_SET_LOADING",
-    payload
+    type: 'AUTH_SET_LOADING',
+    payload,
   };
 };
 
-const setResponse = ({ success, message }) => {
+const setResponse = ({success, message}) => {
   return {
-    type: "AUTH_SET_RESPONSE",
+    type: 'AUTH_SET_RESPONSE',
     payload: {
       success,
-      message
-    }
+      message,
+    },
   };
 };
 
-const setError = message => setResponse({ success: false, message });
+const setError = message => setResponse({success: false, message});
 
 const setToken = token => {
   return {
-    type: "AUTH_SET_TOKEN",
-    payload: token
+    type: 'AUTH_SET_TOKEN',
+    payload: token,
   };
 };
 
 export const setDeviceId = id => {
   return {
-    type: "AUTH_DEVICE_ID",
-    payload: id
+    type: 'AUTH_DEVICE_ID',
+    payload: id,
   };
 };
 
@@ -41,7 +41,7 @@ const updateUserData = () => (dispatch, getState) => {
 
 const updateToken = async (dispatch, response) => {
   try {
-    const { success, result } = response;
+    const {success, result} = response;
     if (success) {
       await Storage.storeToken(result.token);
       dispatch(setToken(result.token));
@@ -61,14 +61,14 @@ export const fetchLogin = (username, password) => async dispatch => {
     updateToken(dispatch, response);
   } catch (error) {
     console.log(error);
-    dispatch(setError("Network error!"));
+    dispatch(setError('Network error!'));
   }
 };
 
 export const fetchRegister = (
   username,
   password,
-  fullname
+  fullname,
 ) => async dispatch => {
   dispatch(setLoading(true));
 
@@ -78,7 +78,7 @@ export const fetchRegister = (
     updateToken(dispatch, response);
   } catch (error) {
     console.log(error);
-    dispatch(setError("Network error!"));
+    dispatch(setError('Network error!'));
   }
 };
 

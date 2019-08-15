@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import SlidingUpPanel from "rn-sliding-up-panel";
-import PropTypes from "prop-types";
+import React, {Component} from 'react';
+import {View, StyleSheet, Dimensions} from 'react-native';
+import SlidingUpPanel from 'rn-sliding-up-panel';
+import PropTypes from 'prop-types';
 
-const window = Dimensions.get("window");
+const window = Dimensions.get('window');
 
 class BottomSheet extends Component {
   static propTypes = {
@@ -12,14 +12,14 @@ class BottomSheet extends Component {
     points: PropTypes.array,
     header: PropTypes.element,
     headerHeight: PropTypes.number,
-    snapping: PropTypes.bool
+    snapping: PropTypes.bool,
   };
 
   static defaultProps = {
     backdrop: false,
     points: [0.4],
     headerHeight: 0,
-    snapping: true
+    snapping: true,
   };
 
   constructor(props) {
@@ -67,18 +67,18 @@ class BottomSheet extends Component {
   };
 
   renderHeader = dragHandlers => {
-    const { header, headerHeight } = this.props;
+    const {header, headerHeight} = this.props;
 
     const headerStyle = {
       height: headerHeight,
-      backgroundColor: "#fff"
+      backgroundColor: '#fff',
     };
 
     return (
       headerHeight && (
         <View style={headerStyle} {...dragHandlers}>
           {header
-            ? typeof header === "function"
+            ? typeof header === 'function'
               ? header()
               : header
             : this.defaultHeader()}
@@ -88,12 +88,12 @@ class BottomSheet extends Component {
   };
 
   render() {
-    const { style, backdrop, headerHeight, children } = this.props;
+    const {style, backdrop, headerHeight, children} = this.props;
     const panelStyle = [styles.panel, style];
 
     const draggableRange = {
       top: this.snappingPoints.length ? this.snappingPoints[0] : window.height,
-      bottom: headerHeight
+      bottom: headerHeight,
     };
     const snappingPoints = this.props.snapping
       ? this.snappingPoints
@@ -107,8 +107,7 @@ class BottomSheet extends Component {
         showBackdrop={backdrop}
         draggableRange={draggableRange}
         snappingPoints={snappingPoints}
-        height={draggableRange.top}
-      >
+        height={draggableRange.top}>
         {dragHandlers => (
           <View style={panelStyle}>
             {this.renderHeader(dragHandlers)}
@@ -124,26 +123,26 @@ class BottomSheet extends Component {
 const styles = StyleSheet.create({
   panel: {
     flex: 1,
-    backgroundColor: "white",
-    position: "relative",
+    backgroundColor: 'white',
+    position: 'relative',
     marginHorizontal: 8,
     borderRadius: 3,
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   container: {
-    flex: 1
+    flex: 1,
   },
   defaultHeader: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerIndicator: {
-    backgroundColor: "#ddd",
+    backgroundColor: '#ddd',
     borderRadius: 3,
     width: 60,
-    height: 6
-  }
+    height: 6,
+  },
 });
 
 export default BottomSheet;
