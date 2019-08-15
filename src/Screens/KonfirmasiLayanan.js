@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {ServiceAPI} from '../Public/API';
 import {getTimeString, navigateToMainStack} from '../Public/Utils';
 
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Text} from 'react-native';
 import {Header, Button, ItemDetail, MiniMap} from '../Components';
 
 const KonfirmasiLayanan = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   // params
-  const {type, title, data, location} = navigation.getParam('layanan');
+  const {id, title, data, location, totalCost} = navigation.getParam('layanan');
 
   // navigate to layanan screen
   const navigateLayanan = () => {
@@ -21,7 +21,7 @@ const KonfirmasiLayanan = ({navigation}) => {
 
     // create service
     setLoading(true);
-    const {success} = await ServiceAPI.create(type, data, location);
+    const {success} = await ServiceAPI.create(id, data, location);
     setLoading(false);
     success && navigateLayanan();
   };
@@ -80,14 +80,16 @@ const KonfirmasiLayanan = ({navigation}) => {
         </View>
 
         <View style={styles.content}>
-          <Button
-            title="Buat Layanan"
-            style={styles.btnKonfirmasi}
-            color="#fff"
-            onPress={buatLayanan}
-          />
+          <Text>Total: IDR {totalCost}</Text>
         </View>
       </ScrollView>
+
+      <Button
+        title="Buat Layanan"
+        style={styles.btnKonfirmasi}
+        color="#fff"
+        onPress={buatLayanan}
+      />
     </View>
   );
 };
@@ -100,11 +102,12 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     borderColor: '#eee',
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
   },
   btnKonfirmasi: {
     backgroundColor: '#8BC34A',
     borderWidth: 0,
+    margin: 8,
   },
 });
 

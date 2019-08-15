@@ -96,6 +96,7 @@ const ServiceAPI = {
   create: (type, data, location) =>
     API.post('service/', {type, data, location}),
   setStatus: (id, status) => API.patch(`service/${id}/status`, {status}),
+  getCategories: () => API.get('service/category/'),
 };
 
 /* ##################################### Notification API ##################################### */

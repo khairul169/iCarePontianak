@@ -8,18 +8,14 @@ import ItemLayanan from './Layanan/Item';
 
 const Layanan = props => {
   const [collapsedItem, setCollapsedItem] = useState();
-
   const {loading, items} = props.layanan;
-  const fetchData = props.fetchItems;
 
-  const onRefresh = () => {
+  const fetchData = () => {
     props.fetchItems();
   };
 
   // fetch data on load
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  useEffect(fetchData, []);
 
   const renderItem = ({item, index}) => {
     const itemStyle = {marginTop: !index ? 8 : 0};
@@ -46,7 +42,7 @@ const Layanan = props => {
         keyExtractor={(item, index) => item.id}
         renderItem={renderItem}
         extraData={collapsedItem}
-        onRefresh={onRefresh}
+        onRefresh={fetchData}
         refreshing={loading}
       />
     </View>

@@ -34,9 +34,9 @@ const KategoriLayanan = ({data, onPress}) => {
     return (
       <Item
         title={item.name}
-        image={item.icon}
+        image={{uri: item.image}}
         style={itemStyle}
-        onPress={() => onPress(item.id)}
+        onPress={() => onPress(item)}
       />
     );
   };
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: '#607D8B',
     marginTop: 6,
-    marginRight: 16,
   },
 });
 

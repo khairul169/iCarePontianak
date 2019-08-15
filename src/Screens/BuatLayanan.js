@@ -1,98 +1,24 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView, ToastAndroid, Text} from 'react-native';
+import {getTimeString} from '../Public/Utils';
 import {
   Button,
   Header,
-  TextEdit,
   PickerSelect,
   DateTimePicker,
-  MiniMap,
+  TextEdit,
 } from '../Components';
-import {Service} from '../Public/Consts';
-import {getTimeString} from '../Public/Utils';
-
-const Layanan = [
-  {
-    type: Service.MEDICALVISIT,
-    title: 'Kunjungan Medis',
-    actions: [
-      'Injeksi',
-      'Intravena Infus',
-      'Perawatan Luka',
-      'Pemenuhan Nutrisi',
-      'Cek Gula Darah, Asam Urat, dan Kolesterol',
-    ],
-  },
-  {
-    type: Service.LABMEDIK,
-    title: 'Cek Lab Medik',
-    actions: [
-      'Tes Darah Lengkap',
-      'Uji Protein C - Reaktif',
-      'Laju Endap Darah',
-      'Tes Elektrolit',
-      'Tes Koagulasi',
-      'Cek Urin',
-      'Cek Sampel Dahak',
-      'Tes ELISA',
-      'Analisa Gas Darah',
-      'Penilaian Risiko Penyakit Jantung',
-    ],
-  },
-  {
-    type: Service.GIGI,
-    title: 'Kesehatan Gigi',
-    actions: ['Pemeriksaan Gigi dan Gusi', 'Perawatan Oral Hygiene'],
-  },
-  {
-    type: Service.BIDAN,
-    title: 'Bidan Terampil',
-    actions: [
-      'Pemeriksaan Kehamilan',
-      'Konsultasi',
-      'Senam Cantik',
-      'Senam Yoga Hamil & Nifas',
-      'Baby Spa',
-      'Pijat Bayi',
-    ],
-  },
-  {
-    type: Service.LANSIA,
-    title: 'Pendampingan Lansia',
-    actions: ['Pendampingan Lansia', 'Konsultasi'],
-  },
-  {
-    type: Service.SANITASI,
-    title: 'Sanitasi',
-    actions: ['Instalasi Jamban', 'Fogging', 'Pemberantasan Hama'],
-  },
-  {
-    type: Service.NUTRISI,
-    title: 'Diet dan Nutrisi',
-    actions: [
-      'Konsultasi Gizi Nutrisi Diet Biasa',
-      'Konsultasi Diet Penyakit Jantung',
-      'Konsultasi Diet Diabetes',
-      'Konsultasi Diet Asam Urat dan Kolesterol',
-      'Konsultasi Diet Pasca Operasi',
-    ],
-  },
-];
 
 const BuatLayanan = ({navigation}) => {
   // Cek layanan
-  const typeLayanan = navigation.getParam('layanan', null);
-  const layanan = Layanan.find(item => item.type === typeLayanan);
+  const layanan = navigation.getParam('layanan', null);
 
   // Item tindakan
-  const defaultAction = 'Lain-lain';
-  const actionItems = layanan
-    ? [defaultAction, ...layanan.actions]
-    : defaultAction;
+  const actionItems = layanan.actions.map(item => item.name);
 
   // States
   const [keluhan, setKeluhan] = useState('');
-  const [tindakan, setTindakan] = useState(defaultAction);
+  const [tindakan, setTindakan] = useState(actionItems && actionItems[0]);
   const [diagnosa, setDiagnosa] = useState('');
   const [alamat, setAlamat] = useState('');
   const [lokasi, setLokasi] = useState();
@@ -106,7 +32,13 @@ const BuatLayanan = ({navigation}) => {
   };
 
   const onBuatLayanan = () => {
-    if (keluhan.trim() === '' || alamat.trim() === '' || !waktu || !lokasi) {
+    if (
+      keluhan.trim() === '' ||
+      alamat.trim() === '' ||
+      !waktu ||
+      !lokasi ||
+      !tindakan
+    ) {
       ToastAndroid.show(
         'Mohon periksa lagi input yang tersedia.',
         ToastAndroid.LONG,
@@ -114,7 +46,7 @@ const BuatLayanan = ({navigation}) => {
       return;
     }
 
-    let dataLayanan = {
+    const dataLayanan = {
       keluhan,
       tindakan,
       alamat,
@@ -122,19 +54,22 @@ const BuatLayanan = ({navigation}) => {
       diagnosa,
     };
 
-    navigation.navigate('KonfirmasiLayanan', {
-      layanan: {
-        type: layanan.type,
-        title: layanan.title,
-        data: dataLayanan,
-        location: lokasi,
-      },
-    });
+    const totalCost = layanan.actions.find(item => item.name === tindakan).cost;
+
+    const args = {
+      id: layanan.id,
+      title: layanan.name,
+      data: dataLayanan,
+      location: lokasi,
+      totalCost,
+    };
+
+    navigation.navigate('KonfirmasiLayanan', {layanan: args});
   };
 
   return (
     <View style={styles.container}>
-      <Header title={layanan.title} backButton navigation={navigation} />
+      <Header title={layanan.name} backButton navigation={navigation} />
 
       <ScrollView style={styles.container}>
         <View style={styles.content}>
@@ -153,7 +88,7 @@ const BuatLayanan = ({navigation}) => {
             onValueChange={item => setTindakan(item)}
           />
 
-          {layanan.type === Service.MEDICALVISIT && (
+          {layanan.name.toLowerCase().startsWith('kunjungan') && (
             <View>
               <Text style={styles.title}>Diagnosa Medis (opsional)</Text>
               <TextEdit
@@ -171,12 +106,6 @@ const BuatLayanan = ({navigation}) => {
             value={alamat}
             capitalize
             onChangeText={value => setAlamat(value)}
-          />
-          <MiniMap
-            borderRadius={3}
-            onPress={onPilihLokasi}
-            style={styles.map}
-            coordinate={lokasi}
           />
           <Button
             title={'Tentukan Lokasi'}
@@ -197,15 +126,15 @@ const BuatLayanan = ({navigation}) => {
             onPress={() => this.dtPicker.show()}
             small
           />
-
-          <Button
-            title="Lanjutkan"
-            onPress={onBuatLayanan}
-            style={styles.btnBuat}
-            color="#fff"
-          />
         </View>
       </ScrollView>
+
+      <Button
+        title="Lanjutkan"
+        onPress={onBuatLayanan}
+        style={styles.btnBuat}
+        color="#fff"
+      />
     </View>
   );
 };
@@ -221,11 +150,6 @@ const styles = StyleSheet.create({
   map: {
     marginTop: 16,
   },
-  btnBuat: {
-    backgroundColor: '#03A9F4',
-    borderWidth: 0,
-    marginTop: 32,
-  },
   title: {
     fontSize: 14,
     color: '#626262',
@@ -237,6 +161,11 @@ const styles = StyleSheet.create({
   },
   btnPilihLokasi: {
     marginTop: 16,
+  },
+  btnBuat: {
+    backgroundColor: '#03A9F4',
+    borderWidth: 0,
+    margin: 8,
   },
 });
 
