@@ -3,7 +3,7 @@ import {
   createAppContainer,
   createSwitchNavigator,
   createStackNavigator,
-  createMaterialTopTabNavigator,
+  createBottomTabNavigator,
 } from 'react-navigation';
 import {fromRight} from 'react-navigation-transitions';
 import BottomTab from '../Components/BottomTab';
@@ -40,8 +40,7 @@ const tabRoutes = {
 };
 
 // BottomTab navigator
-const TabNavigator = createMaterialTopTabNavigator(tabRoutes, {
-  tabBarPosition: 'bottom',
+const TabNavigator = createBottomTabNavigator(tabRoutes, {
   tabBarComponent: props => <BottomTab {...props} icons={routeIcons} />,
 });
 
