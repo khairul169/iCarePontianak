@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import AppContainer from './src/Screens';
-import {setDeviceId} from './src/Actions/Auth.action';
-import {onPushNotification} from './src/Actions/Beranda.action';
 import store from './src/Public/Store';
 
 // OneSignal
@@ -33,12 +31,12 @@ class App extends Component {
   }
 
   onOpened = openResult => {
-    const data = openResult.notification.payload.additionalData;
-    this.store.dispatch(onPushNotification(data));
+    //const data = openResult.notification.payload.additionalData;
+    //this.store.dispatch(onPushNotification(data));
   };
 
   onIds = device => {
-    this.store.dispatch(setDeviceId(device.userId));
+    //this.store.dispatch(setDeviceId(device.userId));
   };
 
   render() {

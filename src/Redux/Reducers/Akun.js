@@ -1,22 +1,23 @@
 const initialState = {
-  loading: false,
-  items: null,
+  loading: true,
+  user: null,
 };
 
-export const layanan = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LAYANAN_SET_LOADING':
+    case 'AKUN_LOADING':
       return {
         ...state,
         loading: action.payload,
       };
-    case 'LAYANAN_SET_ITEMS':
+    case 'AKUN_USER_STATE':
       return {
         ...state,
-        loading: false,
-        items: action.payload,
+        user: action.payload,
       };
     default:
       return state;
   }
 };
+
+export default reducer;

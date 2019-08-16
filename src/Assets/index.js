@@ -1,3 +1,4 @@
+import appIcon from './icon/app-icon.png';
 import iconUser from './icon/user.png';
 import pinImage from './pins/pin.png';
 import pinAmbulance from './pins/ambulance.png';
@@ -14,6 +15,7 @@ import iconSanitasi from './layanan/sanitasi.jpg';
 import iconDietNutrisi from './layanan/dietnutrisi.jpg';
 
 export {
+  appIcon,
   iconUser,
   pinImage,
   pinAmbulance,

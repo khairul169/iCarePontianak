@@ -1,28 +1,33 @@
-import {UserAPI} from '../Public/API';
+import {UserAPI} from '../../Public/API';
 
-const setLoading = bool => {
-  return {
-    type: 'AKUN_SET_LOADING',
-    payload: bool,
-  };
+const STATE_LOADING = {
+  type: 'AKUN_LOADING',
+  payload: true,
 };
 
-const setUserData = userData => {
-  return {
-    type: 'AKUN_SET_USERDATA',
-    payload: userData,
-  };
+const STATE_LOADED = {
+  type: 'AKUN_LOADING',
+  payload: false,
 };
+
+const setUserState = user => ({
+  type: 'AKUN_USER_STATE',
+  payload: user,
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 export const fetchUser = () => async dispatch => {
-  dispatch(setLoading(true));
+  dispatch(STATE_LOADING);
 
   try {
     const {success, result} = await UserAPI.getUser();
-    success && dispatch(setUserData(result));
+    success && dispatch(setUserState(result));
   } catch (error) {
     console.log(error);
   }
+
+  dispatch(STATE_LOADED);
 };
 
 export const setMultiData = data => async dispatch => {

@@ -9,7 +9,7 @@ import {fromRight} from 'react-navigation-transitions';
 import BottomTab from '../Components/BottomTab';
 
 // Routes
-import Splash from './Splash';
+import Loader from './Loader';
 import Login from './Login';
 import Beranda from './Beranda';
 import Notifikasi from './Notifikasi';
@@ -65,7 +65,7 @@ const MainStack = createStackNavigator(
 
 // Root navigator
 const rootNavigator = createSwitchNavigator({
-  Splash,
+  Loader,
   Login,
   MainStack,
 });

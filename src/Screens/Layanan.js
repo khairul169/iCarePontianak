@@ -1,21 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchItems} from '../Actions/Layanan.action';
-
 import {View, StyleSheet, FlatList} from 'react-native';
 import {Header} from '../Components';
 import ItemLayanan from './Layanan/Item';
+import {fetchItems, setServiceStatus} from '../Redux/Actions/Layanan';
 
 const Layanan = props => {
   const [collapsedItem, setCollapsedItem] = useState();
   const {loading, items} = props.layanan;
 
-  const fetchData = () => {
+  const onLoaded = () => {
     props.fetchItems();
   };
-
-  // fetch data on load
-  useEffect(fetchData, []);
 
   const renderItem = ({item, index}) => {
     const itemStyle = {marginTop: !index ? 8 : 0};
@@ -24,13 +20,22 @@ const Layanan = props => {
         item={item}
         collapsed={collapsedItem === index}
         style={itemStyle}
+        navigation={props.navigation}
         onPress={() => {
           setCollapsedItem(collapsedItem !== index ? index : null);
         }}
-        navigation={props.navigation}
+        onCancel={() => {
+          props.setServiceStatus(item.id, 'cancel');
+        }}
+        onComplete={() => {
+          props.setServiceStatus(item.id, 'success');
+        }}
       />
     );
   };
+
+  // fetch data on load
+  useEffect(onLoaded, []);
 
   return (
     <View style={styles.container}>
@@ -42,7 +47,7 @@ const Layanan = props => {
         keyExtractor={(item, index) => item.id}
         renderItem={renderItem}
         extraData={collapsedItem}
-        onRefresh={fetchData}
+        onRefresh={onLoaded}
         refreshing={loading}
       />
     </View>
@@ -62,6 +67,7 @@ const mapStateToProps = ({layanan}) => ({
 
 const mapDispatchToProps = {
   fetchItems,
+  setServiceStatus,
 };
 
 export default connect(

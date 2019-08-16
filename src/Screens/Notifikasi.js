@@ -1,22 +1,18 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {fetchItems} from '../Actions/Notifikasi.action';
-
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Header} from '../Components';
+import {fetchItems} from '../Redux/Actions/Notifikasi';
 
 const Notifikasi = props => {
   const {loading, items} = props.notifikasi;
-  const fetchData = props.fetchItems;
+
+  const onLoaded = () => {
+    props.fetchItems();
+  };
 
   // load items
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const onRefresh = () => {
-    fetchData();
-  };
+  useEffect(onLoaded, []);
 
   const emptyNotification = () => {
     return <Text style={styles.emptyText}>Tidak ada notifikasi.</Text>;
@@ -42,7 +38,7 @@ const Notifikasi = props => {
         keyExtractor={(item, index) => `notif-${index}`}
         renderItem={renderItem}
         ListEmptyComponent={emptyNotification}
-        onRefresh={onRefresh}
+        onRefresh={onLoaded}
         refreshing={loading}
       />
     </View>

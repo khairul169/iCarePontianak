@@ -1,8 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {setServiceStatus} from '../../Actions/Layanan.action';
 import {View, StyleSheet, Linking, ToastAndroid} from 'react-native';
-
 import {Button, StaticMap} from '../../Components';
 import ItemHeader from './ItemHeader';
 import UserInfo from './UserInfo';
@@ -35,14 +32,6 @@ const ItemLayanan = props => {
       );
   };
 
-  const layananBatal = () => {
-    props.setServiceStatus(id, 'cancel');
-  };
-
-  const layananSelesai = () => {
-    props.setServiceStatus(id, 'success');
-  };
-
   const getHeaderTitle = () => {
     return isEmergency
       ? 'Gawat Darurat'
@@ -59,7 +48,7 @@ const ItemLayanan = props => {
           style={styles.actionButton}
           small
           icon="cancel"
-          onPress={layananBatal}
+          onPress={props.onCancel}
         />
       );
     }
@@ -73,7 +62,7 @@ const ItemLayanan = props => {
               style={styles.actionButton}
               small
               icon={'check'}
-              onPress={layananBatal}
+              onPress={props.onCancel}
             />
           ) : (
             <Button
@@ -103,7 +92,7 @@ const ItemLayanan = props => {
             style={styles.actionButton}
             small
             icon={'cancel'}
-            onPress={layananBatal}
+            onPress={props.onCancel}
           />
         </View>
 
@@ -114,7 +103,7 @@ const ItemLayanan = props => {
             border={false}
             color="#fff"
             icon="checkbox-marked-circle"
-            onPress={layananSelesai}
+            onPress={props.onComplete}
           />
         )}
       </View>
@@ -198,11 +187,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = {
-  setServiceStatus,
-};
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ItemLayanan);
+export default ItemLayanan;

@@ -1,21 +1,24 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {fetchData} from '../Actions/Beranda.action';
-import {fetchItems as fetchLayanan} from '../Actions/Layanan.action';
-
 import {View, StyleSheet, Text, ScrollView, RefreshControl} from 'react-native';
 import {HomeHeader} from '../Components';
-import {requestLocationPermission} from '../Public/Utils';
 import LayananGadar from './Beranda/LayananGadar';
 import KategoriLayanan from './Beranda/KategoriLayanan';
+
+import {fetchData} from '../Redux/Actions/Beranda';
+import {fetchItems as fetchLayanan} from '../Redux/Actions/Layanan';
+import {fetchUser} from '../Redux/Actions/Akun';
+import {requestLocationPermission} from '../Public/Utils';
+
 import {gadarBg, gadarIcon} from '../Assets';
 
 const Beranda = props => {
   const {navigation, user} = props;
-  const {pushNotification, kategoriLayanan, isLoading} = props.beranda;
+  const {pushNotification, kategoriLayanan, loading} = props.beranda;
 
   const onLoaded = () => {
     props.fetchData();
+    props.fetchUser();
     requestLocationPermission();
   };
 
@@ -46,7 +49,7 @@ const Beranda = props => {
       <ScrollView
         style={styles.container}
         refreshControl={
-          <RefreshControl onRefresh={onLoaded} refreshing={isLoading} />
+          <RefreshControl onRefresh={onLoaded} refreshing={loading} />
         }>
         <Text style={styles.title}>Layanan Kami</Text>
         <Text style={styles.subtitle}>
@@ -85,12 +88,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({beranda, akun}) => ({
   beranda,
-  user: akun.userData,
+  user: akun.user,
 });
 
 const mapDispatchToProps = {
   fetchData,
   fetchLayanan,
+  fetchUser,
 };
 
 export default connect(
