@@ -34,7 +34,7 @@ const KategoriLayanan = ({data, onPress}) => {
     return (
       <Item
         title={item.name}
-        image={{uri: item.image}}
+        image={{uri: item.icon}}
         style={itemStyle}
         onPress={() => onPress(item)}
       />
