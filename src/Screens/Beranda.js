@@ -15,7 +15,7 @@ import {gadarBg, gadarIcon} from '../Assets';
 
 const Beranda = props => {
   const {navigation, user} = props;
-  const {pushNotification, kategoriLayanan, loading} = props.beranda;
+  const {kategoriLayanan, loading} = props.beranda;
 
   const onLoaded = () => {
     props.setNavigationProps(navigation);
@@ -23,9 +23,6 @@ const Beranda = props => {
     props.fetchUser();
     requestLocationPermission();
   };
-
-  // on screen loaded
-  useEffect(onLoaded, []);
 
   const navigateTo = (route, data) => {
     navigation.navigate(route, data);
@@ -35,15 +32,8 @@ const Beranda = props => {
     navigateTo('BuatLayanan', {layanan});
   };
 
-  const onPushNotification = () => {
-    if (pushNotification) {
-      props.fetchLayanan();
-      navigation.navigate('Layanan');
-    }
-  };
-
-  // on push notification opened
-  useEffect(onPushNotification, [pushNotification]);
+  // on screen loaded
+  useEffect(onLoaded, []);
 
   return (
     <View style={styles.container}>
