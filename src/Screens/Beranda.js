@@ -1,26 +1,28 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {fetchData} from '../Actions/Beranda.action';
-import {fetchItems as fetchLayanan} from '../Actions/Layanan.action';
-
 import {View, StyleSheet, Text, ScrollView, RefreshControl} from 'react-native';
 import {HomeHeader} from '../Components';
-import {requestLocationPermission} from '../Public/Utils';
 import LayananGadar from './Beranda/LayananGadar';
 import KategoriLayanan from './Beranda/KategoriLayanan';
+
+import {fetchData} from '../Redux/Actions/Beranda';
+import {setNavigationProps} from '../Redux/Actions/OneSignal';
+import {fetchItems as fetchLayanan} from '../Redux/Actions/Layanan';
+import {fetchUser} from '../Redux/Actions/Akun';
+import {requestLocationPermission} from '../Public/Utils';
+
 import {gadarBg, gadarIcon} from '../Assets';
 
 const Beranda = props => {
   const {navigation, user} = props;
-  const {pushNotification, kategoriLayanan, isLoading} = props.beranda;
+  const {kategoriLayanan, loading} = props.beranda;
 
   const onLoaded = () => {
+    props.setNavigationProps(navigation);
     props.fetchData();
+    props.fetchUser();
     requestLocationPermission();
   };
-
-  // on screen loaded
-  useEffect(onLoaded, []);
 
   const navigateTo = (route, data) => {
     navigation.navigate(route, data);
@@ -30,15 +32,8 @@ const Beranda = props => {
     navigateTo('BuatLayanan', {layanan});
   };
 
-  const onPushNotification = () => {
-    if (pushNotification) {
-      props.fetchLayanan();
-      navigation.navigate('Layanan');
-    }
-  };
-
-  // on push notification opened
-  useEffect(onPushNotification, [pushNotification]);
+  // on screen loaded
+  useEffect(onLoaded, []);
 
   return (
     <View style={styles.container}>
@@ -46,7 +41,7 @@ const Beranda = props => {
       <ScrollView
         style={styles.container}
         refreshControl={
-          <RefreshControl onRefresh={onLoaded} refreshing={isLoading} />
+          <RefreshControl onRefresh={onLoaded} refreshing={loading} />
         }>
         <Text style={styles.title}>Layanan Kami</Text>
         <Text style={styles.subtitle}>
@@ -85,12 +80,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({beranda, akun}) => ({
   beranda,
-  user: akun.userData,
+  user: akun.user,
 });
 
 const mapDispatchToProps = {
   fetchData,
   fetchLayanan,
+  fetchUser,
+  setNavigationProps,
 };
 
 export default connect(

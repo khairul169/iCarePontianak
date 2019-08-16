@@ -1,22 +1,23 @@
 const initialState = {
-  loading: false,
-  items: null,
+  loading: true,
+  items: [],
 };
 
-export const notifikasi = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'NOTIF_SET_LOADING':
+    case 'LAYANAN_LOADING':
       return {
         ...state,
         loading: action.payload,
       };
-    case 'NOTIF_SET_ITEMS':
+    case 'LAYANAN_SET_ITEMS':
       return {
         ...state,
-        loading: false,
         items: action.payload,
       };
     default:
       return state;
   }
 };
+
+export default reducer;

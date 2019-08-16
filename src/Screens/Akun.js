@@ -1,15 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {
-  fetchUser,
-  setMultiData,
-  setProfileImage,
-  setActive,
-  setUserLocation,
-} from '../Actions/Akun.action';
-import {logout} from '../Actions/Auth.action';
-
-import {
   View,
   Text,
   StyleSheet,
@@ -22,7 +13,17 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import {Header, Icon} from '../Components';
+
+import {
+  fetchUser,
+  setMultiData,
+  setProfileImage,
+  setActive,
+  setUserLocation,
+} from '../Redux/Actions/Akun';
+import {logout} from '../Redux/Actions/Auth';
 import {getUserType} from '../Public/Utils';
+
 import {iconUser} from '../Assets';
 
 const Button = ({onPress, title, icon}) => {
@@ -46,26 +47,23 @@ const Button = ({onPress, title, icon}) => {
 };
 
 const Akun = props => {
-  const {loading, token, user, navigation} = props;
-  const fetchData = props.fetchUser;
+  const {loading, loggedIn, user, navigation} = props;
+
+  const onLoaded = () => {
+    props.fetchUser();
+  };
 
   if (user) {
     user.active = parseInt(user.active, 10);
   }
 
   // on start
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const onRefresh = () => {
-    fetchData();
-  };
+  useEffect(onLoaded, []);
 
   // on token changed
   useEffect(() => {
-    !token && navigation.navigate('Login');
-  }, [navigation, token]);
+    !loggedIn && navigation.navigate('Login');
+  }, [navigation, loggedIn]);
 
   const ubahFotoProfil = () => {
     ImagePicker.openPicker({
@@ -107,7 +105,7 @@ const Akun = props => {
       <ScrollView
         style={styles.container}
         refreshControl={
-          <RefreshControl onRefresh={onRefresh} refreshing={loading} />
+          <RefreshControl onRefresh={onLoaded} refreshing={loading} />
         }>
         <View style={styles.profile}>
           <TouchableOpacity style={styles.profilePict} onPress={ubahFotoProfil}>
@@ -214,10 +212,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({auth, akun}) => ({
+const mapStateToProps = ({akun, auth}) => ({
   loading: akun.loading,
-  token: auth.token,
-  user: akun.userData,
+  user: akun.user,
+  loggedIn: auth.loggedIn,
 });
 
 const mapDispatchToProps = {

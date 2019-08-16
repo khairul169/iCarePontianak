@@ -1,49 +1,29 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import AppContainer from './src/Screens';
-import {setDeviceId} from './src/Actions/Auth.action';
-import {onPushNotification} from './src/Actions/Beranda.action';
 import store from './src/Public/Store';
-
-// OneSignal
-import {ONESIGNAL_ID} from 'react-native-dotenv';
-import OneSignal from 'react-native-onesignal';
+import OneSignal from './src/Public/OneSignal';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.store = store;
 
-    // disable warning box
+    // Initialize app
     console.disableYellowBox = true;
-
-    // initialize onesignal
-    OneSignal.inFocusDisplaying(2);
-    OneSignal.init(ONESIGNAL_ID);
+    OneSignal.initialize();
   }
 
   componentDidMount() {
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.load();
   }
 
   componentWillUnmount() {
-    OneSignal.removeEventListener('opened', this.onOpened);
-    OneSignal.removeEventListener('ids', this.onIds);
+    OneSignal.clean();
   }
-
-  onOpened = openResult => {
-    const data = openResult.notification.payload.additionalData;
-    this.store.dispatch(onPushNotification(data));
-  };
-
-  onIds = device => {
-    this.store.dispatch(setDeviceId(device.userId));
-  };
 
   render() {
     return (
-      <Provider store={this.store}>
+      <Provider store={store}>
         <AppContainer />
       </Provider>
     );

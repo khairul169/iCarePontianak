@@ -1,23 +1,29 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {validateToken} from '../Actions/Auth.action';
-
 import {View, StyleSheet, Image} from 'react-native';
-import appIcon from '../Assets/icon/app-icon.png';
+import {validateToken} from '../Redux/Actions/Auth';
+import OneSignal from '../Public/OneSignal';
+import {appIcon} from '../Assets';
 
-const Splash = props => {
-  const {isLoading, token, navigation} = props;
-  const checkSession = props.validateToken;
+const Loader = props => {
+  const {navigation, auth} = props;
+
+  const onLoaded = () => {
+    props.validateToken();
+  };
+
+  const checkToken = () => {
+    if (auth.loading) return;
+
+    OneSignal.onLoggedIn();
+    navigation.navigate(auth.loggedIn ? 'MainStack' : 'Login');
+  };
 
   // validate auth token
-  useEffect(() => {
-    checkSession();
-  }, [checkSession]);
+  useEffect(onLoaded, []);
 
   // switch screen
-  useEffect(() => {
-    !isLoading && navigation.navigate(token ? 'MainStack' : 'Login');
-  }, [token, navigation, isLoading]);
+  useEffect(checkToken, [auth.loading, auth.loggedIn]);
 
   return (
     <View style={styles.container}>
@@ -40,8 +46,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({auth}) => ({
-  isLoading: auth.loading,
-  token: auth.token,
+  auth,
 });
 
 const mapDispatchToProps = {
@@ -51,4 +56,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Splash);
+)(Loader);

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {fetchLogin, fetchRegister} from '../Actions/Auth.action';
-
 import {View, StyleSheet, Image, ToastAndroid} from 'react-native';
 import InputText from './Login/InputText';
 import Button from './Login/Button';
-import appIcon from '../Assets/icon/app-icon.png';
+import {fetchLogin, fetchRegister} from '../Redux/Actions/Auth';
+import OneSignal from '../Public/OneSignal';
+import {appIcon} from '../Assets';
 
 const Login = props => {
   const [register, setRegister] = useState(false);
@@ -18,19 +18,21 @@ const Login = props => {
 
   const {auth, navigation} = props;
 
-  useEffect(() => {
+  const onAuthChanged = () => {
     if (auth.loading) return;
 
     // error message
-    if (!auth.success && auth.message) {
-      ToastAndroid.show(auth.message, ToastAndroid.LONG);
+    if (!auth.success) {
+      auth.message && ToastAndroid.show(auth.message, ToastAndroid.LONG);
+      return;
     }
 
     // navigate to main screen
-    if (auth.token) {
+    if (auth.loggedIn) {
+      OneSignal.onLoggedIn();
       navigation.navigate('MainStack');
     }
-  }, [auth, navigation]);
+  };
 
   const tryLogin = async () => {
     // login
@@ -56,6 +58,9 @@ const Login = props => {
   const onToggle = () => {
     setRegister(!register);
   };
+
+  // check authentication
+  useEffect(onAuthChanged, [auth]);
 
   return (
     <View style={styles.container}>

@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchItems} from '../Actions/Ambulan.action';
-
 import {
   View,
   Text,
@@ -14,6 +12,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Header, BottomSheet, MapLayout, Button} from '../Components';
+import {fetchItems} from '../Redux/Actions/Ambulan';
 import {pinAmbulance} from '../Assets';
 
 const haversine = require('haversine');

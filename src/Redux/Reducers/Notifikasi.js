@@ -1,22 +1,24 @@
 const initialState = {
-  loading: false,
-  userData: null,
+  loading: true,
+  items: [],
 };
 
-export const akun = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'AKUN_SET_LOADING':
+    case 'NOTIFIKASI_LOADING':
       return {
         ...state,
         loading: action.payload,
       };
-    case 'AKUN_SET_USERDATA':
+    case 'NOTIFIKASI_SET_ITEMS':
       return {
         ...state,
         loading: false,
-        userData: action.payload,
+        items: action.payload,
       };
     default:
       return state;
   }
 };
+
+export default reducer;
