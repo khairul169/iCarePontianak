@@ -4,6 +4,7 @@ import {View, StyleSheet, Image, ToastAndroid} from 'react-native';
 import InputText from './Login/InputText';
 import Button from './Login/Button';
 import {fetchLogin, fetchRegister} from '../Redux/Actions/Auth';
+import OneSignal from '../Public/OneSignal';
 import {appIcon} from '../Assets';
 
 const Login = props => {
@@ -28,6 +29,7 @@ const Login = props => {
 
     // navigate to main screen
     if (auth.loggedIn) {
+      OneSignal.onLoggedIn();
       navigation.navigate('MainStack');
     }
   };

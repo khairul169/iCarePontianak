@@ -35,6 +35,10 @@ export const setMultiData = data => async dispatch => {
   dispatch(fetchUser());
 };
 
+export const setUserDeviceId = value => async dispatch => {
+  await UserAPI.setDeviceId(value);
+};
+
 export const setProfileImage = data => async dispatch => {
   await UserAPI.setProfileImage(data);
   dispatch(fetchUser());

@@ -6,6 +6,7 @@ import LayananGadar from './Beranda/LayananGadar';
 import KategoriLayanan from './Beranda/KategoriLayanan';
 
 import {fetchData} from '../Redux/Actions/Beranda';
+import {setNavigationProps} from '../Redux/Actions/OneSignal';
 import {fetchItems as fetchLayanan} from '../Redux/Actions/Layanan';
 import {fetchUser} from '../Redux/Actions/Akun';
 import {requestLocationPermission} from '../Public/Utils';
@@ -17,6 +18,7 @@ const Beranda = props => {
   const {pushNotification, kategoriLayanan, loading} = props.beranda;
 
   const onLoaded = () => {
+    props.setNavigationProps(navigation);
     props.fetchData();
     props.fetchUser();
     requestLocationPermission();
@@ -95,6 +97,7 @@ const mapDispatchToProps = {
   fetchData,
   fetchLayanan,
   fetchUser,
+  setNavigationProps,
 };
 
 export default connect(

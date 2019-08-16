@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Image} from 'react-native';
 import {validateToken} from '../Redux/Actions/Auth';
+import OneSignal from '../Public/OneSignal';
 import {appIcon} from '../Assets';
 
 const Loader = props => {
@@ -12,7 +13,10 @@ const Loader = props => {
   };
 
   const checkToken = () => {
-    !auth.loading && navigation.navigate(auth.loggedIn ? 'MainStack' : 'Login');
+    if (auth.loading) return;
+
+    OneSignal.onLoggedIn();
+    navigation.navigate(auth.loggedIn ? 'MainStack' : 'Login');
   };
 
   // validate auth token
