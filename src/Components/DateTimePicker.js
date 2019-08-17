@@ -26,7 +26,7 @@ class DateTimePicker extends Component {
     );
 
     // Returns time in unix miliseconds
-    return dateTime.valueOf();
+    return dateTime.unix();
   };
 
   _dateChanged = (event, value) => {

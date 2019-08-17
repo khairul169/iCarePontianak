@@ -8,7 +8,7 @@ import 'moment/locale/id';
 
 export const getTimeString = time => {
   moment.locale('id');
-  return moment(time).format('DD MMMM YYYY HH.mm');
+  return moment(time * 1000).format('DD MMMM YYYY HH.mm');
 };
 
 export const getServiceName = id => {
