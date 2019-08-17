@@ -23,6 +23,7 @@ import PilihLokasi from './PilihLokasi';
 import PanggilBantuan from './PanggilBantuan';
 import LihatLokasi from './LihatLokasi';
 import PengaturanAkun from './PengaturanAkun';
+import LihatLayanan from './LihatLayanan';
 
 // Tabbar icons
 const routeIcons = {
@@ -56,6 +57,7 @@ const MainStack = createStackNavigator(
     PanggilBantuan,
     LihatLokasi,
     PengaturanAkun,
+    LihatLayanan,
   },
   {
     headerMode: 'none',

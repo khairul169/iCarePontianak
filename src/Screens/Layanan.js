@@ -20,31 +20,36 @@ const ItemHeaderAction = ({icon, type, color, onPress}) => {
   );
 };
 
-const Item = ({item, index}) => (
+const Item = ({item, index, onPress}) => (
   <View style={[styles.item, !index && styles.itemFirst]}>
-    <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => console.log('ehhe')}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.itemHeader}>
         <Image style={styles.itemPhoto} source={{uri: item.user.image}} />
 
         <View style={styles.itemHeaderContent}>
-          <Text style={styles.itemHeaderName}>
-            {item.user.name || 'Tanpa Nama'}
-          </Text>
-          <Text style={styles.itemHeaderDetail}>
-            {item.user.type || 'Pengguna'}
-          </Text>
+          <Text style={styles.itemHeaderName}>{item.user.name}</Text>
+          <Text style={styles.itemHeaderDetail}>{item.user.type}</Text>
         </View>
 
-        <ItemHeaderAction icon="message-text" color="#7CB342" />
-        <ItemHeaderAction icon="md-call" type="Ionicons" color="#3949AB" />
+        {item.kontak ? (
+          [
+            <ItemHeaderAction key="msg" icon="message-text" color="#7CB342" />,
+            <ItemHeaderAction
+              key="call"
+              icon="md-call"
+              type="Ionicons"
+              color="#3949AB"
+            />,
+          ]
+        ) : (
+          <Text style={styles.itemId}>#{item.id}</Text>
+        )}
       </View>
 
       <View style={styles.itemDetail}>
         <Icon name="information-outline" style={styles.itemDetailIcon} />
         <Text style={styles.itemDetailValue}>{item.status}</Text>
-        <Text style={styles.itemDetailCost}>{item.tindakan.cost}</Text>
+        <Text style={styles.itemDetailCost}>{item.tindakan.total}</Text>
       </View>
 
       <View style={styles.itemDetail}>
@@ -87,8 +92,12 @@ class Layanan extends Component {
     this.onLoaded();
   }
 
+  lihatLayanan = id => {
+    this.props.navigation.navigate('LihatLayanan', {id});
+  };
+
   renderLayanan(props) {
-    return <Item {...props} />;
+    return <Item {...props} onPress={() => this.lihatLayanan(props.item.id)} />;
   }
 
   render() {
@@ -173,6 +182,10 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     color: '#686868',
+  },
+  itemId: {
+    fontSize: 14,
+    color: '#727272',
   },
   // item detail
   itemDetail: {

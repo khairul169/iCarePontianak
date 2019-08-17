@@ -7,8 +7,8 @@ const MiniMap = ({style, height, borderRadius, onPress, coordinate, pin}) => {
   const [mapReady, setMapReady] = useState(false);
 
   const initialRegion = {
-    latitude: coordinate.latitude || -0.0257813,
-    longitude: coordinate.longitude || 109.3323449,
+    latitude: -0.0257813,
+    longitude: 109.3323449,
     latitudeDelta: 0.015,
     longitudeDelta: 0.02,
   };
