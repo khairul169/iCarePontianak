@@ -1,24 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Header} from '../Components';
 import {fetchItems} from '../Redux/Actions/Notifikasi';
 
-const Notifikasi = props => {
-  const {loading, items} = props.notifikasi;
-
-  const onLoaded = () => {
-    props.fetchItems();
+class Notifikasi extends Component {
+  onLoaded = () => {
+    this.props.fetchItems();
   };
 
-  // load items
-  useEffect(onLoaded, []);
+  componentDidMount() {
+    this.onLoaded();
+  }
 
-  const emptyNotification = () => {
+  emptyNotification = () => {
     return <Text style={styles.emptyText}>Tidak ada notifikasi.</Text>;
   };
 
-  const renderItem = ({item, index}) => {
+  renderItem = ({item, index}) => {
     const itemStyle = [styles.item, !index && {paddingTop: 0}];
     return (
       <View style={itemStyle}>
@@ -28,22 +27,26 @@ const Notifikasi = props => {
     );
   };
 
-  return (
-    <View style={styles.container}>
-      <Header title="Notifikasi" />
+  render() {
+    const {items, loading} = this.props.notifikasi;
 
-      <FlatList
-        style={styles.content}
-        data={items}
-        keyExtractor={(item, index) => `notif-${index}`}
-        renderItem={renderItem}
-        ListEmptyComponent={emptyNotification}
-        onRefresh={onLoaded}
-        refreshing={loading}
-      />
-    </View>
-  );
-};
+    return (
+      <View style={styles.container}>
+        <Header title="Notifikasi" />
+
+        <FlatList
+          style={styles.content}
+          data={items}
+          keyExtractor={(item, index) => `notif-${index}`}
+          renderItem={this.renderItem}
+          ListEmptyComponent={this.emptyNotification}
+          onRefresh={this.onLoaded}
+          refreshing={loading}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

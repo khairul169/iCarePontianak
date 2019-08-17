@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Text, ScrollView, RefreshControl} from 'react-native';
 import {HomeHeader} from '../Components';
@@ -13,51 +13,56 @@ import {requestLocationPermission} from '../Public/Utils';
 
 import {gadarBg, gadarIcon} from '../Assets';
 
-const Beranda = props => {
-  const {navigation, user} = props;
-  const {kategoriLayanan, loading} = props.beranda;
-
-  const onLoaded = () => {
-    props.setNavigationProps(navigation);
-    props.fetchData();
-    props.fetchUser();
+class Beranda extends Component {
+  onLoaded = () => {
+    this.props.setNavigationProps(this.props.navigation);
+    this.props.fetchData();
+    this.props.fetchUser();
     requestLocationPermission();
   };
 
-  const navigateTo = (route, data) => {
-    navigation.navigate(route, data);
+  componentDidMount() {
+    this.onLoaded();
+  }
+
+  navigateTo = (route, data) => {
+    this.props.navigation.navigate(route, data);
   };
 
-  const buatLayanan = layanan => {
-    navigateTo('BuatLayanan', {layanan});
+  buatLayanan = layanan => {
+    this.navigateTo('BuatLayanan', {layanan});
   };
 
-  // on screen loaded
-  useEffect(onLoaded, []);
+  render() {
+    const {user, beranda} = this.props;
+    const {kategoriLayanan, loading} = beranda;
 
-  return (
-    <View style={styles.container}>
-      <HomeHeader name={user && user.name.split(' ')[0]} />
-      <ScrollView
-        style={styles.container}
-        refreshControl={
-          <RefreshControl onRefresh={onLoaded} refreshing={loading} />
-        }>
-        <Text style={styles.title}>Layanan Kami</Text>
-        <Text style={styles.subtitle}>
-          Pilih jenis layanan yang anda inginkan
-        </Text>
-        <LayananGadar
-          icon={gadarIcon}
-          background={gadarBg}
-          onPress={() => navigateTo('Gadar')}
-        />
-        <Text style={styles.subtitle}>Layanan lainnya</Text>
-        <KategoriLayanan data={kategoriLayanan} onPress={buatLayanan} />
-      </ScrollView>
-    </View>
-  );
-};
+    return (
+      <View style={styles.container}>
+        <HomeHeader name={user && user.name.split(' ')[0]} />
+        <ScrollView
+          style={styles.container}
+          refreshControl={
+            <RefreshControl onRefresh={this.onLoaded} refreshing={loading} />
+          }>
+          <Text style={styles.title}>Layanan Kami</Text>
+          <Text style={styles.subtitle}>
+            Pilih jenis layanan yang anda inginkan
+          </Text>
+
+          <LayananGadar
+            icon={gadarIcon}
+            background={gadarBg}
+            onPress={() => this.navigateTo('Gadar')}
+          />
+
+          <Text style={styles.subtitle}>Layanan lainnya</Text>
+          <KategoriLayanan data={kategoriLayanan} onPress={this.buatLayanan} />
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

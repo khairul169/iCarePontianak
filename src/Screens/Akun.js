@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
   View,
@@ -46,26 +46,23 @@ const Button = ({onPress, title, icon}) => {
   );
 };
 
-const Akun = props => {
-  const {loading, loggedIn, user, navigation} = props;
-
-  const onLoaded = () => {
-    props.fetchUser();
+class Akun extends Component {
+  onLoaded = () => {
+    this.props.fetchUser();
   };
 
-  if (user) {
-    user.active = parseInt(user.active, 10);
+  componentDidMount() {
+    this.onLoaded();
   }
 
-  // on start
-  useEffect(onLoaded, []);
+  componentDidUpdate(prevProps) {
+    const {loggedIn, navigation} = this.props;
 
-  // on token changed
-  useEffect(() => {
-    !loggedIn && navigation.navigate('Login');
-  }, [navigation, loggedIn]);
+    if (loggedIn !== prevProps.loggedIn && !loggedIn)
+      navigation.navigate('Login');
+  }
 
-  const ubahFotoProfil = () => {
+  ubahFotoProfil = () => {
     ImagePicker.openPicker({
       width: 512,
       height: 512,
@@ -74,95 +71,113 @@ const Akun = props => {
       mediaType: 'photo',
     })
       .then(image => {
-        props.setProfileImage(image.data);
+        this.props.setProfileImage(image.data);
       })
       .catch(error => {
         console.log(error.message);
       });
   };
 
-  const menerimaLayanan = () => {
-    props.setActive(user.active ? 0 : 1);
+  menerimaLayanan = () => {
+    this.props.setActive(this.props.user.active ? 0 : 1);
   };
 
-  const pengaturanLokasi = () => {
+  pengaturanLokasi = () => {
+    const {lat, lng} = this.props.user;
+
     const coordinate = {
-      latitude: parseFloat(user.lat),
-      longitude: parseFloat(user.lng),
+      latitude: parseFloat(lat),
+      longitude: parseFloat(lng),
     };
-    navigation.navigate('PilihLokasi', {
+
+    this.props.navigation.navigate('PilihLokasi', {
       location: coordinate.latitude ? coordinate : null,
       callback: ({latitude, longitude}) => {
-        props.setUserLocation(latitude, longitude);
+        this.props.props.setUserLocation(latitude, longitude);
       },
     });
   };
 
-  return (
-    <View style={styles.container}>
-      <Header title="Akun" />
-
-      <ScrollView
-        style={styles.container}
-        refreshControl={
-          <RefreshControl onRefresh={onLoaded} refreshing={loading} />
-        }>
-        <View style={styles.profile}>
-          <TouchableOpacity style={styles.profilePict} onPress={ubahFotoProfil}>
-            <Image
-              source={user && user.image ? {uri: user.image} : iconUser}
-              style={styles.profileImage}
-            />
-          </TouchableOpacity>
-
-          <Text style={styles.title}>{user && user.name}</Text>
-          <Text style={styles.subtitle}>{user && getUserType(user.type)}</Text>
-        </View>
-        <View style={styles.content}>
-          <Button
-            icon="account-circle"
-            style={styles.button}
-            title="Pengaturan Akun"
-            onPress={() =>
-              navigation.navigate('PengaturanAkun', {
-                user,
-                callback: data => props.setMultiData(data),
-              })
-            }
+  renderNakesView = () => (
+    <View>
+      <Button
+        icon={
+          <Switch
+            value={this.props.user.active === 1}
+            onValueChange={this.menerimaLayanan}
           />
-          {user && user.type >= 2 && (
-            <View>
-              <Button
-                icon={
-                  <Switch
-                    value={user.active === 1}
-                    onValueChange={menerimaLayanan}
-                  />
-                }
-                style={styles.button}
-                title="Menerima Layanan"
-                onPress={menerimaLayanan}
-              />
-              <Button
-                icon="map-marker"
-                style={styles.button}
-                title="Atur Lokasi Saya"
-                onPress={pengaturanLokasi}
-              />
-            </View>
-          )}
-          <Button
-            icon="logout"
-            style={styles.button}
-            title="Keluar"
-            onPress={props.logout}
-            small
-          />
-        </View>
-      </ScrollView>
+        }
+        style={styles.button}
+        title="Menerima Layanan"
+        onPress={this.menerimaLayanan}
+      />
+      <Button
+        icon="map-marker"
+        style={styles.button}
+        title="Atur Lokasi Saya"
+        onPress={this.pengaturanLokasi}
+      />
     </View>
   );
-};
+
+  render() {
+    const {loading, user, navigation} = this.props;
+
+    if (user) {
+      user.active = parseInt(user.active, 10);
+    }
+
+    return (
+      <View style={styles.container}>
+        <Header title="Akun" />
+
+        <ScrollView
+          style={styles.container}
+          refreshControl={
+            <RefreshControl onRefresh={this.onLoaded} refreshing={loading} />
+          }>
+          <View style={styles.profile}>
+            <TouchableOpacity
+              style={styles.profilePict}
+              onPress={this.ubahFotoProfil}>
+              <Image
+                source={user && user.image ? {uri: user.image} : iconUser}
+                style={styles.profileImage}
+              />
+            </TouchableOpacity>
+
+            <Text style={styles.title}>{user && user.name}</Text>
+            <Text style={styles.subtitle}>
+              {user && getUserType(user.type)}
+            </Text>
+          </View>
+
+          <View style={styles.content}>
+            <Button
+              icon="account-circle"
+              style={styles.button}
+              title="Pengaturan Akun"
+              onPress={() =>
+                navigation.navigate('PengaturanAkun', {
+                  user,
+                  callback: data => this.props.setMultiData(data),
+                })
+              }
+            />
+            {user && user.type >= 2 && this.renderNakesView()}
+            <Button
+              icon="logout"
+              style={styles.button}
+              title="Keluar"
+              onPress={this.props.logout}
+              small
+            />
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
