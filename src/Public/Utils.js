@@ -1,6 +1,7 @@
 import {PermissionsAndroid, Linking} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import {Service} from './Consts';
+import store from 'public/Store';
 
 // momentjs
 import moment from 'moment';
@@ -69,14 +70,56 @@ export const requestLocationPermission = async () => {
   }
 };
 
-export const navigateToMainStack = (navigation, route) => {
+export const navigateToMainStack = route => {
+  const navigation = store.getState().beranda.navigation;
+
+  if (!navigation) {
+    return;
+  }
+
   const action = NavigationActions.navigate({
     routeName: 'TabNavigator',
-    action: NavigationActions.navigate({routeName: route}),
+    action: route && NavigationActions.navigate({routeName: route}),
   });
+
   navigation.reset([action], 0);
 };
 
 export const openPhoneNumber = number => {
   number && Linking.openURL(`tel:${number}`);
+};
+
+export const regionContainingPoints = (points, zoom = 1.0) => {
+  if (!points || points.length <= 1) return points[0];
+
+  let minLat, maxLat, minLng, maxLng;
+
+  // init first point
+  (point => {
+    minLat = point.latitude;
+    maxLat = point.latitude;
+    minLng = point.longitude;
+    maxLng = point.longitude;
+  })(points[0]);
+
+  // calculate rect
+  points.forEach(point => {
+    minLat = Math.min(minLat, point.latitude);
+    maxLat = Math.max(maxLat, point.latitude);
+    minLng = Math.min(minLng, point.longitude);
+    maxLng = Math.max(maxLng, point.longitude);
+  });
+
+  const midLat = (minLat + maxLat) / 2;
+  const midLng = (minLng + maxLng) / 2;
+
+  const deltaLat = (maxLat - minLat) * zoom;
+  const deltaLng = (maxLng - minLng) * zoom;
+
+  return {
+    latitude: midLat,
+    longitude: midLng,
+    latitudeDelta: deltaLat,
+    longitudeDelta: deltaLng,
+  };
 };

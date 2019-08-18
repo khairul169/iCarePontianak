@@ -3,7 +3,16 @@ import {View, Text, StyleSheet, TouchableNativeFeedback} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from './Icon';
 
-const Button = ({title, color, border, style, onPress, small, icon}) => {
+const Button = ({
+  children,
+  title,
+  color,
+  border,
+  style,
+  onPress,
+  small,
+  icon,
+}) => {
   const containerStyle = [
     styles.container,
     small && {
@@ -32,7 +41,8 @@ const Button = ({title, color, border, style, onPress, small, icon}) => {
     <TouchableNativeFeedback onPress={onPress}>
       <View style={containerStyle}>
         {icon && <Icon name={icon} style={iconStyle} />}
-        <Text style={titleStyle}>{title.toUpperCase()}</Text>
+        {title && <Text style={titleStyle}>{title.toUpperCase()}</Text>}
+        {children}
       </View>
     </TouchableNativeFeedback>
   );
@@ -55,7 +65,7 @@ Button.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center',
     height: 48,

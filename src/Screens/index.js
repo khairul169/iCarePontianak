@@ -18,7 +18,6 @@ import Akun from './Akun';
 import Gadar from './Gadar';
 import CariAmbulan from './CariAmbulan';
 import BuatLayanan from './BuatLayanan';
-import KonfirmasiLayanan from './KonfirmasiLayanan';
 import PilihLokasi from './PilihLokasi';
 import PanggilBantuan from './PanggilBantuan';
 import LihatLokasi from './LihatLokasi';
@@ -52,7 +51,6 @@ const MainStack = createStackNavigator(
     Gadar,
     CariAmbulan,
     BuatLayanan,
-    KonfirmasiLayanan,
     PilihLokasi,
     PanggilBantuan,
     LihatLokasi,

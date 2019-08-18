@@ -1,17 +1,19 @@
 import {ONESIGNAL_ID} from 'react-native-dotenv';
 import RNOneSignal from 'react-native-onesignal';
-import store from './Store';
-import {setDeviceId} from '../Redux/Actions/OneSignal';
-import {setUserDeviceId} from '../Redux/Actions/Akun';
+import store from 'public/Store';
+import {UserAPI} from 'public/API';
 
 const OneSignal = (() => {
+  // vars
+  let deviceId = null;
+
   const onNotificationPress = (data, navigation) => {
     navigation.navigate('Layanan');
   };
 
   const onOpened = openResult => {
     const data = openResult.notification.payload.additionalData;
-    const navigation = store.getState().oneSignal.navProps;
+    const navigation = store.getState().beranda.navigation;
 
     if (data && navigation) {
       onNotificationPress(data, navigation);
@@ -19,12 +21,15 @@ const OneSignal = (() => {
   };
 
   const onIds = device => {
-    store.dispatch(setDeviceId(device.userId));
+    deviceId = device.userId;
   };
 
-  const updateDeviceId = () => {
-    const deviceId = store.getState().oneSignal.deviceId;
-    store.dispatch(setUserDeviceId(deviceId));
+  const updateDeviceId = async () => {
+    try {
+      await UserAPI.setDeviceId(deviceId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {

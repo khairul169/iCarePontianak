@@ -2,17 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TouchableHighlight} from 'react-native';
 import MapView from 'react-native-maps';
 import PropTypes from 'prop-types';
+import {regionContainingPoints} from 'public/Utils';
+import {OpenRouteAPI} from 'public/API';
 
-const MiniMap = ({
-  style,
-  height,
-  borderRadius,
-  onPress,
-  coordinate,
-  pin,
-  mapPadding,
-}) => {
+const MiniMap = ({style, onPress, coordinate, mapPadding, directionTo}) => {
   const [mapReady, setMapReady] = useState(false);
+  const [directions, setDirections] = useState();
 
   const initialRegion = {
     latitude: -0.0257813,
@@ -21,32 +16,54 @@ const MiniMap = ({
     longitudeDelta: 0.02,
   };
 
-  // on coordinate changed
-  useEffect(() => {
-    if (!coordinate) return;
-    this.mapView.animateToRegion({
-      ...initialRegion,
-      ...coordinate,
-    });
-  }, [coordinate, initialRegion]);
+  const fetchDirections = async () => {
+    const points = await OpenRouteAPI.getDirection(coordinate, directionTo);
+    setDirections(points);
+  };
+
+  const onCoordinateChange = () => {
+    if (!mapReady || !coordinate || !this.mapView) return;
+
+    let region = initialRegion;
+    if (directionTo) {
+      region = regionContainingPoints([coordinate, directionTo], 1.5);
+      fetchDirections();
+    } else {
+      region = {...region, ...coordinate};
+      setDirections(null);
+    }
+
+    this.mapView.animateToRegion(region);
+  };
 
   const renderMarker = () => {
     if (!mapReady) return;
+    const points = [coordinate, directionTo];
 
-    if (pin && coordinate) {
-      return <MapView.Marker coordinate={coordinate} />;
-    }
+    return points.map(
+      (item, index) => item && <MapView.Marker key={index} coordinate={item} />,
+    );
   };
 
-  const mapStyle = [styles.container, {height, borderRadius}, style];
+  const renderDirection = () => {
+    if (!mapReady || !directions) return;
+    return (
+      <MapView.Polyline
+        coordinates={directions}
+        strokeWidth={5}
+        strokeColor="rgba(34, 62, 230, 0.6)"
+      />
+    );
+  };
+
+  // on coordinate changed
+  useEffect(onCoordinateChange, [coordinate, directionTo, mapReady]);
 
   return (
     <TouchableHighlight onPress={onPress} underlayColor={null}>
-      <View style={mapStyle}>
+      <View style={[styles.container, style]}>
         <MapView
-          ref={ref => {
-            this.mapView = ref;
-          }}
+          ref={ref => (this.mapView = ref)}
           initialRegion={initialRegion}
           style={styles.mapView}
           scrollEnabled={false}
@@ -56,6 +73,7 @@ const MiniMap = ({
           onMapReady={() => setMapReady(true)}
           mapPadding={mapPadding}>
           {renderMarker()}
+          {renderDirection()}
         </MapView>
       </View>
     </TouchableHighlight>
@@ -64,28 +82,19 @@ const MiniMap = ({
 
 MiniMap.propTypes = {
   style: PropTypes.any,
-  height: PropTypes.number,
-  borderRadius: PropTypes.number,
   onPress: PropTypes.func,
-  coordinate: PropTypes.object,
-  pin: PropTypes.bool,
-};
-
-MiniMap.defaultProps = {
-  height: 200,
-  coordinate: {
-    latitude: -0.0257813,
-    longitude: 109.3323449,
-  },
-  pin: true,
+  coordinate: PropTypes.any,
+  mapPadding: PropTypes.object,
+  directionTo: PropTypes.any,
 };
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
+    height: 200,
   },
   mapView: {
     flex: 1,
+    minHeight: 1,
   },
 });
 

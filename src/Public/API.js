@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_BASE, API_DEV} from 'react-native-dotenv';
+import {API_BASE, API_DEV, OPENROUTE_APIKEY} from 'react-native-dotenv';
 import store from './Store';
 
 /* ##################################### Base API ##################################### */
@@ -89,15 +89,25 @@ const UserAPI = {
   setDeviceId: value => value && API.patch('user/deviceid', {value}),
 };
 
+/* ##################################### Client API ##################################### */
+
+const ClientAPI = {
+  getClients: () => API.get('client/'),
+  getClient: id => API.get(`client/${id}`),
+};
+
 /* ##################################### Service API ##################################### */
 
 const ServiceAPI = {
-  getAll: () => API.get('service/'),
-  create: (type, data, location) =>
-    API.post('service/', {type, data, location}),
-  setStatus: (id, status) => API.patch(`service/${id}/status`, {status}),
-  getCategories: () => API.get('service/category/'),
-  getById: id => API.get(`service/get/${id}`),
+  getCategories: () => API.get('service/category'),
+  getCategory: id => API.get(`service/category/${id}`),
+  searchNakes: (kategori, lokasi, exclude) =>
+    API.post('service/nakes', {kategori, lokasi, exclude}),
+  createService: data => API.post('service/create', {data}),
+  getServiceList: () => API.get('service/lists'),
+  getServiceById: id => API.get(`service/view/${id}`),
+  cancel: id => API.patch(`service/cancel/${id}`),
+  finish: id => API.patch(`service/finish/${id}`),
 };
 
 /* ##################################### Notification API ##################################### */
@@ -112,5 +122,41 @@ const AmbulanceAPI = {
   getAll: () => API.get('ambulance/'),
 };
 
+/* ##################################### OpenRoute API ##################################### */
+
+const OpenRouteAPI = {
+  getDirection: async (from, to) => {
+    // direction api
+    let url = 'https://api.openrouteservice.org/v2/directions/';
+    url += `driving-car?api_key=${OPENROUTE_APIKEY}`;
+    url += `&start=${from.longitude},${from.latitude}`;
+    url += `&end=${to.longitude},${to.latitude}`;
+
+    // fetch navigation path
+    try {
+      const response = await axios.get(url);
+      const {coordinates} = response.data.features[0].geometry;
+
+      return coordinates.map(item => ({
+        latitude: item[1],
+        longitude: item[0],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+    return false;
+  },
+};
+
 export default API;
-export {AuthAPI, UserAPI, ServiceAPI, NotificationAPI, AmbulanceAPI};
+export {
+  // Server API
+  AuthAPI,
+  UserAPI,
+  ClientAPI,
+  ServiceAPI,
+  NotificationAPI,
+  AmbulanceAPI,
+  // Third-party API
+  OpenRouteAPI,
+};

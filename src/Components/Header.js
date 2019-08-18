@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Animated} from 'react-native';
 import PropTypes from 'prop-types';
+import {withNavigation} from 'react-navigation';
 import StatusBar, {statusBarHeight} from './StatusBar';
 import Icon from './Icon';
 
@@ -51,7 +52,7 @@ class Header extends Component {
   }
 
   goBack = () => {
-    this.props.navigation && this.props.navigation.goBack();
+    this.props.navigation && this.props.navigation.goBack(null);
   };
 
   render() {
@@ -143,4 +144,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default withNavigation(Header);

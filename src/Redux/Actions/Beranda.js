@@ -26,3 +26,8 @@ export const fetchData = () => async dispatch => {
 
   dispatch(STATE_LOADED);
 };
+
+export const setNavigation = payload => ({
+  type: 'BERANDA_NAVIGATION',
+  payload,
+});

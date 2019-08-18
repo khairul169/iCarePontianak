@@ -2,6 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import * as Component from 'components';
 
+jest.mock('react-navigation', () => ({withNavigation: component => component}));
+
 describe('<BottomSheet />', () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.BottomSheet {...defaultProps} />);

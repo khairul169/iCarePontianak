@@ -49,7 +49,9 @@ const Item = ({item, index, onPress}) => (
       <View style={styles.itemDetail}>
         <Icon name="information-outline" style={styles.itemDetailIcon} />
         <Text style={styles.itemDetailValue}>{item.status}</Text>
-        <Text style={styles.itemDetailCost}>{item.tindakan.total}</Text>
+        {item.status.startsWith('Sedang') && (
+          <Text style={styles.itemDetailCost}>{item.tindakan.total}</Text>
+        )}
       </View>
 
       <View style={styles.itemDetail}>

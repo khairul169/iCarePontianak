@@ -19,14 +19,7 @@ const setLayanan = items => ({
 
 export const fetchItems = () => async dispatch => {
   dispatch(STATE_LOADING);
-  const {success, result} = await ServiceAPI.getAll();
+  const {success, result} = await ServiceAPI.getServiceList();
   success && dispatch(setLayanan(result));
-  dispatch(STATE_LOADED);
-};
-
-export const setServiceStatus = (id, status) => async dispatch => {
-  dispatch(STATE_LOADING);
-  const {success} = await ServiceAPI.setStatus(id, status);
-  success && dispatch(fetchItems());
   dispatch(STATE_LOADED);
 };

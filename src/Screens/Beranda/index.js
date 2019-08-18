@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {View, StyleSheet, Text, ScrollView, RefreshControl} from 'react-native';
 import {HomeHeader} from 'components';
 
-import {fetchData} from 'actions/Beranda';
-import {setNavigationProps} from 'actions/OneSignal';
+import {fetchData, setNavigation} from 'actions/Beranda';
 import {fetchItems as fetchLayanan} from 'actions/Layanan';
 import {fetchUser} from 'actions/Akun';
 import {requestLocationPermission} from 'public/Utils';
@@ -15,14 +14,14 @@ import KategoriLayanan from './KategoriLayanan';
 
 class Beranda extends Component {
   onLoaded = () => {
-    this.props.setNavigationProps(this.props.navigation);
     this.props.fetchData();
     this.props.fetchUser();
-    requestLocationPermission();
   };
 
   componentDidMount() {
+    this.props.setNavigation(this.props.navigation);
     this.onLoaded();
+    requestLocationPermission();
   }
 
   navigateTo = (route, data) => {
@@ -30,7 +29,8 @@ class Beranda extends Component {
   };
 
   buatLayanan = layanan => {
-    this.navigateTo('BuatLayanan', {layanan});
+    const {id} = layanan;
+    this.navigateTo('BuatLayanan', {kategori: id});
   };
 
   render() {
@@ -92,7 +92,7 @@ const mapDispatchToProps = {
   fetchData,
   fetchLayanan,
   fetchUser,
-  setNavigationProps,
+  setNavigation,
 };
 
 export default connect(

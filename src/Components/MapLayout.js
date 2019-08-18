@@ -26,6 +26,7 @@ class MapLayout extends Component {
     userLocation: null,
     animateToUser: true,
     navPoints: null,
+    mapReady: false,
   };
 
   initialRegion = {
@@ -33,6 +34,11 @@ class MapLayout extends Component {
     longitude: 109.3323449,
     latitudeDelta: 0.015,
     longitudeDelta: 0.02,
+  };
+
+  onMapReady = () => {
+    this.setState({mapReady: true});
+    this.props.onMapReady && this.props.onMapReady();
   };
 
   _regionChanged = region => {
@@ -60,6 +66,8 @@ class MapLayout extends Component {
   };
 
   _renderMarkers = () => {
+    if (!this.state.mapReady) return;
+
     const markers = [...this.props.markers];
 
     if (this.props.pin) {
@@ -105,7 +113,7 @@ class MapLayout extends Component {
   };
 
   _renderNavigation = () => {
-    if (!this.state.navPoints) return;
+    if (!this.state.mapReady || !this.state.navPoints) return;
 
     const points = this.state.navPoints.map(item => {
       return {
@@ -155,7 +163,7 @@ class MapLayout extends Component {
         initialRegion={initialRegion}
         showsUserLocation={true}
         showsMyLocationButton={false}
-        onMapReady={this.props.onMapReady}
+        onMapReady={this.onMapReady}
         onRegionChangeComplete={this._regionChanged}
         onUserLocationChange={event =>
           this._userLocation(event.nativeEvent.coordinate)

@@ -30,6 +30,7 @@ const ItemDetail = ({children, title, icon, text, margin, border}) => {
   const textStyle = {
     fontSize: 16,
     color: '#333',
+    lineHeight: 22,
   };
 
   return (
@@ -37,7 +38,7 @@ const ItemDetail = ({children, title, icon, text, margin, border}) => {
       <Icon name={icon} size={18} color="#626262" />
       <View style={contentStyle}>
         <Text style={titleStyle}>{title}</Text>
-        {text && <Text style={textStyle}>{text}</Text>}
+        {text ? <Text style={textStyle}>{text}</Text> : null}
         {children}
       </View>
     </View>

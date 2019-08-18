@@ -25,7 +25,7 @@ export default class LihatLayanan extends Component {
   onLoaded = async () => {
     try {
       this.setState({loading: true});
-      const {success, result} = await ServiceAPI.getById(this.idLayanan);
+      const {success, result} = await ServiceAPI.getServiceById(this.idLayanan);
       success && this.setState({loading: false, layanan: result});
     } catch (error) {
       console.log(error);
@@ -51,8 +51,14 @@ export default class LihatLayanan extends Component {
     openPhoneNumber(number);
   };
 
-  onBatalkan = () => {
-    //
+  onBatalkan = async () => {
+    this.state.layanan && (await ServiceAPI.cancel(this.state.layanan.id));
+    this.onLoaded();
+  };
+
+  onSelesai = async () => {
+    this.state.layanan && (await ServiceAPI.finish(this.state.layanan.id));
+    this.onLoaded();
   };
 
   render() {
@@ -63,7 +69,7 @@ export default class LihatLayanan extends Component {
     return (
       <View style={styles.container}>
         <Header
-          ref={ref => (this.header = ref)}
+          onRef={ref => (this.header = ref)}
           title="Detail Layanan"
           backButton
           {...this.props}
@@ -79,6 +85,7 @@ export default class LihatLayanan extends Component {
             style={styles.map}
             onPress={this.onMapPress}
             mapPadding={{top: 56}}
+            directionTo={layanan.lokasiNakes}
           />
 
           <View style={styles.contentContainer}>
@@ -95,6 +102,11 @@ export default class LihatLayanan extends Component {
 
             <View style={styles.content}>
               <Text style={styles.contentTitle}>Detail Layanan</Text>
+
+              <View style={styles.detailItem}>
+                <Icon name="account-circle" style={styles.detailItemIcon} />
+                <Text style={styles.detailItemValue}>{layanan.klien.nama}</Text>
+              </View>
 
               <View style={styles.detailItem}>
                 <Icon name="account-alert" style={styles.detailItemIcon} />
@@ -144,13 +156,15 @@ export default class LihatLayanan extends Component {
           <TouchableOpacity style={styles.action} onPress={this.onHubungi}>
             <Text style={styles.actionTitle}>HUBUNGI</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.action, styles.coloredAction]}
-            onPress={this.onBatalkan}>
-            <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
-              BATALKAN
-            </Text>
-          </TouchableOpacity>
+          {layanan.status.startsWith('Sedang') && (
+            <TouchableOpacity
+              style={[styles.action, styles.coloredAction]}
+              onPress={layanan.isClient ? this.onBatalkan : this.onSelesai}>
+              <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
+                {layanan.isClient ? 'BATALKAN' : 'SELESAI'}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
