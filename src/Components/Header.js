@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import StatusBar, {statusBarHeight} from './StatusBar';
 import Icon from './Icon';
@@ -37,32 +37,60 @@ HeaderIcon.propTypes = {
   right: PropTypes.bool,
 };
 
-const Header = ({title, navigation, left, right, backButton, transparent}) => {
-  const goBack = () => {
-    navigation && navigation.goBack();
+class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      scrollY: new Animated.Value(0),
+    };
+  }
+
+  onScroll(event) {
+    this.state.scrollY.setValue(event.nativeEvent.contentOffset.y);
+  }
+
+  goBack = () => {
+    this.props.navigation && this.props.navigation.goBack();
   };
 
-  const containerStyle = [
-    styles.header,
-    transparent && styles.headerTransparent,
-    {paddingTop: statusBarHeight},
-  ];
+  render() {
+    const {title, left, right, backButton, transparent, animated} = this.props;
 
-  return (
-    <View style={containerStyle}>
-      <StatusBar />
+    const Container = animated ? Animated.View : View;
+    const containerStyle = [styles.header, {paddingTop: statusBarHeight}];
 
-      <View style={styles.headerItem}>
-        {backButton && <HeaderIcon name="arrow-left" onPress={goBack} />}
-        {left}
-      </View>
+    if (transparent || animated) {
+      containerStyle.push(styles.headerTransparent);
+    }
 
-      <Text style={styles.headerTitle}>{title && title.toUpperCase()}</Text>
+    if (animated) {
+      const backgroundColor = this.state.scrollY.interpolate({
+        inputRange: [0, 80],
+        outputRange: ['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1.0)'],
+        extrapolate: 'clamp',
+      });
+      containerStyle.push({
+        backgroundColor,
+      });
+    }
 
-      <View style={[styles.headerItem, styles.right]}>{right}</View>
-    </View>
-  );
-};
+    return (
+      <Container style={containerStyle}>
+        <StatusBar />
+
+        <View style={styles.headerItem}>
+          {backButton && <HeaderIcon name="arrow-left" onPress={this.goBack} />}
+          {left}
+        </View>
+
+        <Text style={styles.headerTitle}>{title && title.toUpperCase()}</Text>
+
+        <View style={[styles.headerItem, styles.right]}>{right}</View>
+      </Container>
+    );
+  }
+}
 
 Header.propTypes = {
   title: PropTypes.string,
@@ -71,11 +99,7 @@ Header.propTypes = {
   right: PropTypes.element,
   backButton: PropTypes.bool,
   navigation: PropTypes.object,
-};
-
-Header.defaultProps = {
-  backButton: false,
-  transparent: false,
+  animated: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({

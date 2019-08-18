@@ -18,7 +18,7 @@ export default class LihatLayanan extends Component {
     this.idLayanan = props.navigation.getParam('id');
     this.state = {
       loading: false,
-      layanan: undefined,
+      layanan: null,
     };
   }
 
@@ -62,9 +62,18 @@ export default class LihatLayanan extends Component {
 
     return (
       <View style={styles.container}>
-        <Header title="Detail Layanan" backButton {...this.props} transparent />
+        <Header
+          ref={ref => (this.header = ref)}
+          title="Detail Layanan"
+          backButton
+          {...this.props}
+          animated
+        />
 
-        <ScrollView style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          onScroll={e => this.header && this.header.onScroll(e)}
+          scrollEventThrottle={16}>
           <MiniMap
             coordinate={layanan.location}
             style={styles.map}
