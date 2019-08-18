@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 8,
     marginTop: 0,
-    borderRadius: 8,
-    elevation: 2,
+    borderRadius: 2,
+    elevation: 1,
   },
   itemFirst: {
     marginTop: 8,

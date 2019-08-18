@@ -3,7 +3,15 @@ import {View, StyleSheet, TouchableHighlight} from 'react-native';
 import MapView from 'react-native-maps';
 import PropTypes from 'prop-types';
 
-const MiniMap = ({style, height, borderRadius, onPress, coordinate, pin}) => {
+const MiniMap = ({
+  style,
+  height,
+  borderRadius,
+  onPress,
+  coordinate,
+  pin,
+  mapPadding,
+}) => {
   const [mapReady, setMapReady] = useState(false);
 
   const initialRegion = {
@@ -45,7 +53,8 @@ const MiniMap = ({style, height, borderRadius, onPress, coordinate, pin}) => {
           zoomEnabled={false}
           pitchEnabled={false}
           rotateEnabled={false}
-          onMapReady={() => setMapReady(true)}>
+          onMapReady={() => setMapReady(true)}
+          mapPadding={mapPadding}>
           {renderMarker()}
         </MapView>
       </View>

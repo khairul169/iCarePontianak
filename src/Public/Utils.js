@@ -1,4 +1,4 @@
-import {PermissionsAndroid} from 'react-native';
+import {PermissionsAndroid, Linking} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import {Service} from './Consts';
 
@@ -75,4 +75,8 @@ export const navigateToMainStack = (navigation, route) => {
     action: NavigationActions.navigate({routeName: route}),
   });
   navigation.reset([action], 0);
+};
+
+export const openPhoneNumber = number => {
+  number && Linking.openURL(`tel:${number}`);
 };
