@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView, ToastAndroid} from 'react-native';
-import {Header, TextEdit} from '../Components';
-import {HeaderIcon} from '../Components/Header';
+import {Header, TextEdit} from 'components';
+import {HeaderIcon} from 'components/Header';
 
 const PengaturanAkun = props => {
   const user = props.navigation.getParam('user');

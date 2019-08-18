@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView, ToastAndroid, Text} from 'react-native';
-import {getTimeString} from '../Public/Utils';
+import {getTimeString} from 'public/Utils';
 import {
   Button,
   Header,
   PickerSelect,
   DateTimePicker,
   TextEdit,
-} from '../Components';
+} from 'components';
 
 const BuatLayanan = ({navigation}) => {
   // Cek layanan

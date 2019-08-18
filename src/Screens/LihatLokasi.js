@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Header, MapLayout} from '../Components';
+import {Header, MapLayout} from 'components';
 
 const LihatLokasi = ({navigation}) => {
   const location = navigation.getParam('location');

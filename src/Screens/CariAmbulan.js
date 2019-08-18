@@ -11,9 +11,9 @@ import {
   BackHandler,
   Dimensions,
 } from 'react-native';
-import {Header, BottomSheet, MapLayout, Button} from '../Components';
-import {fetchItems} from '../Redux/Actions/Ambulan';
-import {pinAmbulance} from '../Assets';
+import {Header, BottomSheet, MapLayout, Button} from 'components';
+import {fetchItems} from 'actions/Ambulan';
+import {pinAmbulance} from 'assets';
 
 const haversine = require('haversine');
 const window = Dimensions.get('window');

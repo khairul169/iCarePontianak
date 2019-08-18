@@ -6,7 +6,7 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation';
 import {fromRight} from 'react-navigation-transitions';
-import BottomTab from '../Components/BottomTab';
+import BottomTab from 'components/BottomTab';
 
 // Routes
 import Loader from './Loader';

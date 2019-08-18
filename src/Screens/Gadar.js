@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
-import {Header, Button} from '../Components';
+import {Header, Button} from 'components';
 
 // Action image
-import gadarIllust from '../Assets/gadar-illust.png';
+import gadarIllust from 'assets/gadar-illust.png';
 
 const Gadar = ({navigation}) => {
   return (

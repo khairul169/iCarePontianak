@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "actions/*": [
+        "src/Redux/Actions/*"
+      ],
+      "assets": [
+        "src/Assets"
+      ],
+      "components": [
+        "src/Components"
+      ],
+      "public/*": [
+        "src/Public/*"
+      ],
+    }
+  },
+  "exclude": [
+    "node_modules",
+  ]
+}

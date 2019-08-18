@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {Header} from '../Components';
-import {fetchItems} from '../Redux/Actions/Notifikasi';
+import {Header} from 'components';
+import {fetchItems} from 'actions/Notifikasi';
 
 class Notifikasi extends Component {
   onLoaded = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
-import {Icon} from '../../Components';
+import {Icon} from 'components';
 import PropTypes from 'prop-types';
 
 const InputText = ({

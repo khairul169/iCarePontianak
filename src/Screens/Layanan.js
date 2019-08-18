@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Header, Icon} from '../Components';
-import {fetchItems} from '../Redux/Actions/Layanan';
+import {Header, Icon} from 'components';
+import {fetchItems} from 'actions/Layanan';
 
 const ItemHeaderAction = ({icon, type, color, onPress}) => {
   const iconStyle = [styles.itemHeaderActionIcon, color && {color}];

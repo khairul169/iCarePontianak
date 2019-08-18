@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Text, ScrollView, RefreshControl} from 'react-native';
-import {HomeHeader} from '../Components';
-import LayananGadar from './Beranda/LayananGadar';
-import KategoriLayanan from './Beranda/KategoriLayanan';
+import {HomeHeader} from 'components';
 
-import {fetchData} from '../Redux/Actions/Beranda';
-import {setNavigationProps} from '../Redux/Actions/OneSignal';
-import {fetchItems as fetchLayanan} from '../Redux/Actions/Layanan';
-import {fetchUser} from '../Redux/Actions/Akun';
-import {requestLocationPermission} from '../Public/Utils';
+import {fetchData} from 'actions/Beranda';
+import {setNavigationProps} from 'actions/OneSignal';
+import {fetchItems as fetchLayanan} from 'actions/Layanan';
+import {fetchUser} from 'actions/Akun';
+import {requestLocationPermission} from 'public/Utils';
+import {gadarBg, gadarIcon} from 'assets';
 
-import {gadarBg, gadarIcon} from '../Assets';
+import LayananGadar from './LayananGadar';
+import KategoriLayanan from './KategoriLayanan';
 
 class Beranda extends Component {
   onLoaded = () => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-import * as Component from '../src/Components';
+import * as Component from 'components';
 
 describe('<BottomSheet />', () => {
   const defaultProps = {};

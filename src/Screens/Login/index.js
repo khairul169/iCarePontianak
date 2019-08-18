@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Image, ToastAndroid} from 'react-native';
-import InputText from './Login/InputText';
-import Button from './Login/Button';
-import {fetchLogin, fetchRegister} from '../Redux/Actions/Auth';
-import OneSignal from '../Public/OneSignal';
-import {appIcon} from '../Assets';
+import {fetchLogin, fetchRegister} from 'actions/Auth';
+import OneSignal from 'public/OneSignal';
+import {appIcon} from 'assets';
+import InputText from './InputText';
+import Button from './Button';
 
 const Login = props => {
   const [register, setRegister] = useState(false);

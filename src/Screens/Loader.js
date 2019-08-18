@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Image} from 'react-native';
-import {validateToken} from '../Redux/Actions/Auth';
-import OneSignal from '../Public/OneSignal';
-import {appIcon} from '../Assets';
+import {validateToken} from 'actions/Auth';
+import OneSignal from 'public/OneSignal';
+import {appIcon} from 'assets';
 
 const Loader = props => {
   const {navigation, auth} = props;

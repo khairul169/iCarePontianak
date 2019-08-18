@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-import {Header, MapLayout, Button, PickerSelect} from '../Components';
-import {ServiceAPI} from '../Public/API';
-import {Service} from '../Public/Consts';
-import {navigateToMainStack} from '../Public/Utils';
-import {pinImage} from '../Assets';
+import {Header, MapLayout, Button, PickerSelect} from 'components';
+import {ServiceAPI} from 'public/API';
+import {Service} from 'public/Consts';
+import {navigateToMainStack} from 'public/Utils';
+import {pinImage} from 'assets';
 
 const PanggilBantuan = ({navigation}) => {
   const jenisBantuan = [

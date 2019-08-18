@@ -12,7 +12,8 @@ import {
   Switch,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import {Header, Icon} from '../Components';
+import {Header, Icon} from 'components';
+import {iconUser} from 'assets';
 
 import {
   fetchUser,
@@ -20,11 +21,9 @@ import {
   setProfileImage,
   setActive,
   setUserLocation,
-} from '../Redux/Actions/Akun';
-import {logout} from '../Redux/Actions/Auth';
-import {getUserType} from '../Public/Utils';
-
-import {iconUser} from '../Assets';
+} from 'actions/Akun';
+import {logout} from 'actions/Auth';
+import {getUserType} from 'public/Utils';
 
 const Button = ({onPress, title, icon}) => {
   const titleStyle = {

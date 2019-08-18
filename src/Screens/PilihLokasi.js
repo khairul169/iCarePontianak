@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-import {Header, MapLayout, Button} from '../Components';
-import {pinImage} from '../Assets';
+import {Header, MapLayout, Button} from 'components';
+import {pinImage} from 'assets';
 
 const PilihLokasi = ({navigation}) => {
   // state

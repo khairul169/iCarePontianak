@@ -7,9 +7,9 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {Header, MiniMap, Icon} from '../Components';
-import {ServiceAPI} from '../Public/API';
-import {openPhoneNumber} from '../Public/Utils';
+import {Header, MiniMap, Icon} from 'components';
+import {ServiceAPI} from 'public/API';
+import {openPhoneNumber} from 'public/Utils';
 
 export default class LihatLayanan extends Component {
   constructor(props) {

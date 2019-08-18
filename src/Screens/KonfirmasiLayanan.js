@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {ServiceAPI} from '../Public/API';
-import {getTimeString, navigateToMainStack} from '../Public/Utils';
+import {ServiceAPI} from 'public/API';
+import {getTimeString, navigateToMainStack} from 'public/Utils';
 
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import {Header, Button, ItemDetail, MiniMap} from '../Components';
+import {Header, Button, ItemDetail, MiniMap} from 'components';
 
 const KonfirmasiLayanan = ({navigation}) => {
   const [loading, setLoading] = useState(false);
