@@ -133,7 +133,7 @@ export default class LihatLayanan extends Component {
 
             <View style={styles.content}>
               <Text style={styles.contentTitle}>Tindakan</Text>
-              {layanan.tindakan.items.map((item, index) => (
+              {layanan.tindakan.map((item, index) => (
                 <View style={styles.tindakan} key={index}>
                   <Icon name="briefcase-edit" style={styles.detailItemIcon} />
                   <Text style={styles.tindakanName}>{item.name}</Text>
@@ -143,8 +143,18 @@ export default class LihatLayanan extends Component {
             </View>
 
             <View style={styles.content}>
-              <Text style={styles.contentTitle}>Estimasi Biaya</Text>
-              <Text style={styles.totalCost}>{layanan.tindakan.total}</Text>
+              <Text style={styles.contentTitle}>Rincian Biaya</Text>
+              {layanan.biaya.rincian.map(item => (
+                <View style={styles.rincianBiaya}>
+                  <Text style={styles.rincianTitle}>{item.title}</Text>
+                  <Text style={styles.rincianValue}>{item.cost}</Text>
+                </View>
+              ))}
+            </View>
+
+            <View style={styles.content}>
+              <Text style={styles.contentTitle}>Total Biaya Layanan</Text>
+              <Text style={styles.totalCost}>{layanan.biaya.total}</Text>
               <Text style={styles.costDisclaimer}>
                 *Tidak termasuk biaya obat-obatan dan tindakan lainnya
               </Text>
@@ -287,5 +297,20 @@ const styles = StyleSheet.create({
   },
   coloredActionTitle: {
     color: '#fff',
+  },
+  rincianBiaya: {
+    marginTop: 8,
+    borderColor: '#eee',
+    borderTopWidth: 1,
+    paddingTop: 8,
+  },
+  rincianTitle: {
+    fontSize: 12,
+    color: '#686868',
+  },
+  rincianValue: {
+    fontSize: 14,
+    color: '#484848',
+    marginTop: 4,
   },
 });

@@ -49,9 +49,6 @@ const Item = ({item, index, onPress}) => (
       <View style={styles.itemDetail}>
         <Icon name="information-outline" style={styles.itemDetailIcon} />
         <Text style={styles.itemDetailValue}>{item.status}</Text>
-        {item.status.startsWith('Sedang') && (
-          <Text style={styles.itemDetailCost}>{item.tindakan.total}</Text>
-        )}
       </View>
 
       <View style={styles.itemDetail}>
@@ -60,7 +57,9 @@ const Item = ({item, index, onPress}) => (
           type="FontAwesome5"
           style={styles.itemDetailIcon}
         />
-        <Text style={styles.itemDetailValue}>{item.tindakan.label}</Text>
+        <Text style={styles.itemDetailValue}>
+          {item.tindakan.map(a => a.name).join(', ')}
+        </Text>
       </View>
 
       {item.waktu && (
