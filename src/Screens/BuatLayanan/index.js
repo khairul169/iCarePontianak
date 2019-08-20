@@ -12,6 +12,7 @@ import PilihKlien from './PilihKlien';
 import DetailLayanan from './DetailLayanan';
 import Konfirmasi from './Konfirmasi';
 import CariNakes from './CariNakes';
+import TambahKlien from './TambahKlien';
 
 class BuatLayanan extends Component {
   constructor(props) {
@@ -66,6 +67,11 @@ class BuatLayanan extends Component {
 
     if (index === 0) {
       this.jumpTo && this.jumpTo('klien');
+      return;
+    }
+
+    if (index === 1) {
+      this.jumpTo && this.jumpTo('detail');
       return;
     }
 
@@ -169,6 +175,7 @@ export default createStackNavigator(
     Index,
     Konfirmasi,
     CariNakes,
+    TambahKlien,
   },
   {
     headerMode: 'none',

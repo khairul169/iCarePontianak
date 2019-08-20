@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
       return {...state, kategori: action.payload};
 
     case 'BUATLAYANAN_LIST_KLIEN':
-      return {...state, listKlien: action.payload};
+      return {...state, listKlien: action.payload, klien: null};
 
     case 'BUATLAYANAN_TINDAKAN':
       return {...state, tindakan: action.payload};

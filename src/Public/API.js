@@ -47,10 +47,22 @@ const API = (() => {
     }
   };
 
+  // delete method
+  const del = async url => {
+    try {
+      const result = await axios.delete(API_URL + url, getConfig());
+      console.log(result.data);
+      return result.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     get,
     post,
     patch,
+    del,
   };
 })();
 
@@ -94,6 +106,9 @@ const UserAPI = {
 const ClientAPI = {
   getClients: () => API.get('client/'),
   getClient: id => API.get(`client/${id}`),
+  create: data => API.post('client/', {data}),
+  update: (id, data) => API.patch(`client/${id}`, {data}),
+  delete: id => API.del(`client/${id}`),
 };
 
 /* ##################################### Service API ##################################### */
