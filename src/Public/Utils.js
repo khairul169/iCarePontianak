@@ -1,5 +1,6 @@
 import {PermissionsAndroid, Linking} from 'react-native';
-import {NavigationActions} from 'react-navigation';
+import {NavigationActions, createStackNavigator} from 'react-navigation';
+import {fromRight} from 'react-navigation-transitions';
 import {Service} from './Consts';
 import store from 'public/Store';
 
@@ -123,3 +124,9 @@ export const regionContainingPoints = (points, zoom = 1.0) => {
     longitudeDelta: deltaLng,
   };
 };
+
+export const createScreenStack = routes =>
+  createStackNavigator(routes, {
+    headerMode: 'none',
+    transitionConfig: () => fromRight(),
+  });

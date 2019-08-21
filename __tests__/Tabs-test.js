@@ -6,25 +6,7 @@ import TabItem from 'components/TabItem';
 
 describe('<BottomTab />', () => {
   const defaultProps = {
-    navigation: {
-      state: {
-        routes: [
-          {
-            key: 'Home',
-            routeName: 'Home',
-          },
-          {
-            key: 'Account',
-            routeName: 'Account',
-          },
-        ],
-        index: 0,
-      },
-    },
-    icons: {
-      Home: 'home',
-      Account: 'account',
-    },
+    navigation: {state: {routes: []}},
   };
   const wrapper = renderer.create(<BottomTab {...defaultProps} />);
 

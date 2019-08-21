@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Dimensions, ToastAndroid} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
-import {fromRight} from 'react-navigation-transitions';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {Header, Icon, Button} from 'components';
 import {resetState} from 'actions/BuatLayanan';
+import {createScreenStack} from 'public/Utils';
 
 import PilihTindakan from './PilihTindakan';
 import PilihKlien from './PilihKlien';
@@ -170,15 +169,9 @@ const Index = connect(
   mapDispatchToProps,
 )(BuatLayanan);
 
-export default createStackNavigator(
-  {
-    Index,
-    Konfirmasi,
-    CariNakes,
-    TambahKlien,
-  },
-  {
-    headerMode: 'none',
-    transitionConfig: () => fromRight(),
-  },
-);
+export default createScreenStack({
+  Index,
+  Konfirmasi,
+  CariNakes,
+  TambahKlien,
+});

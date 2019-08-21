@@ -3,7 +3,7 @@ import {View, StyleSheet, Keyboard} from 'react-native';
 import PropTypes from 'prop-types';
 import TabItem from './TabItem';
 
-const BottomTab = ({navigation, icons}) => {
+const BottomTab = ({navigation, routes}) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
@@ -34,9 +34,9 @@ const BottomTab = ({navigation, icons}) => {
       {navigation.state.routes.map((item, index) => (
         <TabItem
           key={index}
-          title={item.routeName}
+          title={routes[item.key].title || item.routeName}
           active={index === navigation.state.index}
-          icon={icons[item.key]}
+          icon={routes[item.key].icon}
           onPress={() => navigateTo(item.key)}
         />
       ))}

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import {OPENROUTE_APIKEY} from 'react-native-dotenv';
+import {OpenRouteAPI} from 'public/API';
 
 class MapLayout extends Component {
   static propTypes = {
@@ -15,6 +14,8 @@ class MapLayout extends Component {
     onPress: PropTypes.func,
     navPath: PropTypes.bool,
     mapPadding: PropTypes.object,
+    onMarkerRef: PropTypes.func,
+    renderMarkerChildren: PropTypes.func,
   };
 
   static defaultProps = {
@@ -62,7 +63,23 @@ class MapLayout extends Component {
     this.setState({userLocation: coordinate, animateToUser: false});
 
     // update navigation path
-    if (this.props.navPath) this._updateNavigation(coordinate);
+    this._updateNavigation(coordinate);
+  };
+
+  _renderMarker = (item, index) => {
+    const {onMarkerRef, renderMarkerChildren} = this.props;
+
+    return (
+      <Marker
+        key={index}
+        ref={ref => onMarkerRef && onMarkerRef(index, ref)}
+        coordinate={item.coordinate}
+        title={item.title}
+        image={item.image}
+        onPress={item.onPress}>
+        {renderMarkerChildren && renderMarkerChildren(item, index)}
+      </Marker>
+    );
   };
 
   _renderMarkers = () => {
@@ -74,57 +91,26 @@ class MapLayout extends Component {
       markers.push({coordinate: this.props.coordinate});
     }
 
-    return markers.map((item, index) => (
-      <Marker
-        key={index}
-        coordinate={item.coordinate}
-        title={item.title}
-        image={item.image}
-        onPress={item.onPress}
-      />
-    ));
+    return markers.map(this._renderMarker);
   };
 
-  _updateNavigation = userCoordinate => {
-    if (this.state.navPoints || !this.props.coordinate) return;
-
+  _updateNavigation = async userCoordinate => {
     const {coordinate} = this.props;
+    if (this.state.navPoints || !coordinate) {
+      return;
+    }
 
-    const apiKey = OPENROUTE_APIKEY;
-    const c0 = `${userCoordinate.longitude},${userCoordinate.latitude}`;
-    const c1 = `${coordinate.longitude},${coordinate.latitude}`;
-
-    // direction api
-    const apiUrl = 'https://api.openrouteservice.org/v2/directions/';
-
-    // fetch navigation path
-    axios
-      .get(apiUrl + `driving-car?api_key=${apiKey}&start=${c0}&end=${c1}`)
-      .then(response => {
-        // lines coordinate
-        const points = response.data.features[0].geometry.coordinates;
-
-        // set navigation points
-        this.setState({navPoints: points});
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
+    const points = await OpenRouteAPI.getDirection(userCoordinate, coordinate);
+    this.setState({navPoints: points});
   };
 
   _renderNavigation = () => {
-    if (!this.state.mapReady || !this.state.navPoints) return;
-
-    const points = this.state.navPoints.map(item => {
-      return {
-        latitude: item[1],
-        longitude: item[0],
-      };
-    });
-
+    if (!this.state.mapReady || !this.state.navPoints) {
+      return;
+    }
     return (
       <Polyline
-        coordinates={points}
+        coordinates={this.state.navPoints}
         strokeWidth={5}
         strokeColor="rgba(34, 62, 230, 0.6)"
       />

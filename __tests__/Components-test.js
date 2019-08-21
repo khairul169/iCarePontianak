@@ -4,15 +4,6 @@ import * as Component from 'components';
 
 jest.mock('react-navigation', () => ({withNavigation: component => component}));
 
-describe('<BottomSheet />', () => {
-  const defaultProps = {};
-  const wrapper = renderer.create(<Component.BottomSheet {...defaultProps} />);
-
-  test('render', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
 describe('<Button />', () => {
   const defaultProps = {title: 'This is button'};
   const wrapper = renderer.create(<Component.Button {...defaultProps} />);

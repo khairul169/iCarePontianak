@@ -1,52 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<BottomSheet /> render 1`] = `
-<View
-  pointerEvents="box-none"
-  style={
-    Object {
-      "alignSelf": "stretch",
-      "bottom": -533.6,
-      "flex": 1,
-      "height": 533.6,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "transform": Array [
-        Object {
-          "translateY": -0,
-        },
-      ],
-    }
-  }
->
-  <View
-    style={
-      Array [
-        Object {
-          "backgroundColor": "white",
-          "borderRadius": 3,
-          "flex": 1,
-          "marginHorizontal": 8,
-          "overflow": "hidden",
-          "position": "relative",
-        },
-        undefined,
-      ]
-    }
-  >
-    0
-    <View
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    />
-  </View>
-</View>
-`;
-
 exports[`<Button /> render 1`] = `
 <View
   style={
@@ -283,7 +236,7 @@ exports[`<PickerSelect /> render 1`] = `
       Object {
         "backgroundColor": "#fff",
         "borderColor": "#ddd",
-        "borderRadius": 5,
+        "borderRadius": 2,
         "borderWidth": 1,
         "paddingLeft": 8,
       },

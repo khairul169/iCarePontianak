@@ -125,16 +125,13 @@ const ServiceAPI = {
   finish: id => API.patch(`service/finish/${id}`),
 };
 
-/* ##################################### Notification API ##################################### */
+/* ##################################### Emergency API ##################################### */
 
-const NotificationAPI = {
-  getAll: () => API.get('notification/'),
-};
-
-/* ##################################### Ambulance API ##################################### */
-
-const AmbulanceAPI = {
-  getAll: () => API.get('ambulance/'),
+const EmergencyAPI = {
+  getLists: () => API.get('emergency/'),
+  getById: id => API.get(`emergency/${id}`),
+  create: data => API.post('emergency/', {data}),
+  getAmbulance: () => API.get('emergency/ambulance'),
 };
 
 /* ##################################### OpenRoute API ##################################### */
@@ -170,8 +167,7 @@ export {
   UserAPI,
   ClientAPI,
   ServiceAPI,
-  NotificationAPI,
-  AmbulanceAPI,
+  EmergencyAPI,
   // Third-party API
   OpenRouteAPI,
 };
