@@ -1,4 +1,3 @@
-import BottomSheet from './BottomSheet';
 import Button from './Button';
 import DateTimePicker from './DateTimePicker';
 import Header from './Header';
@@ -14,7 +13,6 @@ import StatusBar from './StatusBar';
 import TextEdit from './TextEdit';
 
 export {
-  BottomSheet,
   Button,
   DateTimePicker,
   Header,

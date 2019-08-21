@@ -53,7 +53,7 @@ class Beranda extends Component {
           <LayananGadar
             icon={gadarIcon}
             background={gadarBg}
-            onPress={() => this.navigateTo('Gadar')}
+            onPress={() => this.navigateTo('Emergency')}
           />
 
           <Text style={styles.subtitle}>Layanan lainnya</Text>

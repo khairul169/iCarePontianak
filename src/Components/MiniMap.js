@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TouchableHighlight} from 'react-native';
 import MapView from 'react-native-maps';
+import MapMarker from './MapMarker';
 import PropTypes from 'prop-types';
 import {regionContainingPoints} from 'public/Utils';
 import {OpenRouteAPI} from 'public/API';
 
-const MiniMap = ({style, onPress, coordinate, mapPadding, directionTo}) => {
+const MiniMap = ({
+  style,
+  onPress,
+  coordinate,
+  mapPadding,
+  directionTo,
+  markerIcons,
+}) => {
   const [mapReady, setMapReady] = useState(false);
   const [directions, setDirections] = useState();
 
@@ -36,13 +44,24 @@ const MiniMap = ({style, onPress, coordinate, mapPadding, directionTo}) => {
     this.mapView.animateToRegion(region);
   };
 
-  const renderMarker = () => {
+  const renderMarkers = () => {
     if (!mapReady) return;
     const points = [coordinate, directionTo];
 
-    return points.map(
-      (item, index) => item && <MapView.Marker key={index} coordinate={item} />,
-    );
+    return points.map((item, index) => {
+      if (!item) return;
+
+      const icon = markerIcons && markerIcons[index];
+      return (
+        <MapMarker
+          key={index}
+          coordinate={item}
+          icon={icon && icon.name}
+          iconType={icon && icon.type}
+          iconColor={icon && icon.color}
+        />
+      );
+    });
   };
 
   const renderDirection = () => {
@@ -72,7 +91,7 @@ const MiniMap = ({style, onPress, coordinate, mapPadding, directionTo}) => {
           rotateEnabled={false}
           onMapReady={() => setMapReady(true)}
           mapPadding={mapPadding}>
-          {renderMarker()}
+          {renderMarkers()}
           {renderDirection()}
         </MapView>
       </View>
@@ -86,6 +105,7 @@ MiniMap.propTypes = {
   coordinate: PropTypes.any,
   mapPadding: PropTypes.object,
   directionTo: PropTypes.any,
+  markerIcons: PropTypes.array,
 };
 
 const styles = StyleSheet.create({

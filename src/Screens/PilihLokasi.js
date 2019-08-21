@@ -39,7 +39,6 @@ const PilihLokasi = ({navigation}) => {
         </View>
 
         <Button
-          icon="map-marker-radius"
           title="Pilih Posisi Ini"
           style={styles.selectButton}
           border={false}

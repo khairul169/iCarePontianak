@@ -12,47 +12,35 @@ import BottomTab from 'components/BottomTab';
 import Loader from './Loader';
 import Login from './Login';
 import Beranda from './Beranda';
-import Notifikasi from './Notifikasi';
 import Layanan from './Layanan';
+import EmergencyMap from './EmergencyMap';
 import Akun from './Akun';
-import Gadar from './Gadar';
-import CariAmbulan from './CariAmbulan';
+import Emergency from './Emergency';
 import BuatLayanan from './BuatLayanan';
 import PilihLokasi from './PilihLokasi';
-import PanggilBantuan from './PanggilBantuan';
 import LihatLokasi from './LihatLokasi';
 import PengaturanAkun from './PengaturanAkun';
 import LihatLayanan from './LihatLayanan';
 
-// Tabbar icons
-const routeIcons = {
-  Beranda: 'home-plus',
-  Notifikasi: 'bell-circle',
-  Layanan: 'radio',
-  Akun: 'account-circle',
-};
-
 const tabRoutes = {
-  Beranda,
-  Notifikasi,
-  Layanan,
-  Akun,
+  Beranda: {screen: Beranda, icon: 'home-plus'},
+  Layanan: {screen: Layanan, icon: 'radio'},
+  EmergencyMap: {screen: EmergencyMap, icon: 'bell-circle', title: 'Emergency'},
+  Akun: {screen: Akun, icon: 'account-circle'},
 };
 
 // BottomTab navigator
 const TabNavigator = createBottomTabNavigator(tabRoutes, {
-  tabBarComponent: props => <BottomTab {...props} icons={routeIcons} />,
+  tabBarComponent: props => <BottomTab {...props} routes={tabRoutes} />,
 });
 
 // Main stacks
 const MainStack = createStackNavigator(
   {
     TabNavigator,
-    Gadar,
-    CariAmbulan,
+    Emergency,
     BuatLayanan,
     PilihLokasi,
-    PanggilBantuan,
     LihatLokasi,
     PengaturanAkun,
     LihatLayanan,

@@ -86,6 +86,15 @@ export default class LihatLayanan extends Component {
             onPress={this.onMapPress}
             mapPadding={{top: 56}}
             directionTo={layanan.lokasiNakes}
+            markerIcons={[
+              {
+                color: '#4CAF50',
+              },
+              {
+                name: 'account-circle',
+                color: '#2196F3',
+              },
+            ]}
           />
 
           <View style={styles.contentContainer}>
@@ -164,14 +173,14 @@ export default class LihatLayanan extends Component {
 
         <View style={styles.col}>
           <TouchableOpacity style={styles.action} onPress={this.onHubungi}>
-            <Text style={styles.actionTitle}>HUBUNGI</Text>
+            <Text style={styles.actionTitle}>Hubungi</Text>
           </TouchableOpacity>
           {layanan.status.startsWith('Sedang') && (
             <TouchableOpacity
               style={[styles.action, styles.coloredAction]}
               onPress={layanan.isClient ? this.onBatalkan : this.onSelesai}>
               <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
-                {layanan.isClient ? 'BATALKAN' : 'SELESAI'}
+                {layanan.isClient ? 'Batalkan' : 'Selesai'}
               </Text>
             </TouchableOpacity>
           )}
@@ -270,7 +279,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   totalCost: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#43A047',
     marginTop: 8,
   },

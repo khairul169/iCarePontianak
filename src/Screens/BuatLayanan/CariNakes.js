@@ -105,6 +105,15 @@ class CariNakes extends Component {
             coordinate={lokasi}
             directionTo={nakesCoordinate}
             mapPadding={{top: 48, bottom: 48}}
+            markerIcons={[
+              {
+                color: '#4CAF50',
+              },
+              {
+                name: 'account-circle',
+                color: '#2196F3',
+              },
+            ]}
           />
 
           <View style={styles.content}>
