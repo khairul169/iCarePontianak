@@ -6,7 +6,6 @@ import {
   ToastAndroid,
   Text,
   TextInput,
-  Animated,
 } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -28,21 +27,11 @@ class PanggilBantuan extends Component {
     ];
 
     this.state = {
-      circleState: new Animated.Value(0),
       loading: false,
       lokasi: null,
       jenis: this.jenisBantuan[0],
       keterangan: '',
     };
-  }
-
-  componentDidMount() {
-    Animated.loop(
-      Animated.timing(this.state.circleState, {
-        toValue: 1,
-        duration: 5000,
-      }),
-    ).start();
   }
 
   onRegionChanged = ({latitude, longitude}) => {
@@ -117,28 +106,6 @@ class PanggilBantuan extends Component {
   }
 
   render() {
-    const circleWidth = this.state.circleState.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 192],
-    });
-    const circleRadius = this.state.circleState.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 96],
-    });
-    const circleOpacity = this.state.circleState.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0],
-    });
-    const circleStyle = [
-      styles.circle,
-      {
-        width: circleWidth,
-        height: circleWidth,
-        borderRadius: circleRadius,
-        opacity: circleOpacity,
-      },
-    ];
-
     return (
       <View style={styles.container}>
         <Header transparent backButton />
@@ -151,7 +118,6 @@ class PanggilBantuan extends Component {
           />
 
           <View style={styles.pinContainer}>
-            <Animated.View style={circleStyle} />
             <Image source={pinImage} style={styles.pin} />
           </View>
 
@@ -188,17 +154,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     resizeMode: 'contain',
-    position: 'absolute',
     transform: [{translateY: -24}],
-  },
-  circle: {
-    backgroundColor: 'rgba(211, 47, 47, 0.2)',
-    borderColor: 'rgba(211, 47, 47, 0.8)',
-    borderWidth: 1,
-    width: 128,
-    height: 128,
-    borderRadius: 64,
-    opacity: 0.0,
   },
   header: {
     height: 24,
