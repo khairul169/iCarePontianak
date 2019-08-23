@@ -60,6 +60,8 @@ class Header extends Component {
 
     const Container = animated ? Animated.View : View;
     const containerStyle = [styles.header, {paddingTop: statusBarHeight}];
+    const HeaderTitle = animated ? Animated.Text : Text;
+    const headerTitleStyle = [styles.headerTitle];
 
     if (transparent || animated) {
       containerStyle.push(styles.headerTransparent);
@@ -71,8 +73,19 @@ class Header extends Component {
         outputRange: ['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1.0)'],
         extrapolate: 'clamp',
       });
+
       containerStyle.push({
         backgroundColor,
+      });
+
+      const headerTitleOpacity = this.state.scrollY.interpolate({
+        inputRange: [0, 80],
+        outputRange: [0, 1],
+        extrapolate: 'clamp',
+      });
+
+      headerTitleStyle.push({
+        opacity: headerTitleOpacity,
       });
     }
 
@@ -85,7 +98,9 @@ class Header extends Component {
           {left}
         </View>
 
-        <Text style={styles.headerTitle}>{title && title.toUpperCase()}</Text>
+        <HeaderTitle style={headerTitleStyle}>
+          {title && title.toUpperCase()}
+        </HeaderTitle>
 
         <View style={[styles.headerItem, styles.right]}>{right}</View>
       </Container>

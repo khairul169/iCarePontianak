@@ -67,7 +67,7 @@ class Index extends Component {
   onItemPress = (item, index) => {
     this.mapLayout.moveToLocation(item.lokasi);
     this.markerRefs[index].showCallout();
-    this.panel.snapTo(0);
+    this.panel.snapTo(1);
   };
 
   renderPanel() {
@@ -112,10 +112,15 @@ class Index extends Component {
           style={styles.map}
           markers={
             items &&
-            items.map(item => ({title: item.jenis, coordinate: item.lokasi}))
+            items.map(item => ({
+              title: item.jenis,
+              description: item.keterangan,
+              coordinate: item.lokasi,
+              icon: 'hand',
+              iconColor: '#d13d3d',
+            }))
           }
           onMarkerRef={(index, ref) => (this.markerRefs[index] = ref)}
-          mapPadding={{bottom: 200}}
           onMapReady={() => this.panel.snapTo(0)}
           onUserLocation={userLocation => this.setState({userLocation})}
         />

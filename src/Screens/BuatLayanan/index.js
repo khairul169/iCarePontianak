@@ -89,6 +89,7 @@ class BuatLayanan extends Component {
 
         <TabView
           navigationState={this.state}
+          lazy={true}
           renderScene={this.renderScene}
           onIndexChange={index => this.setState({index})}
           initialLayout={{width: Dimensions.get('window').width}}

@@ -151,6 +151,7 @@ class CariAmbulan extends Component {
         title: item.name,
         image: pinAmbulance,
         coordinate: item.coordinate,
+        icon: 'ambulance',
         onPress: () => this.selectItem(index),
       }));
 

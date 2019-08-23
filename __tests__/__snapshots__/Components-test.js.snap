@@ -64,13 +64,15 @@ exports[`<Header /> render 1`] = `
   />
   <Text
     style={
-      Object {
-        "color": "#424242",
-        "flex": 3,
-        "fontSize": 16,
-        "fontWeight": "bold",
-        "textAlign": "center",
-      }
+      Array [
+        Object {
+          "color": "#424242",
+          "flex": 3,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        },
+      ]
     }
   />
   <View

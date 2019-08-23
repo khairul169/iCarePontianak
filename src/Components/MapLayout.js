@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import MapView, {Marker, Polyline} from 'react-native-maps';
+import MapView, {Polyline, Circle} from 'react-native-maps';
 import PropTypes from 'prop-types';
+import MapMarker from './MapMarker';
 import {OpenRouteAPI} from 'public/API';
 
 class MapLayout extends Component {
@@ -15,27 +16,33 @@ class MapLayout extends Component {
     navPath: PropTypes.bool,
     mapPadding: PropTypes.object,
     onMarkerRef: PropTypes.func,
-    renderMarkerChildren: PropTypes.func,
   };
 
   static defaultProps = {
     markers: [],
   };
 
-  state = {
-    region: null,
-    userLocation: null,
-    animateToUser: true,
-    navPoints: null,
-    mapReady: false,
-  };
+  constructor(props) {
+    super(props);
 
-  initialRegion = {
-    latitude: -0.0257813,
-    longitude: 109.3323449,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.02,
-  };
+    this.state = {
+      region: null,
+      userLocation: null,
+      animateToUser: true,
+      navPoints: null,
+      mapReady: false,
+    };
+
+    this.initialRegion = {
+      latitude: -0.0257813,
+      longitude: 109.3323449,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.02,
+    };
+
+    this.renderMarker = this._renderMarker.bind(this);
+    this.renderMarkers = this._renderMarkers.bind(this);
+  }
 
   onMapReady = () => {
     this.setState({mapReady: true});
@@ -66,23 +73,33 @@ class MapLayout extends Component {
     this._updateNavigation(coordinate);
   };
 
-  _renderMarker = (item, index) => {
-    const {onMarkerRef, renderMarkerChildren} = this.props;
+  _renderMarker(item, index) {
+    const {onMarkerRef} = this.props;
 
-    return (
-      <Marker
-        key={index}
-        ref={ref => onMarkerRef && onMarkerRef(index, ref)}
+    return [
+      <MapMarker
+        onRef={ref => onMarkerRef && onMarkerRef(index, ref)}
+        onPress={item.onPress}
         coordinate={item.coordinate}
         title={item.title}
-        image={item.image}
-        onPress={item.onPress}>
-        {renderMarkerChildren && renderMarkerChildren(item, index)}
-      </Marker>
-    );
-  };
+        description={item.description}
+        icon={item.icon}
+        iconType={item.iconType}
+        iconColor={item.iconColor}
+      />,
+      item.circle && (
+        <Circle
+          center={item.coordinate}
+          radius={item.circle.radius}
+          strokeWidth={item.circle.width}
+          strokeColor={item.circle.color}
+          fillColor={item.circle.background}
+        />
+      ),
+    ];
+  }
 
-  _renderMarkers = () => {
+  _renderMarkers() {
     if (!this.state.mapReady) return;
 
     const markers = [...this.props.markers];
@@ -91,8 +108,8 @@ class MapLayout extends Component {
       markers.push({coordinate: this.props.coordinate});
     }
 
-    return markers.map(this._renderMarker);
-  };
+    return markers.map(this.renderMarker);
+  }
 
   _updateNavigation = async userCoordinate => {
     const {coordinate} = this.props;
@@ -156,7 +173,7 @@ class MapLayout extends Component {
         }
         onPress={this.props.onPress}
         mapPadding={this.props.mapPadding}>
-        {this._renderMarkers()}
+        {this.renderMarkers()}
         {this._renderNavigation()}
       </MapView>
     );

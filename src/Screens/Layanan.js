@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     margin: 8,
     marginTop: 0,
     borderRadius: 2,
-    elevation: 1,
+    elevation: 3,
   },
   itemFirst: {
     marginTop: 8,

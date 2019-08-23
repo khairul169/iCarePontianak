@@ -15,7 +15,9 @@ const Item = ({title, image, onPress, style}) => {
       onPress={onPress}
       underlayColor={null}>
       <View>
-        <Image source={image} style={styles.itemImage} />
+        <View style={styles.itemImageContainer}>
+          <Image source={image} style={styles.itemImage} />
+        </View>
         <Text style={styles.itemTitle}>{title}</Text>
       </View>
     </TouchableHighlight>
@@ -27,8 +29,8 @@ const KategoriLayanan = ({data, onPress}) => {
     const itemStyle = [
       styles.item,
       {
-        marginLeft: !index ? 16 : 0,
-        marginRight: 16,
+        marginLeft: !index ? 16 : 8,
+        marginRight: data && index < data.length - 1 ? 8 : 16,
       },
     ];
     return (
@@ -56,19 +58,31 @@ const KategoriLayanan = ({data, onPress}) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
+    marginBottom: 16,
   },
   item: {
+    marginTop: 5,
     width: 80,
   },
-  itemImage: {
+  itemImageContainer: {
+    backgroundColor: '#fff',
+    elevation: 3,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 80,
     height: 80,
+  },
+  itemImage: {
+    width: 60,
+    height: 60,
   },
   itemTitle: {
     fontSize: 12,
     lineHeight: 18,
     color: '#607D8B',
     marginTop: 6,
+    textAlign: 'center',
   },
 });
 

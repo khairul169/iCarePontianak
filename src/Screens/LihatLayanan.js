@@ -86,6 +86,15 @@ export default class LihatLayanan extends Component {
             onPress={this.onMapPress}
             mapPadding={{top: 56}}
             directionTo={layanan.lokasiNakes}
+            markerIcons={[
+              {
+                color: '#4CAF50',
+              },
+              {
+                name: 'account-circle',
+                color: '#2196F3',
+              },
+            ]}
           />
 
           <View style={styles.contentContainer}>
