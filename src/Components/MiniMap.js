@@ -49,6 +49,8 @@ const MiniMap = ({
     const points = [coordinate, directionTo];
 
     return points.map((item, index) => {
+      if (!item) return;
+
       const icon = markerIcons && markerIcons[index];
       return (
         <MapMarker

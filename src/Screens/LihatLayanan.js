@@ -173,14 +173,14 @@ export default class LihatLayanan extends Component {
 
         <View style={styles.col}>
           <TouchableOpacity style={styles.action} onPress={this.onHubungi}>
-            <Text style={styles.actionTitle}>HUBUNGI</Text>
+            <Text style={styles.actionTitle}>Hubungi</Text>
           </TouchableOpacity>
           {layanan.status.startsWith('Sedang') && (
             <TouchableOpacity
               style={[styles.action, styles.coloredAction]}
               onPress={layanan.isClient ? this.onBatalkan : this.onSelesai}>
               <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
-                {layanan.isClient ? 'BATALKAN' : 'SELESAI'}
+                {layanan.isClient ? 'Batalkan' : 'Selesai'}
               </Text>
             </TouchableOpacity>
           )}
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   totalCost: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#43A047',
     marginTop: 8,
   },

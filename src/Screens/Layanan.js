@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {Header, Icon} from 'components';
 import {fetchItems} from 'actions/Layanan';
+import {openPhoneNumber} from 'public/Utils';
 
 const ItemHeaderAction = ({icon, type, color, onPress}) => {
   const iconStyle = [styles.itemHeaderActionIcon, color && {color}];
@@ -31,19 +32,14 @@ const Item = ({item, index, onPress}) => (
           <Text style={styles.itemHeaderDetail}>{item.user.type}</Text>
         </View>
 
-        {item.kontak ? (
-          [
-            <ItemHeaderAction key="msg" icon="message-text" color="#7CB342" />,
-            <ItemHeaderAction
-              key="call"
-              icon="md-call"
-              type="Ionicons"
-              color="#3949AB"
-            />,
-          ]
-        ) : (
-          <Text style={styles.itemId}>#{item.id}</Text>
-        )}
+        <ItemHeaderAction key="msg" icon="message-text" color="#7CB342" />
+        <ItemHeaderAction
+          key="call"
+          icon="md-call"
+          type="Ionicons"
+          color="#3949AB"
+          onPress={() => item.user && openPhoneNumber(item.user.phone)}
+        />
       </View>
 
       <View style={styles.itemDetail}>
@@ -130,10 +126,10 @@ const styles = StyleSheet.create({
   // item
   item: {
     backgroundColor: '#fff',
-    margin: 8,
+    margin: 16,
     marginTop: 0,
     borderRadius: 2,
-    elevation: 3,
+    elevation: 2,
   },
   itemFirst: {
     marginTop: 8,
