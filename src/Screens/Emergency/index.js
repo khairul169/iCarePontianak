@@ -8,6 +8,8 @@ import gadarIllust from 'assets/gadar-illust.png';
 
 // routes
 import CariAmbulan from './CariAmbulan';
+import PenangananPertama from './PenangananPertama';
+import LihatPenanganan from './LihatPenanganan';
 import PanggilBantuan from './PanggilBantuan';
 
 class Emergency extends Component {
@@ -34,7 +36,14 @@ class Emergency extends Component {
           />
 
           <View style={styles.col}>
-            <Button style={styles.btnAid} small title="Penanganan Pertama" />
+            <Button
+              style={styles.btnAid}
+              small
+              title="Penanganan Pertama"
+              onPress={() =>
+                this.props.navigation.navigate('PenangananPertama')
+              }
+            />
             <Button
               style={styles.btnAmbulan}
               small
@@ -101,5 +110,7 @@ const styles = StyleSheet.create({
 export default createScreenStack({
   Emergency,
   CariAmbulan,
+  PenangananPertama,
+  LihatPenanganan,
   PanggilBantuan,
 });

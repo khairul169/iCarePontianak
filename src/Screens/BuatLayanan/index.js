@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, StyleSheet, Dimensions, ToastAndroid} from 'react-native';
+import {View, StyleSheet, Dimensions, ToastAndroid, Text} from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {Header, Icon, Button} from 'components';
 import {resetState} from 'actions/BuatLayanan';
@@ -82,6 +82,49 @@ class BuatLayanan extends Component {
     this.props.navigation.navigate('Konfirmasi');
   };
 
+  renderBtnLanjut = () => {
+    const {buatLayanan} = this.props;
+    const {index} = this.state;
+
+    if (index === 0 && !buatLayanan.tindakan.length) {
+      return;
+    }
+
+    if (index === 1 && !buatLayanan.klien) {
+      return;
+    }
+
+    return (
+      <Button
+        title="Lanjut"
+        style={styles.btnFinish}
+        color="#fff"
+        onPress={this.onLanjut}
+      />
+    );
+  };
+
+  renderTabBar(props) {
+    return (
+      <TabBar
+        {...props}
+        style={styles.tabBar}
+        tabStyle={styles.tabStyle}
+        getLabelText={({route}) => route.title}
+        activeColor="#43A047"
+        inactiveColor="#585858"
+        renderLabel={({route, color}) => {
+          const labelStyle = [styles.tabLabel, {color}];
+          return <Text style={labelStyle}>{route.title}</Text>;
+        }}
+        renderIcon={({route, color}) => {
+          return <Icon name={route.icon} size={18} color={color} />;
+        }}
+        renderIndicator={() => <View />}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -93,29 +136,10 @@ class BuatLayanan extends Component {
           renderScene={this.renderScene}
           onIndexChange={index => this.setState({index})}
           initialLayout={{width: Dimensions.get('window').width}}
-          renderTabBar={props => (
-            <TabBar
-              {...props}
-              style={styles.tabBar}
-              tabStyle={styles.tabStyle}
-              labelStyle={styles.tabLabel}
-              getLabelText={({route}) => route.title}
-              renderIcon={({route}) => (
-                <Icon style={styles.tabIcon} name={route.icon} />
-              )}
-              indicatorStyle={styles.tabIndicator}
-            />
-          )}
+          renderTabBar={this.renderTabBar.bind(this)}
         />
 
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Lanjut"
-            style={styles.btnFinish}
-            color="#fff"
-            onPress={this.onLanjut}
-          />
-        </View>
+        {this.renderBtnLanjut()}
       </View>
     );
   }
@@ -134,26 +158,15 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   tabLabel: {
-    color: '#7986CB',
+    color: '#FF5722',
     margin: 0,
     fontSize: 14,
     marginTop: 2,
   },
-  tabIcon: {
-    fontSize: 18,
-    color: '#7986CB',
-  },
-  tabIndicator: {
-    backgroundColor: '#7986CB',
-  },
-  buttonContainer: {
-    padding: 8,
-    backgroundColor: '#fff',
-    elevation: 12,
-  },
   btnFinish: {
-    borderWidth: 0,
+    margin: 8,
     backgroundColor: '#8BC34A',
+    borderWidth: 0,
   },
 });
 

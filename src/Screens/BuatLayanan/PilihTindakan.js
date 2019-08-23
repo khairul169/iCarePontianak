@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, FlatList, Text} from 'react-native';
+import {StyleSheet, View, FlatList, Text} from 'react-native';
 import {Button, Icon} from 'components';
 import {fetchKategori, setTindakan} from 'actions/BuatLayanan';
 
@@ -31,10 +31,12 @@ class PilihTindakan extends Component {
     const selected = this.props.tindakan.includes(item.id);
     return (
       <Button style={styles.item} onPress={() => this.onTindakanPress(item.id)}>
-        <Text style={[styles.itemName, selected && styles.itemSelected]}>
-          {item.name}
-        </Text>
-        <Text style={styles.itemCost}>{item.cost}</Text>
+        <View style={styles.itemContent}>
+          <Text style={[styles.itemName, selected && styles.itemSelected]}>
+            {item.name}
+          </Text>
+          <Text style={styles.itemCost}>{item.cost}</Text>
+        </View>
         {selected && <Icon name="check" size={18} color="#7CB342" />}
       </Button>
     );
@@ -62,18 +64,24 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
-    paddingBottom: 8,
+    paddingBottom: 0,
   },
   item: {
-    marginBottom: 8,
-    height: 60,
+    marginBottom: 16,
+    height: 'auto',
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    elevation: 2,
+    borderWidth: 0,
+  },
+  itemContent: {
+    flex: 1,
+    paddingVertical: 16,
   },
   itemName: {
     flex: 1,
-    marginRight: 8,
     fontSize: 14,
     lineHeight: 18,
     color: '#455A64',
@@ -82,9 +90,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   itemCost: {
-    marginRight: 8,
-    fontSize: 14,
-    color: '#686868',
+    marginTop: 8,
+    fontSize: 20,
+    color: '#43A047',
   },
 });
 
