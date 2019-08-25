@@ -162,7 +162,7 @@ class MapLayout extends Component {
   render() {
     const {style, coordinate} = this.props;
 
-    const containerStyle = [style];
+    const containerStyle = [{zIndex: -1}, style];
     const mapStyle = {flex: 1};
     const centerButton = {
       backgroundColor: '#fff',
