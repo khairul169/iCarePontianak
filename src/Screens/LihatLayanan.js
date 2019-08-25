@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {Header, MiniMap, Icon} from 'components';
+import {Header, MiniMap, Icon, Dialog, Button} from 'components';
 import {ServiceAPI} from 'public/API';
 import {openPhoneNumber} from 'public/Utils';
 
@@ -51,15 +51,90 @@ export default class LihatLayanan extends Component {
     openPhoneNumber(number);
   };
 
-  onBatalkan = async () => {
+  onBatalkan = () => {
+    this.dialog.show({
+      title: 'Layanan batal',
+      description: 'Apakah anda yakin ingin membatalkan layanan ini?',
+      buttonYes: 'Batalkan',
+      onPressYes: () => this.setBatal(),
+    });
+  };
+
+  onSelesai = () => {
+    this.dialog.show({
+      title: 'Layanan selesai',
+      description: 'Apakah anda yakin telah menyelesaikan layanan ini?',
+      onPressYes: () => this.setSelesai(),
+    });
+  };
+
+  setBatal = async () => {
     this.state.layanan && (await ServiceAPI.cancel(this.state.layanan.id));
     this.onLoaded();
   };
 
-  onSelesai = async () => {
+  setSelesai = async () => {
     this.state.layanan && (await ServiceAPI.finish(this.state.layanan.id));
     this.onLoaded();
   };
+
+  renderNotifikasi() {
+    if (!this.state.layanan) {
+      return;
+    }
+
+    let iconColor = '#FFA726';
+    let title = '';
+    let description = '';
+    let recommend = false;
+
+    const {status, isClient} = this.state.layanan;
+
+    if (status.toLowerCase().startsWith('sedang')) {
+      title = 'Menunggu petugas';
+      if (isClient) {
+        description = 'Petugas saat ini sedang menyiapkan layanan yang anda';
+        description += ' buat. Silahkan tunggu petugas menghubungi anda.';
+      } else {
+        description = 'Klien sedang menunggu anda untuk menyelesaikan';
+        description += ' tugas anda.';
+      }
+    }
+
+    if (status.toLowerCase().startsWith('batal')) {
+      iconColor = '#686868';
+      title = 'Layanan batal';
+      description = 'Layanan ini telah dibatalkan.';
+    }
+
+    if (status.toLowerCase().startsWith('selesai')) {
+      iconColor = '#7CB342';
+      title = 'Layanan selesai';
+      description = 'Layanan ini telah selesai.';
+      recommend = true;
+    }
+
+    return (
+      title !== '' && (
+        <View style={styles.content}>
+          <View style={styles.col}>
+            <Icon name="alert-circle" size={24} color={iconColor} />
+            <View style={styles.notif}>
+              <Text style={styles.notifTitle}>{title}</Text>
+              <Text style={styles.notifDesc}>{description}</Text>
+            </View>
+          </View>
+
+          {recommend && (
+            <Button
+              style={styles.recommendButton}
+              title={'Beri Penilaian Pada ' + (isClient ? 'Petugas' : 'Klien')}
+            />
+          )}
+        </View>
+      )
+    );
+  }
 
   render() {
     const {loading, layanan} = this.state;
@@ -98,7 +173,9 @@ export default class LihatLayanan extends Component {
           />
 
           <View style={styles.contentContainer}>
-            <View style={[styles.content, styles.user]}>
+            {this.renderNotifikasi()}
+
+            <View style={[styles.content, styles.col]}>
               <Image
                 style={styles.userImage}
                 source={{uri: layanan.user.image}}
@@ -153,8 +230,8 @@ export default class LihatLayanan extends Component {
 
             <View style={styles.content}>
               <Text style={styles.contentTitle}>Rincian Biaya</Text>
-              {layanan.biaya.rincian.map(item => (
-                <View style={styles.rincianBiaya}>
+              {layanan.biaya.rincian.map((item, index) => (
+                <View key={index} style={styles.rincianBiaya}>
                   <Text style={styles.rincianTitle}>{item.title}</Text>
                   <Text style={styles.rincianValue}>{item.cost}</Text>
                 </View>
@@ -171,20 +248,26 @@ export default class LihatLayanan extends Component {
           </View>
         </ScrollView>
 
-        <View style={styles.col}>
-          <TouchableOpacity style={styles.action} onPress={this.onHubungi}>
-            <Text style={styles.actionTitle}>Hubungi</Text>
+        <View style={styles.actions}>
+          <TouchableOpacity
+            style={[styles.action, styles.coloredAction]}
+            onPress={this.onHubungi}>
+            <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
+              Hubungi
+            </Text>
           </TouchableOpacity>
           {layanan.status.startsWith('Sedang') && (
             <TouchableOpacity
-              style={[styles.action, styles.coloredAction]}
+              style={styles.action}
               onPress={layanan.isClient ? this.onBatalkan : this.onSelesai}>
-              <Text style={[styles.actionTitle, styles.coloredActionTitle]}>
+              <Text style={styles.actionTitle}>
                 {layanan.isClient ? 'Batalkan' : 'Selesai'}
               </Text>
             </TouchableOpacity>
           )}
         </View>
+
+        <Dialog ref={ref => (this.dialog = ref)} />
       </View>
     );
   }
@@ -199,24 +282,41 @@ const styles = StyleSheet.create({
     height: 300,
   },
   contentContainer: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#f2f2f2',
     elevation: 12,
+    padding: 8,
+    paddingBottom: 0,
   },
   content: {
     padding: 16,
     marginBottom: 8,
     backgroundColor: '#fff',
     borderColor: '#eee',
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
+    borderWidth: 1,
+    borderRadius: 2,
   },
   col: {
     flexDirection: 'row',
   },
-  user: {
-    flexDirection: 'row',
-    borderTopWidth: 0,
+  // notif
+  notif: {
+    flex: 1,
+    marginLeft: 16,
   },
+  notifTitle: {
+    fontSize: 14,
+    color: '#585858',
+  },
+  notifDesc: {
+    fontSize: 12,
+    color: '#686868',
+    marginTop: 6,
+    lineHeight: 18,
+  },
+  recommendButton: {
+    marginTop: 16,
+  },
+  // user
   userImage: {
     width: 40,
     height: 40,
@@ -288,13 +388,19 @@ const styles = StyleSheet.create({
     color: '#727272',
     marginTop: 4,
   },
+  // actions
+  actions: {
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
+    borderTopWidth: 1,
+    padding: 8,
+    flexDirection: 'row',
+  },
   action: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingVertical: 15,
+    height: 44,
     alignItems: 'center',
-    borderColor: '#C5E1A5',
-    borderTopWidth: 1,
+    justifyContent: 'center',
   },
   actionTitle: {
     color: '#689F38',
@@ -302,7 +408,7 @@ const styles = StyleSheet.create({
   },
   coloredAction: {
     backgroundColor: '#7CB342',
-    borderTopWidth: 0,
+    borderRadius: 22,
   },
   coloredActionTitle: {
     color: '#fff',

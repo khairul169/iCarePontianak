@@ -24,6 +24,15 @@ describe('<DateTimePicker />', () => {
   });
 });
 
+describe('<Dialog />', () => {
+  const defaultProps = {};
+  const wrapper = renderer.create(<Component.Dialog {...defaultProps} />);
+
+  test('render', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
 describe('<Header />', () => {
   const defaultProps = {};
   const wrapper = renderer.create(<Component.Header {...defaultProps} />);

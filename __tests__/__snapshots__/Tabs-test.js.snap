@@ -6,9 +6,9 @@ exports[`<BottomTab /> render 1`] = `
     Object {
       "alignItems": "center",
       "backgroundColor": "#fff",
-      "elevation": 10,
+      "borderTopColor": "#CFD8DC",
+      "borderTopWidth": 1,
       "flexDirection": "row",
-      "zIndex": 10,
     }
   }
 />

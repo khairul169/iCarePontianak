@@ -33,6 +33,8 @@ exports[`<Button /> render 1`] = `
 
 exports[`<DateTimePicker /> render 1`] = `null`;
 
+exports[`<Dialog /> render 1`] = `<View />`;
+
 exports[`<Header /> render 1`] = `
 <View
   style={

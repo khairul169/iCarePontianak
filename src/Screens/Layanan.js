@@ -118,7 +118,7 @@ class Layanan extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
   },
   content: {
     flex: 1,
@@ -126,10 +126,12 @@ const styles = StyleSheet.create({
   // item
   item: {
     backgroundColor: '#fff',
-    margin: 16,
+    margin: 8,
     marginTop: 0,
     borderRadius: 2,
-    elevation: 2,
+    //elevation: 2,
+    borderColor: '#eee',
+    borderWidth: 1,
   },
   itemFirst: {
     marginTop: 8,

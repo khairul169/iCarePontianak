@@ -1,5 +1,6 @@
 import Button from './Button';
 import DateTimePicker from './DateTimePicker';
+import Dialog from './Dialog';
 import Header from './Header';
 import HomeHeader from './HomeHeader';
 import Icon from './Icon';
@@ -15,6 +16,7 @@ import TextEdit from './TextEdit';
 export {
   Button,
   DateTimePicker,
+  Dialog,
   Header,
   HomeHeader,
   Icon,

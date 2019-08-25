@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
   item: {
     marginBottom: 16,
     height: 'auto',
+    borderRadius: 2,
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    elevation: 2,
-    borderWidth: 0,
+    borderColor: '#ddd',
   },
   itemContent: {
     flex: 1,

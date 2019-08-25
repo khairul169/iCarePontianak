@@ -65,10 +65,10 @@ Button.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center',
     height: 48,
+    borderRadius: 24,
     flexDirection: 'row',
   },
   buttonTitle: {
