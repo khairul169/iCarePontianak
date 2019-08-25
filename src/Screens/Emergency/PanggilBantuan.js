@@ -81,22 +81,24 @@ class PanggilBantuan extends Component {
   renderPanel() {
     return (
       <View style={styles.panel}>
-        <Text style={styles.title}>Jenis Kejadian</Text>
-        <PickerSelect
-          items={this.jenisBantuan}
-          style={styles.pilihanBantuan}
-          height={48}
-          value={this.state.jenis}
-          onValueChange={jenis => this.setState({jenis})}
-        />
+        <View style={styles.container}>
+          <Text style={styles.title}>Jenis Kejadian</Text>
+          <PickerSelect
+            items={this.jenisBantuan}
+            style={styles.pilihanBantuan}
+            height={48}
+            value={this.state.jenis}
+            onValueChange={jenis => this.setState({jenis})}
+          />
 
-        <Text style={styles.title}>Keterangan</Text>
-        <TextInput
-          style={styles.inputText}
-          multiline={true}
-          value={this.state.keterangan}
-          onChangeText={keterangan => this.setState({keterangan})}
-        />
+          <Text style={styles.title}>Keterangan</Text>
+          <TextInput
+            style={styles.inputText}
+            multiline={true}
+            value={this.state.keterangan}
+            onChangeText={keterangan => this.setState({keterangan})}
+          />
+        </View>
 
         <TouchableOpacity style={styles.submitButton} onPress={this.onSubmit}>
           <Text style={styles.submitButtonTitle}>Panggil Bantuan</Text>
@@ -125,8 +127,8 @@ class PanggilBantuan extends Component {
             callbackNode={this.state.fall}
             renderHeader={this.renderHeader.bind(this)}
             renderContent={this.renderPanel.bind(this)}
-            snapPoints={[282, 24]}
-            initialSnap={0}
+            snapPoints={[324, 180]}
+            initialSnap={1}
           />
         </View>
       </View>
@@ -140,13 +142,14 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1,
+    marginBottom: 180,
   },
   pinContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
     top: 0,
-    bottom: 0,
+    bottom: 180,
     left: 0,
     right: 0,
   },
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
   panel: {
-    height: 258,
+    height: 300,
     backgroundColor: '#fff',
   },
   title: {
@@ -182,9 +185,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   inputText: {
-    height: 80,
+    flex: 1,
     margin: 16,
     marginTop: 8,
+    marginBottom: 0,
     borderColor: '#eee',
     borderWidth: 1,
     borderRadius: 2,
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 48,
-    marginHorizontal: 16,
+    margin: 16,
     borderRadius: 2,
   },
   submitButtonTitle: {

@@ -102,10 +102,10 @@ class Index extends Component {
         <Header title="Emergency Map" transparent />
         <BottomSheet
           ref={ref => (this.panel = ref)}
-          snapPoints={[274, 24]}
+          snapPoints={[424, 140]}
           renderHeader={this.renderPanelHeader.bind(this)}
           renderContent={this.renderPanel.bind(this)}
-          initialSnap={0}
+          initialSnap={1}
         />
         <MapLayout
           ref={ref => (this.mapLayout = ref)}
@@ -121,7 +121,7 @@ class Index extends Component {
             }))
           }
           onMarkerRef={(index, ref) => (this.markerRefs[index] = ref)}
-          onMapReady={() => this.panel.snapTo(0)}
+          onMapReady={() => this.panel.snapTo(1)}
           onUserLocation={userLocation => this.setState({userLocation})}
         />
       </View>
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+    marginBottom: 140,
   },
   header: {
     height: 24,
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
   panel: {
-    height: 250,
+    height: 400,
     backgroundColor: '#fff',
   },
   panelContent: {
