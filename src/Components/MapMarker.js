@@ -59,6 +59,7 @@ export default class MapMarker extends React.PureComponent {
         <Image
           source={require('src/Assets/pins/pin_custom.png')}
           style={markerStyle}
+          onLoad={() => this.forceUpdate()}
         />
         <Icon
           name={icon || 'home-circle'}
