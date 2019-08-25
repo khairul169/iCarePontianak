@@ -10,6 +10,7 @@ import {
 import {Header, MiniMap, Icon, Dialog, Button} from 'components';
 import {ServiceAPI} from 'public/API';
 import {openPhoneNumber} from 'public/Utils';
+import {iconUser} from 'assets';
 
 export default class LihatLayanan extends Component {
   constructor(props) {
@@ -178,7 +179,9 @@ export default class LihatLayanan extends Component {
             <View style={[styles.content, styles.col]}>
               <Image
                 style={styles.userImage}
-                source={{uri: layanan.user.image}}
+                source={
+                  layanan.user.image ? {uri: layanan.user.image} : iconUser
+                }
               />
               <View style={styles.userDetail}>
                 <Text style={styles.userName}>{layanan.user.name}</Text>
@@ -322,6 +325,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     overflow: 'hidden',
+    backgroundColor: '#fff',
   },
   userDetail: {
     flex: 1,

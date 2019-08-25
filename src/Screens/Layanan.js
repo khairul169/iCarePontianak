@@ -11,6 +11,7 @@ import {
 import {Header, Icon} from 'components';
 import {fetchItems} from 'actions/Layanan';
 import {openPhoneNumber} from 'public/Utils';
+import {iconUser} from 'assets';
 
 const ItemHeaderAction = ({icon, type, color, onPress}) => {
   const iconStyle = [styles.itemHeaderActionIcon, color && {color}];
@@ -25,7 +26,10 @@ const Item = ({item, index, onPress}) => (
   <View style={[styles.item, !index && styles.itemFirst]}>
     <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.itemHeader}>
-        <Image style={styles.itemPhoto} source={{uri: item.user.image}} />
+        <Image
+          style={styles.itemPhoto}
+          source={item.user.image ? {uri: item.user.image} : iconUser}
+        />
 
         <View style={styles.itemHeaderContent}>
           <Text style={styles.itemHeaderName}>{item.user.name}</Text>
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#555',
+    backgroundColor: '#fff',
     overflow: 'hidden',
   },
   itemHeaderContent: {

@@ -14,6 +14,7 @@ import {searchNakes, resetNakesExclusion} from 'actions/BuatLayanan';
 import {navigateToMainStack} from 'public/Utils';
 import {ServiceAPI} from 'public/API';
 import {fetchItems as fetchLayanan} from 'actions/Layanan';
+import {iconUser} from 'assets';
 
 const ActionButton = ({size, icon, iconSize, onPress, style, color}) => {
   const containerStyle = [
@@ -35,9 +36,14 @@ class CariNakes extends Component {
   }
 
   onResetNakes = () => {
-    if (!this.props.nakes) {
+    const {buatLayanan} = this.props;
+
+    // reset exclusion
+    if (!buatLayanan.nakes) {
       this.props.resetNakesExclusion();
     }
+
+    // search again
     this.props.searchNakes();
   };
 
@@ -119,7 +125,10 @@ class CariNakes extends Component {
           <View style={styles.content}>
             {nakes && (
               <View style={styles.userImgContainer}>
-                <Image style={styles.userImg} source={{uri: nakes.image}} />
+                <Image
+                  style={styles.userImg}
+                  source={nakes.image ? {uri: nakes.image} : iconUser}
+                />
               </View>
             )}
 
