@@ -92,7 +92,7 @@ class Akun extends Component {
     this.props.navigation.navigate('PilihLokasi', {
       location: coordinate.latitude ? coordinate : null,
       callback: ({latitude, longitude}) => {
-        this.props.props.setUserLocation(latitude, longitude);
+        this.props.setUserLocation(latitude, longitude);
       },
     });
   };

@@ -136,9 +136,9 @@ class MapLayout extends Component {
   }
 
   updateNavigation = async userCoordinate => {
-    const {coordinate} = this.props;
+    const {coordinate, navPath} = this.props;
 
-    if (!coordinate) {
+    if (!coordinate || !navPath) {
       return;
     }
 
