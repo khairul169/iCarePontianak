@@ -1,6 +1,7 @@
 import {ONESIGNAL_ID} from 'react-native-dotenv';
 import RNOneSignal from 'react-native-onesignal';
 import store from 'public/Store';
+import {navigateToMainStack} from 'public/Utils';
 import {UserAPI} from 'public/API';
 
 const OneSignal = (() => {
@@ -8,7 +9,8 @@ const OneSignal = (() => {
   let deviceId = null;
 
   const onNotificationPress = (data, navigation) => {
-    navigation.navigate('Layanan');
+    //navigation.navigate('Layanan');
+    navigateToMainStack('Layanan');
   };
 
   const onOpened = openResult => {

@@ -109,6 +109,9 @@ class Layanan extends Component {
           keyExtractor={item => item.id}
           onRefresh={this.onLoaded}
           refreshing={this.props.layanan.loading}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>Tidak ada layanan</Text>
+          }
         />
       </View>
     );
@@ -213,6 +216,12 @@ const styles = StyleSheet.create({
     borderColor: '#eee',
     borderTopWidth: 1,
     paddingTop: 16,
+  },
+  emptyText: {
+    alignSelf: 'center',
+    marginTop: 16,
+    fontSize: 14,
+    color: '#686868',
   },
 });
 

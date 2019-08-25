@@ -138,6 +138,9 @@ class CariAmbulan extends Component {
           data={this.state.items}
           keyExtractor={(item, index) => `item-${index}`}
           renderItem={this.renderAmbulanceList.bind(this)}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>Ambulan tidak tersedia</Text>
+          }
         />
       </View>
     );
@@ -246,6 +249,12 @@ const styles = StyleSheet.create({
   },
   hubungi: {
     marginTop: 16,
+  },
+  emptyText: {
+    alignSelf: 'center',
+    marginTop: 16,
+    fontSize: 14,
+    color: '#686868',
   },
 });
 

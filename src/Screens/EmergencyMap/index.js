@@ -90,6 +90,9 @@ class Index extends Component {
               <Text style={styles.itemTitle}>{item.jenis}</Text>
             </TouchableOpacity>
           )}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>Tidak ada notifikasi darurat</Text>
+          }
         />
       </View>
     );
@@ -176,6 +179,12 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 14,
     color: '#525252',
+  },
+  emptyText: {
+    alignSelf: 'center',
+    marginTop: 16,
+    fontSize: 14,
+    color: '#686868',
   },
 });
 
