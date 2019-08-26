@@ -164,7 +164,7 @@ class CariAmbulan extends Component {
 
         <MapLayout
           ref={ref => (this.mapLayout = ref)}
-          style={styles.container}
+          style={styles.map}
           onUserLocation={userLocation => this.setState({userLocation})}
           onPress={this.releaseItem}
           markers={markers}
@@ -188,6 +188,10 @@ class CariAmbulan extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  map: {
+    flex: 1,
+    marginBottom: 24,
   },
   content: {
     padding: 16,
