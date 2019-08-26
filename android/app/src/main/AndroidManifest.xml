@@ -25,10 +25,19 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-	  
-	  <meta-data
-		android:name="com.google.android.geo.API_KEY"
-		android:value="AIzaSyCOnrC0hfg9p90McSpHEe473l8tLl2Iux0" />
+      
+      <service
+        android:name=".NotificationExtender"
+        android:permission="android.permission.BIND_JOB_SERVICE"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.onesignal.NotificationExtender" />
+        </intent-filter>
+      </service>
+
+      <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyCOnrC0hfg9p90McSpHEe473l8tLl2Iux0" />
     </application>
 
 </manifest>
