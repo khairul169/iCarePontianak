@@ -39,9 +39,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   splashImage: {
-    width: 48,
-    height: 48,
-    tintColor: '#90A4AE',
+    width: 128,
+    height: 128,
   },
 });
 

@@ -128,9 +128,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    tintColor: '#455A64',
-    width: 64,
-    height: 64,
+    flex: 1,
+    width: 128,
+    resizeMode: 'contain',
     alignSelf: 'center',
   },
   inputContainer: {
