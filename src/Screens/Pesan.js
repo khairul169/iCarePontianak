@@ -7,7 +7,7 @@ export default class Pesan extends Component {
     return (
       <View style={styles.container}>
         <Header title="Pesan" />
-        <Text>Pesan</Text>
+        <Text style={styles.emptyText}>Tidak ada pesan untuk ditampilkan.</Text>
       </View>
     );
   }
@@ -16,5 +16,11 @@ export default class Pesan extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: '#686868',
+    marginTop: 16,
+    alignSelf: 'center',
   },
 });
