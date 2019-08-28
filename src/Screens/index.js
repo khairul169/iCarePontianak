@@ -14,6 +14,7 @@ import Login from './Login';
 import Beranda from './Beranda';
 import Layanan from './Layanan';
 import EmergencyMap from './EmergencyMap';
+import Pesan from './Pesan';
 import Akun from './Akun';
 import Emergency from './Emergency';
 import BuatLayanan from './BuatLayanan';
@@ -21,11 +22,13 @@ import PilihLokasi from './PilihLokasi';
 import LihatLokasi from './LihatLokasi';
 import PengaturanAkun from './PengaturanAkun';
 import LihatLayanan from './LihatLayanan';
+import LihatPesan from './LihatPesan';
 
 const tabRoutes = {
   Beranda: {screen: Beranda, icon: 'home-plus'},
   Layanan: {screen: Layanan, icon: 'radio'},
   EmergencyMap: {screen: EmergencyMap, icon: 'bell-circle', title: 'Emergency'},
+  Pesan: {screen: Pesan, icon: 'message-text'},
   Akun: {screen: Akun, icon: 'account-circle'},
 };
 
@@ -44,6 +47,7 @@ const MainStack = createStackNavigator(
     LihatLokasi,
     PengaturanAkun,
     LihatLayanan,
+    LihatPesan,
   },
   {
     headerMode: 'none',

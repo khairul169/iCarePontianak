@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {Header, MiniMap, Icon, Dialog, Button} from 'components';
 import {ServiceAPI} from 'public/API';
-import {openPhoneNumber} from 'public/Utils';
 import {iconUser} from 'assets';
 
 export default class LihatLayanan extends Component {
@@ -48,8 +47,8 @@ export default class LihatLayanan extends Component {
   onHubungi = () => {
     if (!this.state.layanan) return;
 
-    const number = this.state.layanan.user.phone;
-    openPhoneNumber(number);
+    const {id} = this.state.layanan.user;
+    this.props.navigation.navigate('LihatPesan', {id});
   };
 
   onBatalkan = () => {

@@ -134,6 +134,13 @@ const EmergencyAPI = {
   getAmbulance: () => API.get('emergency/ambulance'),
 };
 
+/* ##################################### Message API ##################################### */
+
+const MessageAPI = {
+  getMessages: id => API.get(`message/get/${id}`),
+  create: (id, message) => API.post('message/', {id, message}),
+};
+
 /* ##################################### OpenRoute API ##################################### */
 
 const OpenRouteAPI = {
@@ -168,6 +175,7 @@ export {
   ClientAPI,
   ServiceAPI,
   EmergencyAPI,
+  MessageAPI,
   // Third-party API
   OpenRouteAPI,
 };

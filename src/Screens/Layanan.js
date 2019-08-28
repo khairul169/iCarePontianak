@@ -22,7 +22,7 @@ const ItemHeaderAction = ({icon, type, color, onPress}) => {
   );
 };
 
-const Item = ({item, index, onPress}) => (
+const Item = ({item, index, onPress, navigation}) => (
   <View style={[styles.item, !index && styles.itemFirst]}>
     <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.itemHeader}>
@@ -36,7 +36,14 @@ const Item = ({item, index, onPress}) => (
           <Text style={styles.itemHeaderDetail}>{item.user.type}</Text>
         </View>
 
-        <ItemHeaderAction key="msg" icon="message-text" color="#7CB342" />
+        <ItemHeaderAction
+          key="msg"
+          icon="message-text"
+          color="#7CB342"
+          onPress={() =>
+            item.user && navigation.navigate('LihatPesan', {id: item.user.id})
+          }
+        />
         <ItemHeaderAction
           key="call"
           icon="md-call"
@@ -98,7 +105,13 @@ class Layanan extends Component {
   };
 
   renderLayanan(props) {
-    return <Item {...props} onPress={() => this.lihatLayanan(props.item.id)} />;
+    return (
+      <Item
+        {...props}
+        navigation={this.props.navigation}
+        onPress={() => this.lihatLayanan(props.item.id)}
+      />
+    );
   }
 
   render() {
