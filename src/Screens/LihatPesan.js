@@ -8,53 +8,61 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Header, Icon} from 'components';
-
-const mockData = [
-  {
-    self: false,
-    message: 'Test',
-  },
-  {
-    self: true,
-    message: 'Heheaw awddawdawda awdawdwa awdawdwadaw awdwa',
-  },
-  {
-    self: false,
-    message: 'Test',
-  },
-  {
-    self: true,
-    message: 'Hehe',
-  },
-  {
-    self: true,
-    message: 'Heheaw awddawdawda awdawdwa awdawdwadaw awdwa',
-  },
-  {
-    self: false,
-    message: 'Test',
-  },
-  {
-    self: true,
-    message: 'Hehe',
-  },
-];
+import {HeaderIcon} from 'components/Header';
+import {UserAPI, MessageAPI} from 'public/API';
+import {openPhoneNumber} from 'public/Utils';
 
 export default class LihatPesan extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      messages: mockData,
-      mesage: '',
+      user: null,
+      messages: [],
+      inputMessage: '',
     };
 
     this.userId = props.navigation.getParam('id');
   }
 
-  sendMessage() {
-    this.setState({message: ''});
+  componentDidMount() {
+    this.fetchUser();
+    this.fetchMessages();
   }
+
+  fetchUser = async () => {
+    try {
+      const {success, result} = await UserAPI.getUserById(this.userId);
+      success && this.setState({user: result});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchMessages = async () => {
+    try {
+      const {success, result} = await MessageAPI.getMessages(this.userId);
+      success && this.setState({messages: result});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  sendMessage = async () => {
+    const {user, inputMessage} = this.state;
+    this.setState({inputMessage: ''});
+
+    if (!user) {
+      return;
+    }
+
+    try {
+      const {success} = await MessageAPI.create(user.id, inputMessage);
+      success && this.fetchMessages();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   renderMessageItem({item}) {
     const itemStyle = [styles.message];
@@ -69,7 +77,7 @@ export default class LihatPesan extends Component {
 
     return (
       <View style={itemStyle}>
-        <Text style={styles.messageTime}>12 Agustus 2019 14.10</Text>
+        <Text style={styles.messageTime}>{item.time}</Text>
         <View style={msgBoxStyle}>
           <Text style={textStyle}>{item.message}</Text>
         </View>
@@ -77,28 +85,56 @@ export default class LihatPesan extends Component {
     );
   }
 
+  renderRightHeaderItem = () => {
+    const {user} = this.state;
+
+    if (!user || !user.phone) {
+      return;
+    }
+
+    return (
+      <HeaderIcon
+        name="md-call"
+        type="Ionicons"
+        right
+        onPress={() => openPhoneNumber(user.phone)}
+      />
+    );
+  };
+
   render() {
+    const {user, messages} = this.state;
+
     return (
       <View style={styles.container}>
-        <Header title="Pesan" backButton />
+        <Header
+          title={user ? user.name : 'Pesan'}
+          backButton
+          right={this.renderRightHeaderItem()}
+        />
         <FlatList
-          data={this.state.messages}
+          data={messages}
           renderItem={this.renderMessageItem}
           keyExtractor={(item, index) => `item-${index}`}
           style={styles.messages}
           contentContainerStyle={styles.messagesContent}
           inverted={true}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>
+              Tidak ada pesan untuk ditampilkan.
+            </Text>
+          }
         />
         <View style={styles.actions}>
           <TextInput
             style={styles.inputMessage}
             placeholder="Kirim pesan.."
-            value={this.state.message}
-            onChangeText={message => this.setState({message})}
+            value={this.state.inputMessage}
+            onChangeText={inputMessage => this.setState({inputMessage})}
           />
           <TouchableOpacity
             style={styles.actionItem}
-            onPress={this.sendMessage.bind(this)}>
+            onPress={this.sendMessage}>
             <Icon name="send" style={styles.actionIcon} />
           </TouchableOpacity>
         </View>
@@ -160,5 +196,11 @@ const styles = StyleSheet.create({
   actionIcon: {
     fontSize: 28,
     color: '#424242',
+  },
+  emptyText: {
+    fontSize: 14,
+    color: '#686868',
+    marginTop: 16,
+    alignSelf: 'center',
   },
 });
