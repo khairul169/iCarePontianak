@@ -87,6 +87,7 @@ export default class LihatPesan extends Component {
           keyExtractor={(item, index) => `item-${index}`}
           style={styles.messages}
           contentContainerStyle={styles.messagesContent}
+          inverted={true}
         />
         <View style={styles.actions}>
           <TextInput
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   message: {
-    marginBottom: 16,
+    marginTop: 16,
     alignItems: 'flex-start',
   },
   messageTime: {
