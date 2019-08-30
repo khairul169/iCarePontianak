@@ -16,6 +16,24 @@ import {ServiceAPI} from 'public/API';
 import {fetchItems as fetchLayanan} from 'actions/Layanan';
 import {iconUser} from 'assets';
 
+const UserRating = ({average, count}) => (
+  <View style={styles.userRating}>
+    {[...Array(5).keys()].map((item, index) => {
+      const filled = average && index < average.toFixed();
+      return (
+        <Icon
+          name={filled ? 'star' : 'star-outline'}
+          size={16}
+          color="#4CAF50"
+        />
+      );
+    })}
+    <Text style={styles.userRatingText}>
+      {(average || 0).toFixed(1)} ({count})
+    </Text>
+  </View>
+);
+
 const ActionButton = ({size, icon, iconSize, onPress, style, color}) => {
   const containerStyle = [
     styles.actionButton,
@@ -89,11 +107,13 @@ class CariNakes extends Component {
     const {lokasi, nakes} = this.props.buatLayanan;
 
     const genderIcon =
-      nakes && nakes.gender.startsWith('P') ? 'gender-female' : 'gender-male';
+      nakes && nakes.user.gender.startsWith('P')
+        ? 'gender-female'
+        : 'gender-male';
 
     const mapStyle = [
       styles.map,
-      {height: Dimensions.get('window').height * 0.5},
+      {height: Dimensions.get('window').height * 0.4},
     ];
 
     const nakesCoordinate = nakes && {
@@ -127,7 +147,7 @@ class CariNakes extends Component {
               <View style={styles.userImgContainer}>
                 <Image
                   style={styles.userImg}
-                  source={nakes.image ? {uri: nakes.image} : iconUser}
+                  source={nakes ? {uri: nakes.user.image} : iconUser}
                 />
               </View>
             )}
@@ -141,13 +161,14 @@ class CariNakes extends Component {
 
               {nakes && (
                 <View>
-                  <Text style={styles.userName}>{nakes.name}</Text>
+                  <Text style={styles.userName}>{nakes.user.name}</Text>
                   <View style={styles.userDesc}>
                     <Icon style={styles.userGenderIcon} name={genderIcon} />
                     <Text style={styles.userType}>
-                      {nakes.type} • {nakes.distance}
+                      {nakes.user.type} • {nakes.distance}
                     </Text>
                   </View>
+                  <UserRating {...nakes.user.rating} />
                 </View>
               )}
 
@@ -217,7 +238,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     alignSelf: 'center',
-    marginTop: 24,
+    marginTop: 16,
     fontSize: 22,
     fontWeight: 'bold',
     color: '#484848',
@@ -234,6 +255,17 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   userType: {
+    fontSize: 14,
+    color: '#686868',
+  },
+  userRating: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+  },
+  userRatingText: {
+    marginLeft: 8,
     fontSize: 14,
     color: '#686868',
   },

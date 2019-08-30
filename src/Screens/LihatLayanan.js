@@ -11,6 +11,36 @@ import {Header, MiniMap, Icon, Dialog, Button} from 'components';
 import {ServiceAPI} from 'public/API';
 import {iconUser} from 'assets';
 
+const UserRating = ({average, count}) => {
+  const countTextStyle = [styles.userRatingText, {marginRight: 4}];
+  const countIconStyle = {marginRight: 8};
+  const avgTextStyle = [styles.userRatingText, {marginLeft: 8}];
+
+  return (
+    <View style={styles.userRating}>
+      <Text style={countTextStyle}>{count}</Text>
+      <Icon
+        name="account-circle"
+        size={16}
+        color="#686868"
+        style={countIconStyle}
+      />
+
+      {[...Array(5).keys()].map((item, index) => {
+        const filled = average && index < average.toFixed();
+        return (
+          <Icon
+            name={filled ? 'star' : 'star-outline'}
+            size={16}
+            color="#4CAF50"
+          />
+        );
+      })}
+      <Text style={avgTextStyle}>{(average || 0).toFixed(1)}</Text>
+    </View>
+  );
+};
+
 export default class LihatLayanan extends Component {
   constructor(props) {
     super(props);
@@ -185,6 +215,7 @@ export default class LihatLayanan extends Component {
               <View style={styles.userDetail}>
                 <Text style={styles.userName}>{layanan.user.name}</Text>
                 <Text style={styles.userDesc}>{layanan.user.type}</Text>
+                <UserRating {...layanan.user.rating} />
               </View>
             </View>
 
@@ -338,6 +369,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#686868',
     marginTop: 4,
+  },
+  userRating: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    marginLeft: -2,
+  },
+  userRatingText: {
+    fontSize: 14,
+    color: '#686868',
   },
   contentTitle: {
     fontSize: 14,
