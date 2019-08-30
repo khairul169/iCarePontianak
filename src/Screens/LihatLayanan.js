@@ -6,9 +6,11 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Modal,
+  TextInput,
 } from 'react-native';
 import {Header, MiniMap, Icon, Dialog, Button} from 'components';
-import {ServiceAPI} from 'public/API';
+import {ServiceAPI, UserAPI} from 'public/API';
 import {iconUser} from 'assets';
 
 const UserRating = ({average, count}) => {
@@ -41,6 +43,73 @@ const UserRating = ({average, count}) => {
   );
 };
 
+const GiveRatingModal = ({
+  visible,
+  onHide,
+  value,
+  onValueChange,
+  message,
+  onMessageChange,
+  onSubmit,
+}) => {
+  const containerStyle = {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  };
+  const contentStyle = {
+    backgroundColor: '#fff',
+    padding: 24,
+    borderRadius: 3,
+    elevation: 3,
+  };
+  const titleStyle = {fontSize: 16, color: '#424242'};
+  const starRatingStyle = {
+    flexDirection: 'row',
+    marginTop: 18,
+    marginBottom: 12,
+    justifyContent: 'center',
+  };
+  const inputTextStyle = {marginBottom: 8};
+
+  const renderStars = () =>
+    [...Array(5).keys()].map((item, index) => {
+      const active = value && index < value;
+      return (
+        <TouchableOpacity
+          onPress={() => onValueChange && onValueChange(index + 1)}>
+          <Icon
+            name={active ? 'star' : 'star-outline'}
+            size={38}
+            color={active ? '#4CAF50' : '#686868'}
+          />
+        </TouchableOpacity>
+      );
+    });
+
+  return (
+    <Modal
+      visible={visible}
+      transparent={true}
+      animationType="slide"
+      onRequestClose={onHide}>
+      <View style={containerStyle}>
+        <View style={contentStyle}>
+          <Text style={titleStyle}>Berikan rating</Text>
+          <View style={starRatingStyle}>{renderStars()}</View>
+          <TextInput
+            placeholder="Masukkan pesan..."
+            style={inputTextStyle}
+            value={message}
+            onChangeText={text => onMessageChange && onMessageChange(text)}
+          />
+          <Button title="Beri Rating" onPress={onSubmit} />
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
 export default class LihatLayanan extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +118,9 @@ export default class LihatLayanan extends Component {
     this.state = {
       loading: false,
       layanan: null,
+      giveRatingModal: false,
+      rating: 0,
+      ratingMessage: '',
     };
   }
 
@@ -108,6 +180,28 @@ export default class LihatLayanan extends Component {
     this.onLoaded();
   };
 
+  onSubmitRating = async () => {
+    try {
+      const {giveRating, user, id} = this.state.layanan;
+      const {rating, ratingMessage} = this.state;
+
+      if (!giveRating || !id) {
+        return;
+      }
+
+      const {success} = await UserAPI.addRating(
+        user.id,
+        rating,
+        ratingMessage,
+        id,
+      );
+      this.setState({giveRatingModal: false});
+      success && this.onLoaded();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   renderNotifikasi() {
     if (!this.state.layanan) {
       return;
@@ -157,6 +251,7 @@ export default class LihatLayanan extends Component {
             <Button
               style={styles.recommendButton}
               title={'Beri Penilaian Pada ' + (isClient ? 'Petugas' : 'Klien')}
+              onPress={() => this.setState({giveRatingModal: true})}
             />
           )}
         </View>
@@ -299,6 +394,15 @@ export default class LihatLayanan extends Component {
         </View>
 
         <Dialog ref={ref => (this.dialog = ref)} />
+        <GiveRatingModal
+          visible={this.state.giveRatingModal}
+          onHide={() => this.setState({giveRatingModal: false})}
+          value={this.state.rating}
+          onValueChange={rating => this.setState({rating})}
+          message={this.state.ratingMessage}
+          onMessageChange={ratingMessage => this.setState({ratingMessage})}
+          onSubmit={this.onSubmitRating}
+        />
       </View>
     );
   }

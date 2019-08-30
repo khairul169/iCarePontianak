@@ -99,6 +99,8 @@ const UserAPI = {
   setProfileImage: value => API.patch('user/profileimg', {value}),
   setActive: value => API.patch('user/active', {value}),
   setDeviceId: value => value && API.patch('user/deviceid', {value}),
+  addRating: (id, rating, message, ref) =>
+    API.post(`user/${id}/rating`, {rating, message, ref}),
 };
 
 /* ##################################### Client API ##################################### */
