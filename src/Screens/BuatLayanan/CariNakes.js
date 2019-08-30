@@ -29,7 +29,7 @@ const UserRating = ({average, count}) => (
       );
     })}
     <Text style={styles.userRatingText}>
-      {(average || 0).toFixed(1)} ({count})
+      {average.toFixed(1)} ({count})
     </Text>
   </View>
 );

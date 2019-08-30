@@ -12,19 +12,19 @@ import {ServiceAPI} from 'public/API';
 import {iconUser} from 'assets';
 
 const UserRating = ({average, count}) => {
-  const countTextStyle = [styles.userRatingText, {marginRight: 4}];
-  const countIconStyle = {marginRight: 8};
+  const countIconStyle = {marginRight: 4};
+  const countTextStyle = [styles.userRatingText, {marginRight: 12}];
   const avgTextStyle = [styles.userRatingText, {marginLeft: 8}];
 
   return (
     <View style={styles.userRating}>
-      <Text style={countTextStyle}>{count}</Text>
       <Icon
         name="account-circle"
         size={16}
         color="#686868"
         style={countIconStyle}
       />
+      <Text style={countTextStyle}>{count}</Text>
 
       {[...Array(5).keys()].map((item, index) => {
         const filled = average && index < average.toFixed();
@@ -36,7 +36,7 @@ const UserRating = ({average, count}) => {
           />
         );
       })}
-      <Text style={avgTextStyle}>{(average || 0).toFixed(1)}</Text>
+      <Text style={avgTextStyle}>({average.toFixed(1)})</Text>
     </View>
   );
 };
@@ -116,9 +116,8 @@ export default class LihatLayanan extends Component {
     let iconColor = '#FFA726';
     let title = '';
     let description = '';
-    let recommend = false;
 
-    const {status, isClient} = this.state.layanan;
+    const {status, isClient, giveRating} = this.state.layanan;
 
     if (status.toLowerCase().startsWith('sedang')) {
       title = 'Menunggu petugas';
@@ -141,7 +140,6 @@ export default class LihatLayanan extends Component {
       iconColor = '#7CB342';
       title = 'Layanan selesai';
       description = 'Layanan ini telah selesai.';
-      recommend = true;
     }
 
     return (
@@ -155,7 +153,7 @@ export default class LihatLayanan extends Component {
             </View>
           </View>
 
-          {recommend && (
+          {giveRating && (
             <Button
               style={styles.recommendButton}
               title={'Beri Penilaian Pada ' + (isClient ? 'Petugas' : 'Klien')}
@@ -374,7 +372,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 8,
-    marginLeft: -2,
   },
   userRatingText: {
     fontSize: 14,
