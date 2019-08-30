@@ -137,6 +137,7 @@ const EmergencyAPI = {
 /* ##################################### Message API ##################################### */
 
 const MessageAPI = {
+  getMessageList: () => API.get('message/lists'),
   getMessages: id => API.get(`message/get/${id}`),
   create: (id, message) => API.post('message/', {id, message}),
 };
