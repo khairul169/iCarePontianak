@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
   Text,
   StyleSheet,
@@ -9,16 +10,14 @@ import {
 } from 'react-native';
 import {Header, Icon} from 'components';
 import {HeaderIcon} from 'components/Header';
-import {UserAPI, MessageAPI} from 'public/API';
+import {fetchMessage, sendMessage} from 'actions/LihatPesan';
 import {openPhoneNumber} from 'public/Utils';
 
-export default class LihatPesan extends Component {
+class LihatPesan extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: null,
-      messages: [],
       inputMessage: '',
     };
 
@@ -26,42 +25,13 @@ export default class LihatPesan extends Component {
   }
 
   componentDidMount() {
-    this.fetchUser();
-    this.fetchMessages();
+    this.props.fetchMessage(this.userId);
   }
 
-  fetchUser = async () => {
-    try {
-      const {success, result} = await UserAPI.getUserById(this.userId);
-      success && this.setState({user: result});
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  fetchMessages = async () => {
-    try {
-      const {success, result} = await MessageAPI.getMessages(this.userId);
-      success && this.setState({messages: result});
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   sendMessage = async () => {
-    const {user, inputMessage} = this.state;
+    // send message and clear input
+    this.props.sendMessage(this.state.inputMessage);
     this.setState({inputMessage: ''});
-
-    if (!user) {
-      return;
-    }
-
-    try {
-      const {success} = await MessageAPI.create(user.id, inputMessage);
-      success && this.fetchMessages();
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   renderMessageItem({item}) {
@@ -86,7 +56,7 @@ export default class LihatPesan extends Component {
   }
 
   renderRightHeaderItem = () => {
-    const {user} = this.state;
+    const {user} = this.props;
 
     if (!user || !user.phone) {
       return;
@@ -103,7 +73,7 @@ export default class LihatPesan extends Component {
   };
 
   render() {
-    const {user, messages} = this.state;
+    const {user, messages} = this.props;
 
     return (
       <View style={styles.container}>
@@ -204,3 +174,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+
+const mapStateToProps = ({lihatPesan}) => ({
+  ...lihatPesan,
+});
+
+const mapDispatchToProps = {
+  fetchMessage,
+  sendMessage,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LihatPesan);

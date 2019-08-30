@@ -3,13 +3,17 @@ import RNOneSignal from 'react-native-onesignal';
 import store from 'public/Store';
 import {navigateToMainStack} from 'public/Utils';
 import {UserAPI} from 'public/API';
+import {fetchMessage} from 'actions/LihatPesan';
 
 const OneSignal = (() => {
   // vars
   let deviceId = null;
 
+  const onReceived = notification => {
+    store.dispatch(fetchMessage());
+  };
+
   const onNotificationPress = (data, navigation) => {
-    //navigation.navigate('Layanan');
     navigateToMainStack('Layanan');
   };
 
@@ -42,11 +46,13 @@ const OneSignal = (() => {
     },
 
     load: () => {
+      RNOneSignal.addEventListener('received', onReceived);
       RNOneSignal.addEventListener('opened', onOpened);
       RNOneSignal.addEventListener('ids', onIds);
     },
 
     clean: () => {
+      RNOneSignal.removeEventListener('received', onReceived);
       RNOneSignal.removeEventListener('opened', onOpened);
       RNOneSignal.removeEventListener('ids', onIds);
     },

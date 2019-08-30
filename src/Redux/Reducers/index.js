@@ -3,6 +3,7 @@ import beranda from './Beranda';
 import layanan from './Layanan';
 import akun from './Akun';
 import buatLayanan from './BuatLayanan';
+import lihatPesan from './LihatPesan';
 
 const reducers = {
   auth,
@@ -10,6 +11,7 @@ const reducers = {
   layanan,
   akun,
   buatLayanan,
+  lihatPesan,
 };
 
 export default reducers;
