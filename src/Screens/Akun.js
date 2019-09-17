@@ -146,9 +146,7 @@ class Akun extends Component {
             </TouchableOpacity>
 
             <Text style={styles.title}>{user && user.name}</Text>
-            <Text style={styles.subtitle}>
-              {user && getUserType(user.type)}
-            </Text>
+            <Text style={styles.subtitle}>{user && user.type}</Text>
           </View>
 
           <View style={styles.content}>
@@ -163,7 +161,7 @@ class Akun extends Component {
                 })
               }
             />
-            {user && user.type >= 2 && this.renderNakesView()}
+            {user && user.type !== 'Klien' && this.renderNakesView()}
             <Button
               icon="logout"
               style={styles.button}
