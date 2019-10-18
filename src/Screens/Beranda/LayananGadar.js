@@ -25,8 +25,7 @@ const LayananGadar = ({background, onPress}) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    borderRadius: 3,
-    elevation: 3,
+    borderRadius: 2,
     overflow: 'hidden',
     margin: 16,
     marginTop: 0,
@@ -34,22 +33,25 @@ const styles = StyleSheet.create({
   gadar: {
     resizeMode: 'cover',
     height: 180,
+    position: 'relative',
   },
   content: {
     padding: 16,
+    paddingVertical: 8,
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   gadarTitle: {
-    color: '#686868',
-    fontSize: 18,
+    color: '#fff',
+    fontSize: 14,
   },
   gadarDesc: {
-    color: '#787878',
+    color: '#fff',
     fontSize: 12,
     marginTop: 4,
-  },
-  gadarImage: {
-    width: 96,
-    height: 96,
   },
 });
 

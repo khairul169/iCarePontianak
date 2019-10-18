@@ -28,7 +28,11 @@ const HomeHeader = ({name}) => {
         />
       </View>
 
-      <SearchBar marginTop={12} style={styles.searchBar} />
+      <SearchBar
+        marginTop={12}
+        style={styles.searchBar}
+        placeholder="Apa keluhan anda sekarang?"
+      />
     </View>
   );
 };

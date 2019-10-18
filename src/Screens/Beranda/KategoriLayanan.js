@@ -58,7 +58,6 @@ const KategoriLayanan = ({data, onPress}) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
-    marginBottom: 16,
   },
   item: {
     marginTop: 5,
@@ -66,8 +65,8 @@ const styles = StyleSheet.create({
   },
   itemImageContainer: {
     backgroundColor: '#fff',
+    borderRadius: 2,
     elevation: 3,
-    borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     width: 80,

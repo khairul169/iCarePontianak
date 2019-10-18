@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderTopColor: '#CFD8DC',
-    borderTopWidth: 1,
-    //elevation: 10,
-    //zIndex: 10,
+    //borderTopColor: '#CFD8DC',
+    //borderTopWidth: 1,
+    elevation: 18,
+    zIndex: 10,
     backgroundColor: '#fff',
   },
 });

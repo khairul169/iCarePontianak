@@ -169,7 +169,7 @@ exports[`<HomeHeader /> render 1`] = `
   >
     <TextInput
       allowFontScaling={true}
-      placeholder="Mau cari tindakan atau bantuan apa?"
+      placeholder="Apa keluhan anda sekarang?"
       placeholderTextColor="#78909C"
       rejectResponderTermination={true}
       style={

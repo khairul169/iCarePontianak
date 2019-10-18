@@ -55,8 +55,6 @@ class Beranda extends Component {
             background={gadarBg}
             onPress={() => this.navigateTo('Emergency')}
           />
-
-          <Text style={styles.subtitle}>Layanan lainnya</Text>
           <KategoriLayanan data={kategoriLayanan} onPress={this.buatLayanan} />
         </ScrollView>
       </View>
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#37474F',
     marginLeft: 16,
     marginBottom: 6,

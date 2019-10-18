@@ -23,7 +23,6 @@ import {
   setUserLocation,
 } from 'actions/Akun';
 import {logout} from 'actions/Auth';
-import {getUserType} from 'public/Utils';
 
 const Button = ({onPress, title, icon}) => {
   const titleStyle = {
